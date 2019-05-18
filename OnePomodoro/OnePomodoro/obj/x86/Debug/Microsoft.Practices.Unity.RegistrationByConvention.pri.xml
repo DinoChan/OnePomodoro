@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PriInfo>
+	<ResourceMap name="Microsoft.Practices.Unity.RegistrationByConvention" version="1.0" primary="true">
+		<Qualifiers>
+			<Language>EN-US</Language>
+		</Qualifiers>
+		<ResourceMapSubtree name="Microsoft.Practices.Unity.RegistrationByConvention">
+			<ResourceMapSubtree name="Resources">
+				<NamedResource name="DuplicateTypeMappingException" uri="ms-resource://Microsoft.Practices.Unity.RegistrationByConvention/Microsoft.Practices.Unity.RegistrationByConvention/Resources/DuplicateTypeMappingException">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>An attempt to override an existing mapping was detected for type {1} with name "{0}", currently mapped to type {2}, to type {3}.</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="ExceptionNullAssembly" uri="ms-resource://Microsoft.Practices.Unity.RegistrationByConvention/Microsoft.Practices.Unity.RegistrationByConvention/Resources/ExceptionNullAssembly">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>The set of assemblies contains a null element.</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+		</ResourceMapSubtree>
+	</ResourceMap>
+</PriInfo>

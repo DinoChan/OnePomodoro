@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PriInfo>
+	<ResourceMap name="Prism.Windows" version="1.0" primary="true">
+		<Qualifiers>
+			<Language>EN-US</Language>
+		</Qualifiers>
+		<ResourceMapSubtree name="Prism.Windows">
+			<ResourceMapSubtree name="Resources">
+				<NamedResource name="DefaultPageTypeLookupErrorMessage" uri="ms-resource://Prism.Windows/Prism.Windows/Resources/DefaultPageTypeLookupErrorMessage">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>The page name {0} does not have an associated type in namespace {1}</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="FrameAlreadyRegisteredWithKey" uri="ms-resource://Prism.Windows/Prism.Windows/Resources/FrameAlreadyRegisteredWithKey">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Frames can only be registered to one session state key</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="FrameNavigationServiceUnableResolveMessage" uri="ms-resource://Prism.Windows/Prism.Windows/Resources/FrameNavigationServiceUnableResolveMessage">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Unable to resolve the pageToken {0} to a type.</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="FrameRegistrationRequirement" uri="ms-resource://Prism.Windows/Prism.Windows/Resources/FrameRegistrationRequirement">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Frames must be either be registered before accessing frame session state, or not registered at all</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="InvalidPropertyNameException" uri="ms-resource://Prism.Windows/Prism.Windows/Resources/InvalidPropertyNameException">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>The entity does not contain a property with that name</Value>
+					</Candidate>
+				</NamedResource>
+				<NamedResource name="SessionStateServiceFailed" uri="ms-resource://Prism.Windows/Prism.Windows/Resources/SessionStateServiceFailed">
+					<Candidate qualifiers="Language-EN-US" isDefault="true" type="String">
+						<Value>Session state service failed</Value>
+					</Candidate>
+				</NamedResource>
+			</ResourceMapSubtree>
+		</ResourceMapSubtree>
+	</ResourceMap>
+</PriInfo>

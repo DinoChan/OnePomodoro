@@ -1,0 +1,9 @@
+D:\Users\dinoc\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro.Core\obj\Debug\netstandard2.0\OnePomodoro.Core.csproj.CoreCompileInputs.cache
+D:\Users\dinoc\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro.Core\obj\Debug\netstandard2.0\OnePomodoro.Core.AssemblyInfoInputs.cache
+D:\Users\dinoc\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro.Core\obj\Debug\netstandard2.0\OnePomodoro.Core.AssemblyInfo.cs
+D:\Users\dinoc\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro.Core\bin\Debug\netstandard2.0\OnePomodoro.Core.deps.json
+D:\Users\dinoc\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro.Core\bin\Debug\netstandard2.0\OnePomodoro.Core.dll
+D:\Users\dinoc\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro.Core\bin\Debug\netstandard2.0\OnePomodoro.Core.pdb
+D:\Users\dinoc\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro.Core\obj\Debug\netstandard2.0\OnePomodoro.Core.csprojAssemblyReference.cache
+D:\Users\dinoc\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro.Core\obj\Debug\netstandard2.0\OnePomodoro.Core.dll
+D:\Users\dinoc\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro.Core\obj\Debug\netstandard2.0\OnePomodoro.Core.pdb
