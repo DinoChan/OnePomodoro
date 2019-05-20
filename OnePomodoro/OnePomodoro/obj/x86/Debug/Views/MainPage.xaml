@@ -10,15 +10,30 @@
     prismMvvm:ViewModelLocator.AutoWireViewModel="True"
     xmlns:viewModels="using:OnePomodoro.ViewModels"
     xmlns:helpers="using:OnePomodoro.Helpers"
+    xmlns:converters="using:Microsoft.Toolkit.Uwp.UI.Converters"
     d:DataContext="{d:DesignInstance Type=viewModels:MainViewModel}"
     mc:Ignorable="d">
-    <Grid x:ConnectionId='2'
-        x:Name="ContentArea">
-        <Grid Grid.Row="1" Background="#FF101010">
-            <StackPanel Margin="40">
-            <TextBlock Text="In Work" Foreground="#FF9E1300" FontSize="128" FontFamily="DINPro" FontWeight="Bold"
-                       IsHitTestVisible="{Binding}"/>
-                <TextBlock Text="Take a Break" Foreground="#FF001BAB" FontSize="128" FontFamily="DINPro" FontWeight="Bold"/>
+    <Page.Resources>
+        <converters:BoolToObjectConverter TrueValue="Top" FalseValue="Bottom" x:Key="BoolToVerticalAlignmentConverter"/>
+        <converters:BoolToObjectConverter TrueValue="Left" FalseValue="Right" x:Key="BoolToVerticalHorizontalAlignment"/>
+    </Page.Resources>
+    <Grid x:ConnectionId='2' x:Name="ContentArea">
+        <Grid.DataContext>
+            <viewModels:MainViewModel/>
+        </Grid.DataContext>
+        <Grid Grid.Row="1" Background="#FF101010" >
+            <StackPanel Margin="40" VerticalAlignment="{Binding IsInPomodoro,Converter={StaticResource BoolToVerticalAlignmentConverter}}"
+                        HorizontalAlignment="{Binding IsInPomodoro,Converter={StaticResource BoolToVerticalHorizontalAlignment}}">
+                <TextBlock Text="In Work" Foreground="#FF9E1300" FontSize="128" FontFamily="DINPro" FontWeight="Bold"
+                           Visibility="{Binding IsInPomodoro,Converter={StaticResource BoolToVisibilityConverter}}"/>
+                <TextBlock Text="{Binding RemainingPomodoroInterval,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
+                           FontSize="80" Foreground="#FF999999" Margin="8,-36,0,0"
+                           Visibility="{Binding IsInPomodoro,Converter={StaticResource BoolToVisibilityConverter}}"/>
+                <TextBlock Text="{Binding RemainingBreakInterval,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
+                           FontSize="80" Foreground="#FF999999" Margin="0,0,0,-18" HorizontalAlignment="Right"
+                           Visibility="{Binding IsInPomodoro,Converter={StaticResource NegationBoolToVisibilityConverter}}"/>
+                <TextBlock Text="Take a Break" Foreground="#FF001BAB" FontSize="128" FontFamily="DINPro" FontWeight="Bold"
+                           Visibility="{Binding IsInPomodoro,Converter={StaticResource NegationBoolToVisibilityConverter}}"/>
                 <!--The SystemControlPageBackgroundChromeLowBrush background represents where you should place your content. 
                 Place your content here.-->
             </StackPanel>

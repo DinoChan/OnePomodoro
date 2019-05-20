@@ -5680,12 +5680,11 @@
       ]
     },
     "Microsoft.Xaml.Behaviors.Uwp.Managed/2.0.0": {
-      "sha512": "FHAMa5uwPgkMfy9u3g5sH8o3C8zZOQoLfKUznn95ejNhmNBz3Yj7Diy9pKWabYgkSiyjKzc+E5T4ZsZkwVAJkQ==",
+      "sha512": "LfzU68PVP33nqsuSlO5xAYuoI/itVKz4VVJSIunrS7iqqxE3sy0Q+VvtoYnFcBAoGnY83ZVn8Mnc9HYqOBiPmg==",
       "type": "package",
       "path": "microsoft.xaml.behaviors.uwp.managed/2.0.0",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "lib/uap10.0/Design/Microsoft.Xaml.Interactions.Design.dll",
         "lib/uap10.0/Design/Microsoft.Xaml.Interactivity.Design.dll",
         "lib/uap10.0/Microsoft.Xaml.Interactions.dll",
@@ -5699,7 +5698,7 @@
       ]
     },
     "NETStandard.Library/2.0.3": {
-      "sha512": "st47PosZSHrjECdjeIzZQbzivYBJFv6P2nv4cj2ypdI204DO+vZ7l5raGMiX4eXMJ53RfOIg+/s4DHVZ54Nu2A==",
+      "sha512": "oASM3DLkuLqwYpo4QcB/PIqh5FQO8ONF0ZYAz0Yvtyh0hvFoX6FssSUKtaGyi+YGDaOrUJBQtrFd0QjKl7fo3g==",
       "type": "package",
       "path": "netstandard.library/2.0.3",
       "files": [
@@ -9914,12 +9913,11 @@
       ]
     },
     "Win2D.uwp/1.21.0": {
-      "sha512": "4ddgs6Mt4cDVOPcKE+gV02Rn8G9nhp8C9S94A/msxULD2ysq6Q/z3CmeyATJhJNVfhumWUaXzx0B3v39vB5A4Q==",
+      "sha512": "4Ds/p7HgysgV67pBo/+w7Lidj08Hfa4GD9Zg9HdN3/zLfzRPttHrIn2TUiOUZCgH4eLVJwzOk114ntv4bveS1Q==",
       "type": "package",
       "path": "win2d.uwp/1.21.0",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "Win2d.githash.txt",
         "build/native/Win2D.uwp.targets",
         "include/Microsoft.Graphics.Canvas.h",
@@ -9953,24 +9951,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\jchen\\.nuget\\packages\\": {},
+    "C:\\Users\\dinoc\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft SDKs\\UWPNuGetPackages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Users\\jchen\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro\\OnePomodoro.csproj",
+      "projectUniqueName": "D:\\Users\\dinoc\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro\\OnePomodoro.csproj",
       "projectName": "OnePomodoro",
-      "projectPath": "D:\\Users\\jchen\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro\\OnePomodoro.csproj",
-      "packagesPath": "C:\\Users\\jchen\\.nuget\\packages\\",
-      "outputPath": "D:\\Users\\jchen\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro\\obj\\",
+      "projectPath": "D:\\Users\\dinoc\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro\\OnePomodoro.csproj",
+      "packagesPath": "C:\\Users\\dinoc\\.nuget\\packages\\",
+      "outputPath": "D:\\Users\\dinoc\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft SDKs\\UWPNuGetPackages\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\jchen\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\dinoc\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -9983,8 +9981,8 @@
       "frameworks": {
         "uap10.0.17134": {
           "projectReferences": {
-            "D:\\Users\\jchen\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro.Core\\OnePomodoro.Core.csproj": {
-              "projectPath": "D:\\Users\\jchen\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro.Core\\OnePomodoro.Core.csproj"
+            "D:\\Users\\dinoc\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro.Core\\OnePomodoro.Core.csproj": {
+              "projectPath": "D:\\Users\\dinoc\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro.Core\\OnePomodoro.Core.csproj"
             }
           }
         }

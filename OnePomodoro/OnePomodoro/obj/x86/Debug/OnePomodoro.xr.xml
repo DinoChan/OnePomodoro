@@ -4,6 +4,9 @@
     <RootInterface FullName="Windows.UI.Xaml.Data.IValueConverter" />
   </Roots.Interfaces>
   <Roots.PropertyPathNames>
+    <RootPropertyPathName Name="IsInPomodoro" />
+    <RootPropertyPathName Name="RemainingBreakInterval" />
+    <RootPropertyPathName Name="RemainingPomodoroInterval" />
     <RootPropertyPathName Name="ElementTheme" />
     <RootPropertyPathName Name="SwitchThemeCommand" />
   </Roots.PropertyPathNames>
@@ -18,8 +21,8 @@
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Page">
       <RootProperty Name="Style" />
-      <RootProperty Name="Content" />
       <RootProperty Name="Resources" />
+      <RootProperty Name="Content" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Control">
       <RootProperty Name="Background" />
@@ -44,13 +47,17 @@
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="Foreground" />
       <RootProperty Name="FontFamily" />
-      <RootProperty Name="IsHitTestVisible" />
+      <RootProperty Name="Visibility" />
+      <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="Style" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.FrameworkElement">
       <RootProperty Name="VerticalAlignment" />
     </RootType>
     <RootType FullName="Microsoft.Xaml.DirectUI.ProxyTypes.StaticResourceExtension" />
+    <RootType FullName="Microsoft.Toolkit.Uwp.UI.Converters.BoolToVisibilityConverter" />
+    <RootType FullName="OnePomodoro.Helpers.NegationBoolToVisibilityConverter" />
+    <RootType FullName="Microsoft.Toolkit.Uwp.UI.Converters.FormatStringConverter" />
     <RootType FullName="Windows.UI.Xaml.Controls.ContentDialog">
       <RootProperty Name="TitleTemplate" />
       <RootProperty Name="Content" />
@@ -62,6 +69,8 @@
       <RootProperty Name="Orientation" />
       <RootProperty Name="Children" />
       <RootProperty Name="Margin" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="HorizontalAlignment" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Image">
       <RootProperty Name="Source" />
@@ -79,7 +88,12 @@
       <RootMethod Name="GetAutoWireViewModel" />
       <RootMethod Name="SetAutoWireViewModel" />
     </RootType>
+    <RootType FullName="Microsoft.Toolkit.Uwp.UI.Converters.BoolToObjectConverter">
+      <RootProperty Name="TrueValue" />
+      <RootProperty Name="FalseValue" />
+    </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Grid">
+      <RootProperty Name="DataContext" />
       <RootProperty Name="Children" />
       <RootProperty Name="Background" />
       <RootProperty Name="Margin" />
@@ -87,6 +101,7 @@
       <RootMethod Name="GetRow" />
       <RootMethod Name="SetRow" />
     </RootType>
+    <RootType FullName="OnePomodoro.ViewModels.MainViewModel" />
     <RootType FullName="Windows.UI.Xaml.Data.Binding">
       <RootProperty Name="Converter" />
       <RootProperty Name="ConverterParameter" />

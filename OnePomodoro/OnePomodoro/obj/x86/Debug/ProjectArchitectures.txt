@@ -1,1 +1,1 @@
-D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\OnePomodoro.csproj;x86
+D:\Users\dinoc\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\OnePomodoro.csproj;x86

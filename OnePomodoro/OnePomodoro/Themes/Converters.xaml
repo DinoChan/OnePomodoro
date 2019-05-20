@@ -1,0 +1,9 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="using:Microsoft.Toolkit.Uwp.UI.Converters"
+   xmlns:helpers="using:OnePomodoro.Helpers">
+    <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    <helpers:NegationBoolToVisibilityConverter x:Key="NegationBoolToVisibilityConverter"/>
+    <converters:FormatStringConverter x:Key="FormatStringConverter"/>
+</ResourceDictionary>
