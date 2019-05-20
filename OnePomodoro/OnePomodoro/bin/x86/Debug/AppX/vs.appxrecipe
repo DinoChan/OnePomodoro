@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <Machine>DESKTOP-53SA4GE</Machine>
-    <WindowsUser>dinoc</WindowsUser>
+    <Machine>CNOME1LT011991</Machine>
+    <WindowsUser>JChen</WindowsUser>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetOsVersion>10.0</TargetOsVersion>
     <TargetOsDescription>Windows 10.0</TargetOsDescription>
@@ -10,7 +10,7 @@
     <PackageArchitecture>x86</PackageArchitecture>
     <PackageIdentityName>FC76A899-3894-4030-AD00-2DB24D86E9EA</PackageIdentityName>
     <PackageIdentityPublisher>CN=dinoc</PackageIdentityPublisher>
-    <IntermediateOutputPath>D:\Users\dinoc\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\obj\x86\Debug\</IntermediateOutputPath>
+    <IntermediateOutputPath>D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\obj\x86\Debug\</IntermediateOutputPath>
     <RemoteDeploymentType>
     </RemoteDeploymentType>
     <PackageRegistrationPath>
@@ -18,8 +18,8 @@
     <RemoveNonLayoutFiles>true</RemoveNonLayoutFiles>
     <DeployOptionalPackages>false</DeployOptionalPackages>
     <WindowsSdkPath>C:\Program Files %28x86%29\Windows Kits\10\</WindowsSdkPath>
-    <LayoutDir>D:\Users\dinoc\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\AppX</LayoutDir>
-    <RegisteredManifestChecksum>B0A162A507A596903D508EBDF50603D912D87D1C7EC9CE93A477A013A769F679</RegisteredManifestChecksum>
+    <LayoutDir>D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\AppX</LayoutDir>
+    <RegisteredManifestChecksum>7D4B886673C2AC29E5021481A8D1AD2CF453B699ECB36BEAC38DA1012D92154C</RegisteredManifestChecksum>
     <RegisteredPackageMoniker>FC76A899-3894-4030-AD00-2DB24D86E9EA_1.0.0.0_x86__csdbzh72xdmvg</RegisteredPackageMoniker>
     <RegisteredUserModeAppID>FC76A899-3894-4030-AD00-2DB24D86E9EA_csdbzh72xdmvg!App</RegisteredUserModeAppID>
     <RegisteredPackageID>FC76A899-3894-4030-AD00-2DB24D86E9EA</RegisteredPackageID>
@@ -27,54 +27,54 @@
     <RegisteredVersion>1.0.0.0</RegisteredVersion>
   </PropertyGroup>
   <ItemGroup>
-    <AppXManifest Include="D:\Users\dinoc\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Core\AppxManifest.xml">
+    <AppXManifest Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2019-05-18T08:14:32.981</Modified>
+      <Modified>2019-05-20T05:41:22.471</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
-    <AppxPackagedFile Include="D:\Users\dinoc\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\OnePomodoro.exe">
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\OnePomodoro.exe">
       <PackagePath>entrypoint\OnePomodoro.exe</PackagePath>
-      <Modified>2019-05-18T08:14:31.525</Modified>
+      <Modified>2019-05-20T05:41:17.892</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\dinoc\.nuget\packages\commonservicelocator\1.3.0\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll">
+    <AppxPackagedFile Include="C:\Users\jchen\.nuget\packages\commonservicelocator\1.3.0\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll">
       <PackagePath>Microsoft.Practices.ServiceLocation.dll</PackagePath>
       <Modified>2014-05-05T03:25:44.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\dinoc\.nuget\packages\microsoft.toolkit\5.1.1\lib\netstandard2.0\Microsoft.Toolkit.dll">
+    <AppxPackagedFile Include="C:\Users\jchen\.nuget\packages\microsoft.toolkit\5.1.1\lib\netstandard2.0\Microsoft.Toolkit.dll">
       <PackagePath>Microsoft.Toolkit.dll</PackagePath>
       <Modified>2019-03-15T14:15:26.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\dinoc\.nuget\packages\microsoft.toolkit.uwp\5.1.1\lib\uap10.0.16299\Microsoft.Toolkit.Uwp.dll">
+    <AppxPackagedFile Include="C:\Users\jchen\.nuget\packages\microsoft.toolkit.uwp\5.1.1\lib\uap10.0.16299\Microsoft.Toolkit.Uwp.dll">
       <PackagePath>Microsoft.Toolkit.Uwp.dll</PackagePath>
       <Modified>2019-03-15T14:15:34.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\dinoc\.nuget\packages\microsoft.toolkit.uwp.notifications\5.1.1\lib\uap10.0\Microsoft.Toolkit.Uwp.Notifications.dll">
+    <AppxPackagedFile Include="C:\Users\jchen\.nuget\packages\microsoft.toolkit.uwp.notifications\5.1.1\lib\uap10.0\Microsoft.Toolkit.Uwp.Notifications.dll">
       <PackagePath>Microsoft.Toolkit.Uwp.Notifications.dll</PackagePath>
       <Modified>2019-03-15T14:15:44.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\dinoc\.nuget\packages\microsoft.xaml.behaviors.uwp.managed\2.0.0\lib\uap10.0\Microsoft.Xaml.Interactions.dll">
+    <AppxPackagedFile Include="C:\Users\jchen\.nuget\packages\microsoft.xaml.behaviors.uwp.managed\2.0.0\lib\uap10.0\Microsoft.Xaml.Interactions.dll">
       <PackagePath>Microsoft.Xaml.Interactions.dll</PackagePath>
       <Modified>2016-10-19T09:07:18.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\dinoc\.nuget\packages\microsoft.xaml.behaviors.uwp.managed\2.0.0\lib\uap10.0\Microsoft.Xaml.Interactivity.dll">
+    <AppxPackagedFile Include="C:\Users\jchen\.nuget\packages\microsoft.xaml.behaviors.uwp.managed\2.0.0\lib\uap10.0\Microsoft.Xaml.Interactivity.dll">
       <PackagePath>Microsoft.Xaml.Interactivity.dll</PackagePath>
       <Modified>2016-10-19T09:07:18.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\dinoc\.nuget\packages\newtonsoft.json\12.0.1\lib\netstandard2.0\Newtonsoft.Json.dll">
+    <AppxPackagedFile Include="C:\Users\jchen\.nuget\packages\newtonsoft.json\12.0.1\lib\netstandard2.0\Newtonsoft.Json.dll">
       <PackagePath>Newtonsoft.Json.dll</PackagePath>
       <Modified>2018-11-27T10:07:34.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\dinoc\.nuget\packages\prism.core\6.3.0\lib\wpa81\Prism.dll">
+    <AppxPackagedFile Include="C:\Users\jchen\.nuget\packages\prism.core\6.3.0\lib\wpa81\Prism.dll">
       <PackagePath>Prism.dll</PackagePath>
       <Modified>2017-03-24T10:34:02.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\dinoc\.nuget\packages\prism.unity\6.3.0\lib\uap10.0\Prism.Unity.Windows.dll">
+    <AppxPackagedFile Include="C:\Users\jchen\.nuget\packages\prism.unity\6.3.0\lib\uap10.0\Prism.Unity.Windows.dll">
       <PackagePath>Prism.Unity.Windows.dll</PackagePath>
       <Modified>2017-03-24T10:34:04.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\dinoc\.nuget\packages\prism.windows\6.3.0\lib\uap10.0\Prism.Windows.dll">
+    <AppxPackagedFile Include="C:\Users\jchen\.nuget\packages\prism.windows\6.3.0\lib\uap10.0\Prism.Windows.dll">
       <PackagePath>Prism.Windows.dll</PackagePath>
       <Modified>2017-03-24T10:34:02.000</Modified>
     </AppxPackagedFile>
@@ -82,103 +82,103 @@
       <PackagePath>System.Runtime.dll</PackagePath>
       <Modified>2019-03-12T14:22:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\dinoc\.nuget\packages\unity\4.0.1\lib\win8\Microsoft.Practices.Unity.RegistrationByConvention.dll">
+    <AppxPackagedFile Include="C:\Users\jchen\.nuget\packages\unity\4.0.1\lib\win8\Microsoft.Practices.Unity.RegistrationByConvention.dll">
       <PackagePath>Microsoft.Practices.Unity.RegistrationByConvention.dll</PackagePath>
       <Modified>2015-10-05T01:37:20.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\dinoc\.nuget\packages\unity\4.0.1\lib\win8\Microsoft.Practices.Unity.dll">
+    <AppxPackagedFile Include="C:\Users\jchen\.nuget\packages\unity\4.0.1\lib\win8\Microsoft.Practices.Unity.dll">
       <PackagePath>Microsoft.Practices.Unity.dll</PackagePath>
       <Modified>2015-10-05T01:37:20.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\Users\dinoc\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro.Core\bin\Debug\netstandard2.0\OnePomodoro.Core.dll">
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro.Core\bin\Debug\netstandard2.0\OnePomodoro.Core.dll">
       <PackagePath>OnePomodoro.Core.dll</PackagePath>
-      <Modified>2019-05-17T16:07:27.960</Modified>
+      <Modified>2019-05-20T03:56:01.284</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\bin\10.0.17763.0\XamlCompiler\Microsoft.UI.Xaml.Markup.winmd">
       <PackagePath>Microsoft.UI.Xaml.Markup.winmd</PackagePath>
       <Modified>2018-10-22T17:33:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\Users\dinoc\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Properties\Default.rd.xml">
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Properties\Default.rd.xml">
       <PackagePath>Properties\Default.rd.xml</PackagePath>
-      <Modified>2019-05-17T16:04:51.069</Modified>
+      <Modified>2019-05-20T03:34:53.521</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\Users\dinoc\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\LockScreenLogo.scale-200.png">
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\LockScreenLogo.scale-200.png">
       <PackagePath>Assets\LockScreenLogo.scale-200.png</PackagePath>
-      <Modified>2019-05-17T16:04:51.016</Modified>
+      <Modified>2019-05-20T03:34:53.502</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\Users\dinoc\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\SplashScreen.scale-200.png">
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\SplashScreen.scale-200.png">
       <PackagePath>Assets\SplashScreen.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2019-05-17T16:04:51.022</Modified>
+      <Modified>2019-05-20T03:34:53.503</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\Users\dinoc\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\Square150x150Logo.scale-200.png">
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\Square150x150Logo.scale-200.png">
       <PackagePath>Assets\Square150x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2019-05-17T16:04:51.027</Modified>
+      <Modified>2019-05-20T03:34:53.504</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\Users\dinoc\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\Square44x44Logo.scale-200.png">
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\Square44x44Logo.scale-200.png">
       <PackagePath>Assets\Square44x44Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2019-05-17T16:04:51.039</Modified>
+      <Modified>2019-05-20T03:34:53.505</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\Users\dinoc\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
       <PackagePath>Assets\Square44x44Logo.targetsize-24_altform-unplated.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2019-05-17T16:04:51.044</Modified>
+      <Modified>2019-05-20T03:34:53.506</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\Users\dinoc\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\StoreLogo.png">
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\StoreLogo.png">
       <PackagePath>Assets\StoreLogo.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2019-05-17T16:04:51.048</Modified>
+      <Modified>2019-05-20T03:34:53.507</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\Users\dinoc\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\Wide310x150Logo.scale-200.png">
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\Wide310x150Logo.scale-200.png">
       <PackagePath>Assets\Wide310x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2019-05-17T16:04:51.052</Modified>
+      <Modified>2019-05-20T03:34:53.508</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\Users\dinoc\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\OnePomodoro.xr.xml">
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\OnePomodoro.xr.xml">
       <PackagePath>OnePomodoro.xr.xml</PackagePath>
-      <Modified>2019-05-18T08:05:56.916</Modified>
+      <Modified>2019-05-20T05:41:17.258</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\Users\dinoc\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\App.xbf">
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2019-05-18T08:14:31.082</Modified>
+      <Modified>2019-05-20T05:41:17.377</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\Users\dinoc\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Styles\Page.xbf">
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Styles\Page.xbf">
       <PackagePath>Styles\Page.xbf</PackagePath>
-      <Modified>2019-05-18T08:14:31.080</Modified>
+      <Modified>2019-05-20T05:41:17.376</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\Users\dinoc\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Styles\_Colors.xbf">
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Styles\_Colors.xbf">
       <PackagePath>Styles\_Colors.xbf</PackagePath>
-      <Modified>2019-05-18T08:14:31.080</Modified>
+      <Modified>2019-05-20T05:41:17.376</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\Users\dinoc\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Styles\_FontSizes.xbf">
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Styles\_FontSizes.xbf">
       <PackagePath>Styles\_FontSizes.xbf</PackagePath>
-      <Modified>2019-05-18T08:14:31.080</Modified>
+      <Modified>2019-05-20T05:41:17.377</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\Users\dinoc\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Styles\_Thickness.xbf">
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Styles\_Thickness.xbf">
       <PackagePath>Styles\_Thickness.xbf</PackagePath>
-      <Modified>2019-05-18T08:14:31.081</Modified>
+      <Modified>2019-05-20T05:41:17.377</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\Users\dinoc\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Styles\TextBlock.xbf">
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Styles\TextBlock.xbf">
       <PackagePath>Styles\TextBlock.xbf</PackagePath>
-      <Modified>2019-05-18T08:14:31.081</Modified>
+      <Modified>2019-05-20T05:41:17.377</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\Users\dinoc\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Views\FirstRunDialog.xbf">
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Views\FirstRunDialog.xbf">
       <PackagePath>Views\FirstRunDialog.xbf</PackagePath>
-      <Modified>2019-05-18T08:14:31.082</Modified>
+      <Modified>2019-05-20T05:41:17.378</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\Users\dinoc\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Views\MainPage.xbf">
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Views\MainPage.xbf">
       <PackagePath>Views\MainPage.xbf</PackagePath>
-      <Modified>2019-05-18T08:14:31.083</Modified>
+      <Modified>2019-05-20T05:41:17.378</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\Users\dinoc\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Views\SettingsPage.xbf">
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Views\SettingsPage.xbf">
       <PackagePath>Views\SettingsPage.xbf</PackagePath>
-      <Modified>2019-05-18T08:14:31.083</Modified>
+      <Modified>2019-05-20T05:41:17.378</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\Users\dinoc\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Views\WhatsNewDialog.xbf">
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Views\WhatsNewDialog.xbf">
       <PackagePath>Views\WhatsNewDialog.xbf</PackagePath>
-      <Modified>2019-05-18T08:14:31.083</Modified>
+      <Modified>2019-05-20T05:41:17.379</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.UniversalCRT.Debug\10.0.17763.0\\redist\Debug\x86\ucrtbased.dll">
       <PackagePath>ucrtbased.dll</PackagePath>
@@ -188,13 +188,13 @@
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
       <Modified>2018-10-22T16:44:28.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\Users\dinoc\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\resources.pri">
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2019-05-17T16:07:42.176</Modified>
+      <Modified>2019-05-20T05:41:19.921</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\Users\dinoc\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Core\OnePomodoro.exe">
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Core\OnePomodoro.exe">
       <PackagePath>OnePomodoro.exe</PackagePath>
-      <Modified>2019-05-18T08:14:32.973</Modified>
+      <Modified>2019-05-20T05:41:22.459</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
@@ -252,28 +252,28 @@
       <MoreInfo>
       </MoreInfo>
     </ResolvedSDKReference>
-    <ResolvedSDKReference Include="C:\Users\dinoc\.nuget\packages\microsoft.services.store.engagement\10.1901.28001\SDK\Windows Kits\10\ExtensionSDKs\Microsoft.Services.Store.Engagement\10.0\">
+    <ResolvedSDKReference Include="C:\Users\jchen\.nuget\packages\microsoft.services.store.engagement\10.1901.28001\SDK\Windows Kits\10\ExtensionSDKs\Microsoft.Services.Store.Engagement\10.0\">
       <Name>Microsoft.Services.Store.Engagement</Name>
       <Version>10.0.19011.0</Version>
       <Architecture>ARM</Architecture>
       <FrameworkIdentity>Name=Microsoft.Services.Store.Engagement, MinVersion=10.0.19011.0, Publisher=%27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
-      <AppxLocation>C:\Users\dinoc\.nuget\packages\microsoft.services.store.engagement\10.1901.28001\SDK\Windows Kits\10\ExtensionSDKs\Microsoft.Services.Store.Engagement\10.0\.\AppX\ARM\Microsoft.Services.Store.Engagement.ARM.10.0.appx</AppxLocation>
+      <AppxLocation>C:\Users\jchen\.nuget\packages\microsoft.services.store.engagement\10.1901.28001\SDK\Windows Kits\10\ExtensionSDKs\Microsoft.Services.Store.Engagement\10.0\.\AppX\ARM\Microsoft.Services.Store.Engagement.ARM.10.0.appx</AppxLocation>
       <MoreInfo>http://aka.ms/store-em-docs</MoreInfo>
     </ResolvedSDKReference>
-    <ResolvedSDKReference Include="C:\Users\dinoc\.nuget\packages\microsoft.services.store.engagement\10.1901.28001\SDK\Windows Kits\10\ExtensionSDKs\Microsoft.Services.Store.Engagement\10.0\">
+    <ResolvedSDKReference Include="C:\Users\jchen\.nuget\packages\microsoft.services.store.engagement\10.1901.28001\SDK\Windows Kits\10\ExtensionSDKs\Microsoft.Services.Store.Engagement\10.0\">
       <Name>Microsoft.Services.Store.Engagement</Name>
       <Version>10.0.19011.0</Version>
       <Architecture>x64</Architecture>
       <FrameworkIdentity>Name=Microsoft.Services.Store.Engagement, MinVersion=10.0.19011.0, Publisher=%27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
-      <AppxLocation>C:\Users\dinoc\.nuget\packages\microsoft.services.store.engagement\10.1901.28001\SDK\Windows Kits\10\ExtensionSDKs\Microsoft.Services.Store.Engagement\10.0\.\AppX\x64\Microsoft.Services.Store.Engagement.x64.10.0.appx</AppxLocation>
+      <AppxLocation>C:\Users\jchen\.nuget\packages\microsoft.services.store.engagement\10.1901.28001\SDK\Windows Kits\10\ExtensionSDKs\Microsoft.Services.Store.Engagement\10.0\.\AppX\x64\Microsoft.Services.Store.Engagement.x64.10.0.appx</AppxLocation>
       <MoreInfo>http://aka.ms/store-em-docs</MoreInfo>
     </ResolvedSDKReference>
-    <ResolvedSDKReference Include="C:\Users\dinoc\.nuget\packages\microsoft.services.store.engagement\10.1901.28001\SDK\Windows Kits\10\ExtensionSDKs\Microsoft.Services.Store.Engagement\10.0\">
+    <ResolvedSDKReference Include="C:\Users\jchen\.nuget\packages\microsoft.services.store.engagement\10.1901.28001\SDK\Windows Kits\10\ExtensionSDKs\Microsoft.Services.Store.Engagement\10.0\">
       <Name>Microsoft.Services.Store.Engagement</Name>
       <Version>10.0.19011.0</Version>
       <Architecture>x86</Architecture>
       <FrameworkIdentity>Name=Microsoft.Services.Store.Engagement, MinVersion=10.0.19011.0, Publisher=%27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
-      <AppxLocation>C:\Users\dinoc\.nuget\packages\microsoft.services.store.engagement\10.1901.28001\SDK\Windows Kits\10\ExtensionSDKs\Microsoft.Services.Store.Engagement\10.0\.\AppX\x86\Microsoft.Services.Store.Engagement.x86.10.0.appx</AppxLocation>
+      <AppxLocation>C:\Users\jchen\.nuget\packages\microsoft.services.store.engagement\10.1901.28001\SDK\Windows Kits\10\ExtensionSDKs\Microsoft.Services.Store.Engagement\10.0\.\AppX\x86\Microsoft.Services.Store.Engagement.x86.10.0.appx</AppxLocation>
       <MoreInfo>http://aka.ms/store-em-docs</MoreInfo>
     </ResolvedSDKReference>
     <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\">

@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETStandard,Version=v2.0/",
-    "signature": ""
+    "signature": "7d7eb9a57ffa7c366ebe2e54372bf99ebe1142e0"
   },
   "compilationOptions": {},
   "targets": {
@@ -48,7 +48,7 @@
     "NETStandard.Library/2.0.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-oASM3DLkuLqwYpo4QcB/PIqh5FQO8ONF0ZYAz0Yvtyh0hvFoX6FssSUKtaGyi+YGDaOrUJBQtrFd0QjKl7fo3g==",
+      "sha512": "sha512-st47PosZSHrjECdjeIzZQbzivYBJFv6P2nv4cj2ypdI204DO+vZ7l5raGMiX4eXMJ53RfOIg+/s4DHVZ54Nu2A==",
       "path": "netstandard.library/2.0.3",
       "hashPath": "netstandard.library.2.0.3.nupkg.sha512"
     },

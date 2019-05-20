@@ -8,24 +8,20 @@
     xmlns:appmodel="using:Windows.ApplicationModel"
     xmlns:prismMvvm="using:Prism.Windows.Mvvm"
     prismMvvm:ViewModelLocator.AutoWireViewModel="True"
+    xmlns:viewModels="using:OnePomodoro.ViewModels"
     xmlns:helpers="using:OnePomodoro.Helpers"
+    d:DataContext="{d:DesignInstance Type=viewModels:MainViewModel}"
     mc:Ignorable="d">
     <Grid x:ConnectionId='2'
-        x:Name="ContentArea"
-       Background="Black">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="48"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <TextBlock
-            Grid.Row="0"
-            x:Uid="Main_Title"
-            Style="{StaticResource PageTitleStyle}" />
-        <Grid
-            Grid.Row="1" 
-            Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-            <!--The SystemControlPageBackgroundChromeLowBrush background represents where you should place your content. 
+        x:Name="ContentArea">
+        <Grid Grid.Row="1" Background="#FF101010">
+            <StackPanel Margin="40">
+            <TextBlock Text="In Work" Foreground="#FF9E1300" FontSize="128" FontFamily="DINPro" FontWeight="Bold"
+                       IsHitTestVisible="{Binding}"/>
+                <TextBlock Text="Take a Break" Foreground="#FF001BAB" FontSize="128" FontFamily="DINPro" FontWeight="Bold"/>
+                <!--The SystemControlPageBackgroundChromeLowBrush background represents where you should place your content. 
                 Place your content here.-->
+            </StackPanel>
         </Grid>
     </Grid>
 </Page>

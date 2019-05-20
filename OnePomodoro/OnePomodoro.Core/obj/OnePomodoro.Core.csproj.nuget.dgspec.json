@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Users\\dinoc\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro.Core\\OnePomodoro.Core.csproj": {}
+    "D:\\Users\\jchen\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro.Core\\OnePomodoro.Core.csproj": {}
   },
   "projects": {
-    "D:\\Users\\dinoc\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro.Core\\OnePomodoro.Core.csproj": {
+    "D:\\Users\\jchen\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro.Core\\OnePomodoro.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Users\\dinoc\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro.Core\\OnePomodoro.Core.csproj",
+        "projectUniqueName": "D:\\Users\\jchen\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro.Core\\OnePomodoro.Core.csproj",
         "projectName": "OnePomodoro.Core",
-        "projectPath": "D:\\Users\\dinoc\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro.Core\\OnePomodoro.Core.csproj",
-        "packagesPath": "C:\\Users\\dinoc\\.nuget\\packages\\",
-        "outputPath": "D:\\Users\\dinoc\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro.Core\\obj\\",
+        "projectPath": "D:\\Users\\jchen\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro.Core\\OnePomodoro.Core.csproj",
+        "packagesPath": "C:\\Users\\jchen\\.nuget\\packages\\",
+        "outputPath": "D:\\Users\\jchen\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\dinoc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\jchen\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

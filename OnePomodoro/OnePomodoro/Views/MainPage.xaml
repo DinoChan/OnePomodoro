@@ -8,14 +8,23 @@
     xmlns:appmodel="using:Windows.ApplicationModel"
     xmlns:prismMvvm="using:Prism.Windows.Mvvm"
     prismMvvm:ViewModelLocator.AutoWireViewModel="True"
+    xmlns:viewModels="using:OnePomodoro.ViewModels"
     xmlns:helpers="using:OnePomodoro.Helpers"
+    d:DataContext="{d:DesignInstance Type=viewModels:MainViewModel}"
     mc:Ignorable="d">
     <Grid
         x:Name="ContentArea">
-        <Grid Grid.Row="1" Background="#FF0A0A1C" 
->
-            <!--The SystemControlPageBackgroundChromeLowBrush background represents where you should place your content. 
+        <Grid.DataContext>
+            <viewModels:MainViewModel/>
+        </Grid.DataContext>
+        <Grid Grid.Row="1" Background="#FF101010">
+            <StackPanel Margin="40">
+                <TextBlock Text="In Work" Foreground="#FF9E1300" FontSize="128" FontFamily="DINPro" FontWeight="Bold"
+                       IsHitTestVisible="{Binding is}"/>
+                <TextBlock Text="Take a Break" Foreground="#FF001BAB" FontSize="128" FontFamily="DINPro" FontWeight="Bold"/>
+                <!--The SystemControlPageBackgroundChromeLowBrush background represents where you should place your content. 
                 Place your content here.-->
+            </StackPanel>
         </Grid>
     </Grid>
 </Page>

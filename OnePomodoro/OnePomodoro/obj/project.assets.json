@@ -252,6 +252,34 @@
           "lib/uap10.0/Microsoft.Toolkit.Uwp.Notifications.dll": {}
         }
       },
+      "Microsoft.Toolkit.Uwp.UI/5.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "5.1.1",
+          "Win2D.uwp": "1.21.0"
+        },
+        "compile": {
+          "lib/uap10.0.16299/Microsoft.Toolkit.Uwp.UI.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0.16299/Microsoft.Toolkit.Uwp.UI.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI.Animations/5.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp.UI": "5.1.1",
+          "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
+          "System.ValueTuple": "4.4.0",
+          "Win2D.uwp": "1.21.0"
+        },
+        "compile": {
+          "lib/uap10.0.16299/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0.16299/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
+        }
+      },
       "Microsoft.Xaml.Behaviors.Uwp.Managed/2.0.0": {
         "type": "package",
         "compile": {
@@ -413,6 +441,15 @@
           "build/runtime.win10-x86.Microsoft.Net.UWPCoreRuntimeSdk.targets": {}
         }
       },
+      "System.ValueTuple/4.4.0": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.0/_._": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/_._": {}
+        }
+      },
       "Unity/4.0.1": {
         "type": "package",
         "dependencies": {
@@ -425,6 +462,29 @@
         "runtime": {
           "lib/win8/Microsoft.Practices.Unity.RegistrationByConvention.dll": {},
           "lib/win8/Microsoft.Practices.Unity.dll": {}
+        }
+      },
+      "Win2D.uwp/1.21.0": {
+        "type": "package",
+        "compile": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win10-arm/native/Microsoft.Graphics.Canvas.dll": {
+            "assetType": "native",
+            "rid": "win10-arm"
+          },
+          "runtimes/win10-x64/native/Microsoft.Graphics.Canvas.dll": {
+            "assetType": "native",
+            "rid": "win10-x64"
+          },
+          "runtimes/win10-x86/native/Microsoft.Graphics.Canvas.dll": {
+            "assetType": "native",
+            "rid": "win10-x86"
+          }
         }
       },
       "OnePomodoro.Core/1.0.0": {
@@ -691,6 +751,34 @@
         },
         "runtime": {
           "lib/uap10.0/Microsoft.Toolkit.Uwp.Notifications.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI/5.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "5.1.1",
+          "Win2D.uwp": "1.21.0"
+        },
+        "compile": {
+          "lib/uap10.0.16299/Microsoft.Toolkit.Uwp.UI.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0.16299/Microsoft.Toolkit.Uwp.UI.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI.Animations/5.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp.UI": "5.1.1",
+          "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
+          "System.ValueTuple": "4.4.0",
+          "Win2D.uwp": "1.21.0"
+        },
+        "compile": {
+          "lib/uap10.0.16299/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0.16299/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
         }
       },
       "Microsoft.Xaml.Behaviors.Uwp.Managed/2.0.0": {
@@ -1032,6 +1120,15 @@
           "build/runtime.win10-x86.Microsoft.Net.UWPCoreRuntimeSdk.targets": {}
         }
       },
+      "System.ValueTuple/4.4.0": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.0/_._": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/_._": {}
+        }
+      },
       "Unity/4.0.1": {
         "type": "package",
         "dependencies": {
@@ -1044,6 +1141,18 @@
         "runtime": {
           "lib/win8/Microsoft.Practices.Unity.RegistrationByConvention.dll": {},
           "lib/win8/Microsoft.Practices.Unity.dll": {}
+        }
+      },
+      "Win2D.uwp/1.21.0": {
+        "type": "package",
+        "compile": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "native": {
+          "runtimes/win10-arm/native/Microsoft.Graphics.Canvas.dll": {}
         }
       },
       "OnePomodoro.Core/1.0.0": {
@@ -1310,6 +1419,34 @@
         },
         "runtime": {
           "lib/uap10.0/Microsoft.Toolkit.Uwp.Notifications.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI/5.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "5.1.1",
+          "Win2D.uwp": "1.21.0"
+        },
+        "compile": {
+          "lib/uap10.0.16299/Microsoft.Toolkit.Uwp.UI.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0.16299/Microsoft.Toolkit.Uwp.UI.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI.Animations/5.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp.UI": "5.1.1",
+          "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
+          "System.ValueTuple": "4.4.0",
+          "Win2D.uwp": "1.21.0"
+        },
+        "compile": {
+          "lib/uap10.0.16299/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0.16299/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
         }
       },
       "Microsoft.Xaml.Behaviors.Uwp.Managed/2.0.0": {
@@ -1652,6 +1789,15 @@
           "build/runtime.win10-x86.Microsoft.Net.UWPCoreRuntimeSdk.targets": {}
         }
       },
+      "System.ValueTuple/4.4.0": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.0/_._": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/_._": {}
+        }
+      },
       "Unity/4.0.1": {
         "type": "package",
         "dependencies": {
@@ -1664,6 +1810,18 @@
         "runtime": {
           "lib/win8/Microsoft.Practices.Unity.RegistrationByConvention.dll": {},
           "lib/win8/Microsoft.Practices.Unity.dll": {}
+        }
+      },
+      "Win2D.uwp/1.21.0": {
+        "type": "package",
+        "compile": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "native": {
+          "runtimes/win10-arm/native/Microsoft.Graphics.Canvas.dll": {}
         }
       },
       "OnePomodoro.Core/1.0.0": {
@@ -1930,6 +2088,34 @@
         },
         "runtime": {
           "lib/uap10.0/Microsoft.Toolkit.Uwp.Notifications.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI/5.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "5.1.1",
+          "Win2D.uwp": "1.21.0"
+        },
+        "compile": {
+          "lib/uap10.0.16299/Microsoft.Toolkit.Uwp.UI.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0.16299/Microsoft.Toolkit.Uwp.UI.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI.Animations/5.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp.UI": "5.1.1",
+          "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
+          "System.ValueTuple": "4.4.0",
+          "Win2D.uwp": "1.21.0"
+        },
+        "compile": {
+          "lib/uap10.0.16299/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0.16299/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
         }
       },
       "Microsoft.Xaml.Behaviors.Uwp.Managed/2.0.0": {
@@ -2272,6 +2458,15 @@
           "build/runtime.win10-x86.Microsoft.Net.UWPCoreRuntimeSdk.targets": {}
         }
       },
+      "System.ValueTuple/4.4.0": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.0/_._": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/_._": {}
+        }
+      },
       "Unity/4.0.1": {
         "type": "package",
         "dependencies": {
@@ -2284,6 +2479,15 @@
         "runtime": {
           "lib/win8/Microsoft.Practices.Unity.RegistrationByConvention.dll": {},
           "lib/win8/Microsoft.Practices.Unity.dll": {}
+        }
+      },
+      "Win2D.uwp/1.21.0": {
+        "type": "package",
+        "compile": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
         }
       },
       "OnePomodoro.Core/1.0.0": {
@@ -2550,6 +2754,34 @@
         },
         "runtime": {
           "lib/uap10.0/Microsoft.Toolkit.Uwp.Notifications.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI/5.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "5.1.1",
+          "Win2D.uwp": "1.21.0"
+        },
+        "compile": {
+          "lib/uap10.0.16299/Microsoft.Toolkit.Uwp.UI.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0.16299/Microsoft.Toolkit.Uwp.UI.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI.Animations/5.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp.UI": "5.1.1",
+          "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
+          "System.ValueTuple": "4.4.0",
+          "Win2D.uwp": "1.21.0"
+        },
+        "compile": {
+          "lib/uap10.0.16299/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0.16299/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
         }
       },
       "Microsoft.Xaml.Behaviors.Uwp.Managed/2.0.0": {
@@ -2891,6 +3123,15 @@
           "build/runtime.win10-x86.Microsoft.Net.UWPCoreRuntimeSdk.targets": {}
         }
       },
+      "System.ValueTuple/4.4.0": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.0/_._": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/_._": {}
+        }
+      },
       "Unity/4.0.1": {
         "type": "package",
         "dependencies": {
@@ -2903,6 +3144,18 @@
         "runtime": {
           "lib/win8/Microsoft.Practices.Unity.RegistrationByConvention.dll": {},
           "lib/win8/Microsoft.Practices.Unity.dll": {}
+        }
+      },
+      "Win2D.uwp/1.21.0": {
+        "type": "package",
+        "compile": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "native": {
+          "runtimes/win10-x64/native/Microsoft.Graphics.Canvas.dll": {}
         }
       },
       "OnePomodoro.Core/1.0.0": {
@@ -3169,6 +3422,34 @@
         },
         "runtime": {
           "lib/uap10.0/Microsoft.Toolkit.Uwp.Notifications.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI/5.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "5.1.1",
+          "Win2D.uwp": "1.21.0"
+        },
+        "compile": {
+          "lib/uap10.0.16299/Microsoft.Toolkit.Uwp.UI.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0.16299/Microsoft.Toolkit.Uwp.UI.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI.Animations/5.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp.UI": "5.1.1",
+          "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
+          "System.ValueTuple": "4.4.0",
+          "Win2D.uwp": "1.21.0"
+        },
+        "compile": {
+          "lib/uap10.0.16299/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0.16299/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
         }
       },
       "Microsoft.Xaml.Behaviors.Uwp.Managed/2.0.0": {
@@ -3511,6 +3792,15 @@
           "build/runtime.win10-x86.Microsoft.Net.UWPCoreRuntimeSdk.targets": {}
         }
       },
+      "System.ValueTuple/4.4.0": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.0/_._": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/_._": {}
+        }
+      },
       "Unity/4.0.1": {
         "type": "package",
         "dependencies": {
@@ -3523,6 +3813,18 @@
         "runtime": {
           "lib/win8/Microsoft.Practices.Unity.RegistrationByConvention.dll": {},
           "lib/win8/Microsoft.Practices.Unity.dll": {}
+        }
+      },
+      "Win2D.uwp/1.21.0": {
+        "type": "package",
+        "compile": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "native": {
+          "runtimes/win10-x64/native/Microsoft.Graphics.Canvas.dll": {}
         }
       },
       "OnePomodoro.Core/1.0.0": {
@@ -3789,6 +4091,34 @@
         },
         "runtime": {
           "lib/uap10.0/Microsoft.Toolkit.Uwp.Notifications.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI/5.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "5.1.1",
+          "Win2D.uwp": "1.21.0"
+        },
+        "compile": {
+          "lib/uap10.0.16299/Microsoft.Toolkit.Uwp.UI.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0.16299/Microsoft.Toolkit.Uwp.UI.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI.Animations/5.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp.UI": "5.1.1",
+          "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
+          "System.ValueTuple": "4.4.0",
+          "Win2D.uwp": "1.21.0"
+        },
+        "compile": {
+          "lib/uap10.0.16299/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0.16299/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
         }
       },
       "Microsoft.Xaml.Behaviors.Uwp.Managed/2.0.0": {
@@ -4130,6 +4460,15 @@
           "runtimes/win10-x86/nativeassets/uap10.0.15138/clrcompression.dll": {}
         }
       },
+      "System.ValueTuple/4.4.0": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.0/_._": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/_._": {}
+        }
+      },
       "Unity/4.0.1": {
         "type": "package",
         "dependencies": {
@@ -4142,6 +4481,18 @@
         "runtime": {
           "lib/win8/Microsoft.Practices.Unity.RegistrationByConvention.dll": {},
           "lib/win8/Microsoft.Practices.Unity.dll": {}
+        }
+      },
+      "Win2D.uwp/1.21.0": {
+        "type": "package",
+        "compile": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "native": {
+          "runtimes/win10-x86/native/Microsoft.Graphics.Canvas.dll": {}
         }
       },
       "OnePomodoro.Core/1.0.0": {
@@ -4408,6 +4759,34 @@
         },
         "runtime": {
           "lib/uap10.0/Microsoft.Toolkit.Uwp.Notifications.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI/5.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "5.1.1",
+          "Win2D.uwp": "1.21.0"
+        },
+        "compile": {
+          "lib/uap10.0.16299/Microsoft.Toolkit.Uwp.UI.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0.16299/Microsoft.Toolkit.Uwp.UI.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI.Animations/5.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp.UI": "5.1.1",
+          "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
+          "System.ValueTuple": "4.4.0",
+          "Win2D.uwp": "1.21.0"
+        },
+        "compile": {
+          "lib/uap10.0.16299/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0.16299/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
         }
       },
       "Microsoft.Xaml.Behaviors.Uwp.Managed/2.0.0": {
@@ -4750,6 +5129,15 @@
           "build/runtime.win10-x86.Microsoft.Net.UWPCoreRuntimeSdk.targets": {}
         }
       },
+      "System.ValueTuple/4.4.0": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.0/_._": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/_._": {}
+        }
+      },
       "Unity/4.0.1": {
         "type": "package",
         "dependencies": {
@@ -4762,6 +5150,18 @@
         "runtime": {
           "lib/win8/Microsoft.Practices.Unity.RegistrationByConvention.dll": {},
           "lib/win8/Microsoft.Practices.Unity.dll": {}
+        }
+      },
+      "Win2D.uwp/1.21.0": {
+        "type": "package",
+        "compile": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "native": {
+          "runtimes/win10-x86/native/Microsoft.Graphics.Canvas.dll": {}
         }
       },
       "OnePomodoro.Core/1.0.0": {
@@ -5249,12 +5649,43 @@
         "microsoft.toolkit.uwp.notifications.nuspec"
       ]
     },
+    "Microsoft.Toolkit.Uwp.UI/5.1.1": {
+      "sha512": "wxxbIqSnj6/scu2Qtumny4B6gm6F7lLLzhAQfRa1ctfYOQBfd6HSy/pNZwo4m6gBJJx5c3Vnm55DuKFscra+Sg==",
+      "type": "package",
+      "path": "microsoft.toolkit.uwp.ui/5.1.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/uap10.0.16299/Microsoft.Toolkit.Uwp.UI.dll",
+        "lib/uap10.0.16299/Microsoft.Toolkit.Uwp.UI.pdb",
+        "lib/uap10.0.16299/Microsoft.Toolkit.Uwp.UI.pri",
+        "lib/uap10.0.16299/Microsoft.Toolkit.Uwp.UI.xml",
+        "microsoft.toolkit.uwp.ui.5.1.1.nupkg.sha512",
+        "microsoft.toolkit.uwp.ui.nuspec"
+      ]
+    },
+    "Microsoft.Toolkit.Uwp.UI.Animations/5.1.1": {
+      "sha512": "6g9fliM3+3AokeC/PHyM/1DQ972cUNensP78BqYURvmuVYgS/phoribEPtYKeOD6usK0F3nBZSNmM9vz1XiIQQ==",
+      "type": "package",
+      "path": "microsoft.toolkit.uwp.ui.animations/5.1.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/uap10.0.16299/Microsoft.Toolkit.Uwp.UI.Animations.dll",
+        "lib/uap10.0.16299/Microsoft.Toolkit.Uwp.UI.Animations.pdb",
+        "lib/uap10.0.16299/Microsoft.Toolkit.Uwp.UI.Animations.pri",
+        "lib/uap10.0.16299/Microsoft.Toolkit.Uwp.UI.Animations.xml",
+        "microsoft.toolkit.uwp.ui.animations.5.1.1.nupkg.sha512",
+        "microsoft.toolkit.uwp.ui.animations.nuspec"
+      ]
+    },
     "Microsoft.Xaml.Behaviors.Uwp.Managed/2.0.0": {
-      "sha512": "LfzU68PVP33nqsuSlO5xAYuoI/itVKz4VVJSIunrS7iqqxE3sy0Q+VvtoYnFcBAoGnY83ZVn8Mnc9HYqOBiPmg==",
+      "sha512": "FHAMa5uwPgkMfy9u3g5sH8o3C8zZOQoLfKUznn95ejNhmNBz3Yj7Diy9pKWabYgkSiyjKzc+E5T4ZsZkwVAJkQ==",
       "type": "package",
       "path": "microsoft.xaml.behaviors.uwp.managed/2.0.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "lib/uap10.0/Design/Microsoft.Xaml.Interactions.Design.dll",
         "lib/uap10.0/Design/Microsoft.Xaml.Interactivity.Design.dll",
         "lib/uap10.0/Microsoft.Xaml.Interactions.dll",
@@ -5268,7 +5699,7 @@
       ]
     },
     "NETStandard.Library/2.0.3": {
-      "sha512": "oASM3DLkuLqwYpo4QcB/PIqh5FQO8ONF0ZYAz0Yvtyh0hvFoX6FssSUKtaGyi+YGDaOrUJBQtrFd0QjKl7fo3g==",
+      "sha512": "st47PosZSHrjECdjeIzZQbzivYBJFv6P2nv4cj2ypdI204DO+vZ7l5raGMiX4eXMJ53RfOIg+/s4DHVZ54Nu2A==",
       "type": "package",
       "path": "netstandard.library/2.0.3",
       "files": [
@@ -9408,6 +9839,51 @@
         "runtimes/win10-x86/nativeassets/uap10.0.15138/clrcompression.dll"
       ]
     },
+    "System.ValueTuple/4.4.0": {
+      "sha512": "BahUww/+mdP4ARCAh2RQhQTg13wYLVrBb9SYVgW8ZlrwjraGCXHGjo0oIiUfZ34LUZkMMR+RAzR7dEY4S1HeQQ==",
+      "type": "package",
+      "path": "system.valuetuple/4.4.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net461/System.ValueTuple.dll",
+        "lib/net461/System.ValueTuple.xml",
+        "lib/net47/System.ValueTuple.dll",
+        "lib/net47/System.ValueTuple.xml",
+        "lib/netcoreapp2.0/_._",
+        "lib/netstandard1.0/System.ValueTuple.dll",
+        "lib/netstandard1.0/System.ValueTuple.xml",
+        "lib/netstandard2.0/_._",
+        "lib/portable-net40+sl4+win8+wp8/System.ValueTuple.dll",
+        "lib/portable-net40+sl4+win8+wp8/System.ValueTuple.xml",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net461/System.ValueTuple.dll",
+        "ref/net461/System.ValueTuple.xml",
+        "ref/net47/System.ValueTuple.dll",
+        "ref/net47/System.ValueTuple.xml",
+        "ref/netcoreapp2.0/_._",
+        "ref/netstandard2.0/_._",
+        "ref/portable-net40+sl4+win8+wp8/System.ValueTuple.dll",
+        "ref/portable-net40+sl4+win8+wp8/System.ValueTuple.xml",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "system.valuetuple.4.4.0.nupkg.sha512",
+        "system.valuetuple.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
     "Unity/4.0.1": {
       "sha512": "FQxLlryE47Y5xY7wJfToUrwtyLsgNJK0jK6sPfNC3YUsjzSX7ILXLA4EX8zVxFPOaIMTJBXRIKrnQ/lsECLufg==",
       "type": "package",
@@ -9437,6 +9913,26 @@
         "unity.nuspec"
       ]
     },
+    "Win2D.uwp/1.21.0": {
+      "sha512": "4ddgs6Mt4cDVOPcKE+gV02Rn8G9nhp8C9S94A/msxULD2ysq6Q/z3CmeyATJhJNVfhumWUaXzx0B3v39vB5A4Q==",
+      "type": "package",
+      "path": "win2d.uwp/1.21.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Win2d.githash.txt",
+        "build/native/Win2D.uwp.targets",
+        "include/Microsoft.Graphics.Canvas.h",
+        "include/Microsoft.Graphics.Canvas.native.h",
+        "lib/uap10.0/Microsoft.Graphics.Canvas.winmd",
+        "lib/uap10.0/Microsoft.Graphics.Canvas.xml",
+        "runtimes/win10-arm/native/Microsoft.Graphics.Canvas.dll",
+        "runtimes/win10-x64/native/Microsoft.Graphics.Canvas.dll",
+        "runtimes/win10-x86/native/Microsoft.Graphics.Canvas.dll",
+        "win2d.uwp.1.21.0.nupkg.sha512",
+        "win2d.uwp.nuspec"
+      ]
+    },
     "OnePomodoro.Core/1.0.0": {
       "type": "project",
       "path": "../OnePomodoro.Core/OnePomodoro.Core.csproj",
@@ -9449,30 +9945,32 @@
       "Microsoft.Services.Store.Engagement >= 10.1901.28001",
       "Microsoft.Toolkit.Uwp >= 5.1.1",
       "Microsoft.Toolkit.Uwp.Notifications >= 5.1.1",
+      "Microsoft.Toolkit.Uwp.UI >= 5.1.1",
+      "Microsoft.Toolkit.Uwp.UI.Animations >= 5.1.1",
       "Microsoft.Xaml.Behaviors.Uwp.Managed >= 2.0.0",
       "OnePomodoro.Core >= 1.0.0",
       "Prism.Unity >= 6.3.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\dinoc\\.nuget\\packages\\": {},
+    "C:\\Users\\jchen\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft SDKs\\UWPNuGetPackages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Users\\dinoc\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro\\OnePomodoro.csproj",
+      "projectUniqueName": "D:\\Users\\jchen\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro\\OnePomodoro.csproj",
       "projectName": "OnePomodoro",
-      "projectPath": "D:\\Users\\dinoc\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro\\OnePomodoro.csproj",
-      "packagesPath": "C:\\Users\\dinoc\\.nuget\\packages\\",
-      "outputPath": "D:\\Users\\dinoc\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro\\obj\\",
+      "projectPath": "D:\\Users\\jchen\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro\\OnePomodoro.csproj",
+      "packagesPath": "C:\\Users\\jchen\\.nuget\\packages\\",
+      "outputPath": "D:\\Users\\jchen\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft SDKs\\UWPNuGetPackages\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\dinoc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\jchen\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -9485,8 +9983,8 @@
       "frameworks": {
         "uap10.0.17134": {
           "projectReferences": {
-            "D:\\Users\\dinoc\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro.Core\\OnePomodoro.Core.csproj": {
-              "projectPath": "D:\\Users\\dinoc\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro.Core\\OnePomodoro.Core.csproj"
+            "D:\\Users\\jchen\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro.Core\\OnePomodoro.Core.csproj": {
+              "projectPath": "D:\\Users\\jchen\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro.Core\\OnePomodoro.Core.csproj"
             }
           }
         }
@@ -9513,6 +10011,14 @@
             "version": "[5.1.1, )"
           },
           "Microsoft.Toolkit.Uwp.Notifications": {
+            "target": "Package",
+            "version": "[5.1.1, )"
+          },
+          "Microsoft.Toolkit.Uwp.UI": {
+            "target": "Package",
+            "version": "[5.1.1, )"
+          },
+          "Microsoft.Toolkit.Uwp.UI.Animations": {
             "target": "Package",
             "version": "[5.1.1, )"
           },

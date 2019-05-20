@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Users\\dinoc\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro\\OnePomodoro.csproj": {}
+    "D:\\Users\\jchen\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro\\OnePomodoro.csproj": {}
   },
   "projects": {
-    "D:\\Users\\dinoc\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro.Core\\OnePomodoro.Core.csproj": {
+    "D:\\Users\\jchen\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro.Core\\OnePomodoro.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Users\\dinoc\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro.Core\\OnePomodoro.Core.csproj",
+        "projectUniqueName": "D:\\Users\\jchen\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro.Core\\OnePomodoro.Core.csproj",
         "projectName": "OnePomodoro.Core",
-        "projectPath": "D:\\Users\\dinoc\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro.Core\\OnePomodoro.Core.csproj",
-        "packagesPath": "C:\\Users\\dinoc\\.nuget\\packages\\",
-        "outputPath": "D:\\Users\\dinoc\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro.Core\\obj\\",
+        "projectPath": "D:\\Users\\jchen\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro.Core\\OnePomodoro.Core.csproj",
+        "packagesPath": "C:\\Users\\jchen\\.nuget\\packages\\",
+        "outputPath": "D:\\Users\\jchen\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\dinoc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\jchen\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -66,21 +66,21 @@
         }
       }
     },
-    "D:\\Users\\dinoc\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro\\OnePomodoro.csproj": {
+    "D:\\Users\\jchen\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro\\OnePomodoro.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Users\\dinoc\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro\\OnePomodoro.csproj",
+        "projectUniqueName": "D:\\Users\\jchen\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro\\OnePomodoro.csproj",
         "projectName": "OnePomodoro",
-        "projectPath": "D:\\Users\\dinoc\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro\\OnePomodoro.csproj",
-        "packagesPath": "C:\\Users\\dinoc\\.nuget\\packages\\",
-        "outputPath": "D:\\Users\\dinoc\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro\\obj\\",
+        "projectPath": "D:\\Users\\jchen\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro\\OnePomodoro.csproj",
+        "packagesPath": "C:\\Users\\jchen\\.nuget\\packages\\",
+        "outputPath": "D:\\Users\\jchen\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft SDKs\\UWPNuGetPackages\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\dinoc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\jchen\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -93,8 +93,8 @@
         "frameworks": {
           "uap10.0.17134": {
             "projectReferences": {
-              "D:\\Users\\dinoc\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro.Core\\OnePomodoro.Core.csproj": {
-                "projectPath": "D:\\Users\\dinoc\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro.Core\\OnePomodoro.Core.csproj"
+              "D:\\Users\\jchen\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro.Core\\OnePomodoro.Core.csproj": {
+                "projectPath": "D:\\Users\\jchen\\Source\\Repos\\DinoChan\\OnePomodoro\\OnePomodoro\\OnePomodoro.Core\\OnePomodoro.Core.csproj"
               }
             }
           }
@@ -121,6 +121,14 @@
               "version": "[5.1.1, )"
             },
             "Microsoft.Toolkit.Uwp.Notifications": {
+              "target": "Package",
+              "version": "[5.1.1, )"
+            },
+            "Microsoft.Toolkit.Uwp.UI": {
+              "target": "Package",
+              "version": "[5.1.1, )"
+            },
+            "Microsoft.Toolkit.Uwp.UI.Animations": {
               "target": "Package",
               "version": "[5.1.1, )"
             },

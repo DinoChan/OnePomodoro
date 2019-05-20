@@ -1,9 +1,7 @@
-﻿using System;
-using System.Threading;
-using Prism.Commands;
+﻿using Prism.Commands;
 using Prism.Windows.Mvvm;
+using System;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 
 namespace OnePomodoro.ViewModels
 {
@@ -45,10 +43,7 @@ namespace OnePomodoro.ViewModels
 
         public TimeSpan RemainingPomodoroInterval
         {
-            get
-            {
-                return _remainingPomodoroInterval;
-            }
+            get => _remainingPomodoroInterval;
 
             private set
             {
@@ -57,12 +52,9 @@ namespace OnePomodoro.ViewModels
             }
         }
 
-        public TimeSpan RemainingBreakingInterval
+        public TimeSpan RemainingBreakInterval
         {
-            get
-            {
-                return _remainingBreakInterval;
-            }
+            get => _remainingBreakInterval;
 
 
             private set
@@ -74,10 +66,7 @@ namespace OnePomodoro.ViewModels
 
         public bool IsInPomodoro
         {
-            get
-            {
-                return _isInPomodoro;
-            }
+            get => _isInPomodoro;
 
             private set
             {
@@ -88,10 +77,7 @@ namespace OnePomodoro.ViewModels
 
         public bool IsTimerInProgress
         {
-            get
-            {
-                return _isTimerInProgress;
-            }
+            get => _isTimerInProgress;
 
             private set
             {
@@ -109,10 +95,10 @@ namespace OnePomodoro.ViewModels
         public DelegateCommand StopBreakCommand { get; }
 
 
-
         private void StartPomodoro()
         {
-            _breakStartTime = DateTime.Now;
+            RemainingBreakInterval = _completedPomodoros % LongBreakAfter == 0 ? BreakInterval : LongBreakInterval; ;
+            _pomodoroStartTime = DateTime.Now;
             _pomodoroTimer.Start();
             IsTimerInProgress = true;
         }
@@ -121,15 +107,13 @@ namespace OnePomodoro.ViewModels
             _pomodoroTimer.Stop();
             IsTimerInProgress = false;
             IsInPomodoro = false;
-            RemainingPomodoroInterval = PomodoroInterval;
-
             _completedPomodoros++;
-            
         }
 
 
         private void StartBreak()
         {
+            RemainingPomodoroInterval = PomodoroInterval;
             _breakStartTime = DateTime.Now;
             _breakTimer.Start();
             IsTimerInProgress = true;
@@ -145,24 +129,25 @@ namespace OnePomodoro.ViewModels
 
         private void OnPomodoroTimerTick(object sender, object e)
         {
-            throw new NotImplementedException();
+            var remainingBreakInterval = PomodoroInterval - (DateTime.Now - _pomodoroStartTime);
+            if (remainingBreakInterval < TimeSpan.Zero)
+                remainingBreakInterval = TimeSpan.Zero;
+
+            RemainingPomodoroInterval = remainingBreakInterval;
+            if (RemainingBreakInterval == TimeSpan.Zero)
+                StopPomodoro();
         }
 
         private void OnBreakTimerTick(object sender, object e)
         {
-            var remainingBreakingInterval= DateTime.Now - _breakStartTime;
-            if (remainingBreakingInterval < TimeSpan.Zero)
-                remainingBreakingInterval = TimeSpan.Zero;
+            var breakInterval = _completedPomodoros % LongBreakAfter == 0 ? BreakInterval : LongBreakInterval;
+            TimeSpan remainingBreakInterval = breakInterval - (DateTime.Now - _breakStartTime);
+            if (remainingBreakInterval < TimeSpan.Zero)
+                remainingBreakInterval = TimeSpan.Zero;
 
-            RemainingBreakingInterval = _completedPomodoros % LongBreakAfter == 0 ? BreakInterval : LongBreakInterval;
-
-            RemainingBreakingInterval = remainingBreakingInterval;
-            if (RemainingBreakingInterval == TimeSpan.Zero)
-                StopBreak();
-
-
-            
-            _breakTimer.Interval = RemainingBreakingInterval;
+            RemainingBreakInterval = remainingBreakInterval;
+            if (RemainingBreakInterval <= TimeSpan.Zero){
+                StopBreak();}
         }
     }
 }

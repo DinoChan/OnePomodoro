@@ -3,3 +3,17 @@
 ################################################################################
 
 /OnePomodoro/.vs/OnePomodoro/v16
+#忽略vs配置
+.vs/
+*.suo
+.suo
+*Fakes*
+*.user
+*.pdb
+.vs/slnx.sqlite 
+
+#忽略生成文件
+Debug/
+Release/
+obj/
+bin/
