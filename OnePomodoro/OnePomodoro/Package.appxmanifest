@@ -8,15 +8,15 @@
   IgnorableNamespaces="uap mp genTemplate">
 
   <Identity
-    Name="FC76A899-3894-4030-AD00-2DB24D86E9EA"
-    Publisher="CN=dinoc"
-    Version="1.0.0.0" />
+    Name="24329C-Soft.OnePomodoro"
+    Publisher="CN=6D7AEB3B-3956-49A6-AD32-C4737FDDCD52"
+    Version="1.0.2.0" />
 
-  <mp:PhoneIdentity PhoneProductId="FC76A899-3894-4030-AD00-2DB24D86E9EA" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="0034103c-388d-42cb-b647-d5c98b47d9ae" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>OnePomodoro</DisplayName>
-    <PublisherDisplayName>dinoc</PublisherDisplayName>
+    <PublisherDisplayName>Dino.C</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
