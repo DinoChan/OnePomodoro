@@ -19,7 +19,7 @@
     <DeployOptionalPackages>false</DeployOptionalPackages>
     <WindowsSdkPath>C:\Program Files %28x86%29\Windows Kits\10\</WindowsSdkPath>
     <LayoutDir>D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\AppX</LayoutDir>
-    <RegisteredManifestChecksum>FBECFD72A460BB05BC300E4CB028EDAD63FEDC6B185D4DA894A1C47337746338</RegisteredManifestChecksum>
+    <RegisteredManifestChecksum>5A8F3A42BE4926AD909DBC22D55CD2C1A0CE82B021AFBCC2D85041717FB48760</RegisteredManifestChecksum>
     <RegisteredPackageMoniker>FC76A899-3894-4030-AD00-2DB24D86E9EA_1.0.0.0_x86__csdbzh72xdmvg</RegisteredPackageMoniker>
     <RegisteredUserModeAppID>FC76A899-3894-4030-AD00-2DB24D86E9EA_csdbzh72xdmvg!App</RegisteredUserModeAppID>
     <RegisteredPackageID>FC76A899-3894-4030-AD00-2DB24D86E9EA</RegisteredPackageID>
@@ -30,13 +30,13 @@
     <AppXManifest Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2019-05-21T10:21:35.657</Modified>
+      <Modified>2019-05-21T11:17:36.448</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\OnePomodoro.exe">
       <PackagePath>entrypoint\OnePomodoro.exe</PackagePath>
-      <Modified>2019-05-21T10:21:33.062</Modified>
+      <Modified>2019-05-21T11:16:31.710</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\jchen\.nuget\packages\commonservicelocator\1.3.0\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll">
       <PackagePath>Microsoft.Practices.ServiceLocation.dll</PackagePath>
@@ -167,22 +167,22 @@
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\SplashScreen.scale-100.png">
       <PackagePath>Assets\SplashScreen.scale-100.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2019-05-21T08:17:36.170</Modified>
+      <Modified>2019-05-21T11:15:47.963</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\SplashScreen.scale-125.png">
       <PackagePath>Assets\SplashScreen.scale-125.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2019-05-21T08:17:36.286</Modified>
+      <Modified>2019-05-21T11:15:48.043</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\SplashScreen.scale-150.png">
       <PackagePath>Assets\SplashScreen.scale-150.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2019-05-21T08:17:36.483</Modified>
+      <Modified>2019-05-21T11:15:48.137</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\SplashScreen.scale-400.png">
       <PackagePath>Assets\SplashScreen.scale-400.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2019-05-21T08:17:37.820</Modified>
+      <Modified>2019-05-21T11:15:48.744</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\Square150x150Logo.scale-100.png">
       <PackagePath>Assets\Square150x150Logo.scale-100.png</PackagePath>
@@ -321,7 +321,7 @@
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\SplashScreen.scale-200.png">
       <PackagePath>Assets\SplashScreen.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2019-05-21T08:17:36.834</Modified>
+      <Modified>2019-05-21T11:15:48.283</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\Square150x150Logo.scale-200.png">
       <PackagePath>Assets\Square150x150Logo.scale-200.png</PackagePath>
@@ -353,59 +353,59 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2019-05-21T10:21:32.588</Modified>
+      <Modified>2019-05-21T11:17:33.647</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Styles\Button.xbf">
       <PackagePath>Styles\Button.xbf</PackagePath>
-      <Modified>2019-05-21T10:21:32.585</Modified>
+      <Modified>2019-05-21T11:17:33.644</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Styles\Page.xbf">
       <PackagePath>Styles\Page.xbf</PackagePath>
-      <Modified>2019-05-21T10:21:32.585</Modified>
+      <Modified>2019-05-21T11:17:33.645</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Styles\_Colors.xbf">
       <PackagePath>Styles\_Colors.xbf</PackagePath>
-      <Modified>2019-05-21T10:21:32.586</Modified>
+      <Modified>2019-05-21T11:17:33.645</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Styles\_FontSizes.xbf">
       <PackagePath>Styles\_FontSizes.xbf</PackagePath>
-      <Modified>2019-05-21T10:21:32.586</Modified>
+      <Modified>2019-05-21T11:17:33.645</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Styles\_Thickness.xbf">
       <PackagePath>Styles\_Thickness.xbf</PackagePath>
-      <Modified>2019-05-21T10:21:32.587</Modified>
+      <Modified>2019-05-21T11:17:33.646</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Styles\TextBlock.xbf">
       <PackagePath>Styles\TextBlock.xbf</PackagePath>
-      <Modified>2019-05-21T10:21:32.587</Modified>
+      <Modified>2019-05-21T11:17:33.646</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Themes\Converters.xbf">
       <PackagePath>Themes\Converters.xbf</PackagePath>
-      <Modified>2019-05-21T10:21:32.587</Modified>
+      <Modified>2019-05-21T11:17:33.646</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Themes\Generic.xbf">
       <PackagePath>Themes\Generic.xbf</PackagePath>
-      <Modified>2019-05-21T10:21:32.588</Modified>
+      <Modified>2019-05-21T11:17:33.647</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Views\FirstRunDialog.xbf">
       <PackagePath>Views\FirstRunDialog.xbf</PackagePath>
-      <Modified>2019-05-21T10:21:32.588</Modified>
+      <Modified>2019-05-21T11:17:33.647</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Views\InformationDialog.xbf">
       <PackagePath>Views\InformationDialog.xbf</PackagePath>
-      <Modified>2019-05-21T10:21:32.589</Modified>
+      <Modified>2019-05-21T11:17:33.647</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Views\MainPage.xbf">
       <PackagePath>Views\MainPage.xbf</PackagePath>
-      <Modified>2019-05-21T10:21:32.582</Modified>
+      <Modified>2019-05-21T11:17:33.641</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Views\SettingsPage.xbf">
       <PackagePath>Views\SettingsPage.xbf</PackagePath>
-      <Modified>2019-05-21T10:21:32.589</Modified>
+      <Modified>2019-05-21T11:17:33.648</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Views\WhatsNewDialog.xbf">
       <PackagePath>Views\WhatsNewDialog.xbf</PackagePath>
-      <Modified>2019-05-21T10:21:32.590</Modified>
+      <Modified>2019-05-21T11:17:33.648</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.UniversalCRT.Debug\10.0.17763.0\\redist\Debug\x86\ucrtbased.dll">
       <PackagePath>ucrtbased.dll</PackagePath>
@@ -417,11 +417,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2019-05-21T08:26:36.424</Modified>
+      <Modified>2019-05-21T11:17:34.036</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Core\OnePomodoro.exe">
       <PackagePath>OnePomodoro.exe</PackagePath>
-      <Modified>2019-05-21T10:21:35.643</Modified>
+      <Modified>2019-05-21T11:17:36.438</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
