@@ -14,8 +14,11 @@
 
                 <ResourceDictionary Source="/Styles/TextBlock.xaml"/>
                 <ResourceDictionary Source="/Styles/Page.xaml"/>
+                <ResourceDictionary Source="/Styles/Button.xaml"/>
 
                 <ResourceDictionary Source="/Themes/Converters.xaml"/>
+
+                
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </prismUnity:PrismUnityApplication.Resources>

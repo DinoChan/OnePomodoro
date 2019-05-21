@@ -34,10 +34,11 @@ namespace OnePomodoro.ViewModels
             IsInPomodoro = true;
             RemainingPomodoroInterval = PomodoroInterval;
             _pomodoroTimer = new DispatcherTimer();
-            _pomodoroTimer.Interval = PomodoroInterval;
+            _pomodoroTimer.Interval = TimeSpan.FromSeconds(0.1);
             _pomodoroTimer.Tick += OnPomodoroTimerTick;
 
             _breakTimer = new DispatcherTimer();
+            _breakTimer.Interval = TimeSpan.FromSeconds(0.1);
             _breakTimer.Tick += OnBreakTimerTick;
         }
 
@@ -97,7 +98,6 @@ namespace OnePomodoro.ViewModels
 
         private void StartPomodoro()
         {
-            RemainingBreakInterval = _completedPomodoros % LongBreakAfter == 0 ? BreakInterval : LongBreakInterval; ;
             _pomodoroStartTime = DateTime.Now;
             _pomodoroTimer.Start();
             IsTimerInProgress = true;
@@ -108,12 +108,12 @@ namespace OnePomodoro.ViewModels
             IsTimerInProgress = false;
             IsInPomodoro = false;
             _completedPomodoros++;
+            RemainingBreakInterval = (_completedPomodoros % LongBreakAfter == 0) ? LongBreakInterval : BreakInterval;
         }
 
 
         private void StartBreak()
         {
-            RemainingPomodoroInterval = PomodoroInterval;
             _breakStartTime = DateTime.Now;
             _breakTimer.Start();
             IsTimerInProgress = true;
@@ -122,6 +122,7 @@ namespace OnePomodoro.ViewModels
 
         private void StopBreak()
         {
+            RemainingPomodoroInterval = PomodoroInterval;
             _breakTimer.Stop();
             IsTimerInProgress = false;
             IsInPomodoro = true;
@@ -134,20 +135,22 @@ namespace OnePomodoro.ViewModels
                 remainingBreakInterval = TimeSpan.Zero;
 
             RemainingPomodoroInterval = remainingBreakInterval;
-            if (RemainingBreakInterval == TimeSpan.Zero)
+            if (RemainingPomodoroInterval == TimeSpan.Zero)
                 StopPomodoro();
         }
 
         private void OnBreakTimerTick(object sender, object e)
         {
-            var breakInterval = _completedPomodoros % LongBreakAfter == 0 ? BreakInterval : LongBreakInterval;
+            var breakInterval = _completedPomodoros % LongBreakAfter == 0 ? LongBreakInterval : BreakInterval;
             TimeSpan remainingBreakInterval = breakInterval - (DateTime.Now - _breakStartTime);
             if (remainingBreakInterval < TimeSpan.Zero)
                 remainingBreakInterval = TimeSpan.Zero;
 
             RemainingBreakInterval = remainingBreakInterval;
-            if (RemainingBreakInterval <= TimeSpan.Zero){
-                StopBreak();}
+            if (RemainingBreakInterval <= TimeSpan.Zero)
+            {
+                StopBreak();
+            }
         }
     }
 }

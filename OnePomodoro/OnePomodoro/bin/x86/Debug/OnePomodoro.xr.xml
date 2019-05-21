@@ -4,11 +4,16 @@
     <RootInterface FullName="Windows.UI.Xaml.Data.IValueConverter" />
   </Roots.Interfaces>
   <Roots.PropertyPathNames>
-    <RootPropertyPathName Name="IsInPomodoro" />
-    <RootPropertyPathName Name="RemainingBreakInterval" />
-    <RootPropertyPathName Name="RemainingPomodoroInterval" />
     <RootPropertyPathName Name="ElementTheme" />
     <RootPropertyPathName Name="SwitchThemeCommand" />
+    <RootPropertyPathName Name="IsInPomodoro" />
+    <RootPropertyPathName Name="IsTimerInProgress" />
+    <RootPropertyPathName Name="StopBreakCommand" />
+    <RootPropertyPathName Name="StartBreakCommand" />
+    <RootPropertyPathName Name="StopPomodoroCommand" />
+    <RootPropertyPathName Name="StartPomodoroCommand" />
+    <RootPropertyPathName Name="RemainingBreakInterval" />
+    <RootPropertyPathName Name="RemainingPomodoroInterval" />
   </Roots.PropertyPathNames>
   <Roots.RootTypes>
     <RootType FullName="Prism.Unity.Windows.PrismUnityApplication">
@@ -19,17 +24,27 @@
       <RootProperty Name="MergedDictionaries" />
       <RootProperty Name="Source" />
     </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.Button">
+      <RootProperty Name="Content" />
+      <RootProperty Name="Visibility" />
+      <RootProperty Name="Command" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.Control">
+      <RootProperty Name="CornerRadius" />
+      <RootProperty Name="Background" />
+      <RootProperty Name="FontFamily" />
+      <RootProperty Name="FontSize" />
+      <RootProperty Name="Padding" />
+    </RootType>
+    <RootType FullName="Microsoft.Xaml.DirectUI.ProxyTypes.StaticResourceExtension" />
+    <RootType FullName="Windows.UI.Xaml.Setter">
+      <RootProperty Name="Property" />
+      <RootProperty Name="Value" />
+    </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Page">
       <RootProperty Name="Style" />
       <RootProperty Name="Resources" />
       <RootProperty Name="Content" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.Control">
-      <RootProperty Name="Background" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Setter">
-      <RootProperty Name="Property" />
-      <RootProperty Name="Value" />
     </RootType>
     <RootType FullName="Microsoft.Xaml.DirectUI.ProxyTypes.ThemeResourceExtension" />
     <RootType FullName="Windows.UI.Xaml.Media.SolidColorBrush">
@@ -45,22 +60,25 @@
       <RootProperty Name="Text" />
       <RootProperty Name="Margin" />
       <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Style" />
       <RootProperty Name="Foreground" />
       <RootProperty Name="FontFamily" />
       <RootProperty Name="Visibility" />
       <RootProperty Name="HorizontalAlignment" />
-      <RootProperty Name="Style" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.FrameworkElement">
       <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Margin" />
     </RootType>
-    <RootType FullName="Microsoft.Xaml.DirectUI.ProxyTypes.StaticResourceExtension" />
     <RootType FullName="Microsoft.Toolkit.Uwp.UI.Converters.BoolToVisibilityConverter" />
     <RootType FullName="OnePomodoro.Helpers.NegationBoolToVisibilityConverter" />
     <RootType FullName="Microsoft.Toolkit.Uwp.UI.Converters.FormatStringConverter" />
     <RootType FullName="Windows.UI.Xaml.Controls.ContentDialog">
       <RootProperty Name="TitleTemplate" />
       <RootProperty Name="Content" />
+      <RootProperty Name="Title" />
+      <RootEvent Name="PrimaryButtonClick" />
+      <RootEvent Name="SecondaryButtonClick" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.DataTemplate">
       <RootProperty Name="Template" />
@@ -71,6 +89,8 @@
       <RootProperty Name="Margin" />
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Resources" />
+      <RootProperty Name="Visibility" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Image">
       <RootProperty Name="Source" />
@@ -84,30 +104,16 @@
       <RootProperty Name="Content" />
     </RootType>
     <RootType FullName="OnePomodoro.Views.FirstRunDialog" />
-    <RootType FullName="Prism.Windows.Mvvm.ViewModelLocator">
-      <RootMethod Name="GetAutoWireViewModel" />
-      <RootMethod Name="SetAutoWireViewModel" />
-    </RootType>
-    <RootType FullName="Microsoft.Toolkit.Uwp.UI.Converters.BoolToObjectConverter">
-      <RootProperty Name="TrueValue" />
-      <RootProperty Name="FalseValue" />
-    </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Grid">
-      <RootProperty Name="DataContext" />
-      <RootProperty Name="Children" />
       <RootProperty Name="Background" />
+      <RootProperty Name="Resources" />
+      <RootProperty Name="Children" />
       <RootProperty Name="Margin" />
       <RootProperty Name="RowDefinitions" />
+      <RootProperty Name="DataContext" />
       <RootMethod Name="GetRow" />
       <RootMethod Name="SetRow" />
     </RootType>
-    <RootType FullName="OnePomodoro.ViewModels.MainViewModel" />
-    <RootType FullName="Windows.UI.Xaml.Data.Binding">
-      <RootProperty Name="Converter" />
-      <RootProperty Name="ConverterParameter" />
-      <RootProperty Name="Mode" />
-    </RootType>
-    <RootType FullName="OnePomodoro.Views.MainPage" />
     <RootType FullName="OnePomodoro.Helpers.EnumToBooleanConverter">
       <RootProperty Name="EnumType" />
     </RootType>
@@ -126,7 +132,46 @@
       <RootProperty Name="FontSize" />
       <RootProperty Name="CommandParameter" />
     </RootType>
+    <RootType FullName="Windows.UI.Xaml.Data.Binding">
+      <RootProperty Name="Converter" />
+      <RootProperty Name="ConverterParameter" />
+      <RootProperty Name="Mode" />
+    </RootType>
     <RootType FullName="Windows.UI.Xaml.ElementTheme" />
+    <RootType FullName="OnePomodoro.Views.InformationDialog" />
+    <RootType FullName="Prism.Windows.Mvvm.ViewModelLocator">
+      <RootMethod Name="GetAutoWireViewModel" />
+      <RootMethod Name="SetAutoWireViewModel" />
+    </RootType>
+    <RootType FullName="Microsoft.Toolkit.Uwp.UI.Converters.BoolToObjectConverter">
+      <RootProperty Name="TrueValue" />
+      <RootProperty Name="FalseValue" />
+    </RootType>
+    <RootType FullName="OnePomodoro.ViewModels.MainViewModel" />
+    <RootType FullName="Microsoft.Toolkit.Uwp.UI.Animations.Implicit">
+      <RootMethod Name="GetAnimations" />
+      <RootMethod Name="SetAnimations" />
+      <RootMethod Name="GetShowAnimations" />
+      <RootMethod Name="SetShowAnimations" />
+      <RootMethod Name="GetHideAnimations" />
+      <RootMethod Name="SetHideAnimations" />
+    </RootType>
+    <RootType FullName="Microsoft.Toolkit.Uwp.UI.Animations.Vector3Animation">
+      <RootProperty Name="Target" />
+      <RootProperty Name="Duration" />
+    </RootType>
+    <RootType FullName="Microsoft.Toolkit.Uwp.UI.Animations.OpacityAnimation">
+      <RootProperty Name="Duration" />
+      <RootProperty Name="From" />
+      <RootProperty Name="To" />
+    </RootType>
+    <RootType FullName="Microsoft.Toolkit.Uwp.UI.Animations.ScalarAnimation">
+      <RootProperty Name="Target" />
+      <RootProperty Name="Duration" />
+      <RootProperty Name="From" />
+      <RootProperty Name="To" />
+    </RootType>
+    <RootType FullName="OnePomodoro.Views.MainPage" />
     <RootType FullName="OnePomodoro.Views.SettingsPage" />
     <RootType FullName="OnePomodoro.Views.WhatsNewDialog" />
   </Roots.RootTypes>

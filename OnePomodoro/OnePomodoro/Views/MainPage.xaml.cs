@@ -14,5 +14,11 @@ namespace OnePomodoro.Views
         {
             InitializeComponent();
         }
+
+        private async void OnSettingClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            var dialog = new InformationDialog();
+            dialog.ShowAsync();
+        }
     }
 }

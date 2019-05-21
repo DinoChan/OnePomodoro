@@ -19,7 +19,7 @@
     <DeployOptionalPackages>false</DeployOptionalPackages>
     <WindowsSdkPath>C:\Program Files %28x86%29\Windows Kits\10\</WindowsSdkPath>
     <LayoutDir>D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\AppX</LayoutDir>
-    <RegisteredManifestChecksum>7D4B886673C2AC29E5021481A8D1AD2CF453B699ECB36BEAC38DA1012D92154C</RegisteredManifestChecksum>
+    <RegisteredManifestChecksum>FBECFD72A460BB05BC300E4CB028EDAD63FEDC6B185D4DA894A1C47337746338</RegisteredManifestChecksum>
     <RegisteredPackageMoniker>FC76A899-3894-4030-AD00-2DB24D86E9EA_1.0.0.0_x86__csdbzh72xdmvg</RegisteredPackageMoniker>
     <RegisteredUserModeAppID>FC76A899-3894-4030-AD00-2DB24D86E9EA_csdbzh72xdmvg!App</RegisteredUserModeAppID>
     <RegisteredPackageID>FC76A899-3894-4030-AD00-2DB24D86E9EA</RegisteredPackageID>
@@ -30,13 +30,13 @@
     <AppXManifest Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2019-05-20T05:41:22.471</Modified>
+      <Modified>2019-05-21T10:21:35.657</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\OnePomodoro.exe">
       <PackagePath>entrypoint\OnePomodoro.exe</PackagePath>
-      <Modified>2019-05-20T05:41:17.892</Modified>
+      <Modified>2019-05-21T10:21:33.062</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\jchen\.nuget\packages\commonservicelocator\1.3.0\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll">
       <PackagePath>Microsoft.Practices.ServiceLocation.dll</PackagePath>
@@ -53,6 +53,14 @@
     <AppxPackagedFile Include="C:\Users\jchen\.nuget\packages\microsoft.toolkit.uwp.notifications\5.1.1\lib\uap10.0\Microsoft.Toolkit.Uwp.Notifications.dll">
       <PackagePath>Microsoft.Toolkit.Uwp.Notifications.dll</PackagePath>
       <Modified>2019-03-15T14:15:44.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\jchen\.nuget\packages\microsoft.toolkit.uwp.ui\5.1.1\lib\uap10.0.16299\Microsoft.Toolkit.Uwp.UI.dll">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.dll</PackagePath>
+      <Modified>2019-03-15T14:15:54.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\jchen\.nuget\packages\microsoft.toolkit.uwp.ui.animations\5.1.1\lib\uap10.0.16299\Microsoft.Toolkit.Uwp.UI.Animations.dll">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.Animations.dll</PackagePath>
+      <Modified>2019-03-15T14:15:56.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\jchen\.nuget\packages\microsoft.xaml.behaviors.uwp.managed\2.0.0\lib\uap10.0\Microsoft.Xaml.Interactions.dll">
       <PackagePath>Microsoft.Xaml.Interactions.dll</PackagePath>
@@ -90,95 +98,314 @@
       <PackagePath>Microsoft.Practices.Unity.dll</PackagePath>
       <Modified>2015-10-05T01:37:20.000</Modified>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\jchen\.nuget\packages\win2d.uwp\1.21.0\runtimes\win10-x86\native\Microsoft.Graphics.Canvas.dll">
+      <PackagePath>Microsoft.Graphics.Canvas.dll</PackagePath>
+      <Modified>2017-06-25T19:01:44.000</Modified>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro.Core\bin\Debug\netstandard2.0\OnePomodoro.Core.dll">
       <PackagePath>OnePomodoro.Core.dll</PackagePath>
-      <Modified>2019-05-20T03:56:01.284</Modified>
+      <Modified>2019-05-21T06:07:12.860</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\jchen\.nuget\packages\win2d.uwp\1.21.0\lib\uap10.0\Microsoft.Graphics.Canvas.winmd">
+      <PackagePath>Microsoft.Graphics.Canvas.winmd</PackagePath>
+      <Modified>2017-06-25T19:01:44.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\bin\10.0.17763.0\XamlCompiler\Microsoft.UI.Xaml.Markup.winmd">
       <PackagePath>Microsoft.UI.Xaml.Markup.winmd</PackagePath>
       <Modified>2018-10-22T17:33:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Properties\Default.rd.xml">
-      <PackagePath>Properties\Default.rd.xml</PackagePath>
-      <Modified>2019-05-20T03:34:53.521</Modified>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\LargeTile.scale-100.png">
+      <PackagePath>Assets\LargeTile.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2019-05-21T08:17:34.253</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\LargeTile.scale-125.png">
+      <PackagePath>Assets\LargeTile.scale-125.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2019-05-21T08:17:34.360</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\LargeTile.scale-150.png">
+      <PackagePath>Assets\LargeTile.scale-150.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2019-05-21T08:17:34.524</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\LargeTile.scale-200.png">
+      <PackagePath>Assets\LargeTile.scale-200.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2019-05-21T08:17:34.830</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\LargeTile.scale-400.png">
+      <PackagePath>Assets\LargeTile.scale-400.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2019-05-21T08:17:35.638</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\SmallTile.scale-100.png">
+      <PackagePath>Assets\SmallTile.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2019-05-21T08:17:32.865</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\SmallTile.scale-125.png">
+      <PackagePath>Assets\SmallTile.scale-125.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2019-05-21T08:17:32.897</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\SmallTile.scale-150.png">
+      <PackagePath>Assets\SmallTile.scale-150.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2019-05-21T08:17:32.944</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\SmallTile.scale-200.png">
+      <PackagePath>Assets\SmallTile.scale-200.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2019-05-21T08:17:32.987</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\SmallTile.scale-400.png">
+      <PackagePath>Assets\SmallTile.scale-400.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2019-05-21T08:17:33.069</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\SplashScreen.scale-100.png">
+      <PackagePath>Assets\SplashScreen.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2019-05-21T08:17:36.170</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\SplashScreen.scale-125.png">
+      <PackagePath>Assets\SplashScreen.scale-125.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2019-05-21T08:17:36.286</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\SplashScreen.scale-150.png">
+      <PackagePath>Assets\SplashScreen.scale-150.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2019-05-21T08:17:36.483</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\SplashScreen.scale-400.png">
+      <PackagePath>Assets\SplashScreen.scale-400.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2019-05-21T08:17:37.820</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\Square150x150Logo.scale-100.png">
+      <PackagePath>Assets\Square150x150Logo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2019-05-21T08:17:33.106</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\Square150x150Logo.scale-125.png">
+      <PackagePath>Assets\Square150x150Logo.scale-125.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2019-05-21T08:17:33.150</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\Square150x150Logo.scale-150.png">
+      <PackagePath>Assets\Square150x150Logo.scale-150.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2019-05-21T08:17:33.202</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\Square150x150Logo.scale-400.png">
+      <PackagePath>Assets\Square150x150Logo.scale-400.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2019-05-21T08:17:33.568</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\Square44x44Logo.altform-unplated_targetsize-16.png">
+      <PackagePath>Assets\Square44x44Logo.altform-unplated_targetsize-16.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2019-05-21T08:17:35.960</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\Square44x44Logo.altform-unplated_targetsize-256.png">
+      <PackagePath>Assets\Square44x44Logo.altform-unplated_targetsize-256.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2019-05-21T08:17:36.088</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\Square44x44Logo.altform-unplated_targetsize-32.png">
+      <PackagePath>Assets\Square44x44Logo.altform-unplated_targetsize-32.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2019-05-21T08:17:36.006</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\Square44x44Logo.altform-unplated_targetsize-48.png">
+      <PackagePath>Assets\Square44x44Logo.altform-unplated_targetsize-48.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2019-05-21T08:17:36.029</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\Square44x44Logo.scale-100.png">
+      <PackagePath>Assets\Square44x44Logo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2019-05-21T08:17:35.663</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\Square44x44Logo.scale-125.png">
+      <PackagePath>Assets\Square44x44Logo.scale-125.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2019-05-21T08:17:35.686</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\Square44x44Logo.scale-150.png">
+      <PackagePath>Assets\Square44x44Logo.scale-150.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2019-05-21T08:17:35.713</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\Square44x44Logo.scale-400.png">
+      <PackagePath>Assets\Square44x44Logo.scale-400.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2019-05-21T08:17:35.782</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\Square44x44Logo.targetsize-16.png">
+      <PackagePath>Assets\Square44x44Logo.targetsize-16.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2019-05-21T08:17:35.806</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\Square44x44Logo.targetsize-24.png">
+      <PackagePath>Assets\Square44x44Logo.targetsize-24.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2019-05-21T08:17:35.829</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\Square44x44Logo.targetsize-256.png">
+      <PackagePath>Assets\Square44x44Logo.targetsize-256.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2019-05-21T08:17:35.935</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\Square44x44Logo.targetsize-32.png">
+      <PackagePath>Assets\Square44x44Logo.targetsize-32.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2019-05-21T08:17:35.853</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\Square44x44Logo.targetsize-48.png">
+      <PackagePath>Assets\Square44x44Logo.targetsize-48.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2019-05-21T08:17:35.876</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\StoreLogo.scale-100.png">
+      <PackagePath>Assets\StoreLogo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2019-05-21T08:17:37.849</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\StoreLogo.scale-125.png">
+      <PackagePath>Assets\StoreLogo.scale-125.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2019-05-21T08:17:37.875</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\StoreLogo.scale-150.png">
+      <PackagePath>Assets\StoreLogo.scale-150.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2019-05-21T08:17:37.902</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\StoreLogo.scale-200.png">
+      <PackagePath>Assets\StoreLogo.scale-200.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2019-05-21T08:17:37.933</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\StoreLogo.scale-400.png">
+      <PackagePath>Assets\StoreLogo.scale-400.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2019-05-21T08:17:37.981</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\Wide310x150Logo.scale-100.png">
+      <PackagePath>Assets\Wide310x150Logo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2019-05-21T08:17:33.614</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\Wide310x150Logo.scale-125.png">
+      <PackagePath>Assets\Wide310x150Logo.scale-125.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2019-05-21T08:17:33.660</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\Wide310x150Logo.scale-150.png">
+      <PackagePath>Assets\Wide310x150Logo.scale-150.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2019-05-21T08:17:33.716</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\Wide310x150Logo.scale-400.png">
+      <PackagePath>Assets\Wide310x150Logo.scale-400.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2019-05-21T08:17:34.169</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\LockScreenLogo.scale-200.png">
       <PackagePath>Assets\LockScreenLogo.scale-200.png</PackagePath>
-      <Modified>2019-05-20T03:34:53.502</Modified>
+      <Modified>2019-05-21T06:02:30.686</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\SplashScreen.scale-200.png">
       <PackagePath>Assets\SplashScreen.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2019-05-20T03:34:53.503</Modified>
+      <Modified>2019-05-21T08:17:36.834</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\Square150x150Logo.scale-200.png">
       <PackagePath>Assets\Square150x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2019-05-20T03:34:53.504</Modified>
+      <Modified>2019-05-21T08:17:33.274</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\Square44x44Logo.scale-200.png">
       <PackagePath>Assets\Square44x44Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2019-05-20T03:34:53.505</Modified>
+      <Modified>2019-05-21T08:17:35.742</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
       <PackagePath>Assets\Square44x44Logo.targetsize-24_altform-unplated.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2019-05-20T03:34:53.506</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\StoreLogo.png">
-      <PackagePath>Assets\StoreLogo.png</PackagePath>
-      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2019-05-20T03:34:53.507</Modified>
+      <Modified>2019-05-21T08:17:35.983</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Assets\Wide310x150Logo.scale-200.png">
       <PackagePath>Assets\Wide310x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2019-05-20T03:34:53.508</Modified>
+      <Modified>2019-05-21T08:17:33.801</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\Properties\Default.rd.xml">
+      <PackagePath>Properties\Default.rd.xml</PackagePath>
+      <Modified>2019-05-21T06:02:30.707</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\OnePomodoro.xr.xml">
       <PackagePath>OnePomodoro.xr.xml</PackagePath>
-      <Modified>2019-05-20T05:41:17.258</Modified>
+      <Modified>2019-05-21T09:36:37.536</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2019-05-20T05:41:17.377</Modified>
+      <Modified>2019-05-21T10:21:32.588</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Styles\Button.xbf">
+      <PackagePath>Styles\Button.xbf</PackagePath>
+      <Modified>2019-05-21T10:21:32.585</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Styles\Page.xbf">
       <PackagePath>Styles\Page.xbf</PackagePath>
-      <Modified>2019-05-20T05:41:17.376</Modified>
+      <Modified>2019-05-21T10:21:32.585</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Styles\_Colors.xbf">
       <PackagePath>Styles\_Colors.xbf</PackagePath>
-      <Modified>2019-05-20T05:41:17.376</Modified>
+      <Modified>2019-05-21T10:21:32.586</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Styles\_FontSizes.xbf">
       <PackagePath>Styles\_FontSizes.xbf</PackagePath>
-      <Modified>2019-05-20T05:41:17.377</Modified>
+      <Modified>2019-05-21T10:21:32.586</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Styles\_Thickness.xbf">
       <PackagePath>Styles\_Thickness.xbf</PackagePath>
-      <Modified>2019-05-20T05:41:17.377</Modified>
+      <Modified>2019-05-21T10:21:32.587</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Styles\TextBlock.xbf">
       <PackagePath>Styles\TextBlock.xbf</PackagePath>
-      <Modified>2019-05-20T05:41:17.377</Modified>
+      <Modified>2019-05-21T10:21:32.587</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Themes\Converters.xbf">
+      <PackagePath>Themes\Converters.xbf</PackagePath>
+      <Modified>2019-05-21T10:21:32.587</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Themes\Generic.xbf">
+      <PackagePath>Themes\Generic.xbf</PackagePath>
+      <Modified>2019-05-21T10:21:32.588</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Views\FirstRunDialog.xbf">
       <PackagePath>Views\FirstRunDialog.xbf</PackagePath>
-      <Modified>2019-05-20T05:41:17.378</Modified>
+      <Modified>2019-05-21T10:21:32.588</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Views\InformationDialog.xbf">
+      <PackagePath>Views\InformationDialog.xbf</PackagePath>
+      <Modified>2019-05-21T10:21:32.589</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Views\MainPage.xbf">
       <PackagePath>Views\MainPage.xbf</PackagePath>
-      <Modified>2019-05-20T05:41:17.378</Modified>
+      <Modified>2019-05-21T10:21:32.582</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Views\SettingsPage.xbf">
       <PackagePath>Views\SettingsPage.xbf</PackagePath>
-      <Modified>2019-05-20T05:41:17.378</Modified>
+      <Modified>2019-05-21T10:21:32.589</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Views\WhatsNewDialog.xbf">
       <PackagePath>Views\WhatsNewDialog.xbf</PackagePath>
-      <Modified>2019-05-20T05:41:17.379</Modified>
+      <Modified>2019-05-21T10:21:32.590</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.UniversalCRT.Debug\10.0.17763.0\\redist\Debug\x86\ucrtbased.dll">
       <PackagePath>ucrtbased.dll</PackagePath>
@@ -190,11 +417,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2019-05-20T05:41:19.921</Modified>
+      <Modified>2019-05-21T08:26:36.424</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Users\jchen\Source\Repos\DinoChan\OnePomodoro\OnePomodoro\OnePomodoro\bin\x86\Debug\Core\OnePomodoro.exe">
       <PackagePath>OnePomodoro.exe</PackagePath>
-      <Modified>2019-05-20T05:41:22.459</Modified>
+      <Modified>2019-05-21T10:21:35.643</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
