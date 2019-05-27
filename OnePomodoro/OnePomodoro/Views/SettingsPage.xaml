@@ -14,85 +14,12 @@
         <helper:EnumToBooleanConverter x:Key="EnumToBooleanConverter" EnumType="ElementTheme" />
     </Page.Resources>
 
-    <Grid Margin="{StaticResource MediumLeftRightMargin}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="48"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <TextBlock
-            Grid.Row="0"
-            x:Uid="Settings_Title"
-            Style="{StaticResource PageTitleStyle}" />
-
-        <StackPanel
-            Grid.Row="1"
-            x:Name="ContentArea">
-            <TextBlock
-                x:Uid="Settings_Personalization"
-                Style="{ThemeResource SubtitleTextBlockStyle}" />
-
-            <StackPanel Margin="{StaticResource SmallTopBottomMargin}">
-                <TextBlock
-                    x:Uid="Settings_Theme" />
-
-                <StackPanel Margin="{StaticResource XSmallTopMargin}">
-                    <RadioButton 
-                        x:Uid="Settings_Theme_Light" 
-                        GroupName="AppTheme" 
-                        IsChecked="{Binding ElementTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Light, Mode=OneWay}"
-                        Command="{Binding SwitchThemeCommand}"
-                        FontSize="15">
-                        <RadioButton.CommandParameter>
-                            <xaml:ElementTheme>Light</xaml:ElementTheme>
-                        </RadioButton.CommandParameter>
-                    </RadioButton>
-                    <RadioButton 
-                        x:Uid="Settings_Theme_Dark" 
-                        GroupName="AppTheme"
-                        IsChecked="{Binding ElementTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Dark, Mode=OneWay}"
-                        Command="{Binding SwitchThemeCommand}"
-                        FontSize="15">
-                        <RadioButton.CommandParameter>
-                            <xaml:ElementTheme>Dark</xaml:ElementTheme>
-                        </RadioButton.CommandParameter>
-                    </RadioButton>
-                    <RadioButton 
-                        x:Uid="Settings_Theme_Default"
-                        GroupName="AppTheme"
-                        IsChecked="{Binding ElementTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Default, Mode=OneWay}"
-                        Command="{Binding SwitchThemeCommand}"
-                        FontSize="15">
-                        <RadioButton.CommandParameter>
-                            <xaml:ElementTheme>Default</xaml:ElementTheme>
-                        </RadioButton.CommandParameter>
-                    </RadioButton>
-                </StackPanel>
-            </StackPanel>
-
-            <TextBlock
-                    x:Uid="Settings_About"
-                    Style="{ThemeResource SubtitleTextBlockStyle}"/>
-
-            <StackPanel Margin="{StaticResource XSmallTopMargin}">
-                <TextBlock
-                    Text="{x:Bind ViewModel.VersionDescription, Mode=OneWay}"
-                    Style="{ThemeResource BodyTextBlockStyle}" />
-                <TextBlock
-                    x:Uid="Settings_AboutDescription"
-                    Margin="{StaticResource XSmallTopMargin}"
-                    Style="{ThemeResource BodyTextBlockStyle}" />
-
-                <HyperlinkButton
-                    x:Uid="Settings_PrivacyTermsLink" 
-                    Margin="{StaticResource XSmallTopMargin}" />
-
-                <HyperlinkButton
-                    Margin="{StaticResource XSmallTopMargin}"
-                    x:Uid="FeedbackHub_Link"
-                    Command="{x:Bind ViewModel.LaunchFeedbackHubCommand}"
-                    Visibility="{x:Bind ViewModel.FeedbackLinkVisibility}" />
-            </StackPanel>
-        </StackPanel>
+    <Grid >
+        <NavigationView x:Name="NavigationView" PaneDisplayMode="Top" IsBackEnabled="True" SelectionChanged="OnSelectionChanged" BackRequested="OnBackRequested" IsSettingsVisible="False">
+            <NavigationView.MenuItems>
+                <NavigationViewItem Content="General" x:Name="GeneralSettingsItem" />
+            </NavigationView.MenuItems>
+            <Frame x:Name="ContentFrame"/>
+        </NavigationView>
     </Grid>
 </Page>

@@ -155,8 +155,8 @@
                             Visibility="{Binding IsTimerInProgress,Converter={StaticResource BoolToVisibilityConverter}}"
                             Command="{Binding StopBreakCommand}" />
                 </StackPanel>
-                <!--<Button Content="&#xE10C;"
-                        Click="OnSettingClick"/>-->
+                <Button Content="&#xE10C;"
+                        Click="OnSettingClick"/>
                 <!--<Button Content="&#xF142;"/>-->
             </StackPanel>
         </Grid>

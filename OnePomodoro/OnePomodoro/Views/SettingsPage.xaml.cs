@@ -3,6 +3,7 @@
 using OnePomodoro.ViewModels;
 
 using Windows.UI.Xaml.Controls;
+using System.Linq;
 
 namespace OnePomodoro.Views
 {
@@ -14,6 +15,18 @@ namespace OnePomodoro.Views
         public SettingsPage()
         {
             InitializeComponent();
+            NavigationView.SelectedItem= NavigationView.MenuItems.OfType<NavigationViewItem>().First();
+        }
+
+        private void OnBackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
+        {
+            Frame.GoBack();
+        }
+
+        private void OnSelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+        {
+            if (NavigationView.SelectedItem == GeneralSettingsItem)
+                ContentFrame.Navigate(typeof(GeneralSettingsPage));
         }
     }
 }
