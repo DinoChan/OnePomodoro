@@ -13,6 +13,7 @@ namespace OnePomodoro.Views
         public MainPage()
         {
             InitializeComponent();
+            NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
         }
 
         private void OnSettingClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)

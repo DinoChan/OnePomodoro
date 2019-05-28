@@ -1,4 +1,5 @@
-﻿using Prism.Commands;
+﻿using OnePomodoro.Helpers;
+using Prism.Commands;
 using Prism.Windows.Mvvm;
 using System;
 using Windows.UI.Xaml;
@@ -7,60 +8,62 @@ namespace OnePomodoro.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        private readonly TimeSpan PomodoroInterval = TimeSpan.FromMinutes(25);
-        private readonly TimeSpan BreakInterval = TimeSpan.FromMinutes(5);
-        private readonly TimeSpan LongBreakInterval = TimeSpan.FromMinutes(15);
+        private readonly TimeSpan PomodoroLength = TimeSpan.FromMinutes(25);
+        private readonly TimeSpan BreakLength = TimeSpan.FromMinutes(5);
+        private readonly TimeSpan LongBreakLength = TimeSpan.FromMinutes(15);
         private readonly int LongBreakAfter = 4;
 
 
-        private DispatcherTimer _pomodoroTimer;
-        private DispatcherTimer _breakTimer;
-        private TimeSpan _remainingPomodoroInterval;
-        private TimeSpan _remainingBreakInterval;
+        private CountdownTimer _pomodoroTimer;
+        private CountdownTimer _breakTimer;
+        private CountdownTimer _longBreakTimer;
+        private CountdownTimer _currentBreakTimer;
+        private TimeSpan _remainingPomodoroTime;
+        private TimeSpan _remainingBreakTime;
         private bool _isInPomodoro;
         private bool _isTimerInProgress;
         private int _completedPomodoros;
-        private DateTime _pomodoroStartTime;
-        private DateTime _breakStartTime;
 
 
         public MainViewModel()
         {
-            StartPomodoroCommand = new DelegateCommand(StartPomodoro);
-            StopPomodoroCommand = new DelegateCommand(StopPomodoro);
-            StartBreakCommand = new DelegateCommand(StartBreak);
-            StopBreakCommand = new DelegateCommand(StopBreak);
+            StartTimerCommand = new DelegateCommand(StartTimer);
+            StopTimerCommand = new DelegateCommand(StopTimer);
 
             IsInPomodoro = true;
-            RemainingPomodoroInterval = PomodoroInterval;
-            _pomodoroTimer = new DispatcherTimer();
-            _pomodoroTimer.Interval = TimeSpan.FromSeconds(0.1);
-            _pomodoroTimer.Tick += OnPomodoroTimerTick;
+            RemainingPomodoroTime = PomodoroLength;
+            _pomodoroTimer = new CountdownTimer(PomodoroLength);
+            _pomodoroTimer.Elapsed += OnPomodoroTimerElapsed;
+            _pomodoroTimer.Finished += OnPomodoroTimerFinished;
 
-            _breakTimer = new DispatcherTimer();
-            _breakTimer.Interval = TimeSpan.FromSeconds(0.1);
-            _breakTimer.Tick += OnBreakTimerTick;
+            _breakTimer = new CountdownTimer(BreakLength);
+            _breakTimer.Elapsed += OnBreakTimerElapsed;
+            _breakTimer.Finished += OnBreakTimerFinished;
+
+            _longBreakTimer = new CountdownTimer(LongBreakLength);
+            _longBreakTimer.Elapsed += OnBreakTimerElapsed;
+            _longBreakTimer.Finished += OnBreakTimerFinished;
         }
 
-        public TimeSpan RemainingPomodoroInterval
+        public TimeSpan RemainingPomodoroTime
         {
-            get => _remainingPomodoroInterval;
+            get => _remainingPomodoroTime;
 
             private set
             {
-                _remainingPomodoroInterval = value;
+                _remainingPomodoroTime = value;
                 RaisePropertyChanged();
             }
         }
 
-        public TimeSpan RemainingBreakInterval
+        public TimeSpan RemainingBreakTime
         {
-            get => _remainingBreakInterval;
+            get => _remainingBreakTime;
 
 
             private set
             {
-                _remainingBreakInterval = value;
+                _remainingBreakTime = value;
                 RaisePropertyChanged();
             }
         }
@@ -87,18 +90,13 @@ namespace OnePomodoro.ViewModels
             }
         }
 
-        public DelegateCommand StartPomodoroCommand { get; }
+        public DelegateCommand StartTimerCommand { get; }
 
-        public DelegateCommand StopPomodoroCommand { get; }
-
-        public DelegateCommand StartBreakCommand { get; }
-
-        public DelegateCommand StopBreakCommand { get; }
+        public DelegateCommand StopTimerCommand { get; }
 
 
         private void StartPomodoro()
         {
-            _pomodoroStartTime = DateTime.Now;
             _pomodoroTimer.Start();
             IsTimerInProgress = true;
         }
@@ -108,49 +106,62 @@ namespace OnePomodoro.ViewModels
             IsTimerInProgress = false;
             IsInPomodoro = false;
             _completedPomodoros++;
-            RemainingBreakInterval = (_completedPomodoros % LongBreakAfter == 0) ? LongBreakInterval : BreakInterval;
+            RemainingBreakTime = (_completedPomodoros % LongBreakAfter == 0) ? LongBreakLength : BreakLength;
         }
 
 
         private void StartBreak()
         {
-            _breakStartTime = DateTime.Now;
-            _breakTimer.Start();
+            _currentBreakTimer = (_completedPomodoros % LongBreakAfter == 0) ? _longBreakTimer :_breakTimer;
+            _currentBreakTimer.Start();
             IsTimerInProgress = true;
         }
 
 
         private void StopBreak()
         {
-            RemainingPomodoroInterval = PomodoroInterval;
-            _breakTimer.Stop();
+            RemainingPomodoroTime = PomodoroLength;
+            _currentBreakTimer.Stop();
             IsTimerInProgress = false;
             IsInPomodoro = true;
         }
+       
 
-        private void OnPomodoroTimerTick(object sender, object e)
+        private void OnPomodoroTimerElapsed(object sender, EventArgs e)
         {
-            var remainingBreakInterval = PomodoroInterval - (DateTime.Now - _pomodoroStartTime);
-            if (remainingBreakInterval < TimeSpan.Zero)
-                remainingBreakInterval = TimeSpan.Zero;
+            RemainingPomodoroTime = _pomodoroTimer.RemainingTime;
+        }
 
-            RemainingPomodoroInterval = remainingBreakInterval;
-            if (RemainingPomodoroInterval == TimeSpan.Zero)
+        private void OnPomodoroTimerFinished(object sender, EventArgs e)
+        {
+            StopTimer();
+        }
+
+        private void OnBreakTimerElapsed(object sender, EventArgs e)
+        {
+            RemainingBreakTime = _currentBreakTimer.RemainingTime;
+        }
+
+        private void OnBreakTimerFinished(object sender, EventArgs e)
+        {
+            StopTimer();
+        }
+
+        private void StartTimer()
+        {
+            if (_isInPomodoro)
+                StartPomodoro();
+            else
+                StartBreak();
+        }
+
+        private void StopTimer()
+        {
+            if (_isInPomodoro)
                 StopPomodoro();
-        }
-
-        private void OnBreakTimerTick(object sender, object e)
-        {
-            var breakInterval = _completedPomodoros % LongBreakAfter == 0 ? LongBreakInterval : BreakInterval;
-            TimeSpan remainingBreakInterval = breakInterval - (DateTime.Now - _breakStartTime);
-            if (remainingBreakInterval < TimeSpan.Zero)
-                remainingBreakInterval = TimeSpan.Zero;
-
-            RemainingBreakInterval = remainingBreakInterval;
-            if (RemainingBreakInterval <= TimeSpan.Zero)
-            {
+            else
                 StopBreak();
-            }
         }
+
     }
 }

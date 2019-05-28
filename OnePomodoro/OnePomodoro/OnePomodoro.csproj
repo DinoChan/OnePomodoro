@@ -131,6 +131,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CountdownTimer.cs" />
     <Compile Include="Helpers\EnumToBooleanConverter.cs" />
     <Compile Include="Helpers\NegationBoolToVisibilityConverter.cs" />
     <Compile Include="Helpers\SettingsStorageExtensions.cs" />

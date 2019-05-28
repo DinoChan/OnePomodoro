@@ -53,7 +53,7 @@
                                                                To="0" />
                         </animations:Implicit.HideAnimations>
                 </TextBlock>
-                <TextBlock Text="{Binding RemainingPomodoroInterval,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
+                <TextBlock Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
                            FontSize="160"
                            Foreground="#FF999999"
                            Margin="8,-80,0,0"
@@ -74,7 +74,7 @@
                                                           To="0" />
                         </animations:Implicit.HideAnimations>
                 </TextBlock>
-                <TextBlock Text="{Binding RemainingBreakInterval,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
+                <TextBlock Text="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
                            FontSize="160"
                            Foreground="#FF999999"
                            Margin="0,0,0,-80"
@@ -136,25 +136,14 @@
                                 Value="10" />
                     </Style>
                 </StackPanel.Resources>
-                <StackPanel Orientation="Horizontal"
-                            Visibility="{Binding IsInPomodoro,Converter={StaticResource BoolToVisibilityConverter}}">
-                    <Button Content="&#xE768;"
+                <Button Content="&#xE768;"
                             Visibility="{Binding IsTimerInProgress,Converter={StaticResource NegationBoolToVisibilityConverter}}"
-                            Command="{Binding StartPomodoroCommand}" />
-                    <Button Content="&#xE769;"
+                            Command="{Binding StartTimerCommand}" />
+                <Button Content="&#xE769;"
                             Visibility="{Binding IsTimerInProgress,Converter={StaticResource BoolToVisibilityConverter}}"
-                            Command="{Binding StopPomodoroCommand}" />
-                </StackPanel>
+                            Command="{Binding StopTimerCommand}" />
 
-                <StackPanel Orientation="Horizontal"
-                            Visibility="{Binding IsInPomodoro,Converter={StaticResource NegationBoolToVisibilityConverter}}">
-                    <Button Content="&#xE768;"
-                            Visibility="{Binding IsTimerInProgress,Converter={StaticResource NegationBoolToVisibilityConverter}}"
-                            Command="{Binding StartBreakCommand}" />
-                    <Button Content="&#xE769;"
-                            Visibility="{Binding IsTimerInProgress,Converter={StaticResource BoolToVisibilityConverter}}"
-                            Command="{Binding StopBreakCommand}" />
-                </StackPanel>
+
                 <Button Content="&#xE10C;"
                         Click="OnSettingClick"/>
                 <!--<Button Content="&#xF142;"/>-->
