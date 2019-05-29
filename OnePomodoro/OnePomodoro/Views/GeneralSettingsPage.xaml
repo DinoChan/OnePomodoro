@@ -12,27 +12,66 @@
     mc:Ignorable="d">
     <Page.Resources>
         <helper:EnumToBooleanConverter x:Key="EnumToBooleanConverter" EnumType="ElementTheme" />
+        <Style x:Key="TipsNumberStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#66FB4474"/>
+            <Setter Property="FontSize" Value="40"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Width" Value="36"/>
+        </Style>
+        <Style x:Key="TipsContentStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#EEFFFFFF"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Margin" Value="0,12,0,0"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+
+        <Style x:Key="SettingSubtitleTextBlockStyle" BasedOn="{StaticResource SubtitleTextBlockStyle}" TargetType="TextBlock">
+            <Setter Property="Margin" Value="40,64,0,0"/>
+        </Style>
+
+        <Thickness x:Key="SettingsMargin">40, 8, 0, 0</Thickness>
     </Page.Resources>
 
-    <Grid Margin="{StaticResource MediumLeftRightMargin}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="48"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <TextBlock
-            Grid.Row="0"
-            x:Uid="Settings_Title"
-            Style="{StaticResource PageTitleStyle}" />
-
+    <Grid Margin="32">
         <StackPanel
-            Grid.Row="1"
             x:Name="ContentArea">
-            <TextBlock
-                x:Uid="Settings_Personalization"
-                Style="{ThemeResource SubtitleTextBlockStyle}" />
 
-            <StackPanel Margin="{StaticResource SmallTopBottomMargin}">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="1" Style="{StaticResource TipsNumberStyle}" Opacity="0"/>
+                <TextBlock Text="Pomodoro Technique Principles" FontSize="40" Foreground="#FFFB4474" Style="{ThemeResource SubtitleTextBlockStyle}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="1" Style="{StaticResource TipsNumberStyle}"/>
+                <TextBlock Text="Decide on the task to be done." Style="{StaticResource TipsContentStyle}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="2" Style="{StaticResource TipsNumberStyle}"/>
+                <TextBlock Text="Set the pomodoro timer (traditionally to 25 minutes)." Style="{StaticResource TipsContentStyle}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="3" Style="{StaticResource TipsNumberStyle}"/>
+                <TextBlock Text="Work on the task." Style="{StaticResource TipsContentStyle}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="4" Style="{StaticResource TipsNumberStyle}"/>
+                <TextBlock Text="End work when the timer rings and put a checkmark on a piece of paper." Style="{StaticResource TipsContentStyle}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="5" Style="{StaticResource TipsNumberStyle}"/>
+                <TextBlock Text="If you have fewer than four checkmarks, take a short break (5 minutes), then go to step 2." Style="{StaticResource TipsContentStyle}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="6" Style="{StaticResource TipsNumberStyle}"/>
+                <TextBlock Text="After four pomodoros, take a longer break (25 minutes), reset your checkmark count to zero, then go to step 1." Style="{StaticResource TipsContentStyle}"/>
+            </StackPanel>
+
+            <!--<TextBlock
+                x:Uid="Settings_Personalization"
+                Style="{ThemeResource SubtitleTextBlockStyle}" />-->
+
+            <!--<StackPanel Margin="{StaticResource SmallTopBottomMargin}">
                 <TextBlock
                     x:Uid="Settings_Theme" />
 
@@ -68,30 +107,34 @@
                         </RadioButton.CommandParameter>
                     </RadioButton>
                 </StackPanel>
-            </StackPanel>
+            </StackPanel>-->
 
             <TextBlock
                     x:Uid="Settings_About"
-                    Style="{ThemeResource SubtitleTextBlockStyle}"/>
+                    Style="{StaticResource SettingSubtitleTextBlockStyle}"/>
 
-            <StackPanel Margin="{StaticResource XSmallTopMargin}">
-                <TextBlock
-                    Text="{x:Bind ViewModel.VersionDescription, Mode=OneWay}"
-                    Style="{ThemeResource BodyTextBlockStyle}" />
-                <TextBlock
-                    x:Uid="Settings_AboutDescription"
-                    Margin="{StaticResource XSmallTopMargin}"
-                    Style="{ThemeResource BodyTextBlockStyle}" />
+            <StackPanel Margin="{StaticResource SettingsMargin}">
+                <TextBlock Text="{x:Bind ViewModel.VersionDescription, Mode=OneWay}"
+                           Style="{ThemeResource BodyTextBlockStyle}" />
+                <TextBlock x:Uid="Settings_AboutDescription"
+                           Margin="{StaticResource XSmallTopMargin}"
+                           Style="{ThemeResource BodyTextBlockStyle}" />
 
-                <HyperlinkButton
+                <!--<HyperlinkButton
                     x:Uid="Settings_PrivacyTermsLink" 
-                    Margin="{StaticResource XSmallTopMargin}" />
+                    Margin="{StaticResource XSmallTopMargin}" />-->
 
-                <HyperlinkButton
-                    Margin="{StaticResource XSmallTopMargin}"
-                    x:Uid="FeedbackHub_Link"
-                    Command="{x:Bind ViewModel.LaunchFeedbackHubCommand}"
-                    Visibility="{x:Bind ViewModel.FeedbackLinkVisibility}" />
+                <HyperlinkButton Margin="{StaticResource XSmallTopMargin}"
+                                 x:Uid="FeedbackHub_Link" 
+                                 Command="{x:Bind ViewModel.LaunchFeedbackHubCommand}"
+                                 Visibility="{x:Bind ViewModel.FeedbackLinkVisibility}" />
+                <HyperlinkButton Margin="{StaticResource XSmallTopMargin}"
+                                 x:Uid="Rate_Link"
+                                 NavigateUri="ms-windows-store://review/?ProductId=9nxpdp9gg880"/>
+
+                <HyperlinkButton Margin="{StaticResource XSmallTopMargin}"
+                                 Content="GitHub"
+                                 NavigateUri="https://github.com/DinoChan/OnePomodoro"/>
             </StackPanel>
         </StackPanel>
     </Grid>

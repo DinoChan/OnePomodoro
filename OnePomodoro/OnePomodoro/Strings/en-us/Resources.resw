@@ -154,7 +154,7 @@
     <comment>About this application title for Settings</comment>
   </data>
   <data name="Settings_AboutDescription.Text" xml:space="preserve">    
-    <value>Settings page placeholder text.  Your app description goes here.</value>
+    <value>This is a simple tomato timer.</value>
     <comment>About this application description for Settings</comment>
   </data>
   <data name="Settings_PrivacyTermsLink.Content" xml:space="preserve">    
@@ -225,5 +225,8 @@ Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Ma
   <data name="FeedbackHub_Link.Content" xml:space="preserve">
     <value>Feedback</value>
     <comment>Displayed as the link to launching the Feedback Hub.</comment>
+  </data>
+  <data name="Rate_Link.Content" xml:space="preserve">
+    <value>Rate this app</value>
   </data>
 </root>

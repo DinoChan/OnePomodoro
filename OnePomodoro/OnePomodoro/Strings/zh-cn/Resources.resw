@@ -154,7 +154,7 @@
     <comment>About this application title for Settings</comment>
   </data>
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
-    <value>Settings page placeholder text.  Your app description goes here.</value>
+    <value>这是个简单的番茄钟。</value>
     <comment>About this application description for Settings</comment>
   </data>
   <data name="Settings_PrivacyTermsLink.Content" xml:space="preserve">
@@ -223,7 +223,10 @@ Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Ma
     <comment>What's new prompt message primary button text</comment>
   </data>
   <data name="FeedbackHub_Link.Content" xml:space="preserve">
-    <value>Feedback</value>
+    <value>反馈</value>
     <comment>Displayed as the link to launching the Feedback Hub.</comment>
+  </data>
+  <data name="Rate_Link.Content" xml:space="preserve">
+    <value>为应用评分</value>
   </data>
 </root>
