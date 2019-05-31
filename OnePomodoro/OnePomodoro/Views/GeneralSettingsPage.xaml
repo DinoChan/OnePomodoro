@@ -70,7 +70,7 @@
 
 
             <StackPanel Margin="{StaticResource SettingsMargin}" Orientation="Horizontal">
-                <Image Source="/Assets/LargeTile.png" Height="80" Width="80" />
+                <Image Source="/Assets/LargeTile.png" Height="88" Width="88" />
                 <StackPanel Margin="8,0,0,0">
                     <TextBlock Text="{x:Bind model:Package.Current.DisplayName}"
                                Style="{ThemeResource BodyTextBlockStyle}"/>
