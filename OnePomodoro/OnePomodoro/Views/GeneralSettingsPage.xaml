@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"    
     Style="{StaticResource PageStyle}"
     xmlns:prismMvvm="using:Prism.Windows.Mvvm"
+    xmlns:model="using:Windows.ApplicationModel"
     prismMvvm:ViewModelLocator.AutoWireViewModel="True" 
     xmlns:helper="using:OnePomodoro.Helpers"
     xmlns:xaml="using:Windows.UI.Xaml"
@@ -30,7 +31,7 @@
             <Setter Property="Margin" Value="40,64,0,0"/>
         </Style>
 
-        <Thickness x:Key="SettingsMargin">40, 8, 0, 0</Thickness>
+        <Thickness x:Key="SettingsMargin">36, 36, 0, 0</Thickness>
     </Page.Resources>
 
     <Grid Margin="32">
@@ -67,75 +68,75 @@
                 <TextBlock Text="After four pomodoros, take a longer break (25 minutes), reset your checkmark count to zero, then go to step 1." Style="{StaticResource TipsContentStyle}"/>
             </StackPanel>
 
-            <!--<TextBlock
-                x:Uid="Settings_Personalization"
-                Style="{ThemeResource SubtitleTextBlockStyle}" />-->
 
-            <!--<StackPanel Margin="{StaticResource SmallTopBottomMargin}">
-                <TextBlock
-                    x:Uid="Settings_Theme" />
+            <StackPanel Margin="{StaticResource SettingsMargin}" Orientation="Horizontal">
+                <Image Source="/Assets/LargeTile.png" Height="80" Width="80" />
+                <StackPanel Margin="8,0,0,0">
+                    <TextBlock Text="{x:Bind model:Package.Current.DisplayName}"
+                               Style="{ThemeResource BodyTextBlockStyle}"/>
 
-                <StackPanel Margin="{StaticResource XSmallTopMargin}">
-                    <RadioButton 
-                        x:Uid="Settings_Theme_Light" 
-                        GroupName="AppTheme" 
-                        IsChecked="{Binding ElementTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Light, Mode=OneWay}"
-                        Command="{Binding SwitchThemeCommand}"
-                        FontSize="15">
-                        <RadioButton.CommandParameter>
-                            <xaml:ElementTheme>Light</xaml:ElementTheme>
-                        </RadioButton.CommandParameter>
-                    </RadioButton>
-                    <RadioButton 
-                        x:Uid="Settings_Theme_Dark" 
-                        GroupName="AppTheme"
-                        IsChecked="{Binding ElementTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Dark, Mode=OneWay}"
-                        Command="{Binding SwitchThemeCommand}"
-                        FontSize="15">
-                        <RadioButton.CommandParameter>
-                            <xaml:ElementTheme>Dark</xaml:ElementTheme>
-                        </RadioButton.CommandParameter>
-                    </RadioButton>
-                    <RadioButton 
-                        x:Uid="Settings_Theme_Default"
-                        GroupName="AppTheme"
-                        IsChecked="{Binding ElementTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Default, Mode=OneWay}"
-                        Command="{Binding SwitchThemeCommand}"
-                        FontSize="15">
-                        <RadioButton.CommandParameter>
-                            <xaml:ElementTheme>Default</xaml:ElementTheme>
-                        </RadioButton.CommandParameter>
-                    </RadioButton>
+                    <TextBlock Margin="0,4,0,0"
+                               Style="{ThemeResource BodyTextBlockStyle}" >
+                        <Run Text="© 2019 dino.chan, Designed and Developed by"/>
+                        <Run Text="{x:Bind model:Package.Current.PublisherDisplayName}"/>
+                    </TextBlock>
+
+                    <TextBlock Margin="0,4,0,0"
+                               Style="{ThemeResource BodyTextBlockStyle}"
+                               Foreground="Gray">
+                        <Run Text="Version "/>
+                        <Run Text="{x:Bind model:Package.Current.Id.Version.Major}"/>
+                        <Run Text="."/>
+                        <Run Text="{x:Bind model:Package.Current.Id.Version.Minor}"/>
+                        <Run Text="."/>
+                        <Run Text="{x:Bind model:Package.Current.Id.Version.Build}"/>
+                    </TextBlock>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+                        <HyperlinkButton Padding="0" Content="GitHub" NavigateUri="https://github.com/DinoChan/OnePomodoro"/>
+                        <HyperlinkButton Margin="8,0,0,0" Padding="0" Content="Rate this app" x:Uid="Rate_Link" Command="{x:Bind ViewModel.ReviewCommand}"/>
+                        <HyperlinkButton Margin="8,0,0,0" Padding="0" x:Uid="FeedbackHub_Link" Content="Feedback" Command="{x:Bind ViewModel.LaunchFeedbackHubCommand}" Visibility="{x:Bind ViewModel.FeedbackLinkVisibility}" />
+                    </StackPanel>
                 </StackPanel>
-            </StackPanel>-->
+            </StackPanel>
 
-            <TextBlock
-                    x:Uid="Settings_About"
-                    Style="{StaticResource SettingSubtitleTextBlockStyle}"/>
 
-            <StackPanel Margin="{StaticResource SettingsMargin}">
-                <TextBlock Text="{x:Bind ViewModel.VersionDescription, Mode=OneWay}"
-                           Style="{ThemeResource BodyTextBlockStyle}" />
-                <TextBlock x:Uid="Settings_AboutDescription"
-                           Margin="{StaticResource XSmallTopMargin}"
-                           Style="{ThemeResource BodyTextBlockStyle}" />
+            <!--<TextBlock
+                x:Uid="Settings_About"
+                Style="{StaticResource SettingSubtitleTextBlockStyle}"/>
 
-                <!--<HyperlinkButton
+            <StackPanel Margin="{StaticResource SettingsMargin}" Orientation="Horizontal">
+                <Image Source="/Assets/LargeTile.png" Height="150" Width="150"/>
+                <StackPanel Margin="16,0,0,0">-->
+                    <!--<TextBlock Text="{x:Bind ViewModel.VersionDescription, Mode=OneWay}"
+                               Style="{ThemeResource BodyTextBlockStyle}" />
+                    <TextBlock
+                        Margin="{StaticResource XSmallTopMargin}"
+                        Style="{ThemeResource BodyTextBlockStyle}" >
+                        <Run Text="© 2019 dino.chan, Designed and Developed by"/>
+                        <Run Text="{x:Bind model:Package.Current.PublisherDisplayName}"/>
+                    </TextBlock>-->
+
+                    <!--<HyperlinkButton
                     x:Uid="Settings_PrivacyTermsLink" 
                     Margin="{StaticResource XSmallTopMargin}" />-->
 
-                <HyperlinkButton Margin="{StaticResource XSmallTopMargin}"
-                                 x:Uid="FeedbackHub_Link" 
-                                 Command="{x:Bind ViewModel.LaunchFeedbackHubCommand}"
-                                 Visibility="{x:Bind ViewModel.FeedbackLinkVisibility}" />
-                <HyperlinkButton Margin="{StaticResource XSmallTopMargin}"
-                                 x:Uid="Rate_Link"
-                                 NavigateUri="ms-windows-store://review/?ProductId=9nxpdp9gg880"/>
+                    <!--<HyperlinkButton Margin="0,4,0,0"
+                                     x:Uid="FeedbackHub_Link"
+                                     Content="Feedback"
+                                     Command="{x:Bind ViewModel.LaunchFeedbackHubCommand}"
+                                     Visibility="{x:Bind ViewModel.FeedbackLinkVisibility}" />
 
-                <HyperlinkButton Margin="{StaticResource XSmallTopMargin}"
-                                 Content="GitHub"
-                                 NavigateUri="https://github.com/DinoChan/OnePomodoro"/>
-            </StackPanel>
+                    <HyperlinkButton Margin="{StaticResource XSmallTopMargin}"
+                                     Content="Rate this app"
+                                     x:Uid="Rate_Link"
+                                     Command="{x:Bind ViewModel.ReviewCommand}"/>
+
+                    <HyperlinkButton Margin="{StaticResource XSmallTopMargin}"
+                                     Content="GitHub"
+                                     NavigateUri="https://github.com/DinoChan/OnePomodoro"/>-->
+                <!--</StackPanel>
+            </StackPanel>-->
         </StackPanel>
     </Grid>
 </Page>

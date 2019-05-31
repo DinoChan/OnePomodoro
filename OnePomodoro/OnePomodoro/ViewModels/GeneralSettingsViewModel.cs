@@ -12,6 +12,7 @@ using Prism.Windows.Navigation;
 
 using Windows.ApplicationModel;
 using Windows.UI.Xaml;
+using Edi.UWP.Helpers;
 
 namespace OnePomodoro.ViewModels
 {
@@ -35,6 +36,8 @@ namespace OnePomodoro.ViewModels
 
             set { SetProperty(ref _versionDescription, value); }
         }
+
+        public string Publisher => Package.Current.PublisherDisplayName;
 
         private ICommand _switchThemeCommand;
 
@@ -78,6 +81,26 @@ namespace OnePomodoro.ViewModels
                 return _launchFeedbackHubCommand;
             }
         }
+
+        private ICommand _reviewCommand;
+
+        public ICommand ReviewCommand
+        {
+            get
+            {
+                if (_reviewCommand == null)
+                {
+                    _reviewCommand = new DelegateCommand(
+                        async () =>
+                        {
+                            await Tasks.OpenStoreReviewAsync();
+                        });
+                }
+
+                return _reviewCommand;
+            }
+        }
+
 
         public GeneralSettingsViewModel()
         {
