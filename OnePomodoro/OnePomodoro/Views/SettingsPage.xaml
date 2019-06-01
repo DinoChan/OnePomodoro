@@ -15,7 +15,7 @@
     </Page.Resources>
 
     <Grid >
-        <NavigationView x:Name="NavigationView" PaneTitle=" ssd" Header="header"  PaneDisplayMode="Top" IsBackEnabled="True" SelectionChanged="OnSelectionChanged" BackRequested="OnBackRequested" IsSettingsVisible="False">
+        <NavigationView x:Name="NavigationView" PaneDisplayMode="Top" IsBackEnabled="True" SelectionChanged="OnSelectionChanged" BackRequested="OnBackRequested" IsSettingsVisible="False">
             <NavigationView.MenuItems>
                 <NavigationViewItem Content="General" x:Name="GeneralSettingsItem" />
             </NavigationView.MenuItems>
