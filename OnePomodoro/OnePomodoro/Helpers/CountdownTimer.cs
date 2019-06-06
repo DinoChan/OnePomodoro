@@ -30,6 +30,8 @@ namespace OnePomodoro.Helpers
         public event EventHandler Finished;
         public event EventHandler Elapsed;
 
+        public TimeSpan TotalTime => _totalTime;
+
         /// <summary>
         /// 获取或设置 RemainingInterval 的值
         /// </summary>
@@ -40,7 +42,7 @@ namespace OnePomodoro.Helpers
                 return _remainingTime;
             }
 
-            set
+            private set
             {
                 if (_remainingTime == value)
                     return;
@@ -59,9 +61,6 @@ namespace OnePomodoro.Helpers
 
         public void Stop()
         {
-            if (_innerTimer.IsEnabled == false)
-                return;
-
             _innerTimer.Stop();
             Finished?.Invoke(this, EventArgs.Empty);
         }

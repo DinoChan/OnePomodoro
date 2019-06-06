@@ -94,59 +94,6 @@ namespace OnePomodoro.ViewModels
 
         public DelegateCommand StopTimerCommand { get; }
 
-
-        private void StartPomodoro()
-        {
-            _pomodoroTimer.Start();
-            IsTimerInProgress = true;
-        }
-        private void StopPomodoro()
-        {
-            _pomodoroTimer.Stop();
-            IsTimerInProgress = false;
-            IsInPomodoro = false;
-            _completedPomodoros++;
-            RemainingBreakTime = (_completedPomodoros % LongBreakAfter == 0) ? LongBreakLength : BreakLength;
-        }
-
-
-        private void StartBreak()
-        {
-            _currentBreakTimer = (_completedPomodoros % LongBreakAfter == 0) ? _longBreakTimer :_breakTimer;
-            _currentBreakTimer.Start();
-            IsTimerInProgress = true;
-        }
-
-
-        private void StopBreak()
-        {
-            RemainingPomodoroTime = PomodoroLength;
-            _currentBreakTimer.Stop();
-            IsTimerInProgress = false;
-            IsInPomodoro = true;
-        }
-       
-
-        private void OnPomodoroTimerElapsed(object sender, EventArgs e)
-        {
-            RemainingPomodoroTime = _pomodoroTimer.RemainingTime;
-        }
-
-        private void OnPomodoroTimerFinished(object sender, EventArgs e)
-        {
-            StopTimer();
-        }
-
-        private void OnBreakTimerElapsed(object sender, EventArgs e)
-        {
-            RemainingBreakTime = _currentBreakTimer.RemainingTime;
-        }
-
-        private void OnBreakTimerFinished(object sender, EventArgs e)
-        {
-            StopTimer();
-        }
-
         private void StartTimer()
         {
             if (_isInPomodoro)
@@ -163,5 +110,51 @@ namespace OnePomodoro.ViewModels
                 StopBreak();
         }
 
+        private void StartPomodoro()
+        {
+            _pomodoroTimer.Start();
+            IsTimerInProgress = true;
+        }
+        private void StopPomodoro()
+        {
+            _pomodoroTimer.Stop();
+        }
+
+        private void StartBreak()
+        {
+            _currentBreakTimer.Start();
+            IsTimerInProgress = true;
+        }
+
+        private void StopBreak()
+        {
+            _currentBreakTimer.Stop();
+        }
+
+        private void OnPomodoroTimerElapsed(object sender, EventArgs e)
+        {
+            RemainingPomodoroTime = _pomodoroTimer.RemainingTime;
+        }
+
+        private void OnPomodoroTimerFinished(object sender, EventArgs e)
+        {
+            IsTimerInProgress = false;
+            IsInPomodoro = false;
+            _completedPomodoros++;
+            _currentBreakTimer = (_completedPomodoros % LongBreakAfter == 0) ? _longBreakTimer : _breakTimer;
+            RemainingBreakTime = _currentBreakTimer.TotalTime;
+        }
+
+        private void OnBreakTimerElapsed(object sender, EventArgs e)
+        {
+            RemainingBreakTime = _currentBreakTimer.RemainingTime;
+        }
+
+        private void OnBreakTimerFinished(object sender, EventArgs e)
+        {
+            RemainingPomodoroTime = PomodoroLength;
+            IsTimerInProgress = false;
+            IsInPomodoro = true;
+        }
     }
 }
