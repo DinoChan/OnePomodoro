@@ -12,7 +12,8 @@ using Prism.Windows.Navigation;
 
 using Windows.ApplicationModel;
 using Windows.UI.Xaml;
-using Edi.UWP.Helpers;
+
+using Microsoft.Toolkit.Uwp.Helpers;
 
 namespace OnePomodoro.ViewModels
 {
@@ -93,7 +94,7 @@ namespace OnePomodoro.ViewModels
                     _reviewCommand = new DelegateCommand(
                         async () =>
                         {
-                            await Tasks.OpenStoreReviewAsync();
+                            await SystemInformation.LaunchStoreForReviewAsync();
                         });
                 }
 
