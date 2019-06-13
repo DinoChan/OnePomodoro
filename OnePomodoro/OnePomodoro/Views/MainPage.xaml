@@ -46,33 +46,34 @@
                                   <animations:OpacityAnimation Duration="0:0:0.5"
                                                                From="0"
                                                                To="1.0" />
-                        </animations:Implicit.ShowAnimations>
-                    <animations:Implicit.HideAnimations>
+                     </animations:Implicit.ShowAnimations>
+                     <animations:Implicit.HideAnimations>
                                   <animations:OpacityAnimation Duration="0:0:0.5"
                                                                From="1"
                                                                To="0" />
-                        </animations:Implicit.HideAnimations>
+                     </animations:Implicit.HideAnimations>
                 </TextBlock>
                 <TextBlock Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
                            FontSize="160"
                            Foreground="#FF999999"
                            Margin="8,-80,0,0"
                            Visibility="{Binding IsInPomodoro,Converter={StaticResource BoolToVisibilityConverter}}">
-                      <animations:Implicit.ShowAnimations>
-                            <animations:ScalarAnimation Target="Translation.Y"
-                                                        Duration="0:0:1.5"
-                                                        From="200"
-                                                        To="0" />
-                       
-                          <animations:OpacityAnimation Duration="0:0:1.5"
-                                                       From="0"
-                                                       To="1" />
-                        </animations:Implicit.ShowAnimations>
-                        <animations:Implicit.HideAnimations>
-                             <animations:OpacityAnimation Duration="0:0:0.5"
-                                                          From="1"
-                                                          To="0" />
-                        </animations:Implicit.HideAnimations>
+
+                    <animations:Implicit.ShowAnimations>
+                        <animations:ScalarAnimation Target="Translation.Y"
+                                                    Duration="0:0:1.5"
+                                                    From="200"
+                                                    To="0" />
+                        <animations:OpacityAnimation Duration="0:0:1.5"
+                                                     From="0"
+                                                     To="1" />
+                    </animations:Implicit.ShowAnimations>
+
+                    <animations:Implicit.HideAnimations>
+                        <animations:OpacityAnimation Duration="0:0:0.5"
+                                                     From="1"
+                                                     To="0" />
+                    </animations:Implicit.HideAnimations>
                 </TextBlock>
                 <TextBlock Text="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
                            FontSize="160"
