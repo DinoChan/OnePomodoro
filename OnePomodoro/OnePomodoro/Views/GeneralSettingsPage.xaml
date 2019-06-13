@@ -1,16 +1,15 @@
-﻿<Page
-    x:Class="OnePomodoro.Views.GeneralSettingsPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"    
-    Style="{StaticResource PageStyle}"
-    xmlns:prismMvvm="using:Prism.Windows.Mvvm"
-    xmlns:model="using:Windows.ApplicationModel"
-    prismMvvm:ViewModelLocator.AutoWireViewModel="True" 
-    xmlns:helper="using:OnePomodoro.Helpers"
-    xmlns:xaml="using:Windows.UI.Xaml"
-    mc:Ignorable="d">
+﻿<Page x:Class="OnePomodoro.Views.GeneralSettingsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"    
+      Style="{StaticResource PageStyle}"
+      xmlns:prismMvvm="using:Prism.Windows.Mvvm"
+      xmlns:model="using:Windows.ApplicationModel"
+      prismMvvm:ViewModelLocator.AutoWireViewModel="True" 
+      xmlns:helper="using:OnePomodoro.Helpers"
+      xmlns:xaml="using:Windows.UI.Xaml" 
+      mc:Ignorable="d">
     <Page.Resources>
         <helper:EnumToBooleanConverter x:Key="EnumToBooleanConverter" EnumType="ElementTheme" />
         <Style x:Key="TipsNumberStyle" TargetType="TextBlock">
@@ -99,44 +98,6 @@
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
-
-
-            <!--<TextBlock
-                x:Uid="Settings_About"
-                Style="{StaticResource SettingSubtitleTextBlockStyle}"/>
-
-            <StackPanel Margin="{StaticResource SettingsMargin}" Orientation="Horizontal">
-                <Image Source="/Assets/LargeTile.png" Height="150" Width="150"/>
-                <StackPanel Margin="16,0,0,0">-->
-                    <!--<TextBlock Text="{x:Bind ViewModel.VersionDescription, Mode=OneWay}"
-                               Style="{ThemeResource BodyTextBlockStyle}" />
-                    <TextBlock
-                        Margin="{StaticResource XSmallTopMargin}"
-                        Style="{ThemeResource BodyTextBlockStyle}" >
-                        <Run Text="© 2019 dino.chan, Designed and Developed by"/>
-                        <Run Text="{x:Bind model:Package.Current.PublisherDisplayName}"/>
-                    </TextBlock>-->
-
-                    <!--<HyperlinkButton
-                    x:Uid="Settings_PrivacyTermsLink" 
-                    Margin="{StaticResource XSmallTopMargin}" />-->
-
-                    <!--<HyperlinkButton Margin="0,4,0,0"
-                                     x:Uid="FeedbackHub_Link"
-                                     Content="Feedback"
-                                     Command="{x:Bind ViewModel.LaunchFeedbackHubCommand}"
-                                     Visibility="{x:Bind ViewModel.FeedbackLinkVisibility}" />
-
-                    <HyperlinkButton Margin="{StaticResource XSmallTopMargin}"
-                                     Content="Rate this app"
-                                     x:Uid="Rate_Link"
-                                     Command="{x:Bind ViewModel.ReviewCommand}"/>
-
-                    <HyperlinkButton Margin="{StaticResource XSmallTopMargin}"
-                                     Content="GitHub"
-                                     NavigateUri="https://github.com/DinoChan/OnePomodoro"/>-->
-                <!--</StackPanel>
-            </StackPanel>-->
         </StackPanel>
     </Grid>
 </Page>

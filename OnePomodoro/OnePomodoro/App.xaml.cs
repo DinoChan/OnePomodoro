@@ -31,7 +31,8 @@ namespace OnePomodoro
             {
                 e.Handled = true;
                 ContentDialog dialog = new ContentDialog();
-                dialog.Content = e.Message;
+                var errorMessage = e.Message + Environment.NewLine + e.Exception.StackTrace;
+                dialog.Content = errorMessage;
                 _ = dialog.ShowAsync();
             };
         }
