@@ -12,12 +12,11 @@ namespace OnePomodoro.Views
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
     /// </summary>
-    public sealed partial class AboutPage : Page, INotifyPropertyChanged
+    public sealed partial class AboutPage : Page
     {
         public AboutPage()
         {
             this.InitializeComponent();
-            DataContextChanged += OnDataContextChanged;
         }
 
         private AboutViewModel ViewModel => DataContext as AboutViewModel;
@@ -28,11 +27,6 @@ namespace OnePomodoro.Views
         {
             base.OnNavigatedTo(e);
             ViewModel.OnNavigatedTo(null, null);
-        }
-
-        private void OnDataContextChanged(Windows.UI.Xaml.FrameworkElement sender, Windows.UI.Xaml.DataContextChangedEventArgs args)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ViewModel)));
         }
     }
 }

@@ -2,96 +2,152 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"    
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       Style="{StaticResource PageStyle}"
       xmlns:prismMvvm="using:Prism.Windows.Mvvm"
       xmlns:model="using:Windows.ApplicationModel"
-      prismMvvm:ViewModelLocator.AutoWireViewModel="True" 
+      prismMvvm:ViewModelLocator.AutoWireViewModel="True"
       xmlns:helper="using:OnePomodoro.Helpers"
       xmlns:xaml="using:Windows.UI.Xaml"
       x:DefaultBindMode="OneWay"
       mc:Ignorable="d">
     <Page.Resources>
-        <helper:EnumToBooleanConverter x:Key="EnumToBooleanConverter" EnumType="ElementTheme" />
-        <Style x:Key="TipsNumberStyle" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="#66FB4474"/>
-            <Setter Property="FontSize" Value="40"/>
-            <Setter Property="VerticalAlignment" Value="Top"/>
-            <Setter Property="Width" Value="36"/>
+        <helper:EnumToBooleanConverter x:Key="EnumToBooleanConverter"
+                                       EnumType="ElementTheme" />
+        <Style x:Key="TipsNumberStyle"
+               TargetType="TextBlock">
+            <Setter Property="Foreground"
+                    Value="#66FB4474" />
+            <Setter Property="FontSize"
+                    Value="40" />
+            <Setter Property="VerticalAlignment"
+                    Value="Top" />
+            <Setter Property="Width"
+                    Value="36" />
         </Style>
-        <Style x:Key="TipsContentStyle" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="#EEFFFFFF"/>
-            <Setter Property="FontSize" Value="20"/>
-            <Setter Property="Margin" Value="0,12,0,0"/>
-            <Setter Property="VerticalAlignment" Value="Top"/>
-            <Setter Property="TextWrapping" Value="Wrap"/>
+        <Style x:Key="TipsContentStyle"
+               TargetType="TextBlock">
+            <Setter Property="Foreground"
+                    Value="#EEFFFFFF" />
+            <Setter Property="FontSize"
+                    Value="20" />
+            <Setter Property="Margin"
+                    Value="0,12,0,0" />
+            <Setter Property="VerticalAlignment"
+                    Value="Top" />
+            <Setter Property="TextWrapping"
+                    Value="Wrap" />
         </Style>
 
-        <Style x:Key="SettingSubtitleTextBlockStyle" BasedOn="{StaticResource SubtitleTextBlockStyle}" TargetType="TextBlock">
-            <Setter Property="Margin" Value="40,64,0,0"/>
+        <Style x:Key="SettingSubtitleTextBlockStyle"
+               BasedOn="{StaticResource SubtitleTextBlockStyle}"
+               TargetType="TextBlock">
+            <Setter Property="Margin"
+                    Value="40,64,0,0" />
         </Style>
 
         <Thickness x:Key="SettingsMargin">36, 36, 0, 0</Thickness>
     </Page.Resources>
 
     <Grid Margin="32">
-        <StackPanel
-            x:Name="ContentArea">
+        <StackPanel x:Name="ContentArea">
 
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="1" Style="{StaticResource TipsNumberStyle}" Opacity="0"/>
-                <TextBlock Text="Pomodoro Technique Principles" FontSize="40" Foreground="#FFFB4474" Style="{ThemeResource SubtitleTextBlockStyle}"/>
+                <TextBlock Text="1"
+                           Style="{StaticResource TipsNumberStyle}"
+                           Opacity="0" />
+                <TextBlock Text="Pomodoro Technique Principles"
+                           FontSize="40"
+                           Foreground="#FFFB4474"
+                           Style="{ThemeResource SubtitleTextBlockStyle}" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="1" Style="{StaticResource TipsNumberStyle}"/>
-                <TextBlock Text="Decide on the task to be done." Style="{StaticResource TipsContentStyle}"/>
+                <TextBlock Text="1"
+                           Style="{StaticResource TipsNumberStyle}" />
+                <TextBlock Text="Decide on the task to be done."
+                           Style="{StaticResource TipsContentStyle}" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="2" Style="{StaticResource TipsNumberStyle}"/>
-                <TextBlock Text="Set the pomodoro timer (traditionally to 25 minutes)." Style="{StaticResource TipsContentStyle}"/>
+                <TextBlock Text="2"
+                           Style="{StaticResource TipsNumberStyle}" />
+                <TextBlock Text="Set the pomodoro timer (traditionally to 25 minutes)."
+                           Style="{StaticResource TipsContentStyle}" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="3" Style="{StaticResource TipsNumberStyle}"/>
-                <TextBlock Text="Work on the task." Style="{StaticResource TipsContentStyle}"/>
+                <TextBlock Text="3"
+                           Style="{StaticResource TipsNumberStyle}" />
+                <TextBlock Text="Work on the task."
+                           Style="{StaticResource TipsContentStyle}" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="4" Style="{StaticResource TipsNumberStyle}"/>
-                <TextBlock Text="End work when the timer rings and put a checkmark on a piece of paper." Style="{StaticResource TipsContentStyle}"/>
+                <TextBlock Text="4"
+                           Style="{StaticResource TipsNumberStyle}" />
+                <TextBlock Text="End work when the timer rings and put a checkmark on a piece of paper."
+                           Style="{StaticResource TipsContentStyle}" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="5" Style="{StaticResource TipsNumberStyle}"/>
-                <TextBlock Text="If you have fewer than four checkmarks, take a short break (5 minutes), then go to step 2." Style="{StaticResource TipsContentStyle}"/>
+                <TextBlock Text="5"
+                           Style="{StaticResource TipsNumberStyle}" />
+                <TextBlock Text="If you have fewer than four checkmarks, take a short break (5 minutes), then go to step 2."
+                           Style="{StaticResource TipsContentStyle}" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="6" Style="{StaticResource TipsNumberStyle}"/>
-                <TextBlock Text="After four pomodoros, take a longer break (25 minutes), reset your checkmark count to zero, then go to step 1." Style="{StaticResource TipsContentStyle}"/>
+                <TextBlock Text="6"
+                           Style="{StaticResource TipsNumberStyle}" />
+                <TextBlock Text="After four pomodoros, take a longer break (25 minutes), reset your checkmark count to zero, then go to step 1."
+                           Style="{StaticResource TipsContentStyle}" />
             </StackPanel>
 
 
-            <StackPanel Margin="{StaticResource SettingsMargin}" Orientation="Horizontal">
-                <Image Source="/Assets/LargeTile.png" Height="88" Width="88" />
+            <StackPanel Margin="{StaticResource SettingsMargin}"
+                        Orientation="Horizontal">
+                <Image Source="/Assets/LargeTile.png"
+                       Height="88"
+                       Width="88" />
                 <StackPanel Margin="8,0,0,0">
                     <TextBlock Text="OnePomodoro"
                                x:Uid="AppNameTextBlock"
-                               Style="{ThemeResource BodyTextBlockStyle}"/>
+                               Style="{ThemeResource BodyTextBlockStyle}" />
 
                     <TextBlock Margin="0,4,0,0"
                                Text="© 2019 dino.chan, Designed and Developed by dino.c"
                                Style="{ThemeResource BodyTextBlockStyle}" />
 
+                    <StackPanel Orientation="Horizontal">
 
-                    <TextBlock Margin="0,4,0,0"
+                        <TextBlock Margin="0,4,0,0"
+                                   Style="{ThemeResource BodyTextBlockStyle}"
+                                   Foreground="Gray"
+                                   Text="Version - " />
+                        <TextBlock Margin="0,4,0,0"
+                                   Style="{ThemeResource BodyTextBlockStyle}"
+                                   Foreground="Gray"
+                                   Text="{x:Bind ViewModel.Version}" />
+                    </StackPanel>
+                    <!--<TextBlock Margin="0,4,0,0"
                                Style="{ThemeResource BodyTextBlockStyle}"
                                Foreground="Gray">
                         <Run Text="Version "/>
                         <Run Text="{x:Bind ViewModel.Version}"/>
-                    </TextBlock>
+                    </TextBlock>-->
 
-                    <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
-                        <HyperlinkButton Padding="0" Content="GitHub" NavigateUri="https://github.com/DinoChan/OnePomodoro"/>
-                        <HyperlinkButton Margin="8,0,0,0" Padding="0" Content="Rate this app" x:Uid="Rate_Link" Command="{x:Bind ViewModel.ReviewCommand}"/>
-                        <HyperlinkButton Margin="8,0,0,0" Padding="0" x:Uid="FeedbackHub_Link" Content="Feedback" Command="{x:Bind ViewModel.LaunchFeedbackHubCommand}" Visibility="{x:Bind ViewModel.FeedbackLinkVisibility}" />
+                    <StackPanel Orientation="Horizontal"
+                                Margin="0,4,0,0">
+                        <HyperlinkButton Padding="0"
+                                         Content="GitHub"
+                                         NavigateUri="https://github.com/DinoChan/OnePomodoro" />
+                        <HyperlinkButton Margin="8,0,0,0"
+                                         Padding="0"
+                                         Content="Rate this app"
+                                         x:Uid="Rate_Link"
+                                         Command="{x:Bind ViewModel.ReviewCommand}" />
+                        <HyperlinkButton Margin="8,0,0,0"
+                                         Padding="0"
+                                         x:Uid="FeedbackHub_Link"
+                                         Content="Feedback"
+                                         Command="{x:Bind ViewModel.LaunchFeedbackHubCommand}"
+                                         Visibility="{x:Bind ViewModel.FeedbackLinkVisibility}" />
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
