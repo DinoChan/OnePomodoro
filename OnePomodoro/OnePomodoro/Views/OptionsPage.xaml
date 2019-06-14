@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="OnePomodoro.Views.SettingsPage"
+    x:Class="OnePomodoro.Views.OptionsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -17,7 +17,7 @@
     <Grid >
         <NavigationView x:Name="NavigationView" PaneDisplayMode="Top" IsBackEnabled="True" SelectionChanged="OnSelectionChanged" BackRequested="OnBackRequested" IsSettingsVisible="False">
             <NavigationView.MenuItems>
-                <NavigationViewItem Content="General" x:Name="GeneralSettingsItem" />
+                <NavigationViewItem Content="About" x:Name="AboutItem" />
             </NavigationView.MenuItems>
             <Frame x:Name="ContentFrame"/>
         </NavigationView>

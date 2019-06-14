@@ -15,9 +15,9 @@ using Windows.UI.Xaml;
 
 namespace OnePomodoro.ViewModels
 {
-    public class SettingsViewModel : ViewModelBase
+    public class OptionsViewModel : ViewModelBase
     {
-        public SettingsViewModel()
+        public OptionsViewModel()
         {
         }
 

@@ -18,7 +18,7 @@ using Microsoft.Toolkit.Uwp.Helpers;
 namespace OnePomodoro.ViewModels
 {
     // TODO WTS: Add other settings as necessary. For help see https://github.com/Microsoft/WindowsTemplateStudio/blob/master/docs/pages/settings.md
-    public class GeneralSettingsViewModel : ViewModelBase
+    public class AboutViewModel : ViewModelBase
     {
         private ElementTheme _elementTheme = ThemeSelectorService.Theme;
 
@@ -29,13 +29,13 @@ namespace OnePomodoro.ViewModels
             set { SetProperty(ref _elementTheme, value); }
         }
 
-        private string _versionDescription;
+        private string _version;
 
-        public string VersionDescription
+        public string Version
         {
-            get { return _versionDescription; }
+            get { return _version; }
 
-            set { SetProperty(ref _versionDescription, value); }
+            set { SetProperty(ref _version, value); }
         }
 
         public string Publisher => Package.Current.PublisherDisplayName;
@@ -103,24 +103,23 @@ namespace OnePomodoro.ViewModels
         }
 
 
-        public GeneralSettingsViewModel()
+        public AboutViewModel()
         {
         }
 
         public async Task InitializeAsync()
         {
-            VersionDescription = GetVersionDescription();
+            Version = GetVersion();
             await Task.CompletedTask;
         }
 
-        private string GetVersionDescription()
+        private string GetVersion()
         {
-            var appName = "AppDisplayName".GetLocalized();
             var package = Package.Current;
             var packageId = package.Id;
             var version = packageId.Version;
 
-            return $"{appName} - {version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
+            return $"{version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
         }
 
         public override async void OnNavigatedTo(NavigatedToEventArgs e, Dictionary<string, object> viewModelState)

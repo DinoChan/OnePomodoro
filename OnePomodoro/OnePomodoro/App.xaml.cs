@@ -27,14 +27,14 @@ namespace OnePomodoro
         public App()
         {
             InitializeComponent();
-            UnhandledException += (sender, e) =>
-            {
-                e.Handled = true;
-                ContentDialog dialog = new ContentDialog();
-                var errorMessage = e.Message + Environment.NewLine + e.Exception.StackTrace;
-                dialog.Content = errorMessage;
-                _ = dialog.ShowAsync();
-            };
+            //UnhandledException += (sender, e) =>
+            //{
+            //    e.Handled = true;
+            //    ContentDialog dialog = new ContentDialog();
+            //    var errorMessage = e.Message + Environment.NewLine + e.Exception.StackTrace;
+            //    dialog.Content = errorMessage;
+            //    _ = dialog.ShowAsync();
+            //};
         }
 
         protected override void ConfigureContainer()

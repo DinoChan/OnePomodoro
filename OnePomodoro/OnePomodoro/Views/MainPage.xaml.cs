@@ -18,7 +18,7 @@ namespace OnePomodoro.Views
 
         private void OnSettingClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(SettingsPage));
+            Frame.Navigate(typeof(OptionsPage));
         }
     }
 }

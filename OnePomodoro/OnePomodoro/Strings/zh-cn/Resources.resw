@@ -229,4 +229,7 @@ Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Ma
   <data name="Rate_Link.Content" xml:space="preserve">
     <value>为应用评分</value>
   </data>
+  <data name="AppNameTextBlock.Text" xml:space="preserve">
+    <value>一个番茄钟</value>
+  </data>
 </root>
