@@ -142,12 +142,12 @@
                                          Content="Rate this app"
                                          x:Uid="Rate_Link"
                                          Command="{x:Bind ViewModel.ReviewCommand}" />
-                        <HyperlinkButton Margin="8,0,0,0"
+                        <!--<HyperlinkButton Margin="8,0,0,0"
                                          Padding="0"
                                          x:Uid="FeedbackHub_Link"
                                          Content="Feedback"
                                          Command="{x:Bind ViewModel.LaunchFeedbackHubCommand}"
-                                         Visibility="{x:Bind ViewModel.FeedbackLinkVisibility}" />
+                                         Visibility="{x:Bind ViewModel.FeedbackLinkVisibility}" />-->
                     </StackPanel>
                 </StackPanel>
             </StackPanel>

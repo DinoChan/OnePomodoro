@@ -60,28 +60,28 @@ namespace OnePomodoro.ViewModels
             }
         }
 
-        public Visibility FeedbackLinkVisibility => Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher.IsSupported() ? Visibility.Visible : Visibility.Collapsed;
+        //public Visibility FeedbackLinkVisibility => Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher.IsSupported() ? Visibility.Visible : Visibility.Collapsed;
 
-        private ICommand _launchFeedbackHubCommand;
+        //private ICommand _launchFeedbackHubCommand;
 
-        public ICommand LaunchFeedbackHubCommand
-        {
-            get
-            {
-                if (_launchFeedbackHubCommand == null)
-                {
-                    _launchFeedbackHubCommand = new DelegateCommand(
-                        async () =>
-                        {
-                            // This launcher is part of the Store Services SDK https://docs.microsoft.com/en-us/windows/uwp/monetize/microsoft-store-services-sdk
-                            var launcher = Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher.GetDefault();
-                            await launcher.LaunchAsync();
-                        });
-                }
+        //public ICommand LaunchFeedbackHubCommand
+        //{
+        //    get
+        //    {
+        //        if (_launchFeedbackHubCommand == null)
+        //        {
+        //            _launchFeedbackHubCommand = new DelegateCommand(
+        //                async () =>
+        //                {
+        //                    // This launcher is part of the Store Services SDK https://docs.microsoft.com/en-us/windows/uwp/monetize/microsoft-store-services-sdk
+        //                    var launcher = Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher.GetDefault();
+        //                    await launcher.LaunchAsync();
+        //                });
+        //        }
 
-                return _launchFeedbackHubCommand;
-            }
-        }
+        //        return _launchFeedbackHubCommand;
+        //    }
+        //}
 
         private ICommand _reviewCommand;
 
