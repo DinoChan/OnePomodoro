@@ -125,12 +125,6 @@
                                    Foreground="Gray"
                                    Text="{x:Bind ViewModel.Version}" />
                     </StackPanel>
-                    <!--<TextBlock Margin="0,4,0,0"
-                               Style="{ThemeResource BodyTextBlockStyle}"
-                               Foreground="Gray">
-                        <Run Text="Version "/>
-                        <Run Text="{x:Bind ViewModel.Version}"/>
-                    </TextBlock>-->
 
                     <StackPanel Orientation="Horizontal"
                                 Margin="0,4,0,0">

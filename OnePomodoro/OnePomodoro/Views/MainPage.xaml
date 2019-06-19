@@ -146,7 +146,7 @@
 
 
                 <Button Content="&#xE10C;"
-                        Click="OnSettingClick"/>
+                        Click="OnOptionsClick"/>
                 <!--<Button Content="&#xF142;"/>-->
             </StackPanel>
         </Grid>
