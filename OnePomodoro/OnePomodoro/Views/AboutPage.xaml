@@ -111,12 +111,15 @@
                                Style="{ThemeResource BodyTextBlockStyle}" />
 
                     <TextBlock Margin="0,4,0,0"
-                               Text="© 2019 dino.chan, Designed and Developed by dino.c"
+                               Text="Designed and Developed by dino.c"
                                Style="{ThemeResource BodyTextBlockStyle}" />
 
                     <StackPanel Orientation="Horizontal">
-
                         <TextBlock Margin="0,4,0,0"
+                                   Style="{ThemeResource BodyTextBlockStyle}"
+                                   Foreground="Gray"
+                                   Text="© 2019 dino.c" />
+                        <TextBlock Margin="8,4,0,0"
                                    Style="{ThemeResource BodyTextBlockStyle}"
                                    Foreground="Gray"
                                    Text="Version - " />
