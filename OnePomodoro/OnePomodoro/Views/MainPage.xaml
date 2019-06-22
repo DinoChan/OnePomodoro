@@ -78,7 +78,7 @@
                 <TextBlock Text="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
                            FontSize="160"
                            Foreground="#FF999999"
-                           Margin="0,0,0,-80"
+                           Margin="0,0,-8,-40"
                            HorizontalAlignment="Right"
                            Visibility="{Binding IsInPomodoro,Converter={StaticResource NegationBoolToVisibilityConverter}}">
                     <animations:Implicit.ShowAnimations>
