@@ -17,7 +17,7 @@
         <Style x:Key="TipsNumberStyle"
                TargetType="TextBlock">
             <Setter Property="Foreground"
-                    Value="#66FB4474" />
+                    Value="#66D91153" />
             <Setter Property="FontSize"
                     Value="40" />
             <Setter Property="VerticalAlignment"
@@ -58,7 +58,7 @@
                            Opacity="0" />
                 <TextBlock Text="Pomodoro Technique Principles"
                            FontSize="40"
-                           Foreground="#FFFB4474"
+                           Foreground="#FFD91153"
                            Style="{ThemeResource SubtitleTextBlockStyle}" />
             </StackPanel>
 
