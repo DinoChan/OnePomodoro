@@ -16,7 +16,7 @@ namespace OnePomodoro.Views
             NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
         }
 
-        private void OnSettingClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void OnOptionsClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             Frame.Navigate(typeof(OptionsPage));
         }
