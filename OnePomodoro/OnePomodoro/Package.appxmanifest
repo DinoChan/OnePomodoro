@@ -10,7 +10,7 @@
   <Identity
     Name="24329C-Soft.OnePomodoro"
     Publisher="CN=6D7AEB3B-3956-49A6-AD32-C4737FDDCD52"
-    Version="1.2.17.0" />
+    Version="1.2.20.0" />
 
   <mp:PhoneIdentity PhoneProductId="0034103c-388d-42cb-b647-d5c98b47d9ae" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
@@ -39,7 +39,7 @@
         Description="ms-resource:AppDescription"
         BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square71x71Logo="Assets\SmallTile.png" Square310x310Logo="Assets\LargeTile.png"/>
-        <uap:SplashScreen BackgroundColor="darkRed" Image="Assets\SplashScreen.png"/>
+        <uap:SplashScreen BackgroundColor="#B63D7E" Image="Assets\SplashScreen.png"/>
         <uap:LockScreen BadgeLogo="Assets\BadgeLogo.png" Notification="badgeAndTileText"/>
       </uap:VisualElements>
 
