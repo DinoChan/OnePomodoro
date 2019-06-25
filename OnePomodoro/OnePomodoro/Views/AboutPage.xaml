@@ -119,10 +119,10 @@
                                    Style="{ThemeResource BodyTextBlockStyle}"
                                    Foreground="Gray"
                                    Text="© 2019 dino.c" />
-                        <TextBlock Margin="8,4,0,0"
+                        <TextBlock Margin="16,4,0,0"
                                    Style="{ThemeResource BodyTextBlockStyle}"
                                    Foreground="Gray"
-                                   Text="Version - " />
+                                   Text="version - " />
                         <TextBlock Margin="0,4,0,0"
                                    Style="{ThemeResource BodyTextBlockStyle}"
                                    Foreground="Gray"

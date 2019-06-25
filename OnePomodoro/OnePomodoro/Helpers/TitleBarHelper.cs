@@ -1,105 +1,50 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Windows.ApplicationModel.Core;
+using Windows.UI;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
-
+using Windows.UI.Xaml.Controls;
 
 namespace OnePomodoro.Helpers
 {
-    public class TitleBarHelper : INotifyPropertyChanged
+    public static class TitleBarHelper
     {
-        private static TitleBarHelper _instance = new TitleBarHelper();
-        private static CoreApplicationViewTitleBar _coreTitleBar;
-        private Thickness _titlePosition;
-        private Visibility _titleVisibility;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TitleBarHelper"/> class.
-        /// </summary>
-        public TitleBarHelper()
+        public static void UpdatePageTitleColor(Page page)
         {
-            _coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
-            _coreTitleBar.LayoutMetricsChanged += CoreTitleBar_LayoutMetricsChanged;
-            _titlePosition = CalculateTilebarOffset(_coreTitleBar.SystemOverlayLeftInset, _coreTitleBar.Height);
-            _titleVisibility = Visibility.Visible;
+            UpdatePageTitleColor(page.ActualTheme);
         }
 
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public static TitleBarHelper Instance
+        public static void UpdatePageTitleColor(ElementTheme theme)
         {
-            get
+            var titleBar = ApplicationView.GetForCurrentView().TitleBar;
+            titleBar.ButtonBackgroundColor = Colors.Transparent;
+            if (theme == ElementTheme.Dark)
             {
-                return _instance;
+                titleBar.ButtonForegroundColor = Color.FromArgb(255, 242, 242, 242);
+                titleBar.ButtonHoverForegroundColor = Colors.White;
+                titleBar.ButtonPressedForegroundColor = Colors.White;
+                titleBar.ButtonHoverBackgroundColor = Color.FromArgb(25, 255, 255, 255);
+                titleBar.ButtonPressedBackgroundColor = Color.FromArgb(51, 255, 255, 255);
+                titleBar.ButtonInactiveForegroundColor = Color.FromArgb(255, 102, 102, 102);
+                titleBar.ForegroundColor = Colors.White;
             }
-        }
-
-        public CoreApplicationViewTitleBar TitleBar
-        {
-            get
+            else
             {
-                return _coreTitleBar;
-            }
-        }
-
-        public Thickness TitlePosition
-        {
-            get
-            {
-                return _titlePosition;
+                titleBar.ButtonForegroundColor = Color.FromArgb(255, 23, 23, 23);
+                titleBar.ButtonHoverForegroundColor = Colors.Black;
+                titleBar.ButtonPressedForegroundColor = Colors.Black;
+                titleBar.ButtonHoverBackgroundColor = Color.FromArgb(25, 00, 00, 00);
+                titleBar.ButtonPressedBackgroundColor = Color.FromArgb(51, 00, 00, 00);
+                titleBar.ButtonInactiveForegroundColor = Color.FromArgb(255, 153, 153, 153);
+                titleBar.ForegroundColor = Colors.Black;
             }
 
-            set
-            {
-                if (value.Left != _titlePosition.Left || value.Top != _titlePosition.Top)
-                {
-                    _titlePosition = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TitlePosition)));
-                }
-            }
+            titleBar.BackgroundColor = Colors.Transparent;
+            titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
         }
 
-        public Visibility TitleVisibility
-        {
-            get
-            {
-                return _titleVisibility;
-            }
-            set
-            {
-                _titleVisibility = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TitleVisibility)));
-            }
-        }
-
-        public void ExitFullscreen()
-        {
-            TitleVisibility = Visibility.Visible;
-        }
-
-        public void GoFullscreen()
-        {
-            TitleVisibility = Visibility.Collapsed;
-        }
-
-        private void CoreTitleBar_LayoutMetricsChanged(CoreApplicationViewTitleBar sender, object args)
-        {
-            TitlePosition = CalculateTilebarOffset(_coreTitleBar.SystemOverlayLeftInset, _coreTitleBar.Height);
-        }
-
-        private Thickness CalculateTilebarOffset(double leftPosition, double height)
-        {
-            // top position should be 6 pixels for a 32 pixel high titlebar hence scale by actual height
-            var correctHeight = height / 32 * 6;
-            var left = leftPosition + 12;
-
-            return new Thickness(left, correctHeight, 0, 0);
-        }
     }
 }

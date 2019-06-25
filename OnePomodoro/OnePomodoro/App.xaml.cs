@@ -59,9 +59,9 @@ namespace OnePomodoro
 
         private async Task LaunchApplicationAsync(string page, object launchParam)
         {
+            TitleBarHelper.UpdatePageTitleColor(ElementTheme.Dark);
             await ThemeSelectorService.SetRequestedThemeAsync();
             NavigationService.Navigate(page, launchParam);
-            SetupTitlebar();
             Window.Current.Activate();
             //await Container.Resolve<IWhatsNewDisplayService>().ShowIfAppropriateAsync();
             //await Container.Resolve<IFirstRunDisplayService>().ShowIfAppropriateAsync();
@@ -104,53 +104,6 @@ namespace OnePomodoro
             service.UseTitleBarBackButton = false;
             return service;
         }
-
-
-        private static void SetupTitlebar()
-        {
-            if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.ApplicationView"))
-            {
-                var titleBar = ApplicationView.GetForCurrentView().TitleBar;
-                if (titleBar != null)
-                {
-                    //titleBar.ButtonBackgroundColor = Colors.Transparent;
-                    //if (TrueTheme() == ElementTheme.Dark)
-                    //{
-                    //    titleBar.ButtonForegroundColor = Colors.White;
-                    //    titleBar.ForegroundColor = Colors.White;
-                    //}
-                    //else
-                    //{
-                    //    titleBar.ButtonForegroundColor = Colors.Black;
-                    //    titleBar.ForegroundColor = Colors.Black;
-                    //}
-
-                    //titleBar.BackgroundColor = Colors.Black;
-
-                    //titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
-                    //titleBar.ButtonInactiveForegroundColor = Colors.LightGray;
-
-                    CoreApplicationViewTitleBar coreTitleBar = TitleBarHelper.Instance.TitleBar;
-
-                    coreTitleBar.ExtendViewIntoTitleBar = true;
-                }
-            }
-        }
-
-        public static ElementTheme TrueTheme()
-        {
-            if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5))
-            {
-                var frameworkElement = Window.Current.Content as FrameworkElement;
-                return frameworkElement.ActualTheme;
-            }
-            else
-            {
-                if (Application.Current.RequestedTheme == ApplicationTheme.Light)
-                    return ElementTheme.Light;
-                else
-                    return ElementTheme.Dark;
-            }
-        }
+      
     }
 }

@@ -232,4 +232,7 @@ Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Ma
   <data name="AppNameTextBlock.Text" xml:space="preserve">
     <value>一个番茄钟</value>
   </data>
+  <data name="OptionsPageTitleTextBlock.Text" xml:space="preserve">
+    <value>一个番茄钟</value>
+  </data>
 </root>

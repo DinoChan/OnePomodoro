@@ -230,6 +230,9 @@ Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Ma
     <value>Rate this app</value>
   </data>
   <data name="AppNameTextBlock.Text" xml:space="preserve">
-    <value>OnePomodory</value>
+    <value>OnePomodoro</value>
+  </data>
+  <data name="OptionsPageTitleTextBlock.Text" xml:space="preserve">
+    <value>OnePomodoro</value>
   </data>
 </root>

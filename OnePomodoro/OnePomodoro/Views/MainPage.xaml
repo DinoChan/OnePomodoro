@@ -12,6 +12,7 @@
       xmlns:converters="using:Microsoft.Toolkit.Uwp.UI.Converters"
       xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
       d:DataContext="{d:DesignInstance Type=viewModels:MainViewModel}"
+      RequestedTheme="Dark"
       mc:Ignorable="d">
     <Page.Resources>
         <converters:BoolToObjectConverter TrueValue="Top"
