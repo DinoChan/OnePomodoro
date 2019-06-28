@@ -12,6 +12,7 @@ using Windows.System;
 using Microsoft.Toolkit.Uwp.UI.Extensions;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Xaml.Navigation;
+using Windows.Storage;
 
 namespace OnePomodoro.Views
 {
@@ -44,10 +45,28 @@ namespace OnePomodoro.Views
         }
 
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
             TitleBarHelper.UpdatePageTitleColor(this);
+
+            if (PrivacyStatementMarkdownTextBlock.Text != null)
+            {
+
+                //var target = obj as MarkdownTextBlock;
+                var uri = new Uri("ms-appx:///Assets/Privacy Statement.md");
+                var storageFile = await StorageFile.GetFileFromApplicationUriAsync(uri);
+                var text = await FileIO.ReadTextAsync(storageFile);
+                PrivacyStatementMarkdownTextBlock.Text = text;
+            }
+
+            if (LicenseMarkdownTextBlock.Text != null)
+            {
+                var uri = new Uri("ms-appx:///Assets/License.md");
+                var storageFile = await StorageFile.GetFileFromApplicationUriAsync(uri);
+                var text = await FileIO.ReadTextAsync(storageFile);
+                LicenseMarkdownTextBlock.Text = text;
+            }
         }
 
         private void BlankPage1_BackRequested(object sender, BackRequestedEventArgs e)
@@ -71,7 +90,7 @@ namespace OnePomodoro.Views
 
         private void OnBackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
         {
-           
+
         }
 
         private void OnBackClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)

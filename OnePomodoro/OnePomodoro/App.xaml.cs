@@ -59,6 +59,9 @@ namespace OnePomodoro
 
         private async Task LaunchApplicationAsync(string page, object launchParam)
         {
+            CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar; 
+            coreTitleBar.ExtendViewIntoTitleBar = true;
+
             TitleBarHelper.UpdatePageTitleColor(ElementTheme.Dark);
             await ThemeSelectorService.SetRequestedThemeAsync();
             NavigationService.Navigate(page, launchParam);
