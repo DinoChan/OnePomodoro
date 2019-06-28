@@ -59,7 +59,7 @@ namespace OnePomodoro
 
         private async Task LaunchApplicationAsync(string page, object launchParam)
         {
-            CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar; 
+            CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
             coreTitleBar.ExtendViewIntoTitleBar = true;
 
             TitleBarHelper.UpdatePageTitleColor(ElementTheme.Dark);
@@ -99,6 +99,7 @@ namespace OnePomodoro
                 return Type.GetType(viewModelTypeName);
             });
             await Container.Resolve<ILiveTileService>().EnableQueueAsync().ConfigureAwait(false);
+            await PomodoroSettings.InitializeAsync();
         }
 
         protected override IDeviceGestureService OnCreateDeviceGestureService()
@@ -107,6 +108,6 @@ namespace OnePomodoro
             service.UseTitleBarBackButton = false;
             return service;
         }
-      
+
     }
 }

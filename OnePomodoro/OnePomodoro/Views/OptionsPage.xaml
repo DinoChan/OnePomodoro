@@ -397,9 +397,7 @@
                         x:Name="LicenseMarkdownTextBlock" Padding="40"/>
                 </Grid>
             </PivotItem>
-            <PivotItem Header="Flagged">
-                <TextBlock Text="flagged emails go here." />
-            </PivotItem>
+           
             <PivotItem Header="About">
                 <views:AboutPage/>
             </PivotItem>
