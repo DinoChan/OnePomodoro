@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OnePomodoro.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -23,5 +24,7 @@ namespace OnePomodoro.Views
         {
             this.InitializeComponent();
         }
+
+        private GeneralSettingsViewModel ViewModel => DataContext as GeneralSettingsViewModel;
     }
 }

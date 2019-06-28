@@ -99,7 +99,7 @@ namespace OnePomodoro
                 return Type.GetType(viewModelTypeName);
             });
             await Container.Resolve<ILiveTileService>().EnableQueueAsync().ConfigureAwait(false);
-            await PomodoroSettings.InitializeAsync();
+            await SettingsService.InitializeAsync();
         }
 
         protected override IDeviceGestureService OnCreateDeviceGestureService()
