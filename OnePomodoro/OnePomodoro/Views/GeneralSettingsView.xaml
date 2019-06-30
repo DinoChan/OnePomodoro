@@ -22,11 +22,11 @@
                           Margin="0,16,0,0"
                           Toggled="{x:Bind ViewModel.OnSettingChanged}"/>
             <ToggleSwitch Header="Notify When Pomodoro Finished"
-                          IsOn="{x:Bind ViewModel.Settings.IsNotifyWhenBreakFinished,Mode=TwoWay}"
+                          IsOn="{x:Bind ViewModel.Settings.IsNotifyWhenPomodoroFinished,Mode=TwoWay}"
                           Margin="0,16,0,0"
                           Toggled="{x:Bind ViewModel.OnSettingChanged}"/>
             <ToggleSwitch Header="Notify When Break Finished"
-                          IsOn="{x:Bind ViewModel.Settings.IsNotifyWhenPomodoroFinished,Mode=TwoWay}"
+                          IsOn="{x:Bind ViewModel.Settings.IsNotifyWhenBreakFinished,Mode=TwoWay}"
                           Margin="0,16,0,0"
                           Toggled="{x:Bind ViewModel.OnSettingChanged}"/>
         </StackPanel>

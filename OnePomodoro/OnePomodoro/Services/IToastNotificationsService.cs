@@ -6,6 +6,8 @@ namespace OnePomodoro.Services
     {
         void ShowToastNotification(ToastNotification toastNotification);
 
-        void ShowToastNotificationSample();
+        void ShowPomodoroFinishedToastNotification();
+
+        void ShowBreakFinishedToastNotification();
     }
 }

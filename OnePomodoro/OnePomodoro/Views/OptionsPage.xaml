@@ -389,15 +389,19 @@
                 <views:GeneralSettingsView />
             </PivotItem>
             <PivotItem Header="Privacy Statement" > 
-                <Grid >
-                    <controls:MarkdownTextBlock
-                        x:Name="PrivacyStatementMarkdownTextBlock" Padding="40"/>
+                <Grid>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <controls:MarkdownTextBlock x:Name="PrivacyStatementMarkdownTextBlock"
+                                                    Padding="40" />
+                    </ScrollViewer>
                 </Grid>
             </PivotItem>
             <PivotItem Header="License">
-                <Grid >
-                    <controls:MarkdownTextBlock
-                        x:Name="LicenseMarkdownTextBlock" Padding="40"/>
+                <Grid>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <controls:MarkdownTextBlock x:Name="LicenseMarkdownTextBlock"
+                                                    Padding="40" />
+                    </ScrollViewer>
                 </Grid>
             </PivotItem>
            

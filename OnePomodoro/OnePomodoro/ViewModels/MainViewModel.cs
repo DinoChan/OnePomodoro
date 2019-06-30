@@ -1,7 +1,11 @@
-﻿using OnePomodoro.Helpers;
+﻿using Microsoft.Toolkit.Uwp.Notifications;
+using OnePomodoro.Helpers;
+using OnePomodoro.Services;
 using Prism.Commands;
 using Prism.Windows.Mvvm;
 using System;
+using Microsoft.Practices.Unity;
+using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 
 namespace OnePomodoro.ViewModels
@@ -23,6 +27,7 @@ namespace OnePomodoro.ViewModels
         private bool _isInPomodoro;
         private bool _isTimerInProgress;
         private int _completedPomodoros;
+        private IToastNotificationsService _toastNotificationsService;
 
 
         public MainViewModel()
@@ -43,6 +48,8 @@ namespace OnePomodoro.ViewModels
             _longBreakTimer = new CountdownTimer(LongBreakLength);
             _longBreakTimer.Elapsed += OnBreakTimerElapsed;
             _longBreakTimer.Finished += OnBreakTimerFinished;
+
+            _toastNotificationsService = App.Current.Container.Resolve<IToastNotificationsService>();
         }
 
         public TimeSpan RemainingPomodoroTime
@@ -143,6 +150,12 @@ namespace OnePomodoro.ViewModels
             _completedPomodoros++;
             _currentBreakTimer = (_completedPomodoros % LongBreakAfter == 0) ? _longBreakTimer : _breakTimer;
             RemainingBreakTime = _currentBreakTimer.TotalTime;
+
+            if (SettingsService.Current.AutoStartOfBreak)
+                StartBreak();
+
+            if (SettingsService.Current.IsNotifyWhenPomodoroFinished)
+                _toastNotificationsService.ShowPomodoroFinishedToastNotification();
         }
 
         private void OnBreakTimerElapsed(object sender, EventArgs e)
@@ -155,6 +168,12 @@ namespace OnePomodoro.ViewModels
             RemainingPomodoroTime = PomodoroLength;
             IsTimerInProgress = false;
             IsInPomodoro = true;
+
+            if (SettingsService.Current.AutoStartOfNextPomodoro)
+                StartPomodoro();
+
+            if (SettingsService.Current.IsNotifyWhenBreakFinished)
+                _toastNotificationsService.ShowBreakFinishedToastNotification();
         }
     }
 }
