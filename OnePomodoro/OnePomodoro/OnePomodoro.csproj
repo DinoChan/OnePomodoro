@@ -294,6 +294,7 @@
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
     <Content Include="Assets\Privacy Statement.md" />
     <Content Include="Assets\License.md" />
+    <Content Include="Assets\Whats new.md" />
     <None Include="OnePomodoro_StoreKey.pfx" />
     <None Include="Package.StoreAssociation.xml" />
     <Content Include="Properties\Default.rd.xml" />

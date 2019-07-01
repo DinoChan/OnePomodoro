@@ -67,6 +67,14 @@ namespace OnePomodoro.Views
                 var text = await FileIO.ReadTextAsync(storageFile);
                 LicenseMarkdownTextBlock.Text = text;
             }
+
+            if (WhatsNewMarkdownTextBlock.Text != null)
+            {
+                var uri = new Uri("ms-appx:///Assets/Whats new.md");
+                var storageFile = await StorageFile.GetFileFromApplicationUriAsync(uri);
+                var text = await FileIO.ReadTextAsync(storageFile);
+                WhatsNewMarkdownTextBlock.Text = text;
+            }
         }
 
         private void BlankPage1_BackRequested(object sender, BackRequestedEventArgs e)

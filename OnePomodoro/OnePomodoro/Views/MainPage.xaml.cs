@@ -1,8 +1,9 @@
 ﻿using System;
 
 using OnePomodoro.ViewModels;
-
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 
 namespace OnePomodoro.Views
 {
@@ -19,6 +20,12 @@ namespace OnePomodoro.Views
         private void OnOptionsClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             Frame.Navigate(typeof(OptionsPage));
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            Window.Current.SetTitleBar(null);
         }
     }
 }
