@@ -34,7 +34,7 @@ namespace OnePomodoro.ViewModels
         private IToastNotificationsService _toastNotificationsService;
 
 
-        private PomodoroViewModel()
+        public PomodoroViewModel()
         {
             StartTimerCommand = new DelegateCommand(StartTimer);
             StopTimerCommand = new DelegateCommand(StopTimer);
