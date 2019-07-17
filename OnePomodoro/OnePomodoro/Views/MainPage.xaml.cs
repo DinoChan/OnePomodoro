@@ -1,5 +1,5 @@
 ﻿using System;
-
+using OnePomodoro.PomodoroViews;
 using OnePomodoro.ViewModels;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -15,6 +15,8 @@ namespace OnePomodoro.Views
         {
             InitializeComponent();
             NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
+            ChangePomodoroContent(typeof(TheFirst));
+
         }
 
         private void OnOptionsClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
@@ -26,6 +28,13 @@ namespace OnePomodoro.Views
         {
             base.OnNavigatedTo(e);
             Window.Current.SetTitleBar(null);
+        }
+
+
+        private void ChangePomodoroContent(Type type)
+        {
+           var view= Activator.CreateInstance(type) as PomodoroView;
+            PomodoroContent.Content = view;
         }
     }
 }

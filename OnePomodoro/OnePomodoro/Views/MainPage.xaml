@@ -14,5 +14,10 @@
       d:DataContext="{d:DesignInstance Type=viewModels:MainViewModel}"
       RequestedTheme="Dark"
       mc:Ignorable="d">
-  
+    <Grid>
+        <Button Content="&#xE10C;"
+               
+                Style="{StaticResource TitleBarButton}"/>
+    </Grid>
+    <ContentControl x:Name="PomodoroContent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
 </Page>
