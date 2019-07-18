@@ -20,17 +20,12 @@ namespace OnePomodoro.PomodoroViews
 
         public PomodoroViewModel ViewModel => DataContext as PomodoroViewModel;
 
-        public event EventHandler NavigateToOptionsPage;
 
         public static IEnumerable<Type> Views { get; } = new List<Type>
         {
             typeof(TheFirst),
             typeof(TestPomodoro)
         };
-
-        protected void RaiseNavigateToOptionsPage()
-        {
-            NavigateToOptionsPage?.Invoke(this, EventArgs.Empty);
-        }
+      
     }
 }

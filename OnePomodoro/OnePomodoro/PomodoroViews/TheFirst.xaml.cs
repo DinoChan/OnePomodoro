@@ -29,10 +29,10 @@ namespace OnePomodoro.PomodoroViews
 
         
 
-        private void OnOptionsClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            RaiseNavigateToOptionsPage();
-        }
+        //private void OnOptionsClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        //{
+        //    RaiseNavigateToOptionsPage();
+        //}
 
         //protected override void OnNavigatedTo(NavigationEventArgs e)
         //{

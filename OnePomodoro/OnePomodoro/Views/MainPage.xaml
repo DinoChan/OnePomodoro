@@ -15,9 +15,18 @@
       RequestedTheme="Dark"
       mc:Ignorable="d">
     <Grid>
-        <Button Content="&#xE10C;"
-               
-                Style="{StaticResource TitleBarButton}"/>
+        <ContentControl x:Name="PomodoroContent"
+                        HorizontalContentAlignment="Stretch"
+                        VerticalContentAlignment="Stretch" />
+        <Grid x:Name="AppTitleBar" Background="Transparent" VerticalAlignment="Top"/>
+        <Button x:Name="OptionsButton"
+                Click="OnOptionsClick"
+                Content="&#xE10C;"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                ToolTipService.ToolTip="Options"
+                Style="{StaticResource TitleBarButton}" />
+       
     </Grid>
-    <ContentControl x:Name="PomodoroContent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
+    
 </Page>

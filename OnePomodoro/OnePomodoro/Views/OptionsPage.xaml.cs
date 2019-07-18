@@ -84,22 +84,10 @@ namespace OnePomodoro.Views
 
         private void UpdateTitleBarLayout(CoreApplicationViewTitleBar coreTitleBar)
         {
-            // Get the size of the caption controls area and back button 
-            // (returned in logical pixels), and move your content around as necessary.
-            //LeftPaddingColumn.Width = new GridLength(coreTitleBar.SystemOverlayLeftInset);
-            //RightPaddingColumn.Width = new GridLength(coreTitleBar.SystemOverlayRightInset);
-            //TitleBarButton.Margin = new Thickness(0, 0, coreTitleBar.SystemOverlayRightInset, 0);
-
-            // Update title bar control size as needed to account for system size changes.
             BackButton.Height = coreTitleBar.Height;
             AppTitleBar.Height = coreTitleBar.Height;
         }
 
-
-        private void OnBackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
-        {
-
-        }
 
         private void OnBackClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
