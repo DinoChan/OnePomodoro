@@ -1,4 +1,5 @@
-﻿using Windows.UI.Notifications;
+﻿using System;
+using Windows.UI.Notifications;
 
 namespace OnePomodoro.Services
 {
@@ -9,5 +10,13 @@ namespace OnePomodoro.Services
         void ShowPomodoroFinishedToastNotification();
 
         void ShowBreakFinishedToastNotification();
+
+        void AddPomodoroFinishedToastNotificationSchedule(DateTime time);
+
+        void AddBreakFinishedToastNotificationSchedule(DateTime time);
+
+        void RemovePomodoroFinishedToastNotificationSchedule();
+
+        void RemoveBreakFinishedToastNotificationSchedule();
     }
 }

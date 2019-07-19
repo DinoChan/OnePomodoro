@@ -15,9 +15,9 @@ namespace OnePomodoro.ViewModels
 {
     public class PomodoroViewModel : ViewModelBase
     {
-        private readonly TimeSpan PomodoroLength = TimeSpan.FromMinutes(25);
-        private readonly TimeSpan BreakLength = TimeSpan.FromMinutes(5);
-        private readonly TimeSpan LongBreakLength = TimeSpan.FromMinutes(15);
+        private readonly TimeSpan PomodoroLength = TimeSpan.FromMinutes(0.1);
+        private readonly TimeSpan BreakLength = TimeSpan.FromMinutes(0.1);
+        private readonly TimeSpan LongBreakLength = TimeSpan.FromMinutes(0.1);
         private readonly int LongBreakAfter = 4;
 
         public static PomodoroViewModel Current { get; } = new PomodoroViewModel();
@@ -117,15 +117,23 @@ namespace OnePomodoro.ViewModels
         private void StopTimer()
         {
             if (_isInPomodoro)
+            {
+                _toastNotificationsService.RemovePomodoroFinishedToastNotificationSchedule();
                 StopPomodoro();
+            }
             else
+            {
+                _toastNotificationsService.RemoveBreakFinishedToastNotificationSchedule();
                 StopBreak();
+            }
         }
 
         private void StartPomodoro()
         {
             _pomodoroTimer.Start();
             IsTimerInProgress = true;
+            if (SettingsService.Current.IsNotifyWhenPomodoroFinished)
+                _toastNotificationsService.AddPomodoroFinishedToastNotificationSchedule(DateTime.Now + RemainingPomodoroTime);
         }
         private void StopPomodoro()
         {
@@ -136,6 +144,8 @@ namespace OnePomodoro.ViewModels
         {
             _currentBreakTimer.Start();
             IsTimerInProgress = true;
+            if (SettingsService.Current.IsNotifyWhenBreakFinished)
+                _toastNotificationsService.AddBreakFinishedToastNotificationSchedule(DateTime.Now + RemainingBreakTime);
         }
 
         private void StopBreak()
@@ -158,9 +168,6 @@ namespace OnePomodoro.ViewModels
 
             if (SettingsService.Current.AutoStartOfBreak)
                 StartBreak();
-
-            if (SettingsService.Current.IsNotifyWhenPomodoroFinished)
-                _toastNotificationsService.ShowPomodoroFinishedToastNotification();
         }
 
         private void OnBreakTimerElapsed(object sender, EventArgs e)
@@ -176,9 +183,6 @@ namespace OnePomodoro.ViewModels
 
             if (SettingsService.Current.AutoStartOfNextPomodoro)
                 StartPomodoro();
-
-            if (SettingsService.Current.IsNotifyWhenBreakFinished)
-                _toastNotificationsService.ShowBreakFinishedToastNotification();
         }
     }
 }
