@@ -138,10 +138,18 @@
     <Compile Include="Helpers\EnumToBooleanConverter.cs" />
     <Compile Include="Helpers\MarkdownTextBlockExtensions.cs" />
     <Compile Include="Helpers\NegationBoolToVisibilityConverter.cs" />
+    <Compile Include="Helpers\ScreenshotAttribute.cs" />
     <Compile Include="Helpers\SettingsStorageExtensions.cs" />
+    <Compile Include="Helpers\TitleAttribute.cs" />
     <Compile Include="Helpers\TitleBarHelper.cs" />
     <Compile Include="Models\ISettings.cs" />
     <Compile Include="Models\PomodoroSettings.cs" />
+    <Compile Include="PomodoroViews\TestPomodoro.xaml.cs">
+      <DependentUpon>TestPomodoro.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PomodoroViews\TheFirst.xaml.cs">
+      <DependentUpon>TheFirst.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Constants\PageTokens.cs" />
     <Compile Include="Services\FirstRunDisplayService.cs" />
@@ -160,6 +168,7 @@
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\OptionsViewModel.cs" />
+    <Compile Include="ViewModels\PomodoroViewModel.cs" />
     <Compile Include="Views\FirstRunDialog.xaml.cs">
       <DependentUpon>FirstRunDialog.xaml</DependentUpon>
     </Compile>
@@ -175,11 +184,20 @@
     <Compile Include="Views\OptionsPage.xaml.cs">
       <DependentUpon>OptionsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PomodoroViews\PomodoroView.cs" />
     <Compile Include="Views\WhatsNewDialog.xaml.cs">
       <DependentUpon>WhatsNewDialog.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="PomodoroViews\TestPomodoro.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PomodoroViews\TheFirst.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\Button.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -6,4 +6,13 @@
         <Setter Property="CornerRadius" Value="100"/>
         <Setter Property="Background" Value="Transparent"/>
     </Style>
+
+    <Style TargetType="Button"
+           x:Key="TitleBarButton"
+           BasedOn="{StaticResource NavigationBackButtonSmallStyle}">
+        <Setter Property="FontSize"
+                Value="12" />
+        <Setter Property="Width"
+                Value="48" />
+    </Style>
 </ResourceDictionary>

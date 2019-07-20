@@ -382,7 +382,7 @@
         </Grid>
         <Button Style="{StaticResource NavigationBackButtonSmallStyle}" FontSize="12"
                 x:Name="BackButton" HorizontalAlignment="Left"
-                ToolTipService.ToolTip=""
+                ToolTipService.ToolTip="{x:Null}"
                 Click="OnBackClick" Foreground="White" Width="48" VerticalAlignment="Top"/>
 
         <Pivot Margin="0,0,0,0"  Grid.Row="1">
