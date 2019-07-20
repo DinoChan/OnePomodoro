@@ -1,6 +1,6 @@
 ﻿using Microsoft.Toolkit.Uwp.Notifications;
 using System;
-
+using Windows.Data.Xml.Dom;
 using Windows.UI.Notifications;
 
 namespace OnePomodoro.Services
@@ -13,6 +13,67 @@ namespace OnePomodoro.Services
         private const string ToastGroup = "ToastGroup";
         private const string PomodoroTag = "Pomodoro";
         private const string BreakTag = "Break";
+
+        private readonly XmlDocument PomodoroToastContent = GetPomodoroToastContent();
+
+        private readonly XmlDocument BreakToastContent = GetBreakToastContent();
+
+        private static XmlDocument GetPomodoroToastContent()
+        {
+            var content = new ToastContent()
+            {
+                Launch = "ToastContentActivationParams",
+                Visual = new ToastVisual()
+                {
+                    BindingGeneric = new ToastBindingGeneric()
+                    {
+                        Children =
+                        {
+                            new AdaptiveText()
+                            {
+                                Text = "Pomodoro has finished"
+                            },
+
+                            new AdaptiveText()
+                            {
+                                 Text = @"Pomodoro has finished,let's take a break."
+                            }
+                        }
+                    }
+                },
+            };
+
+            return content.GetXml();
+        }
+
+
+        private static XmlDocument GetBreakToastContent()
+        {
+            var content = new ToastContent()
+            {
+                Launch = "ToastContentActivationParams",
+                Visual = new ToastVisual()
+                {
+                    BindingGeneric = new ToastBindingGeneric()
+                    {
+                        Children =
+                        {
+                            new AdaptiveText()
+                            {
+                                Text = "Break has ended"
+                            },
+
+                            new AdaptiveText()
+                            {
+                                 Text = @"Break has ended,it's time to work."
+                            }
+                        }
+                    }
+                },
+            };
+
+            return content.GetXml();
+        }
 
         public void ShowToastNotification(ToastNotification toastNotification)
         {
@@ -28,30 +89,7 @@ namespace OnePomodoro.Services
 
         public void ShowPomodoroFinishedToastNotification()
         {
-            var content = new ToastContent()
-            {
-                Launch = "ToastContentActivationParams",
-                Visual = new ToastVisual()
-                {
-                    BindingGeneric = new ToastBindingGeneric()
-                    {
-                        Children =
-                        {
-                            new AdaptiveText()
-                            {
-                                Text = "Pomodoro has finished"
-                            },
-
-                            new AdaptiveText()
-                            {
-                                 Text = @"Pomodoro has finished,let's take a break."
-                            }
-                        }
-                    }
-                },
-            };
-
-            var toast = new ToastNotification(content.GetXml())
+            var toast = new ToastNotification(PomodoroToastContent)
             {
                 Tag = ToastTag
             };
@@ -61,30 +99,7 @@ namespace OnePomodoro.Services
 
         public void ShowBreakFinishedToastNotification()
         {
-            var content = new ToastContent()
-            {
-                Launch = "ToastContentActivationParams",
-                Visual = new ToastVisual()
-                {
-                    BindingGeneric = new ToastBindingGeneric()
-                    {
-                        Children =
-                        {
-                            new AdaptiveText()
-                            {
-                                Text = "Break has ended"
-                            },
-
-                            new AdaptiveText()
-                            {
-                                 Text = @"Break has ended,it's time to work."
-                            }
-                        }
-                    }
-                },
-            };
-
-            var toast = new ToastNotification(content.GetXml())
+            var toast = new ToastNotification(BreakToastContent)
             {
                 Tag = ToastTag
             };
@@ -97,34 +112,10 @@ namespace OnePomodoro.Services
             RemovePomodoroFinishedToastNotificationSchedule();
             var notifier = ToastNotificationManager.CreateToastNotifier();
 
-            var content = new ToastContent()
-            {
-                Launch = "ToastContentActivationParams",
-                Visual = new ToastVisual()
-                {
-                    BindingGeneric = new ToastBindingGeneric()
-                    {
-                        Children =
-                        {
-                            new AdaptiveText()
-                            {
-                                Text = "Pomodoro has finished"
-                            },
-
-                            new AdaptiveText()
-                            {
-                                 Text = @"Pomodoro has finished,let's take a break."
-                            }
-                        }
-                    }
-                },
-            };
-
-
-            var toast = new ScheduledToastNotification(content.GetXml(), time)
+            var toast = new ScheduledToastNotification(PomodoroToastContent, time)
             {
                 Tag = ToastTag,
-              
+
             };
 
             notifier.AddToSchedule(toast);
@@ -135,34 +126,10 @@ namespace OnePomodoro.Services
             RemoveBreakFinishedToastNotificationSchedule();
             var notifier = ToastNotificationManager.CreateToastNotifier();
 
-            var content = new ToastContent()
-            {
-                Launch = "ToastContentActivationParams",
-                Visual = new ToastVisual()
-                {
-                    BindingGeneric = new ToastBindingGeneric()
-                    {
-                        Children =
-                        {
-                            new AdaptiveText()
-                            {
-                                Text = "Break has ended"
-                            },
-
-                            new AdaptiveText()
-                            {
-                                 Text = @"Break has ended,it's time to work."
-                            }
-                        }
-                    }
-                },
-            };
-
-
-            var toast = new ScheduledToastNotification(content.GetXml(), time)
+            var toast = new ScheduledToastNotification(BreakToastContent, time)
             {
                 Tag = ToastTag,
-               
+
             };
 
             notifier.AddToSchedule(toast);
@@ -173,7 +140,7 @@ namespace OnePomodoro.Services
             var notifier = ToastNotificationManager.CreateToastNotifier();
             foreach (var scheduledToast in notifier.GetScheduledToastNotifications())
             {
-                if (scheduledToast.Id == PomodoroGroup)
+                if (scheduledToast.Content.InnerText == PomodoroToastContent.InnerText)
                     notifier.RemoveFromSchedule(scheduledToast);
             }
         }
@@ -183,7 +150,7 @@ namespace OnePomodoro.Services
             var notifier = ToastNotificationManager.CreateToastNotifier();
             foreach (var scheduledToast in notifier.GetScheduledToastNotifications())
             {
-                if (scheduledToast.Id == BreakGroup)
+                if (scheduledToast.Content.InnerText == BreakToastContent.InnerText)
                     notifier.RemoveFromSchedule(scheduledToast);
             }
         }

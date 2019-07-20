@@ -15,9 +15,9 @@ namespace OnePomodoro.ViewModels
 {
     public class PomodoroViewModel : ViewModelBase
     {
-        private readonly TimeSpan PomodoroLength = TimeSpan.FromMinutes(0.1);
-        private readonly TimeSpan BreakLength = TimeSpan.FromMinutes(0.1);
-        private readonly TimeSpan LongBreakLength = TimeSpan.FromMinutes(0.1);
+        private readonly TimeSpan PomodoroLength = TimeSpan.FromMinutes(25);
+        private readonly TimeSpan BreakLength = TimeSpan.FromMinutes(5);
+        private readonly TimeSpan LongBreakLength = TimeSpan.FromMinutes(15);
         private readonly int LongBreakAfter = 4;
 
         public static PomodoroViewModel Current { get; } = new PomodoroViewModel();
