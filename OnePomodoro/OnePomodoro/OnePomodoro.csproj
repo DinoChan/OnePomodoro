@@ -147,6 +147,9 @@
     <Compile Include="PomodoroViews\TestPomodoro.xaml.cs">
       <DependentUpon>TestPomodoro.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PomodoroViews\TheBigOne.xaml.cs">
+      <DependentUpon>TheBigOne.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PomodoroViews\TheFirst.xaml.cs">
       <DependentUpon>TheFirst.xaml</DependentUpon>
     </Compile>
@@ -191,6 +194,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="PomodoroViews\TestPomodoro.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PomodoroViews\TheBigOne.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
