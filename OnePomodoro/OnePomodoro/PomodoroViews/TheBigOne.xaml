@@ -28,7 +28,7 @@
                 <TextBlock Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
                            FontWeight="Bold"
                            Foreground="White"
-                           RenderTransformOrigin="0.5,0.53">
+                           RenderTransformOrigin="0.5,0.54">
                     <TextBlock.Projection>
                         <PlaneProjection RotationZ="0"
                                          RotationX="180" />
@@ -43,13 +43,12 @@
                     </TextBlock.RenderTransform>
                      <interactivity:Interaction.Behaviors>
         <behaviors:Light x:Name="LightBehavior"
-                         Distance="39.16"
-                         Duration="344.82"
+                         Distance="400.16"
                         
                          AutomaticallyStart="True"
                          EasingType="Linear"
                          EasingMode="EaseOut"
-                         Color="Violet" />
+                         Color="#FFD91153" />
       </interactivity:Interaction.Behaviors>
                 </TextBlock>
                 <TextBlock Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"

@@ -16,7 +16,7 @@ namespace OnePomodoro.Views
         {
             InitializeComponent();
             NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
-            ChangePomodoroContent(typeof(TheFirst));
+            ChangePomodoroContent(typeof(TheBigOne));
             var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
             coreTitleBar.LayoutMetricsChanged += CoreTitleBar_LayoutMetricsChanged;
 
