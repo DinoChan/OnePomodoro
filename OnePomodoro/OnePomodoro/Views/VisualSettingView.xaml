@@ -10,13 +10,24 @@
              d:DesignWidth="400">
 
     <Grid>
-        <ListView ItemsSource="{x:Bind Items,Mode=OneWay}">
+        <ListView ItemsSource="{x:Bind Items,Mode=OneWay}"
+                  SelectionChanged="OnSelectionChanged"
+                  SelectionMode="Single"
+                  x:Name="VisualsElement">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <controls:WrapPanel />
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Image Width="320"
+                           Height="180"
+                           Source="{Binding ScreenshotUri}"
+                           ToolTipService.ToolTip="{Binding Title}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
-       
+
     </Grid>
 </UserControl>

@@ -1,5 +1,6 @@
 ﻿using OnePomodoro.Helpers;
 using OnePomodoro.PomodoroViews;
+using OnePomodoro.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -28,20 +29,35 @@ namespace OnePomodoro.Views
         }
 
         public IEnumerable<VisualSettingItem> Items { get; }
+
+        public event EventHandler VisualChanged;
+
+        private async void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var item = VisualsElement.SelectedItem as VisualSettingItem;
+            if (item == null)
+                return;
+
+            SettingsService.Current.ViewType = item.Type.Name;
+            VisualChanged?.Invoke(this, EventArgs.Empty);
+
+            await SettingsService.SaveAsync();
+        }
     }
 
     public class VisualSettingItem
     {
-        public Uri ScreenshotUri { get; }
+        public string ScreenshotUri { get; }
 
         public string Title { get; }
 
         public Type Type { get; }
-        private readonly Uri DefaultScreenshotUri = new Uri("/Assets/SplashScreen.png", UriKind.RelativeOrAbsolute);
+        private readonly string DefaultScreenshotUri = "/Assets/SplashScreen.png";
 
         public VisualSettingItem(Type pomodoroViewType)
         {
             Type = pomodoroViewType;
+           
 
             var attributes = Type.GetCustomAttributes(true);
             var titleAttribute = attributes.OfType<TitleAttribute>().FirstOrDefault();
@@ -50,7 +66,7 @@ namespace OnePomodoro.Views
 
             var screenshotAttribute = attributes.OfType<ScreenshotAttribute>().FirstOrDefault();
             if (screenshotAttribute != null && string.IsNullOrWhiteSpace(screenshotAttribute.Uri) == false)
-                ScreenshotUri = new Uri(screenshotAttribute.Uri, UriKind.RelativeOrAbsolute);
+                ScreenshotUri =screenshotAttribute.Uri;
             else
                 ScreenshotUri = DefaultScreenshotUri;
         }

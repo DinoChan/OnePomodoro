@@ -95,8 +95,8 @@ namespace OnePomodoro.PomodoroViews
 
         private void StopTextShimming()
         {
-            _inworkPointLight.StopAnimation("Offset.X");
-            _breakPointLight.StopAnimation("Offset.X");
+            _inworkPointLight?.StopAnimation("Offset.X");
+            _breakPointLight?.StopAnimation("Offset.X");
         }
     }
 }

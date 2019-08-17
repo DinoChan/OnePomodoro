@@ -387,7 +387,7 @@
 
         <Pivot Margin="0,0,0,0"  Grid.Row="1">
             <PivotItem Header="Visual">
-                <views:VisualSettingView />
+                <views:VisualSettingView VisualChanged="OnVisualChanged"/>
             </PivotItem>
             <PivotItem Header="General Settings">
                 <views:GeneralSettingsView />

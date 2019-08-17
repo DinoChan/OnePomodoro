@@ -24,7 +24,7 @@ namespace OnePomodoro.PomodoroViews
         public static IEnumerable<Type> Views { get; } = new List<Type>
         {
             typeof(TheFirst),
-            typeof(TestPomodoro)
+            typeof(TheBigOne)
         };
       
     }

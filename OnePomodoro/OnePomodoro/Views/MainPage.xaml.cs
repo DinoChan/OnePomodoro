@@ -14,6 +14,8 @@ namespace OnePomodoro.Views
     {
         private MainViewModel ViewModel => DataContext as MainViewModel;
 
+        private Type _pomodoroViewType;
+
         public MainPage()
         {
             InitializeComponent();
@@ -39,7 +41,10 @@ namespace OnePomodoro.Views
             if (viewType == null)
                 viewType = PomodoroView.Views.FirstOrDefault();
 
-            ChangePomodoroContent(viewType);
+            if (_pomodoroViewType != viewType)
+                ChangePomodoroContent(viewType);
+
+            _pomodoroViewType = viewType;
 
             Window.Current.SetTitleBar(AppTitleBar);
         }
