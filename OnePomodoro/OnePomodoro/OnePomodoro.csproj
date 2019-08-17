@@ -189,6 +189,9 @@
       <DependentUpon>OptionsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="PomodoroViews\PomodoroView.cs" />
+    <Compile Include="Views\VisualSettingView.xaml.cs">
+      <DependentUpon>VisualSettingView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\WhatsNewDialog.xaml.cs">
       <DependentUpon>WhatsNewDialog.xaml</DependentUpon>
     </Compile>
@@ -257,6 +260,10 @@
     <Page Include="Views\OptionsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\VisualSettingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\WhatsNewDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
