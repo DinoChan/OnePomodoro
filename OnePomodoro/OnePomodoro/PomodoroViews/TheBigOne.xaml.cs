@@ -64,10 +64,10 @@ namespace OnePomodoro.PomodoroViews
                 _inworkPointLight.Color = Color.FromArgb(255, 217, 17, 83);
                 _inworkPointLight.CoordinateSpace = titleVisual;
                 _inworkPointLight.Targets.Add(titleVisual);
-                _inworkPointLight.Offset = new Vector3(-(float)InworkShadow.ActualWidth * 4, (float)InworkShadow.ActualHeight / 2, 400.0f);
+                _inworkPointLight.Offset = new Vector3(-(float)InworkShadow.ActualWidth * 3, (float)InworkShadow.ActualHeight / 2, 300.0f);
             }
             var offsetAnimation = compositor.CreateScalarKeyFrameAnimation();
-            offsetAnimation.InsertKeyFrame(1.0f, (float)InworkShadow.ActualWidth * 4, compositor.CreateLinearEasingFunction());
+            offsetAnimation.InsertKeyFrame(1.0f, (float)InworkShadow.ActualWidth * 3, compositor.CreateLinearEasingFunction());
             offsetAnimation.Duration = TimeSpan.FromMilliseconds(10000);
             offsetAnimation.IterationBehavior = AnimationIterationBehavior.Forever;
 
@@ -83,10 +83,10 @@ namespace OnePomodoro.PomodoroViews
                 _breakPointLight.Color = Color.FromArgb(255, 217, 17, 83);
                 _breakPointLight.CoordinateSpace = titleVisual;
                 _breakPointLight.Targets.Add(titleVisual);
-                _breakPointLight.Offset = new Vector3(-(float)InworkShadow.ActualWidth * 4, (float)InworkShadow.ActualHeight / 2, 400.0f);
+                _breakPointLight.Offset = new Vector3(-(float)InworkShadow.ActualWidth * 3, (float)InworkShadow.ActualHeight / 2, 300.0f);
             }
             offsetAnimation = compositor.CreateScalarKeyFrameAnimation();
-            offsetAnimation.InsertKeyFrame(1.0f, (float)InworkShadow.ActualWidth * 4, compositor.CreateLinearEasingFunction());
+            offsetAnimation.InsertKeyFrame(1.0f, (float)InworkShadow.ActualWidth * 3, compositor.CreateLinearEasingFunction());
             offsetAnimation.Duration = TimeSpan.FromMilliseconds(10000);
             offsetAnimation.IterationBehavior = AnimationIterationBehavior.Forever;
 
@@ -95,8 +95,8 @@ namespace OnePomodoro.PomodoroViews
 
         private void StopTextShimming()
         {
-            _inworkPointLight.StopAnimation("Offset.X");
-            _breakPointLight.StopAnimation("Offset.X");
+            _inworkPointLight?.StopAnimation("Offset.X");
+            _breakPointLight?.StopAnimation("Offset.X");
         }
     }
 }

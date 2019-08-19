@@ -11,15 +11,15 @@ using Windows.UI.Xaml.Controls;
 
 namespace OnePomodoro.Models
 {
-    public class PomodoroSettings : ViewModelBase, ISettings
+    public class PomodoroSettings : ViewModelBase, IPomodoroSettings
     {
-      
+        private string _viewType;
 
         public PomodoroSettings()
         {
         }
 
-     
+        public event EventHandler ViewTypeChanged;
 
         public bool AutoStartOfNextPomodoro { get; set; }
 
@@ -29,7 +29,17 @@ namespace OnePomodoro.Models
 
         public bool IsNotifyWhenBreakFinished { get; set; }
 
+        public string ViewType
+        {
+            get { return _viewType; }
+            set
+            {
+                if (_viewType == value)
+                    return;
 
-      
+                _viewType = value;
+                ViewTypeChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
     }
 }

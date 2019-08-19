@@ -109,5 +109,10 @@ namespace OnePomodoro.Views
             On_BackRequested();
             args.Handled = true;
         }
+
+        private void OnVisualChanged(object sender, EventArgs e)
+        {
+            On_BackRequested();
+        }
     }
 }

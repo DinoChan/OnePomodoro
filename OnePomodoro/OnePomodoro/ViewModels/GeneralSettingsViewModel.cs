@@ -24,7 +24,7 @@ namespace OnePomodoro.ViewModels
                 _toastNotificationsService = App.Current.Container.Resolve<IToastNotificationsService>();
         }
 
-        public ISettings Settings { get; }
+        public IPomodoroSettings Settings { get; }
 
         public async void OnSettingChanged()
         {
