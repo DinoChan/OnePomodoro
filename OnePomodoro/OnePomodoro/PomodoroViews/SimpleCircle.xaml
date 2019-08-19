@@ -37,7 +37,8 @@
                           Visibility="{Binding IsInPomodoro,Converter={StaticResource BoolToVisibilityConverter}}">
                         <Ellipse Fill="{StaticResource Background}"
                                  Stroke="{StaticResource InworkBrush}"
-                                 StrokeThickness="8" />
+                                 StrokeThickness="8"
+                                 Margin="-4"/>
                         <Grid>
                             <Grid RenderTransformOrigin=".5,.5">
                                 <Grid.RenderTransform>
@@ -46,7 +47,7 @@
                                 <Ellipse Fill="{StaticResource Background}"
                                          Height="48"
                                          Width="48"
-                                         Margin="0,-24,0,0"
+                                         Margin="-24,-24,0,0"
                                          Stroke="{StaticResource InworkBrush}"
                                          StrokeThickness="8"
                                          HorizontalAlignment="Center"
@@ -60,11 +61,13 @@
                             <TextBlock Text="focus"
                                        FontSize="72"
                                        Foreground="{StaticResource InworkBrush}"
-                                       HorizontalAlignment="Center" />
+                                       HorizontalAlignment="Center"
+                                       FontFamily="Arial" />
                             <TextBlock Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
                                        FontSize="200"
                                        Foreground="{StaticResource InworkBrush}"
-                                       HorizontalAlignment="Center" />
+                                       HorizontalAlignment="Center"
+                                       FontFamily="Arial" />
 
                             <StackPanel Margin="0,24,0,0"
                                         HorizontalAlignment="Center"

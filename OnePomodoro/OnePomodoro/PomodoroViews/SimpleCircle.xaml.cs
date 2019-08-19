@@ -33,7 +33,10 @@ namespace OnePomodoro.PomodoroViews
 
         private void OnRemainingBreakTimeChanged(object sender, EventArgs e)
         {
-            BreakEllipseTransform.Angle = 360 * (ViewModel.TotalBreakTime - ViewModel.RemainingBreakTime).TotalMilliseconds / ViewModel.TotalBreakTime.TotalMilliseconds;
+            if (ViewModel.TotalBreakTime.TotalMilliseconds == 0)
+                BreakEllipseTransform.Angle = 0;
+            else
+                BreakEllipseTransform.Angle = 360 * (ViewModel.TotalBreakTime - ViewModel.RemainingBreakTime).TotalMilliseconds / ViewModel.TotalBreakTime.TotalMilliseconds;
         }
     }
 }
