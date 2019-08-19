@@ -68,6 +68,8 @@ namespace OnePomodoro.ViewModels
             }
         }
 
+        public TimeSpan TotalPomodoroTime { get; private set; }
+
         public TimeSpan RemainingBreakTime
         {
             get => _remainingBreakTime;
@@ -79,6 +81,8 @@ namespace OnePomodoro.ViewModels
                 RaisePropertyChanged();
             }
         }
+
+        public TimeSpan TotalBreakTime { get; private set; }
 
         public bool IsInPomodoro
         {
