@@ -19,9 +19,21 @@ namespace OnePomodoro.PomodoroViews
 {
     public sealed partial class SimpleCircle : PomodoroView
     {
-        public SimpleCircle()
+        public SimpleCircle() : base()
         {
             InitializeComponent();
+            ViewModel.RemainingPomodoroTimeChanged += OnRemainingPomodoroTimeChanged;
+            ViewModel.RemainingBreakTimeChanged += OnRemainingBreakTimeChanged;
+        }
+
+        private void OnRemainingPomodoroTimeChanged(object sender, EventArgs e)
+        {
+            InworkEllipseTransform.Angle = 360 * (ViewModel.TotalPomodoroTime - ViewModel.RemainingPomodoroTime).TotalMilliseconds / ViewModel.TotalPomodoroTime.TotalMilliseconds;
+        }
+
+        private void OnRemainingBreakTimeChanged(object sender, EventArgs e)
+        {
+            BreakEllipseTransform.Angle = 360 * (ViewModel.TotalBreakTime - ViewModel.RemainingBreakTime).TotalMilliseconds / ViewModel.TotalBreakTime.TotalMilliseconds;
         }
     }
 }

@@ -31,73 +31,144 @@
               Background="{StaticResource Background}">
             <Viewbox MaxHeight="800"
                      MaxWidth="800">
-                <Grid Height="800"
-                      Width="800"
-                      Visibility="{Binding IsInPomodoro,Converter={StaticResource BoolToVisibilityConverter}}">
-                    <Ellipse Fill="{StaticResource Background}"
-                             Stroke="{StaticResource InworkBrush}"
-                             StrokeThickness="8" />
-                    <Grid>
-                        <Grid RenderTransformOrigin=".5,.5">
-                            <Grid.RenderTransform>
-                                <RotateTransform x:Name="InworkEllipseTransform" />
-                            </Grid.RenderTransform>
-                            <Ellipse Fill="{StaticResource Background}"
-                                     Height="48"
-                                     Width="48"
-                                     Margin="0,-24,0,0"
-                                     Stroke="{StaticResource InworkBrush}"
-                                     StrokeThickness="8"
-                                     HorizontalAlignment="Center"
-                                     VerticalAlignment="Top" />
+                <Grid>
+                    <Grid Height="800"
+                          Width="800"
+                          Visibility="{Binding IsInPomodoro,Converter={StaticResource BoolToVisibilityConverter}}">
+                        <Ellipse Fill="{StaticResource Background}"
+                                 Stroke="{StaticResource InworkBrush}"
+                                 StrokeThickness="8" />
+                        <Grid>
+                            <Grid RenderTransformOrigin=".5,.5">
+                                <Grid.RenderTransform>
+                                    <RotateTransform x:Name="InworkEllipseTransform" />
+                                </Grid.RenderTransform>
+                                <Ellipse Fill="{StaticResource Background}"
+                                         Height="48"
+                                         Width="48"
+                                         Margin="0,-24,0,0"
+                                         Stroke="{StaticResource InworkBrush}"
+                                         StrokeThickness="8"
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Top" />
+                            </Grid>
                         </Grid>
+
+                        <StackPanel HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Margin="0,72,0,0">
+                            <TextBlock Text="focus"
+                                       FontSize="72"
+                                       Foreground="{StaticResource InworkBrush}"
+                                       HorizontalAlignment="Center" />
+                            <TextBlock Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
+                                       FontSize="200"
+                                       Foreground="{StaticResource InworkBrush}"
+                                       HorizontalAlignment="Center" />
+
+                            <StackPanel Margin="0,24,0,0"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Bottom">
+                                <StackPanel.Resources>
+                                    <Style TargetType="Button"
+                                           BasedOn="{StaticResource EllipseButtonRevealStyle}">
+                                        <Setter Property="FontFamily"
+                                                Value="Segoe MDL2 Assets" />
+                                        <Setter Property="FontSize"
+                                                Value="148" />
+                                        <Setter Property="Margin"
+                                                Value="0,0,24,0" />
+                                        <Setter Property="Padding"
+                                                Value="10" />
+                                        <Setter Property="BorderThickness"
+                                                Value="0" />
+                                        <Setter Property="Foreground"
+                                                Value="{StaticResource InworkBrush}" />
+                                        <Setter Property="HorizontalAlignment"
+                                                Value="Center" />
+                                    </Style>
+                                </StackPanel.Resources>
+                                <Button Content="&#xE768;"
+                                        Visibility="{x:Bind ViewModel.IsTimerInProgress,Converter={StaticResource NegationBoolToVisibilityConverter}}"
+                                        Command="{Binding StartTimerCommand}" />
+                                <Button Content="&#xE769;"
+                                        Visibility="{x:Bind  ViewModel.IsTimerInProgress,Converter={StaticResource BoolToVisibilityConverter}}"
+                                        Command="{Binding StopTimerCommand}" />
+
+                            </StackPanel>
+                        </StackPanel>
                     </Grid>
 
-                    <StackPanel HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Margin="0,96,0,0">
-                        <TextBlock Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
-                                   FontSize="200"
-                                   Foreground="{StaticResource InworkBrush}"
-                                    HorizontalAlignment="Center"/>
+                    <Grid Height="800"
+                          Width="800"
+                          Visibility="{Binding IsInPomodoro,Converter={StaticResource NegationBoolToVisibilityConverter}}">
+                        <Ellipse Fill="{StaticResource Background}"
+                                 Stroke="{StaticResource BreakBrush}"
+                                 StrokeThickness="8" />
+                        <Grid>
+                            <Grid RenderTransformOrigin=".5,.5">
+                                <Grid.RenderTransform>
+                                    <RotateTransform x:Name="BreakEllipseTransform" />
+                                </Grid.RenderTransform>
+                                <Ellipse Fill="{StaticResource Background}"
+                                         Height="48"
+                                         Width="48"
+                                         Margin="0,-24,0,0"
+                                         Stroke="{StaticResource BreakBrush}"
+                                         StrokeThickness="8"
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Top" />
+                            </Grid>
+                        </Grid>
 
-                        <StackPanel Margin="0,24,0,0"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Bottom">
-                            <StackPanel.Resources>
-                                <Style TargetType="Button"
-                                       BasedOn="{StaticResource EllipseButtonRevealStyle}">
-                                    <Setter Property="FontFamily"
-                                            Value="Segoe MDL2 Assets" />
-                                    <Setter Property="FontSize"
-                                            Value="148" />
-                                    <Setter Property="Margin"
-                                            Value="0,0,24,0" />
-                                    <Setter Property="Padding"
-                                            Value="10" />
-                                    <Setter Property="BorderThickness"
-                                            Value="0" />
-                                    <Setter Property="Foreground"
-                                            Value="{StaticResource InworkBrush}" />
-                                    <Setter Property="HorizontalAlignment"
-                                            Value="Center" />
-                                </Style>
-                            </StackPanel.Resources>
-                            <Button Content="&#xE768;"
-                                    Visibility="{x:Bind ViewModel.IsTimerInProgress,Converter={StaticResource NegationBoolToVisibilityConverter}}"
-                                    Command="{Binding StartTimerCommand}" />
-                            <!--<Button Content="&#xE769;"
-                                    Visibility="{x:Bind  ViewModel.IsTimerInProgress,Converter={StaticResource BoolToVisibilityConverter}}"
-                                    Command="{Binding StopTimerCommand}" />-->
+                        <StackPanel HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Margin="0,72,0,0">
 
+                            <TextBlock Text="relax"
+                                       FontSize="72"
+                                       Foreground="{StaticResource BreakBrush}"
+                                       HorizontalAlignment="Center" />
+                            
+                            <TextBlock Text="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
+                                       FontSize="200"
+                                       Foreground="{StaticResource BreakBrush}"
+                                       HorizontalAlignment="Center" />
+
+                            <StackPanel Margin="0,24,0,0"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Bottom">
+                                <StackPanel.Resources>
+                                    <Style TargetType="Button"
+                                           BasedOn="{StaticResource EllipseButtonRevealStyle}">
+                                        <Setter Property="FontFamily"
+                                                Value="Segoe MDL2 Assets" />
+                                        <Setter Property="FontSize"
+                                                Value="148" />
+                                        <Setter Property="Margin"
+                                                Value="0,0,24,0" />
+                                        <Setter Property="Padding"
+                                                Value="10" />
+                                        <Setter Property="BorderThickness"
+                                                Value="0" />
+                                        <Setter Property="Foreground"
+                                                Value="{StaticResource BreakBrush}" />
+                                        <Setter Property="HorizontalAlignment"
+                                                Value="Center" />
+                                    </Style>
+                                </StackPanel.Resources>
+                                <Button Content="&#xE768;"
+                                        Visibility="{x:Bind ViewModel.IsTimerInProgress,Converter={StaticResource NegationBoolToVisibilityConverter}}"
+                                        Command="{Binding StartTimerCommand}" />
+                                <Button Content="&#xE769;"
+                                        Visibility="{x:Bind  ViewModel.IsTimerInProgress,Converter={StaticResource BoolToVisibilityConverter}}"
+                                        Command="{Binding StopTimerCommand}" />
+
+                            </StackPanel>
                         </StackPanel>
-                    </StackPanel>
+                    </Grid>
                 </Grid>
             </Viewbox>
-
-
-
-
 
         </Grid>
     </Grid>
