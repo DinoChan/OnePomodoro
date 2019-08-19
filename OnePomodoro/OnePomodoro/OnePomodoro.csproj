@@ -144,6 +144,9 @@
     <Compile Include="Helpers\TitleBarHelper.cs" />
     <Compile Include="Models\ISettings.cs" />
     <Compile Include="Models\PomodoroSettings.cs" />
+    <Compile Include="PomodoroViews\SimpleCircle.xaml.cs">
+      <DependentUpon>SimpleCircle.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PomodoroViews\TestPomodoro.xaml.cs">
       <DependentUpon>TestPomodoro.xaml</DependentUpon>
     </Compile>
@@ -193,6 +196,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="PomodoroViews\SimpleCircle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="PomodoroViews\TestPomodoro.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
