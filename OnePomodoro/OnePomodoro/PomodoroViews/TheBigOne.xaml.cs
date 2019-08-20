@@ -55,6 +55,9 @@ namespace OnePomodoro.PomodoroViews
 
         private void ShowTextShimming()
         {
+            if (_inworkPointLight != null)
+                return;
+
             var compositor = Window.Current.Compositor;
             if (_inworkPointLight == null)
             {
@@ -95,8 +98,8 @@ namespace OnePomodoro.PomodoroViews
 
         private void StopTextShimming()
         {
-            _inworkPointLight?.StopAnimation("Offset.X");
-            _breakPointLight?.StopAnimation("Offset.X");
+            //_inworkPointLight?.StopAnimation("Offset.X");
+            //_breakPointLight?.StopAnimation("Offset.X");
         }
     }
 }

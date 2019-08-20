@@ -18,15 +18,34 @@
         <ContentControl x:Name="PomodoroContent"
                         HorizontalContentAlignment="Stretch"
                         VerticalContentAlignment="Stretch" />
-        <Grid x:Name="AppTitleBar" Background="Transparent" VerticalAlignment="Top"/>
-        <Button x:Name="OptionsButton"
-                Click="OnOptionsClick"
-                Content="&#xE10C;"
-                VerticalAlignment="Top"
-                HorizontalAlignment="Left"
-                ToolTipService.ToolTip="Options"
-                Style="{StaticResource TitleBarButton}" />
-       
+        <Grid x:Name="AppTitleBar"
+              Background="Transparent"
+              VerticalAlignment="Top" />
+        <StackPanel VerticalAlignment="Top"
+                    Orientation="Horizontal"
+                    x:Name="AppButtonBar">
+            <Button x:Name="OptionsButton"
+                    Click="OnOptionsClick"
+                    Content="&#xE10C;"
+                    ToolTipService.ToolTip="Options"
+                    Style="{StaticResource TitleBarButton}" />
+            <Button x:Name="FullScreenButton"
+                    Click="OnFullScreenClick"
+                    Content="&#xE92D;"
+                    ToolTipService.ToolTip="FullScreen"
+                    Style="{StaticResource TitleBarButton}" />
+            <Button x:Name="BackToWindowButton"
+                    Click="OnBackToWindowClick"
+                    Content="&#xE92C;"
+                    ToolTipService.ToolTip="BackToWindow"
+                    Style="{StaticResource TitleBarButton}"
+                    Visibility="Collapsed"/>
+            <Button x:Name="PinButton"
+                    Click="OnPinClick"
+                    Content="&#xE141;"
+                    ToolTipService.ToolTip="Pin"
+                    Style="{StaticResource TitleBarButton}" />
+        </StackPanel>
     </Grid>
-    
+
 </Page>
