@@ -7,6 +7,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using System.Linq;
+using Windows.UI.ViewManagement;
 
 namespace OnePomodoro.Views
 {
@@ -64,8 +65,48 @@ namespace OnePomodoro.Views
         private void UpdateTitleBarLayout(CoreApplicationViewTitleBar coreTitleBar)
         {
             AppTitleBar.Height = coreTitleBar.Height;
-            OptionsButton.Height = coreTitleBar.Height;
+            AppButtonBar.Height = coreTitleBar.Height;
             //OptionsButton.Margin = new Thickness(0, 0, coreTitleBar.SystemOverlayRightInset, 0);
+        }
+
+        private async void OnPinClick(object sender, RoutedEventArgs e)
+        {
+            var preferences = ViewModePreferences.CreateDefault(ApplicationViewMode.CompactOverlay);
+            preferences.CustomSize = new Windows.Foundation.Size(200, 200);
+            await ApplicationView.GetForCurrentView().TryEnterViewModeAsync(ApplicationViewMode.CompactOverlay, preferences);
+            Frame.Navigate(typeof(CompactPage));
+        }
+
+        private void OnFullScreenClick(object sender, RoutedEventArgs e)
+        {
+            ApplicationView view = ApplicationView.GetForCurrentView();
+
+            //bool isInFullScreenMode = view.IsFullScreenMode;
+
+            //if (isInFullScreenMode)
+            //{
+            //    view.ExitFullScreenMode();
+            //}
+            //else
+            //{
+            view.TryEnterFullScreenMode();
+            FullScreenButton.Visibility = Visibility.Collapsed;
+            PinButton.Visibility = Visibility.Collapsed;
+            BackToWindowButton.Visibility = Visibility.Visible;
+            //}
+        }
+
+        private void OnBackToWindowClick(object sender, RoutedEventArgs e)
+        {
+            ApplicationView view = ApplicationView.GetForCurrentView();
+            bool isInFullScreenMode = view.IsFullScreenMode;
+
+            //if (isInFullScreenMode)
+            //{
+            view.ExitFullScreenMode();
+            BackToWindowButton.Visibility = Visibility.Collapsed;
+            FullScreenButton.Visibility = Visibility.Visible;
+            PinButton.Visibility = Visibility.Visible;
         }
     }
 }
