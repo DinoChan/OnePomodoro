@@ -8,7 +8,13 @@
              mc:Ignorable="d"
              d:DesignHeight="300"
              d:DesignWidth="400">
-
+    <UserControl.Resources>
+        <Style TargetType="ListViewItem"
+               BasedOn="{StaticResource ListViewItemRevealStyle}">
+            <Setter Property="Padding"
+                    Value="3" />
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <ListView ItemsSource="{x:Bind Items,Mode=OneWay}"
                   SelectionChanged="OnSelectionChanged"
@@ -22,7 +28,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Image Width="320"
-                           Height="180"
+                           Height="175"
                            Source="{Binding ScreenshotUri}"
                            ToolTipService.ToolTip="{Binding Title}" />
                 </DataTemplate>

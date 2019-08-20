@@ -26,7 +26,7 @@ using System.Threading.Tasks;
 namespace OnePomodoro.PomodoroViews
 {
     [Title("The Big One")]
-    [Screenshot("")]
+    [Screenshot("/Assets/Screenshots/TheBigOne.png")]
     public sealed partial class TheBigOne : PomodoroView
     {
         private PointLight _inworkPointLight;
@@ -64,10 +64,10 @@ namespace OnePomodoro.PomodoroViews
                 _inworkPointLight.Color = Color.FromArgb(255, 217, 17, 83);
                 _inworkPointLight.CoordinateSpace = titleVisual;
                 _inworkPointLight.Targets.Add(titleVisual);
-                _inworkPointLight.Offset = new Vector3(-(float)InworkShadow.ActualWidth * 3, (float)InworkShadow.ActualHeight / 2, 300.0f);
+                _inworkPointLight.Offset = new Vector3(-(float)PomodoroPanel.ActualWidth * 3, (float)PomodoroPanel.ActualHeight / 2, 300.0f);
             }
             var offsetAnimation = compositor.CreateScalarKeyFrameAnimation();
-            offsetAnimation.InsertKeyFrame(1.0f, (float)InworkShadow.ActualWidth * 3, compositor.CreateLinearEasingFunction());
+            offsetAnimation.InsertKeyFrame(1.0f, (float)PomodoroPanel.ActualWidth * 3, compositor.CreateLinearEasingFunction());
             offsetAnimation.Duration = TimeSpan.FromMilliseconds(10000);
             offsetAnimation.IterationBehavior = AnimationIterationBehavior.Forever;
 
@@ -83,10 +83,10 @@ namespace OnePomodoro.PomodoroViews
                 _breakPointLight.Color = Color.FromArgb(255, 217, 17, 83);
                 _breakPointLight.CoordinateSpace = titleVisual;
                 _breakPointLight.Targets.Add(titleVisual);
-                _breakPointLight.Offset = new Vector3(-(float)InworkShadow.ActualWidth * 3, (float)InworkShadow.ActualHeight / 2, 300.0f);
+                _breakPointLight.Offset = new Vector3(-(float)PomodoroPanel.ActualWidth * 3, (float)PomodoroPanel.ActualHeight / 2, 300.0f);
             }
             offsetAnimation = compositor.CreateScalarKeyFrameAnimation();
-            offsetAnimation.InsertKeyFrame(1.0f, (float)InworkShadow.ActualWidth * 3, compositor.CreateLinearEasingFunction());
+            offsetAnimation.InsertKeyFrame(1.0f, (float)PomodoroPanel.ActualWidth * 3, compositor.CreateLinearEasingFunction());
             offsetAnimation.Duration = TimeSpan.FromMilliseconds(10000);
             offsetAnimation.IterationBehavior = AnimationIterationBehavior.Forever;
 

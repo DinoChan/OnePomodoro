@@ -4,6 +4,8 @@
     <SolidColorBrush x:Key="ThemeControlForegroundBaseHighBrush" Color="{ThemeResource SystemBaseHighColor}"></SolidColorBrush>
     <SolidColorBrush x:Key="InworkBrush"
                      Color="#FFD91153" />
+    <!--<SolidColorBrush x:Key="BreakBrush"
+                     Color="#FF001BAB" />-->
     <SolidColorBrush x:Key="BreakBrush"
-                     Color="#FF001BAB" />
+                     Color="#FF92CAED" />
 </ResourceDictionary>

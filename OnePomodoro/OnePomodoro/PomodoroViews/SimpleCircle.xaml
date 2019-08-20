@@ -29,12 +29,14 @@
 
         <Grid Grid.Row="1"
               Background="{StaticResource Background}">
-            <Viewbox MaxHeight="800"
-                     MaxWidth="800">
-                <Grid>
+            <Viewbox MaxHeight="1000"
+                     MaxWidth="1000">
+                <Grid Height="1000" Width="1000">
                     <Grid Height="800"
                           Width="800"
+                          VerticalAlignment="Center" HorizontalAlignment="Center"
                           Visibility="{Binding IsInPomodoro,Converter={StaticResource BoolToVisibilityConverter}}">
+                        
                         <Ellipse Fill="{StaticResource Background}"
                                  Stroke="{StaticResource InworkBrush}"
                                  StrokeThickness="8"
@@ -58,17 +60,12 @@
                         <StackPanel HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     Margin="0,72,0,0">
-                            <TextBlock Text="focus"
-                                       FontSize="72"
-                                       Foreground="{StaticResource InworkBrush}"
-                                       HorizontalAlignment="Center"
-                                       FontFamily="Arial" />
                             <TextBlock Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
                                        FontSize="200"
                                        Foreground="{StaticResource InworkBrush}"
                                        HorizontalAlignment="Center"
-                                       FontFamily="Arial" />
-
+                                       FontFamily="{StaticResource TimeFont}" />
+                          
                             <StackPanel Margin="0,24,0,0"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Bottom">
@@ -80,9 +77,9 @@
                                         <Setter Property="FontSize"
                                                 Value="148" />
                                         <Setter Property="Margin"
-                                                Value="0,0,24,0" />
+                                                Value="0,0,0,0" />
                                         <Setter Property="Padding"
-                                                Value="10" />
+                                                Value="30" />
                                         <Setter Property="BorderThickness"
                                                 Value="0" />
                                         <Setter Property="Foreground"
@@ -107,7 +104,8 @@
                           Visibility="{Binding IsInPomodoro,Converter={StaticResource NegationBoolToVisibilityConverter}}">
                         <Ellipse Fill="{StaticResource Background}"
                                  Stroke="{StaticResource BreakBrush}"
-                                 StrokeThickness="8" />
+                                 StrokeThickness="8"
+                                 Margin="-4" />
                         <Grid>
                             <Grid RenderTransformOrigin=".5,.5">
                                 <Grid.RenderTransform>
@@ -116,7 +114,7 @@
                                 <Ellipse Fill="{StaticResource Background}"
                                          Height="48"
                                          Width="48"
-                                         Margin="0,-24,0,0"
+                                         Margin="-24,-24,0,0"
                                          Stroke="{StaticResource BreakBrush}"
                                          StrokeThickness="8"
                                          HorizontalAlignment="Center"
@@ -128,15 +126,12 @@
                                     VerticalAlignment="Center"
                                     Margin="0,72,0,0">
 
-                            <TextBlock Text="relax"
-                                       FontSize="72"
-                                       Foreground="{StaticResource BreakBrush}"
-                                       HorizontalAlignment="Center" />
                             
                             <TextBlock Text="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
                                        FontSize="200"
                                        Foreground="{StaticResource BreakBrush}"
-                                       HorizontalAlignment="Center" />
+                                       HorizontalAlignment="Center"
+                                       FontFamily="{StaticResource TimeFont}" />
 
                             <StackPanel Margin="0,24,0,0"
                                         HorizontalAlignment="Center"
@@ -148,10 +143,8 @@
                                                 Value="Segoe MDL2 Assets" />
                                         <Setter Property="FontSize"
                                                 Value="148" />
-                                        <Setter Property="Margin"
-                                                Value="0,0,24,0" />
                                         <Setter Property="Padding"
-                                                Value="10" />
+                                                Value="30" />
                                         <Setter Property="BorderThickness"
                                                 Value="0" />
                                         <Setter Property="Foreground"

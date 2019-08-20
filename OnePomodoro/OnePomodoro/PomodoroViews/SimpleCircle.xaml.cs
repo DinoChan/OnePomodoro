@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OnePomodoro.Helpers;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -17,6 +18,8 @@ using Windows.UI.Xaml.Navigation;
 
 namespace OnePomodoro.PomodoroViews
 {
+    [Title("Default")]
+    [Screenshot("/Assets/Screenshots/SimpleCircle.png")]
     public sealed partial class SimpleCircle : PomodoroView
     {
         public SimpleCircle() : base()

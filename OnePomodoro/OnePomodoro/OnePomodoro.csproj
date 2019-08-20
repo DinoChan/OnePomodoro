@@ -296,6 +296,9 @@
     <Content Include="Assets\LargeTile.scale-150.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />
     <Content Include="Assets\LargeTile.scale-400.png" />
+    <Content Include="Assets\Screenshots\SimpleCircle.png" />
+    <Content Include="Assets\Screenshots\TheBigOne.png" />
+    <Content Include="Assets\Screenshots\TheFirst.png" />
     <Content Include="Assets\SmallTile.scale-100.png" />
     <Content Include="Assets\SmallTile.scale-125.png" />
     <Content Include="Assets\SmallTile.scale-150.png" />
@@ -334,6 +337,10 @@
     <Content Include="Assets\Privacy Statement.md" />
     <Content Include="Assets\License.md" />
     <Content Include="Assets\Whats new.md" />
+    <Content Include="Font\DINPro-Regular.otf" />
+    <Content Include="Font\DINPro-Bold.otf" />
+    <Content Include="Font\DINPro-Light.otf" />
+    <Content Include="Font\DINPro-Medium.otf" />
     <None Include="OnePomodoro_StoreKey.pfx" />
     <None Include="Package.StoreAssociation.xml" />
     <Content Include="Properties\Default.rd.xml" />

@@ -19,7 +19,7 @@ using Windows.UI.Xaml.Navigation;
 namespace OnePomodoro.PomodoroViews
 {
     [Title("Default")]
-    [Screenshot("")]
+    [Screenshot("/Assets/Screenshots/TheFirst.png")]
     public sealed partial class TheFirst : PomodoroView
     {
         public TheFirst()

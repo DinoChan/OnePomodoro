@@ -24,12 +24,14 @@
                         HorizontalContentAlignment="Stretch"
                         VerticalContentAlignment="Stretch">
             <StackPanel VerticalAlignment="Center"
-                        HorizontalAlignment="Center">
+                        HorizontalAlignment="Center"
+                        x:Name="PomodoroPanel">
                 <Grid x:Name="InworkPanel"
                       Visibility="{Binding IsInPomodoro,Converter={StaticResource BoolToVisibilityConverter}}">
                     <TextBlock Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
                                FontWeight="Bold"
                                Foreground="White"
+                               FontFamily="{StaticResource TimeFont}"
                                RenderTransformOrigin="0.5,0.54"
                                x:Name="InworkShadow">
                         <TextBlock.Projection>
@@ -52,6 +54,7 @@
                     </TextBlock>
                     <TextBlock Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
                                FontWeight="Bold"
+                               FontFamily="{StaticResource TimeFont}"
                                Foreground="White" />
                 </Grid>
                 <Grid x:Name="BreakPanel"
@@ -60,6 +63,7 @@
                                FontWeight="Bold"
                                Foreground="White"
                                RenderTransformOrigin="0.5,0.46"
+                               FontFamily="{StaticResource TimeFont}"
                                x:Name="BreakShadow">
                         <TextBlock.Projection>
                             <PlaneProjection RotationZ="0"
@@ -81,6 +85,7 @@
                     </TextBlock>
                     <TextBlock Text="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
                                FontWeight="Bold"
+                               FontFamily="{StaticResource TimeFont}"
                                Foreground="White" />
                 </Grid>
                 <StackPanel Margin="35,0,35,-100"
@@ -93,8 +98,6 @@
                                     Value="Segoe MDL2 Assets" />
                             <Setter Property="FontSize"
                                     Value="48" />
-                            <Setter Property="Margin"
-                                    Value="0,0,24,0" />
                             <Setter Property="Padding"
                                     Value="10" />
                         </Style>

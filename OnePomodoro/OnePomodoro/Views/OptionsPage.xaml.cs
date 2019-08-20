@@ -30,8 +30,8 @@ namespace OnePomodoro.Views
             KeyboardAccelerator AltLeft = new KeyboardAccelerator();
             AltLeft.Key = VirtualKey.Left;
             AltLeft.Invoked += BackInvoked;
-            this.KeyboardAccelerators.Add(GoBack);
-            this.KeyboardAccelerators.Add(AltLeft);
+            //this.KeyboardAccelerators.Add(GoBack);
+            //this.KeyboardAccelerators.Add(AltLeft);//不能禁止Tooltip
             // ALT routes here
             AltLeft.Modifiers = VirtualKeyModifiers.Menu;
             SystemNavigationManager.GetForCurrentView().BackRequested += BlankPage1_BackRequested;

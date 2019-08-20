@@ -71,7 +71,7 @@
                            x:Name="InWorkTitle"
                            Foreground="#FF9E1300"
                            FontSize="256"
-                           FontFamily="DINPro"
+                           FontFamily="{StaticResource TimeFont}"
                            FontWeight="Bold"
                            Visibility="{Binding IsInPomodoro,Converter={StaticResource BoolToVisibilityConverter}}"
                            Margin="0,-60,0,0">
@@ -88,6 +88,7 @@
                 </TextBlock>
                 <TextBlock Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
                            x:Name="InWorkCountDown"
+                           FontFamily="{StaticResource TimeFont}"
                            FontSize="160"
                            Foreground="#FF999999"
                            Margin="8,-80,0,0"
@@ -112,6 +113,7 @@
                 <TextBlock Text="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
                            x:Name="BreakCountDown"
                            FontSize="160"
+                           FontFamily="{StaticResource TimeFont}"
                            Foreground="#FF999999"
                            Margin="0,0,22,-40"
                            HorizontalAlignment="Right"
@@ -138,7 +140,7 @@
                            x:Name="BreakTitle"
                            Foreground="#FF001BAB"
                            FontSize="256"
-                           FontFamily="DINPro"
+                           FontFamily="{StaticResource TimeFont}"
                            FontWeight="Bold"
                            Visibility="{Binding IsInPomodoro,Converter={StaticResource NegationBoolToVisibilityConverter}}"
                            Margin="0,0,30,-48">
