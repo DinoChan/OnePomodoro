@@ -55,7 +55,12 @@ namespace OnePomodoro.ViewModels
 
             if (DesignMode.DesignMode2Enabled == false && App.Current is PrismUnityApplication)
                 _toastNotificationsService = App.Current.Container.Resolve<IToastNotificationsService>();
+
+            TotalPomodoroTime = PomodoroLength;
         }
+
+        public event EventHandler RemainingPomodoroTimeChanged;
+        public event EventHandler RemainingBreakTimeChanged;
 
         public TimeSpan RemainingPomodoroTime
         {
@@ -64,9 +69,12 @@ namespace OnePomodoro.ViewModels
             private set
             {
                 _remainingPomodoroTime = value;
+                RemainingPomodoroTimeChanged?.Invoke(this, EventArgs.Empty);
                 RaisePropertyChanged();
             }
         }
+
+        public TimeSpan TotalPomodoroTime { get; private set; }
 
         public TimeSpan RemainingBreakTime
         {
@@ -76,9 +84,12 @@ namespace OnePomodoro.ViewModels
             private set
             {
                 _remainingBreakTime = value;
+                RemainingBreakTimeChanged?.Invoke(this, EventArgs.Empty);
                 RaisePropertyChanged();
             }
         }
+
+        public TimeSpan TotalBreakTime { get; private set; }
 
         public bool IsInPomodoro
         {
@@ -164,7 +175,9 @@ namespace OnePomodoro.ViewModels
             IsInPomodoro = false;
             _completedPomodoros++;
             _currentBreakTimer = (_completedPomodoros % LongBreakAfter == 0) ? _longBreakTimer : _breakTimer;
+
             RemainingBreakTime = _currentBreakTimer.TotalTime;
+            TotalBreakTime = _currentBreakTimer.TotalTime;
 
             if (SettingsService.Current.AutoStartOfBreak)
                 StartBreak();

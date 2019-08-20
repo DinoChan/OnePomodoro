@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OnePomodoro.Models
 {
-    public interface ISettings
+    public interface IPomodoroSettings
     {
         bool AutoStartOfNextPomodoro { get; set; }
 
@@ -15,5 +15,9 @@ namespace OnePomodoro.Models
         bool IsNotifyWhenPomodoroFinished { get; set; }
 
         bool IsNotifyWhenBreakFinished { get; set; }
+
+        string ViewType { get; set; }
+
+        event EventHandler ViewTypeChanged;
     }
 }

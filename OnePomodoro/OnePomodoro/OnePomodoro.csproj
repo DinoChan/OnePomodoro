@@ -142,10 +142,16 @@
     <Compile Include="Helpers\SettingsStorageExtensions.cs" />
     <Compile Include="Helpers\TitleAttribute.cs" />
     <Compile Include="Helpers\TitleBarHelper.cs" />
-    <Compile Include="Models\ISettings.cs" />
+    <Compile Include="Models\IPomodoroSettings.cs" />
     <Compile Include="Models\PomodoroSettings.cs" />
+    <Compile Include="PomodoroViews\SimpleCircle.xaml.cs">
+      <DependentUpon>SimpleCircle.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PomodoroViews\TestPomodoro.xaml.cs">
       <DependentUpon>TestPomodoro.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PomodoroViews\TheBigOne.xaml.cs">
+      <DependentUpon>TheBigOne.xaml</DependentUpon>
     </Compile>
     <Compile Include="PomodoroViews\TheFirst.xaml.cs">
       <DependentUpon>TheFirst.xaml</DependentUpon>
@@ -169,6 +175,7 @@
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\OptionsViewModel.cs" />
     <Compile Include="ViewModels\PomodoroViewModel.cs" />
+    <Compile Include="ViewModels\ViewTypeSettingViewModel.cs" />
     <Compile Include="Views\FirstRunDialog.xaml.cs">
       <DependentUpon>FirstRunDialog.xaml</DependentUpon>
     </Compile>
@@ -185,12 +192,23 @@
       <DependentUpon>OptionsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="PomodoroViews\PomodoroView.cs" />
+    <Compile Include="Views\VisualSettingView.xaml.cs">
+      <DependentUpon>VisualSettingView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\WhatsNewDialog.xaml.cs">
       <DependentUpon>WhatsNewDialog.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="PomodoroViews\SimpleCircle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="PomodoroViews\TestPomodoro.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PomodoroViews\TheBigOne.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -250,6 +268,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\VisualSettingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\WhatsNewDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -274,6 +296,9 @@
     <Content Include="Assets\LargeTile.scale-150.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />
     <Content Include="Assets\LargeTile.scale-400.png" />
+    <Content Include="Assets\Screenshots\SimpleCircle.png" />
+    <Content Include="Assets\Screenshots\TheBigOne.png" />
+    <Content Include="Assets\Screenshots\TheFirst.png" />
     <Content Include="Assets\SmallTile.scale-100.png" />
     <Content Include="Assets\SmallTile.scale-125.png" />
     <Content Include="Assets\SmallTile.scale-150.png" />
@@ -312,6 +337,10 @@
     <Content Include="Assets\Privacy Statement.md" />
     <Content Include="Assets\License.md" />
     <Content Include="Assets\Whats new.md" />
+    <Content Include="Font\DINPro-Regular.otf" />
+    <Content Include="Font\DINPro-Bold.otf" />
+    <Content Include="Font\DINPro-Light.otf" />
+    <Content Include="Font\DINPro-Medium.otf" />
     <None Include="OnePomodoro_StoreKey.pfx" />
     <None Include="Package.StoreAssociation.xml" />
     <Content Include="Properties\Default.rd.xml" />
