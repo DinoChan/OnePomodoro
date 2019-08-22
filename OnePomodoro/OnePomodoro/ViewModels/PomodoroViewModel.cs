@@ -61,6 +61,7 @@ namespace OnePomodoro.ViewModels
 
         public event EventHandler RemainingPomodoroTimeChanged;
         public event EventHandler RemainingBreakTimeChanged;
+        public event EventHandler IsInPomodoroChanged;
 
         public TimeSpan RemainingPomodoroTime
         {
@@ -98,6 +99,7 @@ namespace OnePomodoro.ViewModels
             private set
             {
                 _isInPomodoro = value;
+                IsInPomodoroChanged?.Invoke(this, EventArgs.Empty);
                 RaisePropertyChanged();
             }
         }
