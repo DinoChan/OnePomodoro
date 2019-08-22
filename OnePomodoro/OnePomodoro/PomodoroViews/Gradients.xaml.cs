@@ -42,8 +42,8 @@ namespace OnePomodoro.PomodoroViews
             _compositor = Window.Current.Compositor;
 
             _gradientBrush = _compositor.CreateLinearGradientBrush();
-            _gradientBrush.StartPoint = new Vector2(1.0f);
-            _gradientBrush.EndPoint = Vector2.Zero;
+            _gradientBrush.StartPoint = Vector2.Zero;
+            _gradientBrush.EndPoint = new Vector2(1.0f);
 
             _relaxGradientStop = _compositor.CreateColorGradientStop();
             _relaxGradientStop.Offset = 0.5f;
@@ -51,23 +51,23 @@ namespace OnePomodoro.PomodoroViews
             _focusGradientStop = _compositor.CreateColorGradientStop();
             _focusGradientStop.Offset = 0.5f;
             _focusGradientStop.Color = Red;
-            _gradientBrush.ColorStops.Add(_focusGradientStop);
             _gradientBrush.ColorStops.Add(_relaxGradientStop);
-
+            _gradientBrush.ColorStops.Add(_focusGradientStop);
             _backgroundVisual = _compositor.CreateSpriteVisual();
             _backgroundVisual.Brush = _gradientBrush;
             ElementCompositionPreview.SetElementChildVisual(Gradient, _backgroundVisual);
 
-            UpdateGradients();
+
 
 
 
             Loaded += async (s, e) =>
             {
-                await Task.Yield();
-
-                UpdateText();
+                await Task.Delay(2000);
+                UpdateGradients();
                 MiddleText.Visibility = Visibility.Collapsed;
+                await Task.Delay(2000);
+                UpdateText();
             };
 
             Gradient.SizeChanged += (s, e) =>
@@ -95,14 +95,14 @@ namespace OnePomodoro.PomodoroViews
         {
             var relaxGradientStopOffsetAnimation = _compositor.CreateScalarKeyFrameAnimation();
             relaxGradientStopOffsetAnimation.Duration = TimeSpan.FromSeconds(1);
-            relaxGradientStopOffsetAnimation.DelayTime = TimeSpan.FromSeconds(2);
-            relaxGradientStopOffsetAnimation.InsertKeyFrame(1.0f, ViewModel.IsInPomodoro ? 1.0f : 0.25f);
+            // relaxGradientStopOffsetAnimation.DelayTime = TimeSpan.FromSeconds(2);
+            relaxGradientStopOffsetAnimation.InsertKeyFrame(1.0f, ViewModel.IsInPomodoro ?1.0f : 0.75f);
             _relaxGradientStop.StartAnimation(nameof(_relaxGradientStop.Offset), relaxGradientStopOffsetAnimation);
 
             var focusGradientStopOffsetAnimation = _compositor.CreateScalarKeyFrameAnimation();
             focusGradientStopOffsetAnimation.Duration = TimeSpan.FromSeconds(1);
-            focusGradientStopOffsetAnimation.DelayTime = TimeSpan.FromSeconds(2);
-            focusGradientStopOffsetAnimation.InsertKeyFrame(1.0f, ViewModel.IsInPomodoro?0.25f: 1.0f);
+            //focusGradientStopOffsetAnimation.DelayTime = TimeSpan.FromSeconds(2);
+            focusGradientStopOffsetAnimation.InsertKeyFrame(1.0f, ViewModel.IsInPomodoro ? 0.25f : 0.0f);
             _focusGradientStop.StartAnimation(nameof(_focusGradientStop.Offset), focusGradientStopOffsetAnimation);
         }
 
