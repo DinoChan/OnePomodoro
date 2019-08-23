@@ -26,6 +26,7 @@ namespace OnePomodoro.PomodoroViews
             typeof(TheFirst),
             typeof(TheBigOne),
             typeof(SimpleCircle),
+            typeof(Gradients),
         };
       
     }
