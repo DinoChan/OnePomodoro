@@ -310,6 +310,7 @@
     <Content Include="Assets\LargeTile.scale-150.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />
     <Content Include="Assets\LargeTile.scale-400.png" />
+    <Content Include="Assets\Screenshots\Gradients.png" />
     <Content Include="Assets\Screenshots\SimpleCircle.png" />
     <Content Include="Assets\Screenshots\TheBigOne.png" />
     <Content Include="Assets\Screenshots\TheFirst.png" />
