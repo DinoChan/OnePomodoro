@@ -144,6 +144,9 @@
     <Compile Include="Helpers\TitleBarHelper.cs" />
     <Compile Include="Models\IPomodoroSettings.cs" />
     <Compile Include="Models\PomodoroSettings.cs" />
+    <Compile Include="PomodoroViews\GradientsWithBlend.xaml.cs">
+      <DependentUpon>GradientsWithBlend.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PomodoroViews\SimpleCircle.xaml.cs">
       <DependentUpon>SimpleCircle.xaml</DependentUpon>
     </Compile>
@@ -206,6 +209,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="PomodoroViews\GradientsWithBlend.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="PomodoroViews\SimpleCircle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -311,6 +318,7 @@
     <Content Include="Assets\LargeTile.scale-200.png" />
     <Content Include="Assets\LargeTile.scale-400.png" />
     <Content Include="Assets\Screenshots\Gradients.png" />
+    <Content Include="Assets\Screenshots\GradientsWithBlend.png" />
     <Content Include="Assets\Screenshots\SimpleCircle.png" />
     <Content Include="Assets\Screenshots\TheBigOne.png" />
     <Content Include="Assets\Screenshots\TheFirst.png" />

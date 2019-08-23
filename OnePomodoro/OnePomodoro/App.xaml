@@ -20,7 +20,7 @@
 
                 
             </ResourceDictionary.MergedDictionaries>
-            <FontFamily x:Key="TimeFont">Font/DINPro-Regular.otf#DINPro</FontFamily>
+            <FontFamily x:Key="TimeFont">/Font/DINPro-Regular.otf#DINPro</FontFamily>
         </ResourceDictionary>
         
     </prismUnity:PrismUnityApplication.Resources>

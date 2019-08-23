@@ -1,18 +1,15 @@
-﻿using System;
-
+﻿using OnePomodoro.Helpers;
 using OnePomodoro.ViewModels;
-
-using Windows.UI.Xaml.Controls;
-using System.Linq;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Core;
-using OnePomodoro.Helpers;
-using Windows.UI.Xaml;
-using Windows.System;
-using Microsoft.Toolkit.Uwp.UI.Extensions;
+using System;
+using System.Net.Http;
 using Windows.ApplicationModel.Core;
-using Windows.UI.Xaml.Navigation;
 using Windows.Storage;
+using Windows.System;
+using Windows.UI.Core;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Navigation;
 
 namespace OnePomodoro.Views
 {
@@ -52,8 +49,6 @@ namespace OnePomodoro.Views
 
             if (PrivacyStatementMarkdownTextBlock.Text != null)
             {
-
-                //var target = obj as MarkdownTextBlock;
                 var uri = new Uri("ms-appx:///Assets/Privacy Statement.md");
                 var storageFile = await StorageFile.GetFileFromApplicationUriAsync(uri);
                 var text = await FileIO.ReadTextAsync(storageFile);
@@ -70,9 +65,8 @@ namespace OnePomodoro.Views
 
             if (WhatsNewMarkdownTextBlock.Text != null)
             {
-                var uri = new Uri("ms-appx:///Assets/Whats new.md");
-                var storageFile = await StorageFile.GetFileFromApplicationUriAsync(uri);
-                var text = await FileIO.ReadTextAsync(storageFile);
+                HttpClient client = new HttpClient();
+                var text = await client.GetStringAsync("https://raw.githubusercontent.com/DinoChan/OnePomodoro/master/Whats%20new.md?_sm_au_=iVVWJ65DN15Rbq16"); ;
                 WhatsNewMarkdownTextBlock.Text = text;
             }
         }
