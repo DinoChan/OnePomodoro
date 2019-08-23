@@ -8,6 +8,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using System.Linq;
 using Windows.UI.ViewManagement;
+using OnePomodoro.Helpers;
 
 namespace OnePomodoro.Views
 {
@@ -55,6 +56,10 @@ namespace OnePomodoro.Views
         {
             var view = Activator.CreateInstance(type) as PomodoroView;
             PomodoroContent.Content = view;
+            if ((view as FrameworkElement).RequestedTheme == ElementTheme.Light)
+                TitleBarHelper.UpdatePageTitleColor(ElementTheme.Light);
+            else
+                TitleBarHelper.UpdatePageTitleColor(ElementTheme.Dark);
         }
 
         private void CoreTitleBar_LayoutMetricsChanged(CoreApplicationViewTitleBar sender, object args)

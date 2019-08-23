@@ -27,7 +27,8 @@ namespace OnePomodoro.PomodoroViews
             typeof(TheBigOne),
             typeof(SimpleCircle),
             typeof(Gradients),
+            typeof(GradientsWithBlend),
         };
-      
+
     }
 }
