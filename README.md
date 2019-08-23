@@ -12,5 +12,5 @@ Download and play with the OnePomodoro app from the [Microsoft Store](https://ww
 
 ![](https://raw.githubusercontent.com/DinoChan/OnePomodoro/master/Gradients.png?_sm_au_=iVVWJ65DN15Rbq16)
 
-![](https://raw.githubusercontent.com/DinoChan/OnePomodoro/master/GradientsWithBlend.gif?_sm_au_=iVVWJ65DN15Rbq16)
+![](https://raw.githubusercontent.com/DinoChan/OnePomodoro/master/GradientsWithBlend.gif?_sm_au_=iVVsWSPq4vSjMZq6)
 
