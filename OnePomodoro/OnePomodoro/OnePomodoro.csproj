@@ -153,6 +153,9 @@
     <Compile Include="PomodoroViews\TheBigOne.xaml.cs">
       <DependentUpon>TheBigOne.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PomodoroViews\Gradients.xaml.cs">
+      <DependentUpon>Gradients.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PomodoroViews\TheFirst.xaml.cs">
       <DependentUpon>TheFirst.xaml</DependentUpon>
     </Compile>
@@ -214,6 +217,10 @@
     <Page Include="PomodoroViews\TheBigOne.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PomodoroViews\Gradients.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="PomodoroViews\TheFirst.xaml">
       <SubType>Designer</SubType>
@@ -303,6 +310,7 @@
     <Content Include="Assets\LargeTile.scale-150.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />
     <Content Include="Assets\LargeTile.scale-400.png" />
+    <Content Include="Assets\Screenshots\Gradients.png" />
     <Content Include="Assets\Screenshots\SimpleCircle.png" />
     <Content Include="Assets\Screenshots\TheBigOne.png" />
     <Content Include="Assets\Screenshots\TheFirst.png" />
