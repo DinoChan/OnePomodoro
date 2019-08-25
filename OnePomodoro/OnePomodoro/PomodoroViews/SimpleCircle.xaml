@@ -49,7 +49,7 @@
                                 <Ellipse Fill="{StaticResource Background}"
                                          Height="48"
                                          Width="48"
-                                         Margin="-24,-24,0,0"
+                                         Margin="0,-24,0,0"
                                          Stroke="{StaticResource InworkBrush}"
                                          StrokeThickness="8"
                                          HorizontalAlignment="Center"

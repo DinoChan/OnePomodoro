@@ -178,8 +178,8 @@ namespace OnePomodoro.ViewModels
             _completedPomodoros++;
             _currentBreakTimer = (_completedPomodoros % LongBreakAfter == 0) ? _longBreakTimer : _breakTimer;
 
-            RemainingBreakTime = _currentBreakTimer.TotalTime;
             TotalBreakTime = _currentBreakTimer.TotalTime;
+            RemainingBreakTime = _currentBreakTimer.TotalTime;
 
             if (SettingsService.Current.AutoStartOfBreak)
                 StartBreak();
