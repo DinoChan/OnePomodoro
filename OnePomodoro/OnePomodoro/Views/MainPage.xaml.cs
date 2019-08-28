@@ -62,6 +62,9 @@ namespace OnePomodoro.Views
                 TitleBarHelper.UpdatePageTitleColor(ElementTheme.Light);
             else
                 TitleBarHelper.UpdatePageTitleColor(ElementTheme.Dark);
+
+            if (Window.Current.Content is FrameworkElement rootElement)
+                rootElement.RequestedTheme = (view as FrameworkElement).RequestedTheme;
         }
 
         private void CoreTitleBar_LayoutMetricsChanged(CoreApplicationViewTitleBar sender, object args)
