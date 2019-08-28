@@ -65,9 +65,15 @@ namespace OnePomodoro.Views
 
             if (WhatsNewMarkdownTextBlock.Text != null)
             {
-                HttpClient client = new HttpClient();
-                var text = await client.GetStringAsync("https://raw.githubusercontent.com/DinoChan/OnePomodoro/master/Whats%20new.md?_sm_au_=iVVWJ65DN15Rbq16"); ;
-                WhatsNewMarkdownTextBlock.Text = text;
+                try
+                {
+                    HttpClient client = new HttpClient();
+                    var text = await client.GetStringAsync("https://raw.githubusercontent.com/DinoChan/OnePomodoro/master/Whats%20new.md?_sm_au_=iVVWJ65DN15Rbq16"); ;
+                    WhatsNewMarkdownTextBlock.Text = text;
+                }
+                catch (Exception)
+                {
+                }
             }
         }
 

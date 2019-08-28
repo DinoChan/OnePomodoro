@@ -18,6 +18,8 @@ namespace OnePomodoro.Views
 
         private Type _pomodoroViewType;
 
+        private bool _isInCompactMode;
+
         public MainPage()
         {
             InitializeComponent();
@@ -43,11 +45,11 @@ namespace OnePomodoro.Views
             if (viewType == null)
                 viewType = PomodoroView.Views.FirstOrDefault();
 
-            if (_pomodoroViewType != viewType)
+            if (_pomodoroViewType != viewType || _isInCompactMode)
                 ChangePomodoroContent(viewType);
 
             _pomodoroViewType = viewType;
-
+            _isInCompactMode = false;
             Window.Current.SetTitleBar(AppTitleBar);
         }
 
@@ -80,6 +82,7 @@ namespace OnePomodoro.Views
             preferences.CustomSize = new Windows.Foundation.Size(200, 200);
             await ApplicationView.GetForCurrentView().TryEnterViewModeAsync(ApplicationViewMode.CompactOverlay, preferences);
             Frame.Navigate(typeof(CompactPage));
+            _isInCompactMode = true;
         }
 
         private void OnFullScreenClick(object sender, RoutedEventArgs e)

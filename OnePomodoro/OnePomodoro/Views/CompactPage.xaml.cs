@@ -53,12 +53,10 @@ namespace OnePomodoro.Views
 
         private async void OnUnpinClick(object sender, RoutedEventArgs e)
         {
-          
             if (Frame.CanGoBack)
                 Frame.GoBack();
 
             var preferences = ViewModePreferences.CreateDefault(ApplicationViewMode.Default);
-            //pref.CustomSize = new Windows.Foundation.Size(800, 600);
             await ApplicationView.GetForCurrentView().TryEnterViewModeAsync(ApplicationViewMode.Default, preferences);
         }
     }
