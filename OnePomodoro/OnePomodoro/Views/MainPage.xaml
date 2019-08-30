@@ -19,30 +19,22 @@
         <ContentControl x:Name="PomodoroContent"
                         HorizontalContentAlignment="Stretch"
                         VerticalContentAlignment="Stretch" />
-        <Grid x:Name="AppTitleBar"
-              Background="Transparent"
-              VerticalAlignment="Top" />
-        <StackPanel VerticalAlignment="Top"
-                    Orientation="Horizontal"
-                    x:Name="AppButtonBar">
-            <controls:WindowTitleBarButton x:Name="OptionsButton"
-                    Click="OnOptionsClick"
-                    Content="&#xE10C;"
-                    ToolTipService.ToolTip="Options" />
-            <controls:WindowTitleBarButton x:Name="FullScreenButton"
-                    Click="OnFullScreenClick"
-                    Content="&#xE92D;"
-                    ToolTipService.ToolTip="FullScreen" />
-            <controls:WindowTitleBarButton x:Name="BackToWindowButton"
-                    Click="OnBackToWindowClick"
-                    Content="&#xE92C;"
-                    ToolTipService.ToolTip="BackToWindow"
-                    Visibility="Collapsed"/>
-            <controls:WindowTitleBarButton x:Name="PinButton"
-                    Click="OnPinClick"
-                    Content="&#xE141;"
-                    ToolTipService.ToolTip="Pin"/>
-        </StackPanel>
+        <controls:TitleBar VerticalAlignment="Top" IsTitleVisibile="False">
+            <controls:TitleBar.Buttons>
+                <Button x:Name="OptionsButton"
+                        Click="OnOptionsClick"
+                        Content="&#xE700;"
+                        ToolTipService.ToolTip="Options" />
+                <Button x:Name="FullScreenButton"
+                        Click="OnFullScreenClick"
+                        Content="&#xE92D;"
+                        ToolTipService.ToolTip="FullScreen" />
+                <Button x:Name="PinButton"
+                        Click="OnPinClick"
+                        Content="&#xE141;"
+                        ToolTipService.ToolTip="Pin" />
+            </controls:TitleBar.Buttons>
+        </controls:TitleBar>
     </Grid>
 
 </Page>

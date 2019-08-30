@@ -24,10 +24,23 @@ namespace OnePomodoro.Views
         {
             InitializeComponent();
             NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
+            Window.Current.SizeChanged += OnWindowCurrentSizeChanged;
             //ChangePomodoroContent(typeof(TheFirst));
-            var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
-            coreTitleBar.LayoutMetricsChanged += CoreTitleBar_LayoutMetricsChanged;
+        }
 
+        private void OnWindowCurrentSizeChanged(object sender, Windows.UI.Core.WindowSizeChangedEventArgs e)
+        {
+            var view = ApplicationView.GetForCurrentView();
+            if (view.IsFullScreenMode)
+            {
+                FullScreenButton.Visibility = Visibility.Collapsed;
+                PinButton.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                FullScreenButton.Visibility = Visibility.Visible;
+                PinButton.Visibility = Visibility.Visible;
+            }
         }
 
         private void OnOptionsClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
@@ -50,7 +63,6 @@ namespace OnePomodoro.Views
 
             _pomodoroViewType = viewType;
             _isInCompactMode = false;
-            Window.Current.SetTitleBar(AppTitleBar);
         }
 
 
@@ -58,26 +70,9 @@ namespace OnePomodoro.Views
         {
             var view = Activator.CreateInstance(type) as PomodoroView;
             PomodoroContent.Content = view;
-            if ((view as FrameworkElement).RequestedTheme == ElementTheme.Light)
-                TitleBarHelper.UpdatePageTitleColor(ElementTheme.Light);
-            else
-                TitleBarHelper.UpdatePageTitleColor(ElementTheme.Dark);
-
-            if (Window.Current.Content is FrameworkElement rootElement)
-                rootElement.RequestedTheme = (view as FrameworkElement).RequestedTheme;
+            RequestedTheme = (view as FrameworkElement).RequestedTheme;
         }
 
-        private void CoreTitleBar_LayoutMetricsChanged(CoreApplicationViewTitleBar sender, object args)
-        {
-            UpdateTitleBarLayout(sender);
-        }
-
-        private void UpdateTitleBarLayout(CoreApplicationViewTitleBar coreTitleBar)
-        {
-            AppTitleBar.Height = coreTitleBar.Height;
-            AppButtonBar.Height = coreTitleBar.Height;
-            //OptionsButton.Margin = new Thickness(0, 0, coreTitleBar.SystemOverlayRightInset, 0);
-        }
 
         private async void OnPinClick(object sender, RoutedEventArgs e)
         {
@@ -91,33 +86,7 @@ namespace OnePomodoro.Views
         private void OnFullScreenClick(object sender, RoutedEventArgs e)
         {
             ApplicationView view = ApplicationView.GetForCurrentView();
-
-            //bool isInFullScreenMode = view.IsFullScreenMode;
-
-            //if (isInFullScreenMode)
-            //{
-            //    view.ExitFullScreenMode();
-            //}
-            //else
-            //{
             view.TryEnterFullScreenMode();
-            FullScreenButton.Visibility = Visibility.Collapsed;
-            PinButton.Visibility = Visibility.Collapsed;
-            BackToWindowButton.Visibility = Visibility.Visible;
-            //}
-        }
-
-        private void OnBackToWindowClick(object sender, RoutedEventArgs e)
-        {
-            ApplicationView view = ApplicationView.GetForCurrentView();
-            bool isInFullScreenMode = view.IsFullScreenMode;
-
-            //if (isInFullScreenMode)
-            //{
-            view.ExitFullScreenMode();
-            BackToWindowButton.Visibility = Visibility.Collapsed;
-            FullScreenButton.Visibility = Visibility.Visible;
-            PinButton.Visibility = Visibility.Visible;
         }
     }
 }

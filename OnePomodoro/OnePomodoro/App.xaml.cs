@@ -62,7 +62,6 @@ namespace OnePomodoro
             CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
             coreTitleBar.ExtendViewIntoTitleBar = true;
 
-            TitleBarHelper.UpdatePageTitleColor(ElementTheme.Dark);
             await ThemeSelectorService.SetRequestedThemeAsync();
             NavigationService.Navigate(page, launchParam);
             Window.Current.Activate();

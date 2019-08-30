@@ -3,7 +3,8 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:OnePomodoro.Views"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:controls="using:OnePomodoro.Controls"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:pomodoroviews="using:OnePomodoro.PomodoroViews"
       mc:Ignorable="d"
@@ -11,17 +12,13 @@
 
     <Grid>
         <pomodoroviews:SimpleCircle />
-        <Grid x:Name="AppTitleBar"
-              Background="Transparent"
-              VerticalAlignment="Top" />
-        <StackPanel VerticalAlignment="Top"
-                    Orientation="Horizontal"
-                    x:Name="AppButtonBar">
-            <Button x:Name="UnpinButton"
-                    Click="OnUnpinClick"
-                    Content="&#xE196;"
-                    ToolTipService.ToolTip="Unpin"
-                    Style="{StaticResource TitleBarButton}" />
-        </StackPanel>
+        <controls:TitleBar VerticalAlignment="Top" IsTitleVisibile="False">
+            <controls:TitleBar.Buttons>
+                <Button x:Name="UnpinButton"
+                        Click="OnUnpinClick"
+                        Content="&#xE196;"
+                        ToolTipService.ToolTip="Unpin" />
+            </controls:TitleBar.Buttons>
+        </controls:TitleBar>
     </Grid>
 </Page>

@@ -21,31 +21,14 @@ namespace OnePomodoro.Views
         public OptionsPage()
         {
             InitializeComponent();
-            KeyboardAccelerator GoBack = new KeyboardAccelerator();
-            GoBack.Key = VirtualKey.GoBack;
-            GoBack.Invoked += BackInvoked;
-            KeyboardAccelerator AltLeft = new KeyboardAccelerator();
-            AltLeft.Key = VirtualKey.Left;
-            AltLeft.Invoked += BackInvoked;
-            //this.KeyboardAccelerators.Add(GoBack);
-            //this.KeyboardAccelerators.Add(AltLeft);//不能禁止Tooltip
-            // ALT routes here
-            AltLeft.Modifiers = VirtualKeyModifiers.Menu;
+          
             SystemNavigationManager.GetForCurrentView().BackRequested += BlankPage1_BackRequested;
-
-            var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
-
-            // Set XAML element as a draggable region.
-            Window.Current.SetTitleBar(AppTitleBar);
-            //var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
-            UpdateTitleBarLayout(coreTitleBar);
         }
 
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            TitleBarHelper.UpdatePageTitleColor(this);
 
             if (PrivacyStatementMarkdownTextBlock.Text != null)
             {
@@ -82,11 +65,7 @@ namespace OnePomodoro.Views
             On_BackRequested();
         }
 
-        private void UpdateTitleBarLayout(CoreApplicationViewTitleBar coreTitleBar)
-        {
-            BackButton.Height = coreTitleBar.Height;
-            AppTitleBar.Height = coreTitleBar.Height;
-        }
+       
 
 
         private void OnBackClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
