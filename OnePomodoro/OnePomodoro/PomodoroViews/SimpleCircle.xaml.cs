@@ -18,7 +18,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace OnePomodoro.PomodoroViews
 {
-    [Title("Default")]
+    [Title("SimpleCircle")]
     [Screenshot("/Assets/Screenshots/SimpleCircle.png")]
     public sealed partial class SimpleCircle : PomodoroView
     {
