@@ -9,10 +9,11 @@
                     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
                     xmlns:viewModels="using:OnePomodoro.ViewModels"
                     xmlns:helpers="using:OnePomodoro.Helpers"
+                    xmlns:controls="using:OnePomodoro.Controls"
                     x:DefaultBindMode="OneWay"
                     d:DataContext="{d:DesignInstance Type=viewModels:PomodoroViewModel}"
                     RequestedTheme="Dark"
-                    d:DesignHeight="1200"
+                    d:DesignHeight="300"
                     d:DesignWidth="1920">
     <UserControl.Resources>
         <converters:BoolToObjectConverter TrueValue="Top"
@@ -159,8 +160,15 @@
             </StackPanel>
 
 
-
-            <StackPanel Margin="35,55"
+            <controls:PomodoroStateButton Margin="45,60"
+                                          HorizontalAlignment="Left"
+                                          VerticalAlignment="Bottom"
+                                          StartCommand="{Binding StartTimerCommand}"
+                                          StopCommand="{Binding StopTimerCommand}"
+                                          IsInPomodoro="{x:Bind ViewModel.IsInPomodoro}"
+                                          IsTimerInProgress="{x:Bind ViewModel.IsTimerInProgress}"/>
+            <StackPanel Margin="35,35"
+                        Visibility="Collapsed"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Bottom"
                         Orientation="Horizontal">
