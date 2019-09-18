@@ -52,8 +52,19 @@ namespace OnePomodoro.Controls
             DependencyProperty.Register(nameof(StopCommand), typeof(ICommand), typeof(PomodoroStateButton), new PropertyMetadata(null));
 
 
+        /// <summary>
+        /// 标识 PomodoroColor 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty PomodoroColorProperty =
+            DependencyProperty.Register(nameof(PomodoroColor), typeof(Color), typeof(PomodoroStateButton), new PropertyMetadata(Colors.White));
 
-    
+        /// <summary>
+        /// 标识 BreakColor 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty BreakColorProperty =
+            DependencyProperty.Register(nameof(BreakColor), typeof(Color), typeof(PomodoroStateButton), new PropertyMetadata(Colors.White));
+
+
         public PomodoroStateButton()
         {
             DefaultStyleKey = typeof(PomodoroStateButton);
@@ -94,6 +105,24 @@ namespace OnePomodoro.Controls
         {
             get => (ICommand)GetValue(StopCommandProperty);
             set => SetValue(StopCommandProperty, value);
+        }
+
+        /// <summary>
+        /// 获取或设置PomodoroColor的值
+        /// </summary>
+        public Color PomodoroColor
+        {
+            get => (Color)GetValue(PomodoroColorProperty);
+            set => SetValue(PomodoroColorProperty, value);
+        }
+
+        /// <summary>
+        /// 获取或设置BreakColor的值
+        /// </summary>
+        public Color BreakColor
+        {
+            get => (Color)GetValue(BreakColorProperty);
+            set => SetValue(BreakColorProperty, value);
         }
 
         protected override void OnApplyTemplate()

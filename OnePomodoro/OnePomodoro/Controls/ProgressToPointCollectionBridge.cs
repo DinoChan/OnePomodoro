@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
@@ -112,15 +113,21 @@ namespace OnePomodoro.Controls
 
         private PointCollection GetCurrentPoints(PointCollection fromPoints, PointCollection toPoints, double percentage)
         {
-            var result = new PointCollection();
+            var points = new List<Point>();
             for (var i = 0;
-                i < Math.Min(fromPoints.Count, toPoints.Count);
-                i++)
+                 i < Math.Min(fromPoints.Count, toPoints.Count);
+                 i++)
             {
                 var x = (1 - percentage) * fromPoints[i].X + percentage * toPoints[i].X;
                 var y = (1 - percentage) * fromPoints[i].Y + percentage * toPoints[i].Y;
 
-                result.Add(new Point(x, y));
+                points.Add(new Point(x, y));
+
+            }
+            var result = new PointCollection();
+            foreach (var point in points.Distinct())
+            {
+                result.Add(point);
             }
             return result;
         }

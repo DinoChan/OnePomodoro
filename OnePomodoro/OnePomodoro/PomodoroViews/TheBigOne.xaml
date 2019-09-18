@@ -7,6 +7,7 @@
                     mc:Ignorable="d"
                     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
                     xmlns:behaviors="using:Microsoft.Toolkit.Uwp.UI.Animations.Behaviors"
+                    xmlns:controls="using:OnePomodoro.Controls"
                     d:DesignHeight="1000"
                     d:DesignWidth="1900">
 
@@ -88,28 +89,14 @@
                                FontFamily="{StaticResource TimeFont}"
                                Foreground="White" />
                 </Grid>
-                <StackPanel Margin="35,0,35,-100"
-                            HorizontalAlignment="Center"
-                            Orientation="Horizontal">
-                    <StackPanel.Resources>
-                        <Style TargetType="Button"
-                               BasedOn="{StaticResource EllipseButtonRevealStyle}">
-                            <Setter Property="FontFamily"
-                                    Value="Segoe MDL2 Assets" />
-                            <Setter Property="FontSize"
-                                    Value="48" />
-                            <Setter Property="Padding"
-                                    Value="10" />
-                        </Style>
-                    </StackPanel.Resources>
-                    <Button Content="&#xE768;"
-                            Visibility="{Binding IsTimerInProgress,Converter={StaticResource NegationBoolToVisibilityConverter}}"
-                            Command="{Binding StartTimerCommand}" />
 
-                    <Button Content="&#xE769;"
-                            Visibility="{Binding IsTimerInProgress,Converter={StaticResource BoolToVisibilityConverter}}"
-                            Command="{Binding StopTimerCommand}" />
-                </StackPanel>
+                <controls:PomodoroStateButton Margin="35,0,35,-100"
+                                              HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              StartCommand="{Binding StartTimerCommand}"
+                                              StopCommand="{Binding StopTimerCommand}"
+                                              IsInPomodoro="{x:Bind ViewModel.IsInPomodoro}"
+                                              IsTimerInProgress="{x:Bind ViewModel.IsTimerInProgress}"/>
             </StackPanel>
         </ContentControl>
 
