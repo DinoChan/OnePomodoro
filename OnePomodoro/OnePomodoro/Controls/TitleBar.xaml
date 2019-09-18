@@ -15,7 +15,7 @@
                          Color="{ThemeResource SystemBaseHighColor}" />
 
 
-        <SolidColorBrush x:Key="ButtonBackgroundBrush"
+        <SolidColorBrush x:Key="ButtonForegroundColor"
                          Color="{ThemeResource SystemBaseHighColor}" />
         <SolidColorBrush x:Key="ButtonInactiveForegroundBrush"
                          Color="{ThemeResource SystemChromeDisabledLowColor}" />
