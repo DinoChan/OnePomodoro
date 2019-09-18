@@ -141,7 +141,7 @@ namespace OnePomodoro.Controls
                 //Color pressedbgColor = ((SolidColorBrush)Application.Current.Resources["SystemControlBackgroundListMediumBrush"]).Color;
                 //Color pressedfgColor = ((SolidColorBrush)Application.Current.Resources["SystemControlForegroundBaseHighBrush"]).Color;
 
-                Color fgColor = ((SolidColorBrush)Resources["ButtonBackgroundBrush"]).Color;
+                Color fgColor = ((SolidColorBrush)Resources["ButtonForegroundColor"]).Color;
                 Color inactivefgColor = ((SolidColorBrush)Resources["ButtonInactiveForegroundBrush"]).Color;
                 Color hoverbgColor = ((SolidColorBrush)Resources["ButtonHoverBackgroundBrush"]).Color;
                 Color hoverfgColor = ((SolidColorBrush)Resources["ButtonHoverForegroundBrush"]).Color;
