@@ -9,10 +9,11 @@
                     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
                     xmlns:viewModels="using:OnePomodoro.ViewModels"
                     xmlns:helpers="using:OnePomodoro.Helpers"
+                    xmlns:controls="using:OnePomodoro.Controls"
                     x:DefaultBindMode="OneWay"
                     d:DataContext="{d:DesignInstance Type=viewModels:PomodoroViewModel}"
                     RequestedTheme="Dark"
-                    d:DesignHeight="1200"
+                    d:DesignHeight="300"
                     d:DesignWidth="1920">
     <UserControl.Resources>
         <converters:BoolToObjectConverter TrueValue="Top"
@@ -159,34 +160,13 @@
             </StackPanel>
 
 
-
-            <StackPanel Margin="35,55"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Bottom"
-                        Orientation="Horizontal">
-                <StackPanel.Resources>
-                    <Style TargetType="Button"
-                           BasedOn="{StaticResource EllipseButtonRevealStyle}">
-                        <Setter Property="FontFamily"
-                                Value="Segoe MDL2 Assets" />
-                        <Setter Property="FontSize"
-                                Value="48" />
-                        <Setter Property="Margin"
-                                Value="0,0,24,0" />
-                        <Setter Property="Padding"
-                                Value="10" />
-                    </Style>
-                </StackPanel.Resources>
-                <Button Content="&#xE768;"
-                        Visibility="{x:Bind ViewModel.IsTimerInProgress,Converter={StaticResource NegationBoolToVisibilityConverter}}"
-                        Command="{Binding StartTimerCommand}" />
-                <Button Content="&#xE769;"
-                        Visibility="{x:Bind  ViewModel.IsTimerInProgress,Converter={StaticResource BoolToVisibilityConverter}}"
-                        Command="{Binding StopTimerCommand}" />
-                <!--<Button Content="&#xE10C;"
-                        Click="OnOptionsClick" />-->
-                <!--<Button Content="&#xF142;"/>-->
-            </StackPanel>
+            <controls:PomodoroStateButton Margin="45,60"
+                                          HorizontalAlignment="Left"
+                                          VerticalAlignment="Bottom"
+                                          StartCommand="{Binding StartTimerCommand}"
+                                          StopCommand="{Binding StopTimerCommand}"
+                                          IsInPomodoro="{x:Bind ViewModel.IsInPomodoro}"
+                                          IsTimerInProgress="{x:Bind ViewModel.IsTimerInProgress}"/>
         </Grid>
     </Grid>
 </local:PomodoroView>

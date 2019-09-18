@@ -11,6 +11,7 @@
                     xmlns:helpers="using:OnePomodoro.Helpers"
                     x:DefaultBindMode="OneWay"
                     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+                    xmlns:controls1="using:OnePomodoro.Controls"
                     d:DataContext="{d:DesignInstance Type=viewModels:PomodoroViewModel}"
                     RequestedTheme="Light"
                     d:DesignHeight="1200"
@@ -39,7 +40,7 @@
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center">
                     <StackPanel Orientation="Horizontal"
-                                Margin="16,20"
+                                Margin="16,28"
                                 x:Name="ButtonRoot"
                                 Visibility="Collapsed"
                                 HorizontalAlignment="Left"
@@ -54,28 +55,16 @@
                                                          To="1"
                                                          Duration="0:0:0.6" />
                         </animations:Implicit.ShowAnimations>
-                        <StackPanel.Resources>
-                            <Style TargetType="Button"
-                                   BasedOn="{StaticResource EllipseButtonRevealStyle}">
-                                <Setter Property="FontFamily"
-                                        Value="Segoe MDL2 Assets" />
-                                <Setter Property="FontSize"
-                                        Value="48" />
-                                <Setter Property="Margin"
-                                        Value="0,0,24,0" />
-                                <Setter Property="Padding"
-                                        Value="10" />
-                                <Setter Property="Foreground"
-                                        Value="White" />
-                            </Style>
-                        </StackPanel.Resources>
-                        
-                        <Button Content="&#xE768;"
-                                Visibility="{Binding IsTimerInProgress,Converter={StaticResource NegationBoolToVisibilityConverter}}"
-                                Command="{Binding StartTimerCommand}" />
-                        <Button Content="&#xE769;"
-                                Visibility="{Binding IsTimerInProgress,Converter={StaticResource BoolToVisibilityConverter}}"
-                                Command="{Binding StopTimerCommand}" />
+                        <controls1:PomodoroStateButton 
+                                           controls1:DropShadowPanel.BlurRadius="8"
+                                           controls1:DropShadowPanel.OffsetY="2"
+                                           controls1:DropShadowPanel.ShadowOpacity="0.3"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Bottom"
+                                           StartCommand="{Binding StartTimerCommand}"
+                                           StopCommand="{Binding StopTimerCommand}"
+                                           IsInPomodoro="{x:Bind ViewModel.IsInPomodoro}"
+                                           IsTimerInProgress="{x:Bind ViewModel.IsTimerInProgress}"/>
                     </StackPanel>
                     <Grid>
                         <StackPanel x:Name="FocusText"
