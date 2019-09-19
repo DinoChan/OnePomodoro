@@ -138,6 +138,7 @@
     <Compile Include="Controls\ButtonState.cs" />
     <Compile Include="Controls\DropShadowPanel.cs" />
     <Compile Include="Controls\DropShadowPanel.Properties.cs" />
+    <Compile Include="Controls\GlowPanel.cs" />
     <Compile Include="Controls\OutlinePanel.cs" />
     <Compile Include="Controls\PomodoroStateButton.cs" />
     <Compile Include="Controls\ProgressToPointCollectionBridge.cs" />

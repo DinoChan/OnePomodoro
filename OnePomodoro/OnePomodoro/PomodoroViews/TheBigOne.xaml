@@ -8,6 +8,7 @@
                     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
                     xmlns:behaviors="using:Microsoft.Toolkit.Uwp.UI.Animations.Behaviors"
                     xmlns:controls="using:OnePomodoro.Controls"
+                    x:DefaultBindMode="OneWay"
                     d:DesignHeight="1000"
                     d:DesignWidth="1900">
 

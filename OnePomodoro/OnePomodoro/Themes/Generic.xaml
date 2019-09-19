@@ -191,7 +191,189 @@
         </Setter>
     </Style>
 
+    <Style TargetType="controls:GlowPanel" >
+        <Setter Property="IsTabStop"
+                Value="False" />
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="IsHitTestVisible" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:GlowPanel">
+                    <Grid Background="{TemplateBinding Background}"
+                          BorderBrush="{TemplateBinding BorderBrush}"
+                          BorderThickness="{TemplateBinding BorderThickness}"
+                          HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                          VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                          x:Name="Root">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="PromodoroStates">
 
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition From="Inwork" To="Break">
+                                        <Storyboard BeginTime="0:0:2">
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Root" Storyboard.TargetProperty="Opacity">
+                                                <LinearDoubleKeyFrame KeyTime="0:0:0"   Value="0"/>
+                                                <LinearDoubleKeyFrame KeyTime="0:0:1"   Value="1"/>
+                                                <LinearDoubleKeyFrame KeyTime="0:0:6"   Value="1"/>
+                                                <LinearDoubleKeyFrame KeyTime="0:0:8"   Value="0"/>
+                                            </DoubleAnimationUsingKeyFrames>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Red" Storyboard.TargetProperty="OffsetX" EnableDependentAnimation="True">
+                                                <LinearDoubleKeyFrame KeyTime="0:0:2" Value="-10"/>
+                                                <EasingDoubleKeyFrame KeyTime="0:0:4" Value="10">
+                                                    <EasingDoubleKeyFrame.EasingFunction>
+                                                        <CircleEase EasingMode="EaseInOut"/>
+                                                    </EasingDoubleKeyFrame.EasingFunction>
+                                                </EasingDoubleKeyFrame>
+                                                <LinearDoubleKeyFrame KeyTime="0:0:5" Value="0"/>
+                                            </DoubleAnimationUsingKeyFrames>
+
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Red" Storyboard.TargetProperty="OffsetY" EnableDependentAnimation="True">
+                                                <LinearDoubleKeyFrame KeyTime="0:0:2" Value="0"/>
+                                                <EasingDoubleKeyFrame KeyTime="0:0:3" Value="10">
+                                                    <EasingDoubleKeyFrame.EasingFunction>
+                                                        <CircleEase EasingMode="EaseIn"/>
+                                                    </EasingDoubleKeyFrame.EasingFunction>
+                                                </EasingDoubleKeyFrame>
+                                                <EasingDoubleKeyFrame KeyTime="0:0:4" Value="0">
+                                                    <EasingDoubleKeyFrame.EasingFunction>
+                                                        <CircleEase EasingMode="EaseOut"/>
+                                                    </EasingDoubleKeyFrame.EasingFunction>
+                                                </EasingDoubleKeyFrame>
+                                            </DoubleAnimationUsingKeyFrames>
+
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Blue" Storyboard.TargetProperty="OffsetX" EnableDependentAnimation="True">
+                                                <LinearDoubleKeyFrame KeyTime="0:0:2" Value="10"/>
+                                                <EasingDoubleKeyFrame KeyTime="0:0:4" Value="-10">
+                                                    <EasingDoubleKeyFrame.EasingFunction>
+                                                        <CircleEase EasingMode="EaseInOut"/>
+                                                    </EasingDoubleKeyFrame.EasingFunction>
+                                                </EasingDoubleKeyFrame>
+                                                <LinearDoubleKeyFrame KeyTime="0:0:5" Value="0"/>
+                                            </DoubleAnimationUsingKeyFrames>
+
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Blue" Storyboard.TargetProperty="OffsetY" EnableDependentAnimation="True">
+                                                <LinearDoubleKeyFrame KeyTime="0:0:2" Value="0"/>
+                                                <EasingDoubleKeyFrame KeyTime="0:0:3" Value="-10">
+                                                    <EasingDoubleKeyFrame.EasingFunction>
+                                                        <CircleEase EasingMode="EaseIn"/>
+                                                    </EasingDoubleKeyFrame.EasingFunction>
+                                                </EasingDoubleKeyFrame>
+                                                <EasingDoubleKeyFrame KeyTime="0:0:4" Value="0">
+                                                    <EasingDoubleKeyFrame.EasingFunction>
+                                                        <CircleEase EasingMode="EaseOut"/>
+                                                    </EasingDoubleKeyFrame.EasingFunction>
+                                                </EasingDoubleKeyFrame>
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualTransition>
+
+                                    <VisualTransition From="Break" To="Work">
+                                        <Storyboard BeginTime="0:0:2">
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Root" Storyboard.TargetProperty="Opacity">
+                                                <LinearDoubleKeyFrame KeyTime="0:0:0"   Value="0"/>
+                                                <LinearDoubleKeyFrame KeyTime="0:0:1"   Value="1"/>
+                                                <LinearDoubleKeyFrame KeyTime="0:0:6"   Value="1"/>
+                                                <LinearDoubleKeyFrame KeyTime="0:0:8"   Value="0"/>
+                                            </DoubleAnimationUsingKeyFrames>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Red" Storyboard.TargetProperty="OffsetX" EnableDependentAnimation="True">
+                                                <LinearDoubleKeyFrame KeyTime="0:0:2" Value="10"/>
+                                                <EasingDoubleKeyFrame KeyTime="0:0:4" Value="-10">
+                                                    <EasingDoubleKeyFrame.EasingFunction>
+                                                        <CircleEase EasingMode="EaseInOut"/>
+                                                    </EasingDoubleKeyFrame.EasingFunction>
+                                                </EasingDoubleKeyFrame>
+                                                <LinearDoubleKeyFrame KeyTime="0:0:5" Value="0"/>
+                                            </DoubleAnimationUsingKeyFrames>
+
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Red" Storyboard.TargetProperty="OffsetY" EnableDependentAnimation="True">
+                                                <LinearDoubleKeyFrame KeyTime="0:0:2" Value="0"/>
+                                                <EasingDoubleKeyFrame KeyTime="0:0:3" Value="-10">
+                                                    <EasingDoubleKeyFrame.EasingFunction>
+                                                        <CircleEase EasingMode="EaseIn"/>
+                                                    </EasingDoubleKeyFrame.EasingFunction>
+                                                </EasingDoubleKeyFrame>
+                                                <EasingDoubleKeyFrame KeyTime="0:0:4" Value="0">
+                                                    <EasingDoubleKeyFrame.EasingFunction>
+                                                        <CircleEase EasingMode="EaseOut"/>
+                                                    </EasingDoubleKeyFrame.EasingFunction>
+                                                </EasingDoubleKeyFrame>
+                                            </DoubleAnimationUsingKeyFrames>
+
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Blue" Storyboard.TargetProperty="OffsetX" EnableDependentAnimation="True">
+                                                <LinearDoubleKeyFrame KeyTime="0:0:2" Value="-10"/>
+                                                <EasingDoubleKeyFrame KeyTime="0:0:4" Value="10">
+                                                    <EasingDoubleKeyFrame.EasingFunction>
+                                                        <CircleEase EasingMode="EaseInOut"/>
+                                                    </EasingDoubleKeyFrame.EasingFunction>
+                                                </EasingDoubleKeyFrame>
+                                                <LinearDoubleKeyFrame KeyTime="0:0:5" Value="0"/>
+                                            </DoubleAnimationUsingKeyFrames>
+
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Blue" Storyboard.TargetProperty="OffsetY" EnableDependentAnimation="True">
+                                                <LinearDoubleKeyFrame KeyTime="0:0:2" Value="0"/>
+                                                <EasingDoubleKeyFrame KeyTime="0:0:3" Value="10">
+                                                    <EasingDoubleKeyFrame.EasingFunction>
+                                                        <CircleEase EasingMode="EaseIn"/>
+                                                    </EasingDoubleKeyFrame.EasingFunction>
+                                                </EasingDoubleKeyFrame>
+                                                <EasingDoubleKeyFrame KeyTime="0:0:4" Value="0">
+                                                    <EasingDoubleKeyFrame.EasingFunction>
+                                                        <CircleEase EasingMode="EaseOut"/>
+                                                    </EasingDoubleKeyFrame.EasingFunction>
+                                                </EasingDoubleKeyFrame>
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualTransition>
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="Inwork" >
+                                    <VisualState.Setters>
+                                        <Setter Target="Root.Opacity" Value="0"/>
+                                        <Setter Target="Red.OffsetX" Value="-10"/>
+                                        <Setter Target="Blue.OffsetX" Value="10"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Break">
+                                    <VisualState.Setters>
+                                        <Setter Target="Root.Opacity" Value="0"/>
+                                        <Setter Target="Red.OffsetX" Value="10"/>
+                                        <Setter Target="Blue.OffsetX" Value="-10"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <controls:DropShadowPanel ShadowOpacity="1"
+                                                  BlurRadius="48"
+                                                  Color="#FFFF35BF"
+                                                  OffsetX="0"
+                                                  OffsetY="0"
+                                                  RelativeElement="{TemplateBinding RelativeElement}"
+                                                  x:Name="Red"/>
+
+
+                        <controls:DropShadowPanel BlurRadius="48"
+                                                  Color="#FF47E6FF" 
+                                                  OffsetX="0"
+                                                  OffsetY="0"
+                                                  RelativeElement="{TemplateBinding RelativeElement}"
+                                                  x:Name="Blue"/>
+
+                        <controls:DropShadowPanel ShadowOpacity="1"
+                                                  BlurRadius="18"
+                                                  Color="White"
+                                                  OffsetX="0"
+                                                  OffsetY="0"
+                                                  RelativeElement="{TemplateBinding RelativeElement}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    
     <Style TargetType="controls:PomodoroStateButton">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="{ThemeResource SystemBaseHighColor}"/>
@@ -336,7 +518,8 @@
                                                             RelativeElement="{Binding ElementName=Shape}" 
                                                             Style="{StaticResource Shadow}"/>
                                     <controls:OutlinePanel RelativeElement="{Binding ElementName=Shape}" x:Name="Outline"/>
-
+                                    <controls:GlowPanel RelativeElement="{Binding ElementName=Shape}" 
+                                                        IsInPomodoro="{TemplateBinding IsInPomodoro}"/>
                                     <Polygon Points="{Binding Source={StaticResource ProgressToPointCollectionBridge},Path=Points}"
                                              StrokeThickness="4"
                                              Stretch="None" 
