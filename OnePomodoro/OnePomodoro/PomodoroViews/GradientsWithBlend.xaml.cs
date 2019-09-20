@@ -128,6 +128,7 @@ namespace OnePomodoro.PomodoroViews
 
                 _backgroundVisual.Size = e.NewSize.ToVector2();
                 _foregroundBrush.CenterPoint = _backgroundVisual.Size / 2;
+                _backgroundBrush.CenterPoint = _backgroundVisual.Size / 2;
             };
 
             ViewModel.IsInPomodoroChanged += (s, e) =>
@@ -176,7 +177,7 @@ namespace OnePomodoro.PomodoroViews
             }
         }
 
-        private void StartOffsetAnimation(CompositionColorGradientStop gradientOffset,float offset)
+        private void StartOffsetAnimation(CompositionColorGradientStop gradientOffset, float offset)
         {
             var offsetAnimation = _compositor.CreateScalarKeyFrameAnimation();
             offsetAnimation.Duration = TimeSpan.FromSeconds(1);
@@ -188,7 +189,7 @@ namespace OnePomodoro.PomodoroViews
         {
             var colorAnimation = _compositor.CreateColorKeyFrameAnimation();
             colorAnimation.Duration = TimeSpan.FromSeconds(2);
-            colorAnimation.Direction =Windows.UI.Composition.AnimationDirection.Alternate;
+            colorAnimation.Direction = Windows.UI.Composition.AnimationDirection.Alternate;
             colorAnimation.InsertKeyFrame(1.0f, color);
             gradientOffset.StartAnimation(nameof(CompositionColorGradientStop.Color), colorAnimation);
         }

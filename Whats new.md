@@ -10,3 +10,7 @@ Add some Pomodoros.
 **2019-08-23 v1.5:**
 
 Add One Pomodoro.
+
+**2019-09-20 v1.6:**
+
+Add a pomodoro state button.
