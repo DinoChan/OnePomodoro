@@ -30,12 +30,28 @@ namespace OnePomodoro.PomodoroViews
         public LongShadow()
         {
             InitializeComponent();
-            MackLongShadow(108, 0.3f, InWorkCountDown, InworkBackground, InworkElement, Color.FromArgb(255, 232, 122, 105));
-            MackLongShadow(108, 0.3f, BreakCountDown, BreakBackground, BreakElement, Color.FromArgb(255, 82, 113, 194));
+            MackLongShadow(108, 0.3f, InWorkCountDown, InworkBackground, Color.FromArgb(255, 232, 122, 105));
+            MackLongShadow(108, 0.3f, BreakCountDown, BreakBackground, Color.FromArgb(255, 82, 113, 194));
+
+            var rootVisual = ElementCompositionPreview.GetElementVisual(Root);
+            var v = rootVisual.Orientation;
+            rootVisual.CenterPoint = new Vector3(400, 0, 0);
+            rootVisual.BackfaceVisibility =  CompositionBackfaceVisibility.Hidden;
+            Loaded += (S, E) =>
+            {
+
+                var relaxGradientStopOffsetAnimation = rootVisual.Compositor.CreateQuaternionKeyFrameAnimation();
+                relaxGradientStopOffsetAnimation.Duration = TimeSpan.FromSeconds(5);
+                // relaxGradientStopOffsetAnimation.DelayTime = TimeSpan.FromSeconds(2);
+                relaxGradientStopOffsetAnimation.InsertKeyFrame(1.0f, new Quaternion(0,2f,0,1));
+                rootVisual.StartAnimation(nameof(rootVisual.Orientation), relaxGradientStopOffsetAnimation);
+
+
+            };
         }
 
 
-        private void MackLongShadow(int depth, float opacity, TextBlock textElement, FrameworkElement shadowElement, Panel root, Color color)
+        private void MackLongShadow(int depth, float opacity, TextBlock textElement, FrameworkElement shadowElement, Color color)
         {
             var textVisual = ElementCompositionPreview.GetElementVisual(textElement);
             var compositor = textVisual.Compositor;
