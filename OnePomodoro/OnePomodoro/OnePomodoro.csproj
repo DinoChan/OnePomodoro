@@ -169,6 +169,9 @@
     <Compile Include="PomodoroViews\Gradients.xaml.cs">
       <DependentUpon>Gradients.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PomodoroViews\LongShadow.xaml.cs">
+      <DependentUpon>LongShadow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PomodoroViews\TheFirst.xaml.cs">
       <DependentUpon>TheFirst.xaml</DependentUpon>
     </Compile>
@@ -240,6 +243,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PomodoroViews\Gradients.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PomodoroViews\LongShadow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

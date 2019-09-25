@@ -1,0 +1,113 @@
+﻿<local:PomodoroView x:Class="OnePomodoro.PomodoroViews.LongShadow"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="using:OnePomodoro.PomodoroViews"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    mc:Ignorable="d"
+                    xmlns:converters="using:Microsoft.Toolkit.Uwp.UI.Converters"
+                    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
+                    xmlns:viewModels="using:OnePomodoro.ViewModels"
+                    xmlns:helpers="using:OnePomodoro.Helpers"
+                    xmlns:controls="using:OnePomodoro.Controls"
+                    x:DefaultBindMode="OneWay"
+                    d:DataContext="{d:DesignInstance Type=viewModels:PomodoroViewModel}"
+                    RequestedTheme="Dark"
+                    d:DesignHeight="900"
+                    d:DesignWidth="1920">
+    <UserControl.Resources>
+        <converters:BoolToObjectConverter TrueValue="Top"
+                                          FalseValue="Bottom"
+                                          x:Key="BoolToVerticalAlignmentConverter" />
+        <converters:BoolToObjectConverter TrueValue="Left"
+                                          FalseValue="Right"
+                                          x:Key="BoolToVerticalHorizontalAlignment" />
+
+    </UserControl.Resources>
+    <Grid x:Name="ContentArea">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="60" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1400" />
+                    </VisualState.StateTriggers>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Grid Grid.Row="1"
+              Background="#FF1F1F1F">
+            <StackPanel HorizontalAlignment="Center" Margin="40">
+                <TextBlock Text="One Pomodoro" HorizontalAlignment="Center" FontSize="48"/>
+                <TextBlock Text="The Pomodoro technique makes you more productive" HorizontalAlignment="Center"
+                           Margin="0,12,0,0" FontSize="15"/>
+                <Grid Height="500" Width="360"  Margin="0,24,0,0" CornerRadius="1">
+                    <Grid   Background="#FFE87A69" x:Name="InworkElement">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Focus" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                        <Grid  HorizontalAlignment="Center"
+                               Grid.Row="1"
+                               VerticalAlignment="Center">
+                            <Rectangle x:Name="InworkBackground"/>
+                            <TextBlock Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
+                               x:Name="InWorkCountDown"
+                               FontFamily="{StaticResource TimeFont}"
+                               FontSize="92"
+                               FontWeight="Bold"
+                              />
+                        </Grid>
+                        <controls:PomodoroStateButton HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  StartCommand="{Binding StartTimerCommand}"
+                                                  StopCommand="{Binding StopTimerCommand}"
+                                                  IsInPomodoro="{x:Bind ViewModel.IsInPomodoro}"
+                                                  IsTimerInProgress="{x:Bind ViewModel.IsTimerInProgress}"
+                                                  Grid.Row="2"/>
+                    </Grid>
+
+                    <Grid  Background="#FF5271c2" x:Name="BreakElement" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Relax" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                        <Grid HorizontalAlignment="Center"
+                               Grid.Row="1"
+                              VerticalAlignment="Center">
+
+                            <Rectangle x:Name="BreakBackground"/>
+                            <TextBlock Text="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
+                               x:Name="BreakCountDown"
+                               FontFamily="{StaticResource TimeFont}"
+                               FontSize="120"
+                               FontWeight="Bold"
+                               />
+                        </Grid>
+                        <controls:PomodoroStateButton HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  StartCommand="{Binding StartTimerCommand}"
+                                                  StopCommand="{Binding StopTimerCommand}"
+                                                  IsInPomodoro="{x:Bind ViewModel.IsInPomodoro}"
+                                                  IsTimerInProgress="{x:Bind ViewModel.IsTimerInProgress}"
+                                                  Grid.Row="2"/>
+                    </Grid>
+                </Grid>
+                
+            </StackPanel>
+
+
+        </Grid>
+    </Grid>
+</local:PomodoroView>
