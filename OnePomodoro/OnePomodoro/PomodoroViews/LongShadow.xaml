@@ -29,7 +29,7 @@
             <VisualStateGroup>
                 <VisualState>
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="60" />
+                        <AdaptiveTrigger MinWindowHeight="60" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
 
@@ -37,7 +37,7 @@
                 </VisualState>
                 <VisualState>
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="1400" />
+                        <AdaptiveTrigger MinWindowHeight="800" />
                     </VisualState.StateTriggers>
                 </VisualState>
             </VisualStateGroup>
@@ -48,63 +48,94 @@
                 <TextBlock Text="One Pomodoro" HorizontalAlignment="Center" FontSize="48"/>
                 <TextBlock Text="The Pomodoro technique makes you more productive" HorizontalAlignment="Center"
                            Margin="0,12,0,0" FontSize="15"/>
-                <Grid Height="500" Width="360"  Margin="0,24,0,0" CornerRadius="1">
-                    <Grid   Background="#FFE87A69" x:Name="InworkElement">
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <TextBlock Text="Focus" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
-                        <Grid  HorizontalAlignment="Center"
-                               Grid.Row="1"
-                               VerticalAlignment="Center">
-                            <Rectangle x:Name="InworkBackground"/>
-                            <TextBlock Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
-                               x:Name="InWorkCountDown"
-                               FontFamily="{StaticResource TimeFont}"
-                               FontSize="92"
-                               FontWeight="Bold"
-                              />
-                        </Grid>
-                        <controls:PomodoroStateButton HorizontalAlignment="Center"
+                <controls:FlipSide Height="500" Width="360"  Margin="0,24,0,0" x:Name="FlipSide"  >
+                    <controls:FlipSide.Side1>
+                        <Grid   Background="#FFE87A69" x:Name="InworkElement" CornerRadius="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="Focus" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+
+
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Center"
+                                        Grid.Row="1"
+                                        VerticalAlignment="Center">
+                                <Grid>
+                                    <Rectangle x:Name="InworkBackground"/>
+
+                                    <TextBlock Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm}"
+                                               x:Name="InWorkCountDown"
+                                               FontFamily="{StaticResource TimeFont}"
+                                               FontSize="128"
+                                               FontWeight="Bold"/>
+                                </Grid>
+                                <Grid  VerticalAlignment="Bottom"
+                                       Margin="12,0,0,10">
+                                    <Rectangle x:Name="InworkSecondBackground"/>
+                                    <TextBlock Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=ss}"
+                                               x:Name="InWorkCountDownSecond"
+                                               FontFamily="{StaticResource TimeFont}"
+                                               FontSize="80" 
+                                               FontWeight="Bold"/>
+                                </Grid>
+                            </StackPanel>
+
+                            <controls:PomodoroStateButton HorizontalAlignment="Center"
                                                   VerticalAlignment="Center"
                                                   StartCommand="{Binding StartTimerCommand}"
                                                   StopCommand="{Binding StopTimerCommand}"
                                                   IsInPomodoro="{x:Bind ViewModel.IsInPomodoro}"
                                                   IsTimerInProgress="{x:Bind ViewModel.IsTimerInProgress}"
                                                   Grid.Row="2"/>
-                    </Grid>
-
-                    <Grid  Background="#FF5271c2" x:Name="BreakElement" >
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <TextBlock Text="Relax" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
-                        <Grid HorizontalAlignment="Center"
-                               Grid.Row="1"
-                              VerticalAlignment="Center">
-
-                            <Rectangle x:Name="BreakBackground"/>
-                            <TextBlock Text="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
-                               x:Name="BreakCountDown"
-                               FontFamily="{StaticResource TimeFont}"
-                               FontSize="120"
-                               FontWeight="Bold"
-                               />
                         </Grid>
-                        <controls:PomodoroStateButton HorizontalAlignment="Center"
+                    </controls:FlipSide.Side1>
+                    <controls:FlipSide.Side2>
+                        <Grid  Background="#FF5271c2" x:Name="BreakElement" CornerRadius="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="Relax" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+
+
+                            <StackPanel HorizontalAlignment="Center"
+                                        Grid.Row="1"
+                                        VerticalAlignment="Center"
+                                        Orientation="Horizontal">
+                                <Grid>
+                                    <Rectangle x:Name="BreakBackground"/>
+                                    <TextBlock Text="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm}"
+                                               x:Name="BreakCountDown"
+                                               FontFamily="{StaticResource TimeFont}"
+                                               FontSize="128"
+                                               FontWeight="Bold"/>
+                                </Grid>
+                                <Grid Margin="12,0,0,10" VerticalAlignment="Bottom">
+                                    <Rectangle x:Name="BreakSecondBackground"/>
+                                    <TextBlock Text="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=ss}"
+                                               x:Name="BreakCountDownSecond"
+                                               FontFamily="{StaticResource TimeFont}"
+                                               FontSize="80" 
+                                               FontWeight="Bold"/>
+                                </Grid>
+                            </StackPanel>
+
+                            <controls:PomodoroStateButton HorizontalAlignment="Center"
                                                   VerticalAlignment="Center"
                                                   StartCommand="{Binding StartTimerCommand}"
                                                   StopCommand="{Binding StopTimerCommand}"
                                                   IsInPomodoro="{x:Bind ViewModel.IsInPomodoro}"
                                                   IsTimerInProgress="{x:Bind ViewModel.IsTimerInProgress}"
                                                   Grid.Row="2"/>
-                    </Grid>
-                </Grid>
-                
+                        </Grid>
+                    </controls:FlipSide.Side2>
+                </controls:FlipSide>
+
+
             </StackPanel>
 
 

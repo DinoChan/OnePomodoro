@@ -17,22 +17,25 @@ namespace OnePomodoro.Controls
     [TemplateVisualState(GroupName = CommonStatesName, Name = NormalStateName)]
     [TemplateVisualState(GroupName = CommonStatesName, Name = PointerOverStateName)]
     [TemplateVisualState(GroupName = CommonStatesName, Name = PressedStateName)]
-    [TemplatePart(Name = OutlineBorderName, Type = typeof(Border))]
+    [TemplateVisualState(GroupName = PromodoroStatesName, Name = InworkStateName)]
+    [TemplateVisualState(GroupName = PromodoroStatesName, Name = BreakStateName)]
 
-    public class ButtonDecorator : Control
+    public class ButtonDecorator : ElementDecorator
     {
-        private const string CommonStatesName = "PromodoroStates";
+        private const string CommonStatesName = "CommonStates";
         private const string NormalStateName = "Normal";
         private const string PointerOverStateName = "PointerOver";
         private const string PressedStateName = "Pressed";
-
-        private const string OutlineBorderName = "OutlineBorder";
+        private const string PromodoroStatesName = "PromodoroStates";
+        private const string InworkStateName = "Inwork";
+        private const string BreakStateName = "Break";
 
         /// <summary>
-        /// 标识 RelativeElement 依赖属性。
+        /// 标识 IsInPomodoro 依赖属性。
         /// </summary>
-        public static readonly DependencyProperty RelativeElementProperty =
-            DependencyProperty.Register(nameof(RelativeElement), typeof(FrameworkElement), typeof(ButtonDecorator), new PropertyMetadata(default(FrameworkElement), OnRelativeElementChanged));
+        public static readonly DependencyProperty IsInPomodoroProperty =
+            DependencyProperty.Register(nameof(IsInPomodoro), typeof(bool), typeof(ButtonDecorator), new PropertyMetadata(default(bool), OnIsInPomodoroChanged));
+
 
         /// <summary>
         /// 标识 State 依赖属性。
@@ -40,30 +43,13 @@ namespace OnePomodoro.Controls
         public static readonly DependencyProperty StateProperty =
             DependencyProperty.Register(nameof(State), typeof(ButtonState), typeof(ButtonDecorator), new PropertyMetadata(ButtonState.Normal, OnStateChanged));
 
-
-
-        private Border _outlineBorder;
-        private readonly Compositor _compositor;
-        protected SpriteVisual Visual { get; private set; }
-        private CompositionMaskBrush _maskBrush;
-
+      
         public ButtonDecorator()
         {
             this.DefaultStyleKey = typeof(ButtonDecorator);
-            _compositor = ElementCompositionPreview.GetElementVisual(this).Compositor;
-            Visual = _compositor.CreateSpriteVisual();
-            _maskBrush = _compositor.CreateMaskBrush();
-            Visual.Brush = _maskBrush;
-        }
+           }
 
-        /// <summary>
-        /// 获取或设置RelativeElement的值
-        /// </summary>
-        public FrameworkElement RelativeElement
-        {
-            get => (FrameworkElement)GetValue(RelativeElementProperty);
-            set => SetValue(RelativeElementProperty, value);
-        }
+       
 
         /// <summary>
         /// 获取或设置State的值
@@ -74,38 +60,33 @@ namespace OnePomodoro.Controls
             set => SetValue(StateProperty, value);
         }
 
-        protected override void OnApplyTemplate()
+        /// <summary>
+        /// 获取或设置IsInPomodoro的值
+        /// </summary>
+        public bool IsInPomodoro
         {
-            base.OnApplyTemplate();
-            _outlineBorder = GetTemplateChild(OutlineBorderName) as Border;
-            if (_outlineBorder == null)
-                return;
-
-            ElementCompositionPreview.SetElementChildVisual(_outlineBorder, Visual);
-
-            ConfigureShadowVisualForCastingElement();
-            UpdateVisualStates(false);
+            get => (bool)GetValue(IsInPomodoroProperty);
+            set => SetValue(IsInPomodoroProperty, value);
         }
 
         /// <summary>
-        /// RelativeElement 属性更改时调用此方法。
+        /// IsInPomodoro 属性更改时调用此方法。
         /// </summary>
-        /// <param name="oldValue">RelativeElement 属性的旧值。</param>
-        /// <param name="newValue">RelativeElement 属性的新值。</param>
-        protected virtual void OnRelativeElementChanged(FrameworkElement oldValue, FrameworkElement newValue)
+        /// <param name="oldValue">IsInPomodoro 属性的旧值。</param>
+        /// <param name="newValue">IsInPomodoro 属性的新值。</param>
+        protected virtual void OnIsInPomodoroChanged(bool oldValue, bool newValue)
         {
-            if (oldValue != null)
-            {
-                oldValue.SizeChanged -= OnSizeChanged;
-            }
-
-            if (newValue != null)
-            {
-                newValue.SizeChanged += OnSizeChanged;
-            }
-
-            ConfigureShadowVisualForCastingElement();
+            UpdateVisualStates(true);
         }
+
+
+        protected override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+           
+            UpdateVisualStates(false);
+        }
+
 
         /// <summary>
         /// State 属性更改时调用此方法。
@@ -135,17 +116,7 @@ namespace OnePomodoro.Controls
                     break;
             }
             VisualStateManager.GoToState(this, state, useTransitions);
-        }
-
-        private static void OnRelativeElementChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
-        {
-            var oldValue = (FrameworkElement)args.OldValue;
-            var newValue = (FrameworkElement)args.NewValue;
-            if (oldValue == newValue)
-                return;
-
-            var target = obj as ButtonDecorator;
-            target?.OnRelativeElementChanged(oldValue, newValue);
+            VisualStateManager.GoToState(this, IsInPomodoro ? InworkStateName : BreakStateName, useTransitions);    
         }
 
         private static void OnStateChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
@@ -159,37 +130,17 @@ namespace OnePomodoro.Controls
             target?.OnStateChanged(oldValue, newValue);
         }
 
-        private void ConfigureShadowVisualForCastingElement()
+        private static void OnIsInPomodoroChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
         {
-            UpdateOutlineMask();
+            var oldValue = (bool)args.OldValue;
+            var newValue = (bool)args.NewValue;
+            if (oldValue == newValue)
+                return;
 
-            UpdateOutlineSize();
+            var target = obj as ButtonDecorator;
+            target?.OnIsInPomodoroChanged(oldValue, newValue);
         }
 
-        protected virtual void UpdateOutlineMask()
-        {
 
-        }
-
-        private void OnSizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            UpdateOutlineSize();
-        }
-
-        private void UpdateOutlineSize()
-        {
-            if (Visual != null)
-            {
-                Vector2 newSize = new Vector2(0, 0);
-                Vector3 centerPoint = new Vector3(0, 0, 0);
-                if (RelativeElement != null)
-                {
-                    newSize = new Vector2((float)RelativeElement.ActualWidth, (float)RelativeElement.ActualHeight);
-                    centerPoint = new Vector3((float)RelativeElement.ActualWidth / 2, (float)RelativeElement.ActualHeight / 2, 0);
-                }
-                Visual.CenterPoint = centerPoint;
-                Visual.Size = newSize;
-            }
-        }
     }
 }

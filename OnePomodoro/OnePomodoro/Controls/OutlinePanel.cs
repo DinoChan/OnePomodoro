@@ -14,7 +14,7 @@ using Windows.UI.Xaml.Shapes;
 
 namespace OnePomodoro.Controls
 {
-    public class OutlinePanel : ButtonDecorator
+    public class OutlinePanel : ElementDecorator
     {
         private readonly Compositor _compositor;
         private CompositionMaskBrush _maskBrush;
@@ -80,6 +80,8 @@ namespace OnePomodoro.Controls
         protected virtual void OnColorChanged(Color oldValue, Color newValue)
         {
             _maskBrushSource = _compositor.CreateColorBrush(newValue);
+            if (_maskBrush != null)
+                _maskBrush.Source = _maskBrushSource;
         }
     }
 }

@@ -18,7 +18,6 @@ namespace OnePomodoro.Controls
 
     public class PomodoroStateButton : Button
     {
-
         private const string ProgressStatesName = "ProgressStates";
         private const string IdleStateName = "Idle";
         private const string BusyStateName = "Busy";
@@ -50,7 +49,6 @@ namespace OnePomodoro.Controls
         /// </summary>
         public static readonly DependencyProperty StopCommandProperty =
             DependencyProperty.Register(nameof(StopCommand), typeof(ICommand), typeof(PomodoroStateButton), new PropertyMetadata(null));
-
 
         /// <summary>
         /// 标识 PomodoroColor 依赖属性。
@@ -150,8 +148,6 @@ namespace OnePomodoro.Controls
         {
             UpdateVisualStates(true);
         }
-
-
 
         protected virtual void UpdateVisualStates(bool useTransitions)
         {

@@ -138,7 +138,8 @@
     <Compile Include="Controls\ButtonState.cs" />
     <Compile Include="Controls\DropShadowPanel.cs" />
     <Compile Include="Controls\DropShadowPanel.Properties.cs" />
-    <Compile Include="Controls\GlowPanel.cs" />
+    <Compile Include="Controls\ElementDecorator.cs" />
+    <Compile Include="Controls\FlipSide.cs" />
     <Compile Include="Controls\OutlinePanel.cs" />
     <Compile Include="Controls\PomodoroStateButton.cs" />
     <Compile Include="Controls\ProgressToPointCollectionBridge.cs" />
@@ -149,6 +150,7 @@
     <Compile Include="Helpers\EnumToBooleanConverter.cs" />
     <Compile Include="Helpers\MarkdownTextBlockExtensions.cs" />
     <Compile Include="Helpers\NegationBoolToVisibilityConverter.cs" />
+    <Compile Include="Helpers\PromodoroViewModelInformation.cs" />
     <Compile Include="Helpers\ScreenshotAttribute.cs" />
     <Compile Include="Helpers\SettingsStorageExtensions.cs" />
     <Compile Include="Helpers\TitleAttribute.cs" />

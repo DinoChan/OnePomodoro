@@ -12,7 +12,7 @@ using Windows.UI.Xaml.Shapes;
 
 namespace OnePomodoro.Controls
 {
-    public partial class DropShadowPanel : ButtonDecorator
+    public partial class DropShadowPanel : ElementDecorator
     {
         private readonly Compositor _compositor;
         private CompositionMaskBrush _maskBrush;
