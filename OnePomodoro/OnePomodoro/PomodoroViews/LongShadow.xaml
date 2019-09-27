@@ -45,7 +45,7 @@
         <Grid Grid.Row="1"
               Background="#FF1F1F1F">
             <StackPanel HorizontalAlignment="Center" Margin="40">
-                <TextBlock Text="One Pomodoro" HorizontalAlignment="Center" FontSize="48"/>
+                <TextBlock Text="OnePomodoro" HorizontalAlignment="Center" FontSize="48"/>
                 <TextBlock Text="The Pomodoro technique makes you more productive" HorizontalAlignment="Center"
                            Margin="0,12,0,0" FontSize="15"/>
                 <controls:FlipSide Height="500" Width="360"  Margin="0,24,0,0" x:Name="FlipSide"  >
@@ -69,16 +69,16 @@
                                     <TextBlock Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm}"
                                                x:Name="InWorkCountDown"
                                                FontFamily="{StaticResource TimeFont}"
-                                               FontSize="128"
+                                               FontSize="148"
                                                FontWeight="Bold"/>
                                 </Grid>
                                 <Grid  VerticalAlignment="Bottom"
-                                       Margin="12,0,0,10">
+                                       Margin="12,0,0,-16">
                                     <Rectangle x:Name="InworkSecondBackground"/>
                                     <TextBlock Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=ss}"
                                                x:Name="InWorkCountDownSecond"
                                                FontFamily="{StaticResource TimeFont}"
-                                               FontSize="80" 
+                                               FontSize="108" 
                                                FontWeight="Bold"/>
                                 </Grid>
                             </StackPanel>
@@ -111,15 +111,15 @@
                                     <TextBlock Text="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm}"
                                                x:Name="BreakCountDown"
                                                FontFamily="{StaticResource TimeFont}"
-                                               FontSize="128"
+                                               FontSize="148"
                                                FontWeight="Bold"/>
                                 </Grid>
-                                <Grid Margin="12,0,0,10" VerticalAlignment="Bottom">
+                                <Grid Margin="12,0,0,-16" VerticalAlignment="Bottom">
                                     <Rectangle x:Name="BreakSecondBackground"/>
                                     <TextBlock Text="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=ss}"
                                                x:Name="BreakCountDownSecond"
                                                FontFamily="{StaticResource TimeFont}"
-                                               FontSize="80" 
+                                               FontSize="108" 
                                                FontWeight="Bold"/>
                                 </Grid>
                             </StackPanel>
