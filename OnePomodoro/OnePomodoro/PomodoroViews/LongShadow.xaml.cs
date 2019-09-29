@@ -23,7 +23,7 @@ using Windows.UI.Xaml.Navigation;
 namespace OnePomodoro.PomodoroViews
 {
     [Title("LongShadow")]
-    [Screenshot("/Assets/Screenshots/TheFirst.png")]
+    [Screenshot("/Assets/Screenshots/LongShadow.png")]
     public sealed partial class LongShadow : PomodoroView
     {
 

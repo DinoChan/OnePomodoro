@@ -442,7 +442,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <pomodoroControls:TitleBar>
+        <pomodoroControls:TitleBar IsTitleVisibile="True">
             <pomodoroControls:TitleBar.Buttons>
                 <Button x:Name="BackButton"
                         ToolTipService.ToolTip="{x:Null}"
@@ -477,7 +477,8 @@
                 <Grid>
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
                         <controls:MarkdownTextBlock x:Name="WhatsNewMarkdownTextBlock"
-                                                    Padding="40" />
+                                                    Padding="40"
+                                                    FontFamily="{StaticResource TimeFont}"/>
                     </ScrollViewer>
                 </Grid>
             </PivotItem>
