@@ -138,7 +138,8 @@
     <Compile Include="Controls\ButtonState.cs" />
     <Compile Include="Controls\DropShadowPanel.cs" />
     <Compile Include="Controls\DropShadowPanel.Properties.cs" />
-    <Compile Include="Controls\GlowPanel.cs" />
+    <Compile Include="Controls\ElementDecorator.cs" />
+    <Compile Include="Controls\FlipSide.cs" />
     <Compile Include="Controls\OutlinePanel.cs" />
     <Compile Include="Controls\PomodoroStateButton.cs" />
     <Compile Include="Controls\ProgressToPointCollectionBridge.cs" />
@@ -149,6 +150,7 @@
     <Compile Include="Helpers\EnumToBooleanConverter.cs" />
     <Compile Include="Helpers\MarkdownTextBlockExtensions.cs" />
     <Compile Include="Helpers\NegationBoolToVisibilityConverter.cs" />
+    <Compile Include="Helpers\PromodoroViewModelInformation.cs" />
     <Compile Include="Helpers\ScreenshotAttribute.cs" />
     <Compile Include="Helpers\SettingsStorageExtensions.cs" />
     <Compile Include="Helpers\TitleAttribute.cs" />
@@ -163,11 +165,17 @@
     <Compile Include="PomodoroViews\TestPomodoro.xaml.cs">
       <DependentUpon>TestPomodoro.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PomodoroViews\SmpleTextWithAcrylic.xaml.cs">
+      <DependentUpon>SmpleTextWithAcrylic.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PomodoroViews\TheBigOne.xaml.cs">
       <DependentUpon>TheBigOne.xaml</DependentUpon>
     </Compile>
     <Compile Include="PomodoroViews\Gradients.xaml.cs">
       <DependentUpon>Gradients.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PomodoroViews\LongShadow.xaml.cs">
+      <DependentUpon>LongShadow.xaml</DependentUpon>
     </Compile>
     <Compile Include="PomodoroViews\TheFirst.xaml.cs">
       <DependentUpon>TheFirst.xaml</DependentUpon>
@@ -235,11 +243,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PomodoroViews\SmpleTextWithAcrylic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="PomodoroViews\TheBigOne.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PomodoroViews\Gradients.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PomodoroViews\LongShadow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -333,6 +349,7 @@
     <Content Include="Assets\LargeTile.scale-400.png" />
     <Content Include="Assets\Screenshots\Gradients.png" />
     <Content Include="Assets\Screenshots\GradientsWithBlend.png" />
+    <Content Include="Assets\Screenshots\LongShadow.png" />
     <Content Include="Assets\Screenshots\SimpleCircle.png" />
     <Content Include="Assets\Screenshots\TheBigOne.png" />
     <Content Include="Assets\Screenshots\TheFirst.png" />

@@ -29,7 +29,7 @@ namespace OnePomodoro.Views
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-
+            
             if (PrivacyStatementMarkdownTextBlock.Text != null)
             {
                 var uri = new Uri("ms-appx:///Assets/Privacy Statement.md");

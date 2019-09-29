@@ -28,6 +28,7 @@ namespace OnePomodoro.PomodoroViews
             typeof(SimpleCircle),
             typeof(Gradients),
             typeof(GradientsWithBlend),
+            typeof(LongShadow),
         };
 
     }

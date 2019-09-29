@@ -15,18 +15,44 @@
             <Setter.Value>
                 <ControlTemplate TargetType="controls:OutlinePanel">
                     <Grid>
+                        <Border x:Name="OutlineBorder" 
+                                HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                VerticalAlignment="{TemplateBinding HorizontalAlignment}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style TargetType="controls:ButtonDecorator" x:Key="Outline">
+        <Setter Property="IsTabStop"
+                Value="False" />
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="IsHitTestVisible" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:ButtonDecorator">
+                    <Grid Background="{TemplateBinding Background}"
+                          BorderBrush="{TemplateBinding BorderBrush}"
+                          BorderThickness="{TemplateBinding BorderThickness}"
+                          HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                          VerticalAlignment="{TemplateBinding VerticalAlignment}">
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualStateGroup.Transitions>
                                     <VisualTransition From="Normal" To="PointerOver" >
                                         <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="OutlineBorder" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.5">
+                                            <DoubleAnimation Storyboard.TargetName="Outline" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.5">
                                                 <DoubleAnimation.EasingFunction>
                                                     <CubicEase EasingMode="EaseOut"/>
                                                 </DoubleAnimation.EasingFunction>
                                             </DoubleAnimation>
 
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OutlineBorder" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Outline" Storyboard.TargetProperty="(UIElement.Visibility)">
                                                 <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="Visible"/>
                                                 <DiscreteObjectKeyFrame KeyTime="00:00:0.5" Value="Collapsed"/>
                                             </ObjectAnimationUsingKeyFrames>
@@ -34,13 +60,13 @@
                                     </VisualTransition>
                                     <VisualTransition To="Normal" >
                                         <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="OutlineBorder" Storyboard.TargetProperty="Opacity" To="0.2" Duration="0:0:1">
+                                            <DoubleAnimation Storyboard.TargetName="Outline" Storyboard.TargetProperty="Opacity" To="0.2" Duration="0:0:1">
                                                 <DoubleAnimation.EasingFunction>
                                                     <CubicEase EasingMode="EaseOut"/>
                                                 </DoubleAnimation.EasingFunction>
                                             </DoubleAnimation>
 
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OutlineBorder" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Outline" Storyboard.TargetProperty="(UIElement.Visibility)">
                                                 <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="Visible"/>
                                                 <DiscreteObjectKeyFrame KeyTime="00:00:0.5" Value="Collapsed"/>
                                             </ObjectAnimationUsingKeyFrames>
@@ -51,25 +77,26 @@
                                     <VisualState.Setters>
                                         <Setter Target="Scale.ScaleX" Value="1"/>
                                         <Setter Target="Scale.ScaleY" Value="1"/>
-                                        <Setter Target="OutlineBorder.Opacity" Value="0.2"/>
-                                        <Setter Target="OutlineBorder.Visibility" Value="Collapsed"/>
+                                        <Setter Target="Outline.Opacity" Value="0.2"/>
+                                        <Setter Target="Outline.Visibility" Value="Collapsed"/>
                                     </VisualState.Setters>
                                 </VisualState>
                                 <VisualState x:Name="PointerOver">
                                     <VisualState.Setters>
                                         <Setter Target="Scale.ScaleX" Value="2.6"/>
                                         <Setter Target="Scale.ScaleY" Value="2.6"/>
-                                        <Setter Target="OutlineBorder.Opacity" Value="0"/>
-                                        <Setter Target="OutlineBorder.Visibility" Value="Visible"/>
+                                        <Setter Target="Outline.Opacity" Value="0"/>
+                                        <Setter Target="Outline.Visibility" Value="Visible"/>
                                     </VisualState.Setters>
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <Border x:Name="OutlineBorder" 
-                                Visibility="Collapsed" 
-                                Opacity="0.5"
-                                HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                                VerticalAlignment="{TemplateBinding HorizontalAlignment}" >
+
+
+                        <controls:OutlinePanel x:Name="Outline" 
+                                               Visibility="Collapsed"
+                                               Opacity="0.5"
+                                               RelativeElement="{TemplateBinding RelativeElement}">
                             <interactivity:Interaction.Behaviors>
                                 <behaviors:Scale x:Name="Scale"
                                                     ScaleX="1"
@@ -82,13 +109,12 @@
                                                     EasingMode="EaseOut"
                                                     AutomaticallyStart="True"/>
                             </interactivity:Interaction.Behaviors>
-                        </Border>
+                        </controls:OutlinePanel>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-
 
     <Style TargetType="controls:DropShadowPanel">
         <Setter Property="IsTabStop"
@@ -191,7 +217,7 @@
         </Setter>
     </Style>
 
-    <Style TargetType="controls:GlowPanel" >
+    <Style TargetType="controls:ButtonDecorator"  x:Key="Glow">
         <Setter Property="IsTabStop"
                 Value="False" />
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
@@ -201,7 +227,7 @@
         <Setter Property="IsHitTestVisible" Value="False"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="controls:GlowPanel">
+                <ControlTemplate TargetType="controls:ButtonDecorator">
                     <Grid Background="{TemplateBinding Background}"
                           BorderBrush="{TemplateBinding BorderBrush}"
                           BorderThickness="{TemplateBinding BorderThickness}"
@@ -373,7 +399,6 @@
         </Setter>
     </Style>
 
-    
     <Style TargetType="controls:PomodoroStateButton">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="{ThemeResource SystemBaseHighColor}"/>
@@ -517,8 +542,8 @@
                                                             controls:DropShadowPanel.IsMasked="{TemplateBinding controls:DropShadowPanel.IsMasked}"
                                                             RelativeElement="{Binding ElementName=Shape}" 
                                                             Style="{StaticResource Shadow}"/>
-                                    <controls:OutlinePanel RelativeElement="{Binding ElementName=Shape}" x:Name="Outline"/>
-                                    <controls:GlowPanel RelativeElement="{Binding ElementName=Shape}" 
+                                    <controls:ButtonDecorator RelativeElement="{Binding ElementName=Shape}" x:Name="Outline" Style="{StaticResource Outline}"/>
+                                    <controls:ButtonDecorator RelativeElement="{Binding ElementName=Shape}" Style="{StaticResource Glow}"
                                                         IsInPomodoro="{TemplateBinding IsInPomodoro}"/>
                                     <Polygon Points="{Binding Source={StaticResource ProgressToPointCollectionBridge},Path=Points}"
                                              StrokeThickness="4"
@@ -536,6 +561,40 @@
                             </Viewbox>
                         </Grid>
                     </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style TargetType="controls:FlipSide">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:FlipSide">
+                    <Grid x:Name="LayoutRoot"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="FlipStates">
+                                <VisualState x:Name="Slide1">
+                                    <VisualState.Setters>
+                                        <Setter Target="Side1Content.IsHitTestVisible" Value="True" />
+                                        <Setter Target="Side2Content.IsHitTestVisible" Value="False" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Slide2">
+                                    <VisualState.Setters>
+                                        <Setter Target="Side1Content.IsHitTestVisible" Value="False" />
+                                        <Setter Target="Side2Content.IsHitTestVisible" Value="True" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <ContentPresenter x:Name="Side1Content" IsHitTestVisible="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="{TemplateBinding Side1}" />
+                        <ContentPresenter x:Name="Side2Content" IsHitTestVisible="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="{TemplateBinding Side2}" />
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

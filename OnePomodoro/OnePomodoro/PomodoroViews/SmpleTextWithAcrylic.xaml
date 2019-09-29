@@ -1,4 +1,4 @@
-﻿<local:PomodoroView x:Class="OnePomodoro.PomodoroViews.TheBigOne"
+﻿<local:PomodoroView x:Class="OnePomodoro.PomodoroViews.SmpleTextWithAcrylic"
                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="using:OnePomodoro.PomodoroViews"
@@ -91,7 +91,7 @@
                                Foreground="White" />
                 </Grid>
 
-                <controls:PomodoroStateButton Margin="45,0,35,-100"
+                <controls:PomodoroStateButton Margin="35,0,35,-100"
                                               HorizontalAlignment="Center"
                                               VerticalAlignment="Center"
                                               StartCommand="{Binding StartTimerCommand}"
