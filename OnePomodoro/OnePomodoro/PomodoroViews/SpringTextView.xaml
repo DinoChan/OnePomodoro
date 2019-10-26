@@ -1,0 +1,45 @@
+﻿<local:PomodoroView x:Class="OnePomodoro.PomodoroViews.SpringTextView"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="using:OnePomodoro.PomodoroViews"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    mc:Ignorable="d"
+                    xmlns:converters="using:Microsoft.Toolkit.Uwp.UI.Converters"
+                    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
+                    xmlns:viewModels="using:OnePomodoro.ViewModels"
+                    xmlns:helpers="using:OnePomodoro.Helpers"
+                    xmlns:controls="using:OnePomodoro.Controls"
+                    x:DefaultBindMode="OneWay"
+                    d:DataContext="{d:DesignInstance Type=viewModels:PomodoroViewModel}"
+                    RequestedTheme="Dark"
+                    d:DesignHeight="900"
+                    d:DesignWidth="1920">
+    <Grid x:Name="Root">
+        <Rectangle x:Name="RootBackground"/>
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel HorizontalAlignment="Center" Margin="8">
+                <TextBlock Text="OnePomodoro" HorizontalAlignment="Center" FontSize="24"/>
+            </StackPanel>
+            <Grid Grid.Row="1" x:Name="ContentArea" Background="#FF202020">
+                    <TextBlock Text="Work" x:Name="FocusElement" Foreground="White"  FontSize="72" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <TextBlock Text="Relea" x:Name="RelaxElement" Foreground="White" FontSize="72" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </Grid>
+            <Grid Height="48" Grid.Row="2">
+                <controls:PomodoroStateButton HorizontalAlignment="Center"
+                                          Grid.Row="2"
+                                          VerticalAlignment="Center"
+                                              Style="{StaticResource SmallButton}"
+                                          StartCommand="{Binding StartTimerCommand}"
+                                          StopCommand="{Binding StopTimerCommand}"
+                                          IsInPomodoro="{x:Bind ViewModel.IsInPomodoro}"
+                                          IsTimerInProgress="{x:Bind ViewModel.IsTimerInProgress}"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</local:PomodoroView>

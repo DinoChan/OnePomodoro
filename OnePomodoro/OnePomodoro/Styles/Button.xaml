@@ -17,6 +17,11 @@
                 Value="48" />
     </Style>
 
+    <Style TargetType="controls:PomodoroStateButton" x:Key="SmallButton">
+        <Setter Property="Height" Value="24"/>
+        <Setter Property="Width" Value="24"/>
+    </Style>
+
     <Style TargetType="controls:PomodoroStateButton" x:Key="LargeButton">
         <Setter Property="Height" Value="96"/>
         <Setter Property="Width" Value="96"/>
