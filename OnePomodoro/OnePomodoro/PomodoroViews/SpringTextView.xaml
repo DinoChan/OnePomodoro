@@ -23,22 +23,55 @@
                 <RowDefinition/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <StackPanel HorizontalAlignment="Center" Margin="8">
-                <TextBlock Text="OnePomodoro" HorizontalAlignment="Center" FontSize="24"/>
+            <StackPanel HorizontalAlignment="Center" Margin="4">
+                <TextBlock Text="OnePomodoro" HorizontalAlignment="Center" FontSize="16"/>
             </StackPanel>
             <Grid Grid.Row="1" x:Name="ContentArea" Background="#FF202020">
-                    <TextBlock Text="Work" x:Name="FocusElement" Foreground="White"  FontSize="72" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <TextBlock Text="Relea" x:Name="RelaxElement" Foreground="White" FontSize="72" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <TextBlock Text="Work" x:Name="FocusElement" FontSize="72" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <TextBlock.Foreground>
+                        <LinearGradientBrush EndPoint="0,0" StartPoint="1,1">
+                            <GradientStop Color="#FFf093fb" Offset="0"/>
+                            <GradientStop Color="#FFf5576c" Offset="1"/>
+                        </LinearGradientBrush>
+                    </TextBlock.Foreground>
+                </TextBlock>
+                <TextBlock Text="Relea" x:Name="RelaxElement" FontSize="72" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <TextBlock.Foreground>
+                            <LinearGradientBrush EndPoint="0,0" StartPoint="1,1">
+                            <GradientStop Color="#FF4b8dbf" Offset="0"/>
+                            <GradientStop Color="#FFa78ee9" Offset="1"/>
+                            </LinearGradientBrush>
+                        </TextBlock.Foreground>
+                </TextBlock>
             </Grid>
-            <Grid Height="48" Grid.Row="2">
-                <controls:PomodoroStateButton HorizontalAlignment="Center"
-                                          Grid.Row="2"
-                                          VerticalAlignment="Center"
-                                              Style="{StaticResource SmallButton}"
-                                          StartCommand="{Binding StartTimerCommand}"
-                                          StopCommand="{Binding StopTimerCommand}"
-                                          IsInPomodoro="{x:Bind ViewModel.IsInPomodoro}"
-                                          IsTimerInProgress="{x:Bind ViewModel.IsTimerInProgress}"/>
+            <Grid Height="30" Grid.Row="2">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <controls:PomodoroStateButton Grid.Row="2"
+                                                  VerticalAlignment="Center"
+                                                  Style="{StaticResource SmallButton}"
+                                                  StartCommand="{Binding StartTimerCommand}"
+                                                  StopCommand="{Binding StopTimerCommand}"
+                                                  IsInPomodoro="{x:Bind ViewModel.IsInPomodoro}"
+                                                  IsTimerInProgress="{x:Bind ViewModel.IsTimerInProgress}"/>
+                    <TextBlock Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
+                           x:Name="InWorkCountDown"
+                               VerticalAlignment="Center"
+                           FontFamily="{StaticResource TimeFont}"
+                           FontSize="20"
+                           Foreground="White"
+                           Margin="8,0,0,2"
+                           Visibility="{Binding IsInPomodoro,Converter={StaticResource BoolToVisibilityConverter}}"/>
+
+                    <TextBlock Text="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
+                           x:Name="BreakCountDown"
+                               VerticalAlignment="Center"
+                          FontSize="20"
+                           FontFamily="{StaticResource TimeFont}"
+                           Foreground="White"
+                               Margin="8,0,0,2"
+                           Visibility="{Binding IsInPomodoro,Converter={StaticResource NegationBoolToVisibilityConverter}}"/>
+
+                </StackPanel>
             </Grid>
         </Grid>
     </Grid>

@@ -47,21 +47,18 @@ namespace OnePomodoro.PomodoroViews
 
             _focusVisual = ElementCompositionPreview.GetElementVisual(FocusElement);
             _relaxVisual = ElementCompositionPreview.GetElementVisual(RelaxElement);
-
+            
             RootBackground.SizeChanged += (s, e) =>
             {
                 if (e.NewSize == e.PreviousSize)
                     return;
 
                 backgroundVisual.Size = e.NewSize.ToVector2();
-
-
             };
 
             ContentArea.SizeChanged += (s, e) =>
             {
-                _focusVisual.CenterPoint = new Vector3(e.NewSize.ToVector2() / 2, 0);
-                _relaxVisual.CenterPoint = new Vector3(e.NewSize.ToVector2() / 2, 0);
+                UpdateOffset();
             };
 
             ViewModel.IsInPomodoroChanged += (s, e) =>
@@ -87,15 +84,16 @@ namespace OnePomodoro.PomodoroViews
 
         private void UpdateOffset()
         {
+            var y = (float)(Root.ActualHeight - FocusElement.ActualHeight) / 2;
             if (ViewModel.IsInPomodoro)
             {
-                StartOffsetAnimation(_focusVisual, 0);
-                StartOffsetAnimation(_relaxVisual, (float)(Root.ActualWidth + RelaxElement.ActualWidth) / 2);
+                StartOffsetAnimation(_focusVisual, new Vector2((float)(ContentArea.ActualWidth - FocusElement.ActualWidth) / 2, y));
+                StartOffsetAnimation(_relaxVisual, new Vector2((float)(ContentArea.ActualWidth + RelaxElement.ActualWidth), y));
             }
             else
             {
-                StartOffsetAnimation(_focusVisual, -(float)(Root.ActualWidth + RelaxElement.ActualWidth) / 2);
-                StartOffsetAnimation(_relaxVisual, 0);
+                StartOffsetAnimation(_focusVisual, new Vector2(-(float)(RelaxElement.ActualWidth) * 2, y));
+                StartOffsetAnimation(_relaxVisual, new Vector2((float)(ContentArea.ActualWidth - RelaxElement.ActualWidth) / 2, y));
             }
         }
 
@@ -109,12 +107,17 @@ namespace OnePomodoro.PomodoroViews
         }
 
 
-        private void StartOffsetAnimation(Visual visual, float offsetX)
+        private void StartOffsetAnimation(Visual visual, Vector2 offset)
+        {
+            StartOffsetAnimation(visual, offset, TimeSpan.FromMilliseconds(200));
+        }
+
+        private void StartOffsetAnimation(Visual visual, Vector2 offset, TimeSpan period)
         {
             var springAnimation = _compositor.CreateSpringVector3Animation();
             springAnimation.DampingRatio = 0.5f;
-            springAnimation.Period = TimeSpan.FromMilliseconds(200);
-            springAnimation.FinalValue = new Vector3(offsetX, 0, 0);
+            springAnimation.Period = period;
+            springAnimation.FinalValue = new Vector3(offset, 0);
             visual.StartAnimation(nameof(visual.Offset), springAnimation);
         }
     }
