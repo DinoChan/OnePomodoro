@@ -23,11 +23,11 @@
                 <RowDefinition/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <StackPanel HorizontalAlignment="Center" Margin="4">
-                <TextBlock Text="OnePomodoro" HorizontalAlignment="Center" FontSize="16"/>
-            </StackPanel>
+            <Grid HorizontalAlignment="Center" Height="32">
+                <TextBlock Text="OnePomodoro" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+            </Grid>
             <Grid Grid.Row="1" x:Name="ContentArea" Background="#FF202020">
-                <TextBlock Text="Work" x:Name="FocusElement" FontSize="72" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <TextBlock Text="o(*≧▽≦)ツ" FontFamily="Arial" x:Name="FocusElement" FontSize="72" HorizontalAlignment="Left" VerticalAlignment="Top">
                     <TextBlock.Foreground>
                         <LinearGradientBrush EndPoint="0,0" StartPoint="1,1">
                             <GradientStop Color="#FFf093fb" Offset="0"/>
@@ -35,7 +35,7 @@
                         </LinearGradientBrush>
                     </TextBlock.Foreground>
                 </TextBlock>
-                <TextBlock Text="Relea" x:Name="RelaxElement" FontSize="72" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <TextBlock Text="╮( •́ω•̀ )╭" FontFamily="Arial" x:Name="RelaxElement" FontSize="72" HorizontalAlignment="Left" VerticalAlignment="Top">
                         <TextBlock.Foreground>
                             <LinearGradientBrush EndPoint="0,0" StartPoint="1,1">
                             <GradientStop Color="#FF4b8dbf" Offset="0"/>
@@ -44,7 +44,7 @@
                         </TextBlock.Foreground>
                 </TextBlock>
             </Grid>
-            <Grid Height="30" Grid.Row="2">
+            <Grid Height="32" Grid.Row="2">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <controls:PomodoroStateButton Grid.Row="2"
                                                   VerticalAlignment="Center"

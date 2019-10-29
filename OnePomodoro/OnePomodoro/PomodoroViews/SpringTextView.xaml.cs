@@ -84,7 +84,7 @@ namespace OnePomodoro.PomodoroViews
 
         private void UpdateOffset()
         {
-            var y = (float)(Root.ActualHeight - FocusElement.ActualHeight) / 2;
+            var y = (float)(ContentArea.ActualHeight - FocusElement.ActualHeight) / 2;
             if (ViewModel.IsInPomodoro)
             {
                 StartOffsetAnimation(_focusVisual, new Vector2((float)(ContentArea.ActualWidth - FocusElement.ActualWidth) / 2, y));
