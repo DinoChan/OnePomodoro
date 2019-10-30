@@ -358,6 +358,7 @@
     <Content Include="Assets\Screenshots\GradientsWithBlend.png" />
     <Content Include="Assets\Screenshots\LongShadow.png" />
     <Content Include="Assets\Screenshots\SimpleCircle.png" />
+    <Content Include="Assets\Screenshots\SpringText.png" />
     <Content Include="Assets\Screenshots\TheBigOne.png" />
     <Content Include="Assets\Screenshots\TheFirst.png" />
     <Content Include="Assets\SmallTile.scale-100.png" />

@@ -25,8 +25,8 @@ namespace OnePomodoro.PomodoroViews
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
     /// </summary>
-    [Title("SpringTextView")]
-    [Screenshot("/Assets/Screenshots/LongShadow.png")]
+    [Title("SpringText")]
+    [Screenshot("/Assets/Screenshots/SpringText.png")]
     public sealed partial class SpringTextView : PomodoroView
     {
         private readonly Compositor _compositor;
