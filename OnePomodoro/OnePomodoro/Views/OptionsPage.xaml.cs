@@ -51,7 +51,7 @@ namespace OnePomodoro.Views
                 try
                 {
                     HttpClient client = new HttpClient();
-                    var text = await client.GetStringAsync("https://raw.githubusercontent.com/DinoChan/OnePomodoro/master/Whats%20new.md?_sm_au_=iVVWJ65DN15Rbq16"); ;
+                    var text = await client.GetStringAsync("https://raw.githubusercontent.com/DinoChan/OnePomodoro/master/Whats%20new.md"); ;
                     WhatsNewMarkdownTextBlock.Text = text;
                 }
                 catch (Exception)
