@@ -1,0 +1,89 @@
+﻿<local:PomodoroView x:Class="OnePomodoro.PomodoroViews.KonosubaView"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="using:OnePomodoro.PomodoroViews"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    mc:Ignorable="d"
+                    xmlns:converters="using:Microsoft.Toolkit.Uwp.UI.Converters"
+                    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
+                    xmlns:viewModels="using:OnePomodoro.ViewModels"
+                    xmlns:helpers="using:OnePomodoro.Helpers"
+                    xmlns:controls="using:OnePomodoro.Controls"
+                    x:DefaultBindMode="OneWay"
+                    d:DataContext="{d:DesignInstance Type=viewModels:PomodoroViewModel}"
+                    RequestedTheme="Light"
+                    d:DesignHeight="1050"
+                    d:DesignWidth="1920">
+    <Grid x:Name="Root" Background="White">
+        <Viewbox >
+            <Grid Height="1050" Width="1920" x:Name="ContentArea">
+                <Grid >
+                    <Grid x:Name="FocusElementTop">
+                        <Grid.Clip>
+                            <RectangleGeometry Rect="-1000,-1000,3920,1525"/>
+                        </Grid.Clip>
+                        <TextBlock Text="爆爆" FontFamily="Arial" Margin="-1000" FontSize="1200" HorizontalAlignment="Center" VerticalAlignment="Center"
+                               FontWeight="Bold"
+                               Foreground="Red"/>
+                    </Grid>
+                    <Grid x:Name="FocusElementBottom" >
+                        <Grid.Clip>
+                            <RectangleGeometry Rect="-1000,525,3920,1525"/>
+                        </Grid.Clip>
+                        <TextBlock Text="爆爆" FontFamily="Arial" Margin="-1000" FontSize="1200" HorizontalAlignment="Center" VerticalAlignment="Center"
+                               FontWeight="Bold"
+                               Foreground="Red"/>
+                    </Grid>
+
+                    <Grid x:Name="RelaxElementTop">
+                        <Grid.Clip>
+                            <RectangleGeometry Rect="-1000,-1000,3920,1525"/>
+                        </Grid.Clip>
+                        <TextBlock Text="爆爆爆爆" FontFamily="Arial"   Margin="-1000" FontSize="600" HorizontalAlignment="Center" VerticalAlignment="Center"
+                               FontWeight="Bold"
+                               Foreground="Blue"/>
+                    </Grid>
+                    <Grid x:Name="RelaxElementBottom">
+                        <Grid.Clip>
+                            <RectangleGeometry Rect="-1000,525,3920,1525"/>
+                        </Grid.Clip>
+                        <TextBlock Text="爆爆爆爆" FontFamily="Arial"  Margin="-1000"  FontSize="600" HorizontalAlignment="Center" VerticalAlignment="Center"
+                               FontWeight="Bold"
+                               Foreground="Blue"/>
+                    </Grid>
+                </Grid>
+
+                <Grid HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="200" Width="200">
+                    <Ellipse x:Name="RootBackground" Fill="Red"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <controls:PomodoroStateButton Grid.Row="2"
+                                                  VerticalAlignment="Center"
+                                                  Style="{StaticResource SmallButton}"
+                                                  StartCommand="{Binding StartTimerCommand}"
+                                                  StopCommand="{Binding StopTimerCommand}"
+                                                  IsInPomodoro="{x:Bind ViewModel.IsInPomodoro}"
+                                                  IsTimerInProgress="{x:Bind ViewModel.IsTimerInProgress}"/>
+                        <TextBlock Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
+                           x:Name="InWorkCountDown"
+                               VerticalAlignment="Center"
+                           FontFamily="{StaticResource TimeFont}"
+                           FontSize="20"
+                           Foreground="White"
+                           Margin="8,0,0,2"
+                           Visibility="{Binding IsInPomodoro,Converter={StaticResource BoolToVisibilityConverter}}"/>
+
+                        <TextBlock Text="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
+                           x:Name="BreakCountDown"
+                               VerticalAlignment="Center"
+                          FontSize="20"
+                           FontFamily="{StaticResource TimeFont}"
+                           Foreground="White"
+                               Margin="8,0,0,2"
+                           Visibility="{Binding IsInPomodoro,Converter={StaticResource NegationBoolToVisibilityConverter}}"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Viewbox>
+    </Grid>
+</local:PomodoroView>
