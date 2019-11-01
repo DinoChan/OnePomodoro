@@ -141,8 +141,8 @@ namespace OnePomodoro.PomodoroViews
         private void StartOffsetAnimation(Visual visual, float offsetX)
         {
             var springAnimation = _compositor.CreateSpringVector3Animation();
-            springAnimation.DampingRatio = 0.5f;
-            springAnimation.Period = TimeSpan.FromMilliseconds(200);
+            springAnimation.DampingRatio = 0.85f;
+            springAnimation.Period = TimeSpan.FromMilliseconds(50);
             springAnimation.FinalValue = new Vector3(offsetX, 0, 0);
             visual.StartAnimation(nameof(visual.Offset), springAnimation);
         }
