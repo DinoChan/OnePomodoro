@@ -30,9 +30,6 @@ namespace OnePomodoro.PomodoroViews
     public sealed partial class KonosubaView : PomodoroView
     {
         private readonly Compositor _compositor;
-        private readonly CompositionColorBrush _colorBursh;
-        private static readonly Color Blue = Color.FromArgb(255, 44, 56, 82);
-        private static readonly Color Red = Color.FromArgb(255, 81, 44, 81);
         private readonly Visual _focusTopVisual;
         private readonly Visual _relaxTopVisual;
         private readonly Visual _focusBottomVisual;
@@ -42,24 +39,11 @@ namespace OnePomodoro.PomodoroViews
         {
             this.InitializeComponent();
             _compositor = Window.Current.Compositor;
-            _colorBursh = _compositor.CreateColorBrush(Colors.Black);
-            var backgroundVisual = _compositor.CreateSpriteVisual();
-            backgroundVisual.Brush = _colorBursh;
-            ElementCompositionPreview.SetElementChildVisual(RootBackground, backgroundVisual);
 
             _focusTopVisual = ElementCompositionPreview.GetElementVisual(FocusElementTop);
             _focusBottomVisual = ElementCompositionPreview.GetElementVisual(FocusElementBottom);
             _relaxTopVisual = ElementCompositionPreview.GetElementVisual(RelaxElementTop);
             _relaxBottomVisual = ElementCompositionPreview.GetElementVisual(RelaxElementBottom);
-
-
-            RootBackground.SizeChanged += (s, e) =>
-            {
-                if (e.NewSize == e.PreviousSize)
-                    return;
-
-                backgroundVisual.Size = e.NewSize.ToVector2();
-            };
 
             ContentArea.SizeChanged += (s, e) =>
             {
@@ -68,25 +52,15 @@ namespace OnePomodoro.PomodoroViews
 
             ViewModel.IsInPomodoroChanged += (s, e) =>
             {
-                UpdateBackground();
                 UpdateOffsetUsingAnimation();
             };
 
             Loaded += (s, e) =>
             {
-                UpdateBackground();
                 UpdateOffsetUsingAnimation();
             };
 
             UpdateOffset();
-        }
-
-        private void UpdateBackground()
-        {
-            if (ViewModel.IsInPomodoro)
-                StartColorAnimation(Red);
-            else
-                StartColorAnimation(Blue);
         }
 
         private void UpdateOffsetUsingAnimation()
@@ -126,17 +100,6 @@ namespace OnePomodoro.PomodoroViews
                 _relaxBottomVisual.Offset = new Vector3(0, 0, 0);
             }
         }
-
-        private void StartColorAnimation(Color color)
-        {
-            var colorAnimation = _compositor.CreateColorKeyFrameAnimation();
-            colorAnimation.Duration = TimeSpan.FromSeconds(2);
-            colorAnimation.Direction = Windows.UI.Composition.AnimationDirection.Alternate;
-            colorAnimation.InsertKeyFrame(1.0f, color);
-            _colorBursh.StartAnimation(nameof(_colorBursh.Color), colorAnimation);
-        }
-
-
 
         private void StartOffsetAnimation(Visual visual, float offsetX)
         {
