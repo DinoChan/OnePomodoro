@@ -22,3 +22,7 @@ Add One Pomodoro.
 **2019-10-30 v1.8:**
 
 Add One Pomodoro.
+
+**2019-11-04 v1.9:**
+
+Add One Pomodoro.

@@ -26,7 +26,7 @@ namespace OnePomodoro.PomodoroViews
     /// 可用于自身或导航至 Frame 内部的空白页。
     /// </summary>
     [Title("konosuba")]
-    [Screenshot("/Assets/Screenshots/SpringText.png")]
+    [Screenshot("/Assets/Screenshots/Konosuba.png")]
     public sealed partial class KonosubaView : PomodoroView
     {
         private readonly Compositor _compositor;
