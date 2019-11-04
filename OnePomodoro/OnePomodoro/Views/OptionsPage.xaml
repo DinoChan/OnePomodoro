@@ -451,7 +451,7 @@
         </pomodoroControls:TitleBar>
         <Pivot Margin="0,0,0,0"
                Grid.Row="1">
-            <PivotItem Header="Visual">
+            <PivotItem Header="Pomodoros">
                 <views:VisualSettingView VisualChanged="OnVisualChanged" />
             </PivotItem>
             <PivotItem Header="General Settings">

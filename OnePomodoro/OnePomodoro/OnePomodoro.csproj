@@ -162,6 +162,9 @@
     <Compile Include="PomodoroViews\SimpleCircle.xaml.cs">
       <DependentUpon>SimpleCircle.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PomodoroViews\KonosubaView.xaml.cs">
+      <DependentUpon>KonosubaView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PomodoroViews\SpringTextView.xaml.cs">
       <DependentUpon>SpringTextView.xaml</DependentUpon>
     </Compile>
@@ -239,6 +242,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="PomodoroViews\SimpleCircle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PomodoroViews\KonosubaView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -356,6 +363,7 @@
     <Content Include="Assets\LargeTile.scale-400.png" />
     <Content Include="Assets\Screenshots\Gradients.png" />
     <Content Include="Assets\Screenshots\GradientsWithBlend.png" />
+    <Content Include="Assets\Screenshots\Konosuba.png" />
     <Content Include="Assets\Screenshots\LongShadow.png" />
     <Content Include="Assets\Screenshots\SimpleCircle.png" />
     <Content Include="Assets\Screenshots\SpringText.png" />

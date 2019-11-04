@@ -30,6 +30,7 @@ namespace OnePomodoro.PomodoroViews
             typeof(GradientsWithBlend),
             typeof(LongShadow),
             typeof(SpringTextView),
+            typeof(KonosubaView),
         };
 
     }
