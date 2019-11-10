@@ -62,6 +62,11 @@ namespace OnePomodoro.Controls
         public static readonly DependencyProperty BreakColorProperty =
             DependencyProperty.Register(nameof(BreakColor), typeof(Color), typeof(PomodoroStateButton), new PropertyMetadata(Colors.White));
 
+        /// <summary>
+        /// 标识 OutlineColor 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty OutlineColorProperty =
+            DependencyProperty.Register(nameof(OutlineColor), typeof(Color), typeof(PomodoroStateButton), new PropertyMetadata(Colors.White));
 
         public PomodoroStateButton()
         {
@@ -121,6 +126,15 @@ namespace OnePomodoro.Controls
         {
             get => (Color)GetValue(BreakColorProperty);
             set => SetValue(BreakColorProperty, value);
+        }
+
+        /// <summary>
+        /// 获取或设置OutlineColor的值
+        /// </summary>
+        public Color OutlineColor
+        {
+            get => (Color)GetValue(OutlineColorProperty);
+            set => SetValue(OutlineColorProperty, value);
         }
 
         protected override void OnApplyTemplate()

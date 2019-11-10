@@ -96,6 +96,7 @@
                         <controls:OutlinePanel x:Name="Outline" 
                                                Visibility="Collapsed"
                                                Opacity="0.5"
+                                               Color="{TemplateBinding controls:DropShadowPanel.Color}"
                                                RelativeElement="{TemplateBinding RelativeElement}">
                             <interactivity:Interaction.Behaviors>
                                 <behaviors:Scale x:Name="Scale"
@@ -406,6 +407,7 @@
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="PomodoroColor" Value="White"/>
         <Setter Property="BreakColor" Value="White"/>
+        <Setter Property="OutlineColor" Value="White"/>
         <Setter Property="controls:DropShadowPanel.Color" Value="Black"/>
         <Setter Property="controls:DropShadowPanel.ShadowOpacity" Value="0"/>
         <Setter Property="Height" Value="48"/>
@@ -542,7 +544,8 @@
                                                             controls:DropShadowPanel.IsMasked="{TemplateBinding controls:DropShadowPanel.IsMasked}"
                                                             RelativeElement="{Binding ElementName=Shape}" 
                                                             Style="{StaticResource Shadow}"/>
-                                    <controls:ButtonDecorator RelativeElement="{Binding ElementName=Shape}" x:Name="Outline" Style="{StaticResource Outline}"/>
+                                    <controls:ButtonDecorator RelativeElement="{Binding ElementName=Shape}" x:Name="Outline" Style="{StaticResource Outline}"
+                                                              controls:DropShadowPanel.Color="{TemplateBinding OutlineColor}"/>
                                     <controls:ButtonDecorator RelativeElement="{Binding ElementName=Shape}" Style="{StaticResource Glow}"
                                                         IsInPomodoro="{TemplateBinding IsInPomodoro}"/>
                                     <Polygon Points="{Binding Source={StaticResource ProgressToPointCollectionBridge},Path=Points}"
