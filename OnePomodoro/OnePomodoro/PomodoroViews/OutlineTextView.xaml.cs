@@ -1,4 +1,5 @@
 ﻿using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.Effects;
 using Microsoft.Graphics.Canvas.Geometry;
 using Microsoft.Graphics.Canvas.Text;
 using Microsoft.Graphics.Canvas.UI.Composition;
@@ -13,6 +14,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.DirectX;
+using Windows.Networking.BackgroundTransfer;
 using Windows.UI;
 using Windows.UI.Composition;
 using Windows.UI.Text;
@@ -58,47 +60,89 @@ namespace OnePomodoro.PomodoroViews
 
 
 
-        private void ShowTextShimming()
+        private async void ShowTextShimming()
         {
             if (_inworkPointLight != null)
                 return;
 
-            var compositor = Window.Current.Compositor;
-            if (_inworkPointLight == null)
-            {
-                var titleVisual = VisualExtensions.GetVisual(InworkShadow);
-                _inworkPointLight = compositor.CreatePointLight();
+           // _inworkPointLight = CreatePointLightAndStartAnimation(Color.FromArgb(255, 217, 17, 83), TimeSpan.Zero);
+           // _breakPointLight = CreatePointLightAndStartAnimation(Color.FromArgb(255, 0, 27, 171), TimeSpan.FromSeconds(1));
+           //var rootVisual= VisualExtensions.GetVisual(this);
+           // var buttonVisual = VisualExtensions.GetVisual(StateButton);
+           // var focusVisual = VisualExtensions.GetVisual(FocusPanel);
+           // var relayVisual = VisualExtensions.GetVisual(RelaxPanel);
+           // _inworkPointLight.Targets.Add(rootVisual);
+           // _breakPointLight.Targets.Add(rootVisual);
+           // //_inworkPointLight.Targets.Add(focusVisual);
+           // //_breakPointLight.Targets.Add(focusVisual);
 
-                _inworkPointLight.Color = Color.FromArgb(255, 217, 17, 83);
-                _inworkPointLight.CoordinateSpace = titleVisual;
-                _inworkPointLight.Targets.Add(titleVisual);
-                _inworkPointLight.Offset = new Vector3(-(float)PomodoroPanel.ActualWidth * 3, (float)PomodoroPanel.ActualHeight / 2, 300.0f);
+           // //var compositor = Window.Current.Compositor;
+           // //var titleVisual = VisualExtensions.GetVisual(this);
+           // //var pointLight = compositor.CreatePointLight();
+           // //pointLight.CoordinateSpace = titleVisual;
+           // //pointLight.Color = Colors.Transparent;
+           // //pointLight.Targets.Add(focusVisual);
+           // //pointLight.Targets.Add(relayVisual);
+           // //pointLight.Offset = new Vector3(-100000, 0, 0);
+           // RelaxPanel.Visibility = Visibility.Collapsed;
+
+
+
+            var compositor = ElementCompositionPreview.GetElementVisual(this).Compositor;
+            var canvasDevice = CanvasDevice.GetSharedDevice();
+            var graphicsDevice = CanvasComposition.CreateCompositionGraphicsDevice(compositor, canvasDevice);
+
+            var bitmap = await CanvasBitmap.LoadAsync(canvasDevice, new Uri("ms-appx:///Assets/flutter.png", UriKind.RelativeOrAbsolute));
+
+            var drawingSurface = graphicsDevice.CreateDrawingSurface(bitmap.Size,
+                DirectXPixelFormat.B8G8R8A8UIntNormalized, DirectXAlphaMode.Premultiplied);
+            using (var ds = CanvasComposition.CreateDrawingSession(drawingSurface))
+            {
+                ds.Clear(Colors.Transparent);
+                ds.DrawImage(bitmap);
             }
+
+            var surfaceBrush = compositor.CreateSurfaceBrush(drawingSurface);
+            surfaceBrush.Stretch = CompositionStretch.None;
+
+            var border = new BorderEffect
+            {
+                ExtendX = CanvasEdgeBehavior.Wrap,
+                ExtendY = CanvasEdgeBehavior.Wrap,
+                Source = new CompositionEffectSourceParameter("source")
+            };
+
+            var fxFactory = compositor.CreateEffectFactory(border);
+            var fxBrush = fxFactory.CreateBrush();
+            fxBrush.SetSourceParameter("source", surfaceBrush);
+
+            var sprite = compositor.CreateSpriteVisual();
+            sprite.Size = new Vector2(1000000);
+            sprite.Brush = fxBrush;
+
+            ElementCompositionPreview.SetElementChildVisual(Root, sprite);
+        }
+
+
+        private PointLight CreatePointLightAndStartAnimation(Color color, TimeSpan delay)
+        {
+            var compositor = Window.Current.Compositor;
+            var titleVisual = VisualExtensions.GetVisual(this);
+            var pointLight = compositor.CreatePointLight();
+
+            pointLight.Color = color;
+            pointLight.CoordinateSpace = titleVisual;
+            //pointLight.Targets.Add(titleVisual);
+            pointLight.Offset = new Vector3(-(float)PomodoroPanel.ActualWidth * 2, (float)PomodoroPanel.ActualHeight / 2, 300.0f);
+
             var offsetAnimation = compositor.CreateScalarKeyFrameAnimation();
             offsetAnimation.InsertKeyFrame(1.0f, (float)PomodoroPanel.ActualWidth * 3, compositor.CreateLinearEasingFunction());
-            offsetAnimation.Duration = TimeSpan.FromMilliseconds(10000);
+            offsetAnimation.Duration = TimeSpan.FromSeconds(10);
+            offsetAnimation.DelayTime = delay;
             offsetAnimation.IterationBehavior = AnimationIterationBehavior.Forever;
 
-            _inworkPointLight.StartAnimation("Offset.X", offsetAnimation);
-
-
-
-            if (_breakPointLight == null)
-            {
-                var titleVisual = VisualExtensions.GetVisual(BreakShadow);
-                _breakPointLight = compositor.CreatePointLight();
-
-                _breakPointLight.Color = Color.FromArgb(255, 217, 17, 83);
-                _breakPointLight.CoordinateSpace = titleVisual;
-                _breakPointLight.Targets.Add(titleVisual);
-                _breakPointLight.Offset = new Vector3(-(float)PomodoroPanel.ActualWidth * 3, (float)PomodoroPanel.ActualHeight / 2, 300.0f);
-            }
-            offsetAnimation = compositor.CreateScalarKeyFrameAnimation();
-            offsetAnimation.InsertKeyFrame(1.0f, (float)PomodoroPanel.ActualWidth * 3, compositor.CreateLinearEasingFunction());
-            offsetAnimation.Duration = TimeSpan.FromMilliseconds(10000);
-            offsetAnimation.IterationBehavior = AnimationIterationBehavior.Forever;
-
-            _breakPointLight.StartAnimation("Offset.X", offsetAnimation);
+            pointLight.StartAnimation("Offset.X", offsetAnimation);
+            return pointLight;
         }
 
         private void StopTextShimming()
@@ -163,7 +207,7 @@ namespace OnePomodoro.PomodoroViews
 
 
             spriteTextVisual.Brush = maskBrush;
-            ElementCompositionPreview.SetElementChildVisual(InworkShadow, spriteTextVisual);
+            ElementCompositionPreview.SetElementChildVisual(this, spriteTextVisual);
         }
     }
 
