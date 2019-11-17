@@ -65,26 +65,26 @@ namespace OnePomodoro.PomodoroViews
             if (_inworkPointLight != null)
                 return;
 
-           // _inworkPointLight = CreatePointLightAndStartAnimation(Color.FromArgb(255, 217, 17, 83), TimeSpan.Zero);
-           // _breakPointLight = CreatePointLightAndStartAnimation(Color.FromArgb(255, 0, 27, 171), TimeSpan.FromSeconds(1));
-           //var rootVisual= VisualExtensions.GetVisual(this);
-           // var buttonVisual = VisualExtensions.GetVisual(StateButton);
-           // var focusVisual = VisualExtensions.GetVisual(FocusPanel);
-           // var relayVisual = VisualExtensions.GetVisual(RelaxPanel);
-           // _inworkPointLight.Targets.Add(rootVisual);
-           // _breakPointLight.Targets.Add(rootVisual);
-           // //_inworkPointLight.Targets.Add(focusVisual);
-           // //_breakPointLight.Targets.Add(focusVisual);
+            _inworkPointLight = CreatePointLightAndStartAnimation(Color.FromArgb(255, 217, 17, 83), TimeSpan.Zero);
+            _breakPointLight = CreatePointLightAndStartAnimation(Color.FromArgb(255, 0, 27, 171), TimeSpan.FromSeconds(1));
+            var rootVisual = VisualExtensions.GetVisual(this);
+            var buttonVisual = VisualExtensions.GetVisual(StateButton);
+            var focusVisual = VisualExtensions.GetVisual(FocusPanel);
+            var relayVisual = VisualExtensions.GetVisual(RelaxPanel);
 
-           // //var compositor = Window.Current.Compositor;
-           // //var titleVisual = VisualExtensions.GetVisual(this);
-           // //var pointLight = compositor.CreatePointLight();
-           // //pointLight.CoordinateSpace = titleVisual;
-           // //pointLight.Color = Colors.Transparent;
-           // //pointLight.Targets.Add(focusVisual);
-           // //pointLight.Targets.Add(relayVisual);
-           // //pointLight.Offset = new Vector3(-100000, 0, 0);
-           // RelaxPanel.Visibility = Visibility.Collapsed;
+
+            //_inworkPointLight.Targets.Add(focusVisual);
+            //_breakPointLight.Targets.Add(focusVisual);
+
+            //var compositor = Window.Current.Compositor;
+            //var titleVisual = VisualExtensions.GetVisual(this);
+            //var pointLight = compositor.CreatePointLight();
+            //pointLight.CoordinateSpace = titleVisual;
+            //pointLight.Color = Colors.Transparent;
+            //pointLight.Targets.Add(focusVisual);
+            //pointLight.Targets.Add(relayVisual);
+            //pointLight.Offset = new Vector3(-100000, 0, 0);
+            RelaxPanel.Visibility = Visibility.Collapsed;
 
 
 
@@ -121,6 +121,15 @@ namespace OnePomodoro.PomodoroViews
             sprite.Brush = fxBrush;
 
             ElementCompositionPreview.SetElementChildVisual(Root, sprite);
+
+            var backgroundVisual = VisualExtensions.GetVisual(Root);
+            _inworkPointLight.Targets.Add(rootVisual);
+            _breakPointLight.Targets.Add(rootVisual);
+            _breakPointLight.Targets.Add(backgroundVisual);
+
+            var ambientLight = compositor.CreateAmbientLight();
+            ambientLight.Color = Colors.White;
+            ambientLight.Targets.Add(backgroundVisual);
         }
 
 
