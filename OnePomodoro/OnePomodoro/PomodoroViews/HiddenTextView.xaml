@@ -67,6 +67,10 @@
                 </ContentControl>
             </Grid>
         </Viewbox>
-        <Rectangle x:Name="Background" />
+        <Rectangle >
+            <Rectangle.Fill>
+                <controls:TiledBrush ImageSourceUri="ms-appx:///Assets/flutter.png"/>
+            </Rectangle.Fill>
+        </Rectangle>
     </Grid>
 </local:PomodoroView>

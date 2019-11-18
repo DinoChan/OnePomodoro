@@ -143,6 +143,7 @@
     <Compile Include="Controls\OutlinePanel.cs" />
     <Compile Include="Controls\PomodoroStateButton.cs" />
     <Compile Include="Controls\ProgressToPointCollectionBridge.cs" />
+    <Compile Include="Controls\TiledBrush.cs" />
     <Compile Include="Controls\TitleBar.xaml.cs">
       <DependentUpon>TitleBar.xaml</DependentUpon>
     </Compile>

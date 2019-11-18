@@ -51,7 +51,7 @@ namespace OnePomodoro.PomodoroViews
         private async void OnLoaded(object sender, RoutedEventArgs e)
         {
             Loaded -= OnLoaded;
-            await ShowTextShimmingAsync();
+            ShowTextShimmingAsync();
             OnIsInPomodoroChanged();
         }
 
@@ -61,7 +61,7 @@ namespace OnePomodoro.PomodoroViews
             RelaxPanel.Visibility = ViewModel.IsInPomodoro ? Visibility.Collapsed : Visibility.Visible;
         }
 
-        private async Task ShowTextShimmingAsync()
+        private void ShowTextShimmingAsync()
         {
             if (_redLight != null)
                 return;
@@ -93,11 +93,6 @@ namespace OnePomodoro.PomodoroViews
             //pointLight.Offset = new Vector3(-100000, 0, 0);
             RelaxPanel.Visibility = Visibility.Collapsed;
 
-
-
-            await InitializeBackgroundAsync();
-
-
             ////var backgroundVisual = VisualExtensions.GetVisual(Root);
             //_inworkPointLight.Targets.Add(rootVisual);
             //_breakPointLight.Targets.Add(rootVisual);
@@ -108,37 +103,7 @@ namespace OnePomodoro.PomodoroViews
             ////ambientLight.Targets.Add(backgroundVisual);
         }
 
-        private async Task InitializeBackgroundAsync()
-        {
-            var compositor = ElementCompositionPreview.GetElementVisual(this).Compositor;
-
-            var imageBrush = compositor.CreateSurfaceBrush();
-            var loadedSurface = LoadedImageSurface.StartLoadFromUri(new Uri("ms-appx:///Assets/flutter.png"));
-            imageBrush.Surface = loadedSurface;
-            imageBrush.Stretch = CompositionStretch.None;
-
-            var borderEffect = new BorderEffect
-            {
-                ExtendX = CanvasEdgeBehavior.Wrap,
-                ExtendY = CanvasEdgeBehavior.Wrap,
-                Source = new CompositionEffectSourceParameter("source")
-            };
-
-            var effectFactory = compositor.CreateEffectFactory(borderEffect);
-            var effectBrush = effectFactory.CreateBrush();
-            effectBrush.SetSourceParameter("source", imageBrush);
-
-            var sprite = compositor.CreateSpriteVisual();
-            sprite.Brush = effectBrush;
-
-            var backgroundVisual = VisualExtensions.GetVisual(Background);
-            var bindSizeAnimation = compositor.CreateExpressionAnimation("backgroundVisual.Size");
-            bindSizeAnimation.SetReferenceParameter("backgroundVisual", backgroundVisual);
-            sprite.StartAnimation("Size", bindSizeAnimation);
-
-            ElementCompositionPreview.SetElementChildVisual(Background, sprite);
-
-        }
+       
 
 
         private PointLight CreatePointLightAndStartAnimation(Color color, TimeSpan delay)
