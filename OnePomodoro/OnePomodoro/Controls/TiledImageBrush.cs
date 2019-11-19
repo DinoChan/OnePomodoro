@@ -3,10 +3,11 @@ using System;
 using Windows.UI.Composition;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace OnePomodoro.Controls
 {
-    public class TiledBrush : XamlCompositionBrushBase
+    public class TiledImageBrush : XamlCompositionBrushBase
     {
         private CompositionEffectFactory _borderEffectFactory;
         private CompositionEffectBrush _borderEffectBrush;
@@ -20,26 +21,26 @@ namespace OnePomodoro.Controls
         /// <summary>
         /// 获取或设置ImageSourceUri的值
         /// </summary>
-        public Uri ImageSourceUri
+        public ImageSource Source
         {
-            get => (Uri)GetValue(ImageSourceUriProperty);
-            set => SetValue(ImageSourceUriProperty, value);
+            get => (ImageSource)GetValue(SourceProperty);
+            set => SetValue(SourceProperty, value);
         }
 
         /// <summary>
         /// 标识 ImageSourceUri 依赖属性。
         /// </summary>
-        public static readonly DependencyProperty ImageSourceUriProperty =
-            DependencyProperty.Register(nameof(ImageSourceUri), typeof(Uri), typeof(TiledBrush), new PropertyMetadata(default(Uri), OnImageSourceUriChanged));
+        public static readonly DependencyProperty SourceProperty =
+            DependencyProperty.Register(nameof(Source), typeof(ImageSource), typeof(TiledImageBrush), new PropertyMetadata(default(ImageSource), OnImageSourceUriChanged));
 
         private static void OnImageSourceUriChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
         {
-            var oldValue = (Uri)args.OldValue;
-            var newValue = (Uri)args.NewValue;
+            var oldValue = (ImageSource)args.OldValue;
+            var newValue = (ImageSource)args.NewValue;
             if (oldValue == newValue)
                 return;
 
-            var target = obj as TiledBrush;
+            var target = obj as TiledImageBrush;
             target?.OnImageSourceUriChanged(oldValue, newValue);
         }
 
@@ -48,16 +49,17 @@ namespace OnePomodoro.Controls
         /// </summary>
         /// <param name="oldValue">ImageSourceUri 属性的旧值。</param>
         /// <param name="newValue">ImageSourceUri 属性的新值。</param>
-        protected virtual void OnImageSourceUriChanged(Uri oldValue, Uri newValue)
+        protected virtual void OnImageSourceUriChanged(ImageSource oldValue, ImageSource newValue)
         {
-            UpdateSurface(newValue);
+            UpdateSurface();
         }
 
 
-        private void UpdateSurface(Uri uri)
+        private void UpdateSurface()
         {
-            if (uri != null && _surfaceBrush != null)
+            if (Source != null && _surfaceBrush != null)
             {
+                var uri = (Source as BitmapImage)?.UriSource ?? new Uri("ms-appx:///");
                 _surface = LoadedImageSurface.StartLoadFromUri(uri);
                 _surfaceBrush.Surface = _surface;
             }
@@ -73,7 +75,7 @@ namespace OnePomodoro.Controls
                 _surfaceBrush = Compositor.CreateSurfaceBrush();
                 _surfaceBrush.Stretch = CompositionStretch.None;
 
-                UpdateSurface(ImageSourceUri);
+                UpdateSurface();
 
                 _borderEffect = new BorderEffect()
                 {
