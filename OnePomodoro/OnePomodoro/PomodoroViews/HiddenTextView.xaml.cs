@@ -40,6 +40,7 @@ namespace OnePomodoro.PomodoroViews
         private PointLight _redLight;
         private PointLight _blueLight;
         private AmbientLight _backgroundLight;
+        private AmbientLight _buttonLight;
 
         private Color _redColor = Color.FromArgb(255, 217, 17, 83);
         private Color _blueColor = Color.FromArgb(255, 0, 27, 171);
@@ -87,7 +88,6 @@ namespace OnePomodoro.PomodoroViews
         {
             _redLight = CreatePointLightAndStartAnimation(_redColor, TimeSpan.Zero);
             _blueLight = CreatePointLightAndStartAnimation(_blueColor, TimeSpan.FromSeconds(0.5));
-            var buttonVisual = VisualExtensions.GetVisual(StateButton);
             var focusVisual = VisualExtensions.GetVisual(FocusPanel);
             var relayVisual = VisualExtensions.GetVisual(RelaxPanel);
 
@@ -96,25 +96,28 @@ namespace OnePomodoro.PomodoroViews
 
             _redLight.Targets.Add(relayVisual);
             _blueLight.Targets.Add(relayVisual);
-
-            _redLight.Targets.Add(buttonVisual);
-            _blueLight.Targets.Add(buttonVisual);
         }
 
 
         private void CreateBackgroundLight()
         {
             var compositor = Window.Current.Compositor;
-            _backgroundLight = compositor.CreateAmbientLight();
-            var rootVisual = VisualExtensions.GetVisual(this);
-            _backgroundLight.Color = ViewModel.IsInPomodoro ? _lightRedColor : _lightBlueColor;
-            _backgroundLight.Intensity = 0;
-            var buttonVisual = VisualExtensions.GetVisual(StateButton);
+            var buttonVisual = VisualExtensions.GetVisual(ButtonPanel);
             var focusVisual = VisualExtensions.GetVisual(FocusPanel);
             var relayVisual = VisualExtensions.GetVisual(RelaxPanel);
-            _backgroundLight.Targets.Add(buttonVisual);
+            var footVisual = VisualExtensions.GetVisual(FootBackground);
+
+            _backgroundLight = compositor.CreateAmbientLight();
+            _backgroundLight.Color = ViewModel.IsInPomodoro ? _lightRedColor : _lightBlueColor;
+            _backgroundLight.Intensity = 0;
             _backgroundLight.Targets.Add(focusVisual);
             _backgroundLight.Targets.Add(relayVisual);
+            _backgroundLight.Targets.Add(footVisual);
+
+            _buttonLight = compositor.CreateAmbientLight();
+            _buttonLight.Color = Colors.White;
+            _buttonLight.Intensity = 0;
+            _buttonLight.Targets.Add(buttonVisual);
         }
 
         private PointLight CreatePointLightAndStartAnimation(Color color, TimeSpan delay)
@@ -160,6 +163,7 @@ namespace OnePomodoro.PomodoroViews
             scalarAnimation.InsertKeyFrame(1.0f, 0.5f, compositor.CreateLinearEasingFunction());
             scalarAnimation.Duration = TimeSpan.FromSeconds(1);
             _backgroundLight.StartAnimation(nameof(AmbientLight.Intensity), scalarAnimation);
+            _buttonLight.StartAnimation(nameof(AmbientLight.Intensity), scalarAnimation);
         }
 
         private void HideBackgroundLight()
@@ -170,6 +174,7 @@ namespace OnePomodoro.PomodoroViews
             scalarAnimation.InsertKeyFrame(1.0f, 0, compositor.CreateLinearEasingFunction());
             scalarAnimation.Duration = TimeSpan.FromSeconds(1);
             _backgroundLight.StartAnimation(nameof(AmbientLight.Intensity), scalarAnimation);
+            _buttonLight.StartAnimation(nameof(AmbientLight.Intensity), scalarAnimation);
         }
 
 
