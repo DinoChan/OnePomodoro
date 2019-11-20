@@ -31,6 +31,8 @@ namespace OnePomodoro.PomodoroViews
             typeof(LongShadow),
             typeof(SpringTextView),
             typeof(KonosubaView),
+            typeof(HiddenTextView),
+            typeof(OutlineTextView),
         };
 
     }

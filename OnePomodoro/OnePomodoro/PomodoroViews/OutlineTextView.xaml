@@ -1,0 +1,74 @@
+﻿<local:PomodoroView x:Class="OnePomodoro.PomodoroViews.OutlineTextView"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="using:OnePomodoro.PomodoroViews"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    mc:Ignorable="d"
+                    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+                    xmlns:behaviors="using:Microsoft.Toolkit.Uwp.UI.Animations.Behaviors"
+                    xmlns:controls="using:OnePomodoro.Controls"
+
+                    x:DefaultBindMode="OneWay"
+                    d:DesignHeight="1000"
+                    d:DesignWidth="1900">
+
+    <Grid x:Name="LayoutRoot" >
+        <Rectangle x:Name="Root"/>
+        <ContentControl FontFamily="{StaticResource TimeFont}"
+                        Foreground="White"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+            <StackPanel VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        x:Name="PomodoroPanel">
+                <Grid>
+                    <StackPanel x:Name="FocusPanel">
+                        
+                        <TextBlock Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
+                                   FontSize="280"
+                                   Grid.Row="1"
+                                   Height="360"
+                                   HorizontalAlignment="Center"
+                                   Foreground="White"
+                                   />
+                        <TextBlock Text="Focus On Your Job"
+                               HorizontalAlignment="Center"
+                                   Height="216"
+                               Foreground="White"
+                               FontSize="168"
+                               />
+                    </StackPanel>
+                    <StackPanel x:Name="RelaxPanel">
+                        
+                        <TextBlock Text="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
+                                           FontSize="280"
+                                           Grid.Row="1"
+                                   Height="360"
+                                           HorizontalAlignment="Center"
+                                           Foreground="White"
+                                           />
+
+                        <TextBlock Text="Take a break"
+                                   Height="216"
+                                           Foreground="White"
+                                   HorizontalAlignment="Center"
+                               FontSize="168"                                              />
+                    </StackPanel>
+                </Grid>
+                <controls:PomodoroStateButton Margin="60,60"
+                                              x:Name="StateButton"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"
+                                      Style="{StaticResource LargeButton}"
+                                      StartCommand="{Binding StartTimerCommand}"
+                                      StopCommand="{Binding StopTimerCommand}"
+                                      IsInPomodoro="{x:Bind ViewModel.IsInPomodoro}"
+                                      IsTimerInProgress="{x:Bind ViewModel.IsTimerInProgress}"/>
+
+            </StackPanel>
+        </ContentControl>
+
+
+    </Grid>
+</local:PomodoroView>
