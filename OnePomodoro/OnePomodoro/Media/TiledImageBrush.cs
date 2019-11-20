@@ -5,7 +5,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 
-namespace OnePomodoro.Controls
+namespace OnePomodoro.Media
 {
     public class TiledImageBrush : XamlCompositionBrushBase
     {
@@ -21,7 +21,7 @@ namespace OnePomodoro.Controls
         /// <summary>
         /// 获取或设置ImageSourceUri的值
         /// </summary>
-        public ImageSource Source
+        public ImageSource Source 
         {
             get => (ImageSource)GetValue(SourceProperty);
             set => SetValue(SourceProperty, value);

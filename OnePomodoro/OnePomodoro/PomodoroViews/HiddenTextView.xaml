@@ -8,6 +8,7 @@
                     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
                     xmlns:behaviors="using:Microsoft.Toolkit.Uwp.UI.Animations.Behaviors"
                     xmlns:controls="using:OnePomodoro.Controls"
+                    xmlns:media="using:OnePomodoro.Media"
                     x:DefaultBindMode="OneWay"
                     d:DesignHeight="787.5"
                     d:DesignWidth="1440">
@@ -68,8 +69,8 @@
             </Grid>
         </Viewbox>
         <Rectangle IsHitTestVisible="False">
-            <Rectangle.Fill>
-                <controls:TiledImageBrush Source="ms-appx:///Assets/flutter.png"/>
+            <Rectangle.Fill> 
+                <media:TiledImageBrush Source="ms-appx:///Assets/flutter.png"/> 
             </Rectangle.Fill>
         </Rectangle>
     </Grid>
