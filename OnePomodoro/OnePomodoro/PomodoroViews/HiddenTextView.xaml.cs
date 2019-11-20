@@ -87,7 +87,7 @@ namespace OnePomodoro.PomodoroViews
         private void ShowTextShimmingAsync()
         {
             _redLight = CreatePointLightAndStartAnimation(_redColor, TimeSpan.Zero);
-            _blueLight = CreatePointLightAndStartAnimation(_blueColor, TimeSpan.FromSeconds(0.5));
+            _blueLight = CreatePointLightAndStartAnimation(_blueColor, TimeSpan.FromSeconds(0.25));
             var focusVisual = VisualExtensions.GetVisual(FocusPanel);
             var relayVisual = VisualExtensions.GetVisual(RelaxPanel);
 
@@ -122,18 +122,19 @@ namespace OnePomodoro.PomodoroViews
 
         private PointLight CreatePointLightAndStartAnimation(Color color, TimeSpan delay)
         {
-            var width = 1920f;
-            var height = 1050f;
+            var width = 960;
+            var height = 461;
             var compositor = Window.Current.Compositor;
-            var rootVisual = VisualExtensions.GetVisual(this);
+
+            var rootVisual = VisualExtensions.GetVisual(Root);
             var pointLight = compositor.CreatePointLight();
 
             pointLight.Color = color;
             pointLight.CoordinateSpace = rootVisual;
-            pointLight.Offset = new Vector3(-width * 3, height / 2, 150.0f);
+            pointLight.Offset = new Vector3(-width * 4, height / 2, 75.0f);
 
             var offsetAnimation = compositor.CreateScalarKeyFrameAnimation();
-            offsetAnimation.InsertKeyFrame(1.0f, width * 4, compositor.CreateLinearEasingFunction());
+            offsetAnimation.InsertKeyFrame(1.0f, width * 5, compositor.CreateLinearEasingFunction());
             offsetAnimation.Duration = TimeSpan.FromSeconds(10);
             offsetAnimation.DelayTime = delay;
             offsetAnimation.IterationBehavior = AnimationIterationBehavior.Forever;
@@ -163,6 +164,10 @@ namespace OnePomodoro.PomodoroViews
             scalarAnimation.InsertKeyFrame(1.0f, 0.5f, compositor.CreateLinearEasingFunction());
             scalarAnimation.Duration = TimeSpan.FromSeconds(1);
             _backgroundLight.StartAnimation(nameof(AmbientLight.Intensity), scalarAnimation);
+
+            scalarAnimation = compositor.CreateScalarKeyFrameAnimation();
+            scalarAnimation.InsertKeyFrame(1.0f, 1f, compositor.CreateLinearEasingFunction());
+            scalarAnimation.Duration = TimeSpan.FromSeconds(1);
             _buttonLight.StartAnimation(nameof(AmbientLight.Intensity), scalarAnimation);
         }
 
