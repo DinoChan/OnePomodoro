@@ -8,15 +8,16 @@
                     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
                     xmlns:behaviors="using:Microsoft.Toolkit.Uwp.UI.Animations.Behaviors"
                     xmlns:controls="using:OnePomodoro.Controls"
+                    xmlns:media="using:OnePomodoro.Media"
                     x:DefaultBindMode="OneWay"
-                    d:DesignHeight="1050"
-                    d:DesignWidth="1920">
+                    d:DesignHeight="787.5"
+                    d:DesignWidth="1440">
 
     <Grid x:Name="LayoutRoot" Background="Black">
        
         <Viewbox>
-            <Grid Height="1050"
-                  Width="1920">
+            <Grid Height="525"
+                  Width="960">
                 <ContentControl FontFamily="{StaticResource TimeFont}"
                                 Foreground="White"
                                 HorizontalAlignment="Center"
@@ -29,31 +30,31 @@
                                 <TextBlock Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
                                            FontSize="380"
                                            Grid.Row="1"
-                                           Height="440"
+                                           Margin="0,-128,0,-110"
                                            HorizontalAlignment="Center"
                                            Foreground="White" />
-                                <TextBlock Text="Focus On Your Job"
+                                <TextBlock Text="FOCUS ON JOB" FontWeight="Bold"
                                            HorizontalAlignment="Center"
-                                           Height="216"
                                            Foreground="White"
-                                           FontSize="168" />
+                                           FontSize="128" />
                             </StackPanel>
-                            <StackPanel x:Name="RelaxPanel">
+                            <StackPanel x:Name="RelaxPanel" >
                                 <TextBlock Text="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
                                            FontSize="380"
                                            Grid.Row="1"
-                                           Height="440"
+                                           Margin="0,-128,0,-110"
                                            HorizontalAlignment="Center"
                                            Foreground="White" />
 
-                                <TextBlock Text="Take a break"
-                                           Height="216"
+                                <TextBlock Text="TAKE A BREAK" FontWeight="Bold"
+                                          
                                            Foreground="White"
                                            HorizontalAlignment="Center"
-                                           FontSize="168" />
+                                           FontSize="128" />
                             </StackPanel>
                         </Grid>
-                        <controls:PomodoroStateButton Margin="0,60,0,0"
+                        
+                        <controls:PomodoroStateButton Margin="0,0,0,0"
                                                       x:Name="StateButton"
                                                       HorizontalAlignment="Center"
                                                       VerticalAlignment="Center"
@@ -67,9 +68,9 @@
                 </ContentControl>
             </Grid>
         </Viewbox>
-        <Rectangle >
-            <Rectangle.Fill>
-                <controls:TiledBrush ImageSourceUri="ms-appx:///Assets/flutter.png"/>
+        <Rectangle IsHitTestVisible="False">
+            <Rectangle.Fill> 
+                <media:TiledImageBrush Source="ms-appx:///Assets/flutter.png"/> 
             </Rectangle.Fill>
         </Rectangle>
     </Grid>
