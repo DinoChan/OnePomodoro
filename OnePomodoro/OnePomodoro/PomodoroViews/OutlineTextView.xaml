@@ -23,38 +23,7 @@
                         HorizontalAlignment="Center"
                         x:Name="PomodoroPanel">
                 <Grid>
-                    <StackPanel x:Name="FocusPanel">
-                        
-                        <TextBlock Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
-                                   FontSize="280"
-                                   Grid.Row="1"
-                                   Height="360"
-                                   HorizontalAlignment="Center"
-                                   Foreground="White"
-                                   />
-                        <TextBlock Text="Focus On Your Job"
-                               HorizontalAlignment="Center"
-                                   Height="216"
-                               Foreground="White"
-                               FontSize="168"
-                               />
-                    </StackPanel>
-                    <StackPanel x:Name="RelaxPanel">
-                        
-                        <TextBlock Text="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
-                                           FontSize="280"
-                                           Grid.Row="1"
-                                   Height="360"
-                                           HorizontalAlignment="Center"
-                                           Foreground="White"
-                                           />
-
-                        <TextBlock Text="Take a break"
-                                   Height="216"
-                                           Foreground="White"
-                                   HorizontalAlignment="Center"
-                               FontSize="168"                                              />
-                    </StackPanel>
+                    <controls:OutlineTextControl Text="sddsfsd" FontColor="White" Height="100" Width="100" FontSize="50" ShowNonOutlineText="True" FontColor="Blue"/>
                 </Grid>
                 <controls:PomodoroStateButton Margin="60,60"
                                               x:Name="StateButton"
