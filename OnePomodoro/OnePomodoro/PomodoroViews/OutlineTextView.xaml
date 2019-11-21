@@ -23,7 +23,7 @@
                         HorizontalAlignment="Center"
                         x:Name="PomodoroPanel">
                 <Grid>
-                    <controls:OutlineTextControl Text="sddsfsd" FontColor="White" Height="100" Width="100" FontSize="50" ShowNonOutlineText="True" FontColor="Blue"/>
+                    <controls:OutlineTextControl Text="sddsdsfsd" StrokeWidth="2" OutlineColor="Red" DashStyle="Solid"  Height="400" Width="300" FontSize="100"  FontColor="Blue"/>
                 </Grid>
                 <controls:PomodoroStateButton Margin="60,60"
                                               x:Name="StateButton"

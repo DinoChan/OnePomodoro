@@ -34,22 +34,14 @@ namespace OnePomodoro.Controls
             var spriteTextVisual = compositor.CreateSpriteVisual();
             spriteTextVisual.Size = new Vector2(512, 512);
 
-            _drawingSurface = graphicsDevice.CreateDrawingSurface(new Size(512, 512), DirectXPixelFormat.B8G8R8A8UIntNormalized, DirectXAlphaMode.Premultiplied);
 
-            DrawText();
-
-            var maskSurfaceBrush = compositor.CreateSurfaceBrush(_drawingSurface);
-            var surfaceTextBrush = compositor.CreateColorBrush(Colors.DeepPink);
-            var maskBrush = compositor.CreateMaskBrush();
-            maskBrush.Mask = maskSurfaceBrush;
-            maskBrush.Source = surfaceTextBrush;
-
-
-            spriteTextVisual.Brush = maskBrush;
             ElementCompositionPreview.SetElementChildVisual(this, spriteTextVisual);
             SizeChanged += (s, e) =>
             {
-                spriteTextVisual.Size = e.NewSize.ToVector2();
+                _drawingSurface = graphicsDevice.CreateDrawingSurface(new Size(512, 512), DirectXPixelFormat.B8G8R8A8UIntNormalized, DirectXAlphaMode.Premultiplied);
+                DrawText();
+                var maskSurfaceBrush = compositor.CreateSurfaceBrush(_drawingSurface);
+                spriteTextVisual.Brush = maskSurfaceBrush;
                 DrawText();
             };
             RegisterPropertyChangedCallback(FontSizeProperty, new DependencyPropertyChangedCallback((s, e) =>
@@ -176,27 +168,27 @@ namespace OnePomodoro.Controls
         /// <summary>
         /// 获取或设置StrokeStyle的值
         /// </summary>
-        public CanvasStrokeStyle StrokeStyle
+        public CanvasDashStyle DashStyle
         {
-            get => (CanvasStrokeStyle)GetValue(StrokeStyleProperty);
-            set => SetValue(StrokeStyleProperty, value);
+            get => (CanvasDashStyle)GetValue(DashStyleProperty);
+            set => SetValue(DashStyleProperty, value);
         }
 
         /// <summary>
         /// 标识 StrokeStyle 依赖属性。
         /// </summary>
-        public static readonly DependencyProperty StrokeStyleProperty =
-            DependencyProperty.Register(nameof(StrokeStyle), typeof(CanvasStrokeStyle), typeof(OutlineTextControl), new PropertyMetadata(default(CanvasStrokeStyle), OnStrokeStyleChanged));
+        public static readonly DependencyProperty DashStyleProperty =
+            DependencyProperty.Register(nameof(DashStyle), typeof(CanvasDashStyle), typeof(OutlineTextControl), new PropertyMetadata(default(CanvasDashStyle), OnDashStyleChanged));
 
-        private static void OnStrokeStyleChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        private static void OnDashStyleChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
         {
-            var oldValue = (CanvasStrokeStyle)args.OldValue;
-            var newValue = (CanvasStrokeStyle)args.NewValue;
+            var oldValue = (CanvasDashStyle)args.OldValue;
+            var newValue = (CanvasDashStyle)args.NewValue;
             if (oldValue == newValue)
                 return;
 
             var target = obj as OutlineTextControl;
-            target?.OnStrokeStyleChanged(oldValue, newValue);
+            target?.OnDashStyleChanged(oldValue, newValue);
         }
 
         /// <summary>
@@ -204,7 +196,7 @@ namespace OnePomodoro.Controls
         /// </summary>
         /// <param name="oldValue">StrokeStyle 属性的旧值。</param>
         /// <param name="newValue">StrokeStyle 属性的新值。</param>
-        protected virtual void OnStrokeStyleChanged(CanvasStrokeStyle oldValue, CanvasStrokeStyle newValue)
+        protected virtual void OnDashStyleChanged(CanvasDashStyle oldValue, CanvasDashStyle newValue)
         {
             DrawText();
         }
@@ -251,9 +243,9 @@ namespace OnePomodoro.Controls
         /// <summary>
         /// 获取或设置StrokeWidth的值
         /// </summary>
-        public float StrokeWidth
+        public double StrokeWidth
         {
-            get => (float)GetValue(StrokeWidthProperty);
+            get => (double)GetValue(StrokeWidthProperty);
             set => SetValue(StrokeWidthProperty, value);
         }
 
@@ -261,12 +253,12 @@ namespace OnePomodoro.Controls
         /// 标识 StrokeWidth 依赖属性。
         /// </summary>
         public static readonly DependencyProperty StrokeWidthProperty =
-            DependencyProperty.Register(nameof(StrokeWidth), typeof(float), typeof(OutlineTextControl), new PropertyMetadata(default(float), OnStrokeWidthChanged));
+            DependencyProperty.Register(nameof(StrokeWidth), typeof(double), typeof(OutlineTextControl), new PropertyMetadata(default(double), OnStrokeWidthChanged));
 
         private static void OnStrokeWidthChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
         {
-            var oldValue = (float)args.OldValue;
-            var newValue = (float)args.NewValue;
+            var oldValue = (double)args.OldValue;
+            var newValue = (double)args.NewValue;
             if (oldValue == newValue)
                 return;
 
@@ -279,17 +271,17 @@ namespace OnePomodoro.Controls
         /// </summary>
         /// <param name="oldValue">StrokeWidth 属性的旧值。</param>
         /// <param name="newValue">StrokeWidth 属性的新值。</param>
-        protected virtual void OnStrokeWidthChanged(float oldValue, float newValue)
+        protected virtual void OnStrokeWidthChanged(double oldValue, double newValue)
         {
             DrawText();
         }
 
         private void DrawText()
         {
-            if (ActualHeight == 0 || ActualWidth == 0 || string.IsNullOrWhiteSpace(Text))
+            if (ActualHeight == 0 || ActualWidth == 0 || string.IsNullOrWhiteSpace(Text) || _drawingSurface == null)
                 return;
 
-            var width =  (float)ActualWidth;
+            var width = (float)ActualWidth;
             var height = (float)ActualHeight;
             using (var session = CanvasComposition.CreateDrawingSession(_drawingSurface))
             {
@@ -314,14 +306,17 @@ namespace OnePomodoro.Controls
 
                         using (var textGeometry = CanvasGeometry.CreateText(textLayout))
                         {
-                            float strokeWidth = 1f;
-                            session.DrawGeometry(textGeometry, OutlineColor, strokeWidth, StrokeStyle);
+                            var dashedStroke = new CanvasStrokeStyle()
+                            {
+                                DashStyle = DashStyle
+                            };
+                            session.DrawGeometry(textGeometry, OutlineColor, (float)StrokeWidth, dashedStroke);
                         }
                     }
                 }
             }
         }
 
-      
+
     }
 }
