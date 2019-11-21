@@ -36,122 +36,151 @@ namespace OnePomodoro.PomodoroViews
     [Screenshot("/Assets/Screenshots/OutlineTextView.png")]
     public sealed partial class OutlineTextView : PomodoroView
     {
-        private PointLight _inworkPointLight;
-        private PointLight _breakPointLight;
+        private PointLight _redLight;
+        private PointLight _blueLight;
+        private AmbientLight _backgroundLight;
+        private AmbientLight _buttonLight;
+
+        private Color _redColor = Color.FromArgb(255, 217, 17, 83);
+        private Color _blueColor = Color.FromArgb(255, 0, 27, 171);
+
+        private Color _lightRedColor = Color.FromArgb(255, 247, 97, 163);
+        private Color _lightBlueColor = Color.FromArgb(255, 80, 107, 251);
 
         public OutlineTextView()
         {
             this.InitializeComponent();
+            OnIsInPomodoroChanged();
             Loaded += OnLoaded;
-            Unloaded += OnUnloaded;
+            ViewModel.IsInPomodoroChanged += (s, e) => OnIsInPomodoroChanged();
         }
 
-        private async void OnLoaded(object sender, RoutedEventArgs e)
+        private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            //await LayoutRoot.Fade(0.0f, duration: 0, delay: 0, easingMode: Windows.UI.Xaml.Media.Animation.EasingMode.EaseIn).StartAsync();
-            //await LayoutRoot.Fade(1.0f, duration: 1500, delay: 0).StartAsync();
-            ShowTextShimming();
+            Loaded -= OnLoaded;
+            ShowTextShimmingAsync();
+            OnIsInPomodoroChanged();
+            CreateBackgroundLight();
         }
 
-        private void OnUnloaded(object sender, RoutedEventArgs e)
+        private void OnIsInPomodoroChanged()
         {
-            StopTextShimming();
+            FocusPanel.Visibility = ViewModel.IsInPomodoro ? Visibility.Visible : Visibility.Collapsed;
+            RelaxPanel.Visibility = ViewModel.IsInPomodoro ? Visibility.Collapsed : Visibility.Visible;
+            SwitchBackgroundLightColor();
+
         }
 
-
-
-        private async void ShowTextShimming()
+        protected override void OnPointerEntered(PointerRoutedEventArgs e)
         {
-          
+            base.OnPointerEntered(e);
+            ShowBackgroundLight();
+        }
 
+        protected override void OnPointerExited(PointerRoutedEventArgs e)
+        {
+            base.OnPointerExited(e);
+            HideBackgroundLight();
+        }
+
+        private void ShowTextShimmingAsync()
+        {
+            var width = 960;
+
+            _redLight = CreatePointLightAndStartAnimation(_redColor, -width * 2, width * 5);
+            _blueLight = CreatePointLightAndStartAnimation(_blueColor, width * 3, -width * 4);
+            var focusVisual = VisualExtensions.GetVisual(FocusPanel);
+            var relayVisual = VisualExtensions.GetVisual(RelaxPanel);
+
+            _redLight.Targets.Add(focusVisual);
+            _blueLight.Targets.Add(focusVisual);
+
+            _redLight.Targets.Add(relayVisual);
+            _blueLight.Targets.Add(relayVisual);
         }
 
 
-        private PointLight CreatePointLightAndStartAnimation(Color color, TimeSpan delay)
+        private void CreateBackgroundLight()
         {
             var compositor = Window.Current.Compositor;
-            var titleVisual = VisualExtensions.GetVisual(this);
+            var buttonVisual = VisualExtensions.GetVisual(ButtonPanel);
+            var focusVisual = VisualExtensions.GetVisual(FocusPanel);
+            var relayVisual = VisualExtensions.GetVisual(RelaxPanel);
+            var footVisual = VisualExtensions.GetVisual(FootBackground);
+
+            _backgroundLight = compositor.CreateAmbientLight();
+            _backgroundLight.Color = ViewModel.IsInPomodoro ? _lightRedColor : _lightBlueColor;
+            _backgroundLight.Intensity = 0;
+            _backgroundLight.Targets.Add(focusVisual);
+            _backgroundLight.Targets.Add(relayVisual);
+            _backgroundLight.Targets.Add(footVisual);
+
+            _buttonLight = compositor.CreateAmbientLight();
+            _buttonLight.Color = Colors.White;
+            _buttonLight.Intensity = 0;
+            _buttonLight.Targets.Add(buttonVisual);
+        }
+
+        private PointLight CreatePointLightAndStartAnimation(Color color, float startOffsetX, float endOffsetX)
+        {
+            var height = 461;
+            var compositor = Window.Current.Compositor;
+
+            var rootVisual = VisualExtensions.GetVisual(Root);
             var pointLight = compositor.CreatePointLight();
 
             pointLight.Color = color;
-            pointLight.CoordinateSpace = titleVisual;
-            //pointLight.Targets.Add(titleVisual);
-            pointLight.Offset = new Vector3(-(float)PomodoroPanel.ActualWidth * 2, (float)PomodoroPanel.ActualHeight / 2, 300.0f);
+            pointLight.CoordinateSpace = rootVisual;
+            pointLight.Offset = new Vector3(startOffsetX, height / 2, 75.0f);
 
             var offsetAnimation = compositor.CreateScalarKeyFrameAnimation();
-            offsetAnimation.InsertKeyFrame(1.0f, (float)PomodoroPanel.ActualWidth * 3, compositor.CreateLinearEasingFunction());
-            offsetAnimation.Duration = TimeSpan.FromSeconds(10);
-            offsetAnimation.DelayTime = delay;
+            offsetAnimation.InsertKeyFrame(1.0f, endOffsetX, compositor.CreateLinearEasingFunction());
+            offsetAnimation.Duration = TimeSpan.FromSeconds(15);
             offsetAnimation.IterationBehavior = AnimationIterationBehavior.Forever;
 
             pointLight.StartAnimation("Offset.X", offsetAnimation);
             return pointLight;
         }
 
-        private void StopTextShimming()
+        private void SwitchBackgroundLightColor()
         {
-            //_inworkPointLight?.StopAnimation("Offset.X");
-            //_breakPointLight?.StopAnimation("Offset.X");
+            if (_backgroundLight == null)
+                return;
+
+            var compositor = Window.Current.Compositor;
+
+            var colorAnimation = compositor.CreateColorKeyFrameAnimation();
+            colorAnimation.InsertKeyFrame(1.0f, ViewModel.IsInPomodoro ? _lightRedColor : _lightBlueColor, compositor.CreateLinearEasingFunction());
+            colorAnimation.Duration = TimeSpan.FromSeconds(1);
+            _backgroundLight.StartAnimation(nameof(AmbientLight.Color), colorAnimation);
         }
 
-        private void DrawText(CompositionDrawingSurface surface, string text, float fontSize)
+        private void ShowBackgroundLight()
         {
-            using (var session = CanvasComposition.CreateDrawingSession(surface))
-            {
-                session.Clear(Colors.Transparent);
-                using (var textFormat = new CanvasTextFormat()
-                {
-                    FontSize = fontSize,
-                    Direction = CanvasTextDirection.LeftToRightThenTopToBottom,
-                    VerticalAlignment = CanvasVerticalAlignment.Center,
-                    HorizontalAlignment = CanvasHorizontalAlignment.Center,
+            var compositor = Window.Current.Compositor;
 
-                })
-                {
-                    using (var textLayout = new CanvasTextLayout(session, text, textFormat, 500f, 500f))
-                    {
-                        using (var textGeometry = CanvasGeometry.CreateText(textLayout))
-                        {
-                            float strokeWidth = 1f;
+            var scalarAnimation = compositor.CreateScalarKeyFrameAnimation();
+            scalarAnimation.InsertKeyFrame(1.0f, 0.5f, compositor.CreateLinearEasingFunction());
+            scalarAnimation.Duration = TimeSpan.FromSeconds(1);
+            _backgroundLight.StartAnimation(nameof(AmbientLight.Intensity), scalarAnimation);
 
-                            session.DrawGeometry(textGeometry, Colors.White, strokeWidth, dashedStroke);
-                        }
-                    }
-                }
-            }
+            scalarAnimation = compositor.CreateScalarKeyFrameAnimation();
+            scalarAnimation.InsertKeyFrame(1.0f, 1f, compositor.CreateLinearEasingFunction());
+            scalarAnimation.Duration = TimeSpan.FromSeconds(1);
+            _buttonLight.StartAnimation(nameof(AmbientLight.Intensity), scalarAnimation);
         }
 
-        CanvasTextLayout textLayout;
-        CanvasGeometry textGeometry;
-        CanvasStrokeStyle dashedStroke = new CanvasStrokeStyle()
+        private void HideBackgroundLight()
         {
-            DashStyle = CanvasDashStyle.Solid
-        };
+            var compositor = Window.Current.Compositor;
 
-
-
-        private void CreateColoredText(string text)
-        {
-            var compositor = ElementCompositionPreview.GetElementVisual(this).Compositor;
-            var graphicsDevice = CanvasComposition.CreateCompositionGraphicsDevice(compositor, CanvasDevice.GetSharedDevice());
-
-            var spriteTextVisual = compositor.CreateSpriteVisual();
-            spriteTextVisual.Size = new Vector2(512, 512);
-
-            var maskDrawingSurface = graphicsDevice.CreateDrawingSurface(new Size(512, 512), DirectXPixelFormat.B8G8R8A8UIntNormalized, DirectXAlphaMode.Premultiplied);
-
-            DrawText(maskDrawingSurface, "this is a test", 40f);
-
-            var maskSurfaceBrush = compositor.CreateSurfaceBrush(maskDrawingSurface);
-            var surfaceTextBrush = compositor.CreateColorBrush(Colors.DeepPink);
-            var maskBrush = compositor.CreateMaskBrush();
-            maskBrush.Mask = maskSurfaceBrush;
-            maskBrush.Source = surfaceTextBrush;
-
-
-            spriteTextVisual.Brush = maskBrush;
-            ElementCompositionPreview.SetElementChildVisual(this, spriteTextVisual);
+            var scalarAnimation = compositor.CreateScalarKeyFrameAnimation();
+            scalarAnimation.InsertKeyFrame(1.0f, 0, compositor.CreateLinearEasingFunction());
+            scalarAnimation.Duration = TimeSpan.FromSeconds(1);
+            _backgroundLight.StartAnimation(nameof(AmbientLight.Intensity), scalarAnimation);
+            _buttonLight.StartAnimation(nameof(AmbientLight.Intensity), scalarAnimation);
         }
+
     }
 
 

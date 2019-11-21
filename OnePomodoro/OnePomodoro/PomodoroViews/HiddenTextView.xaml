@@ -63,7 +63,7 @@
                 </ContentControl>
             </Grid>
         </Viewbox>
-        <Rectangle IsHitTestVisible="False" >
+        <Rectangle IsHitTestVisible="False"  Grid.RowSpan="2">
             <Rectangle.Fill>
                 <media:TiledImageBrush Source="ms-appx:///Assets/flutter.png"/>
             </Rectangle.Fill>

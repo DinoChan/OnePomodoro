@@ -32,17 +32,17 @@ namespace OnePomodoro.Controls
             var graphicsDevice = CanvasComposition.CreateCompositionGraphicsDevice(compositor, CanvasDevice.GetSharedDevice());
 
             var spriteTextVisual = compositor.CreateSpriteVisual();
-            spriteTextVisual.Size = new Vector2(512, 512);
+            
 
 
             ElementCompositionPreview.SetElementChildVisual(this, spriteTextVisual);
             SizeChanged += (s, e) =>
             {
-                _drawingSurface = graphicsDevice.CreateDrawingSurface(new Size(512, 512), DirectXPixelFormat.B8G8R8A8UIntNormalized, DirectXAlphaMode.Premultiplied);
+                _drawingSurface = graphicsDevice.CreateDrawingSurface(e.NewSize, DirectXPixelFormat.B8G8R8A8UIntNormalized, DirectXAlphaMode.Premultiplied);
                 DrawText();
                 var maskSurfaceBrush = compositor.CreateSurfaceBrush(_drawingSurface);
                 spriteTextVisual.Brush = maskSurfaceBrush;
-                DrawText();
+                spriteTextVisual.Size = e.NewSize.ToVector2();
             };
             RegisterPropertyChangedCallback(FontSizeProperty, new DependencyPropertyChangedCallback((s, e) =>
              {

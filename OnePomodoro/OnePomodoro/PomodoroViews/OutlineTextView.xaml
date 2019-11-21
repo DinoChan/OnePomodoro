@@ -8,35 +8,74 @@
                     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
                     xmlns:behaviors="using:Microsoft.Toolkit.Uwp.UI.Animations.Behaviors"
                     xmlns:controls="using:OnePomodoro.Controls"
-
+                    xmlns:media="using:OnePomodoro.Media"
                     x:DefaultBindMode="OneWay"
                     d:DesignHeight="1000"
                     d:DesignWidth="1900">
 
-    <Grid x:Name="LayoutRoot" >
-        <Rectangle x:Name="Root"/>
-        <ContentControl FontFamily="{StaticResource TimeFont}"
-                        Foreground="White"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center">
-            <StackPanel VerticalAlignment="Center"
-                        HorizontalAlignment="Center"
-                        x:Name="PomodoroPanel">
-                <Grid>
-                    <controls:OutlineTextControl Text="sddsdsfsd" StrokeWidth="2" OutlineColor="Red" DashStyle="Solid"  Height="400" Width="300" FontSize="100"  FontColor="Blue"/>
-                </Grid>
-                <controls:PomodoroStateButton Margin="60,60"
-                                              x:Name="StateButton"
-                                      HorizontalAlignment="Center"
-                                      VerticalAlignment="Center"
-                                      Style="{StaticResource LargeButton}"
-                                      StartCommand="{Binding StartTimerCommand}"
-                                      StopCommand="{Binding StopTimerCommand}"
-                                      IsInPomodoro="{x:Bind ViewModel.IsInPomodoro}"
-                                      IsTimerInProgress="{x:Bind ViewModel.IsTimerInProgress}"/>
+    <Grid x:Name="LayoutRoot" Background="Black">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Viewbox>
+            <Grid Height="461"
+                  Width="960"
+                  x:Name="Root">
+                <ContentControl FontFamily="{StaticResource TimeFont}"
+                                Foreground="White"
+                                HorizontalAlignment="Center" 
+                                VerticalAlignment="Center">
+                    <StackPanel VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                x:Name="PomodoroPanel">
+                        <Grid>
+                            <StackPanel x:Name="FocusPanel">
+                                <controls:OutlineTextControl Margin="0,-20,0,0" Width="960" Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}" StrokeWidth="2" OutlineColor="White" DashStyle="Solid"  Height="350"  FontSize="380" />
 
+                                <controls:OutlineTextControl Width="960" Text="FOCUS ON JOB" StrokeWidth="2" OutlineColor="White" DashStyle="Solid"  Height="128"  FontSize="128" />
+
+                            </StackPanel>
+                            <StackPanel x:Name="RelaxPanel">
+                                <controls:OutlineTextControl  Margin="0,-20,0,0" Text="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}" StrokeWidth="2" OutlineColor="White" DashStyle="Solid" Height="350"  FontSize="380"  />
+
+                                <controls:OutlineTextControl Text="TAKE A BREAK" StrokeWidth="2" OutlineColor="White" DashStyle="Solid"  Height="128"  FontSize="128" />
+
+                            </StackPanel>
+                        </Grid>
+
+
+                    </StackPanel>
+                </ContentControl>
+            </Grid>
+        </Viewbox>
+        <Rectangle IsHitTestVisible="False" Grid.RowSpan="2" >
+            <Rectangle.Fill>
+                <media:TiledImageBrush Source="ms-appx:///Assets/flutter.png"/>
+            </Rectangle.Fill>
+        </Rectangle>
+
+        <Grid Height="32" Grid.Row="1">
+            <Rectangle x:Name="FootBackground" Fill="White"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="ButtonPanel">
+                <controls:PomodoroStateButton 
+                                               x:Name="StateButton"
+                                                  VerticalAlignment="Center"
+                                                 HorizontalAlignment="Center"
+                                                  Style="{StaticResource SmallButton}"
+                                                  StartCommand="{Binding StartTimerCommand}"
+                                                  StopCommand="{Binding StopTimerCommand}"
+                                                  IsInPomodoro="{x:Bind ViewModel.IsInPomodoro}"
+                                                  IsTimerInProgress="{x:Bind ViewModel.IsTimerInProgress}"/>
+
+                <TextBlock Text="OnePomodoro"
+                               VerticalAlignment="Center"
+                           FontFamily="{StaticResource TimeFont}"
+                           FontSize="20"
+                           Foreground="White"
+                           Margin="8,0,0,2"/>
             </StackPanel>
-        </ContentControl>
+        </Grid>
 
 
     </Grid>
