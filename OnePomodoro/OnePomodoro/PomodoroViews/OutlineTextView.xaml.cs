@@ -162,9 +162,9 @@ namespace OnePomodoro.PomodoroViews
             ambientLight.Color = _greenColor;
 
             var offsetAnimation = compositor.CreateScalarKeyFrameAnimation();
-            offsetAnimation.InsertKeyFrame(0.3f, 0, compositor.CreateLinearEasingFunction());
-            offsetAnimation.InsertKeyFrame(0.5f, 0.25f, compositor.CreateLinearEasingFunction());
-            offsetAnimation.InsertKeyFrame(0.7f, 0, compositor.CreateLinearEasingFunction());
+            offsetAnimation.InsertKeyFrame(0.25f, 0, compositor.CreateLinearEasingFunction());
+            offsetAnimation.InsertKeyFrame(0.5f, 0.20f, compositor.CreateLinearEasingFunction());
+            offsetAnimation.InsertKeyFrame(0.75f, 0, compositor.CreateLinearEasingFunction());
             offsetAnimation.Duration = TimeSpan.FromSeconds(10);
             offsetAnimation.IterationBehavior = AnimationIterationBehavior.Forever;
 
