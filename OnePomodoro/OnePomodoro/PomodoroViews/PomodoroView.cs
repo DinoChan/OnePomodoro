@@ -32,6 +32,7 @@ namespace OnePomodoro.PomodoroViews
             typeof(SpringTextView),
             typeof(KonosubaView),
             typeof(HiddenTextView),
+            typeof(WhiteTextView),
             typeof(OutlineTextView),
         };
 

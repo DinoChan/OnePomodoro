@@ -1,4 +1,4 @@
-﻿<local:PomodoroView x:Class="OnePomodoro.PomodoroViews.HiddenTextView"
+﻿<local:PomodoroView x:Class="OnePomodoro.PomodoroViews.WhiteTextView"
                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="using:OnePomodoro.PomodoroViews"
@@ -18,10 +18,21 @@
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+      
+        <Rectangle IsHitTestVisible="False" >
+            <Rectangle.Fill>
+                <media:TiledImageBrush Source="ms-appx:///Assets/flutter.png"/>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Rectangle IsHitTestVisible="False" x:Name="Background">
+            <Rectangle.Fill>
+                <media:TiledImageBrush Source="ms-appx:///Assets/flutter.png"/>
+            </Rectangle.Fill>
+        </Rectangle>
+
         <Viewbox>
             <Grid Height="461"
-                  Width="960"
-                  x:Name="Root">
+                  Width="960">
                 <ContentControl FontFamily="{StaticResource TimeFont}"
                                 Foreground="White"
                                 HorizontalAlignment="Center"
@@ -63,16 +74,12 @@
                 </ContentControl>
             </Grid>
         </Viewbox>
-        <Rectangle IsHitTestVisible="False"  Grid.RowSpan="2">
-            <Rectangle.Fill>
-                <media:TiledImageBrush Source="ms-appx:///Assets/flutter.png"/>
-            </Rectangle.Fill>
-        </Rectangle>
-
         <Grid Height="32" Grid.Row="1">
             <Rectangle x:Name="FootBackground" Fill="White"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="ButtonPanel">
-                <controls:PomodoroStateButton 
+                <controls:PomodoroStateButton BreakColor="Black"
+                                              OutlineColor="Black"
+                                              PomodoroColor="Black"
                                                x:Name="StateButton"
                                                   VerticalAlignment="Center"
                                                  HorizontalAlignment="Center"
@@ -86,7 +93,7 @@
                                VerticalAlignment="Center"
                            FontFamily="{StaticResource TimeFont}"
                            FontSize="20"
-                           Foreground="White"
+                           Foreground="Black"
                            Margin="8,0,0,2"
 />
             </StackPanel>

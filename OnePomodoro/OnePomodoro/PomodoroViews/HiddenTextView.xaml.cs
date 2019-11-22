@@ -34,12 +34,13 @@ using Windows.UI.Xaml.Navigation;
 namespace OnePomodoro.PomodoroViews
 {
     [Title("Hidden Text")]
-    [Screenshot("/Assets/Screenshots/HiddenTextView.png")]
+    [Screenshot("/Assets/Screenshots/HiddenText.png")]
     public sealed partial class HiddenTextView : PomodoroView
     {
         private PointLight _redLight;
         private PointLight _blueLight;
         private AmbientLight _backgroundLight;
+        private AmbientLight _buttonLight;
 
         private Color _redColor = Color.FromArgb(255, 217, 17, 83);
         private Color _blueColor = Color.FromArgb(255, 0, 27, 171);
@@ -53,6 +54,8 @@ namespace OnePomodoro.PomodoroViews
             OnIsInPomodoroChanged();
             Loaded += OnLoaded;
             ViewModel.IsInPomodoroChanged += (s, e) => OnIsInPomodoroChanged();
+            var footBackgroundVisual = VisualExtensions.GetVisual(FootBackground);
+            footBackgroundVisual.Opacity = 0;
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
@@ -86,8 +89,7 @@ namespace OnePomodoro.PomodoroViews
         private void ShowTextShimmingAsync()
         {
             _redLight = CreatePointLightAndStartAnimation(_redColor, TimeSpan.Zero);
-            _blueLight = CreatePointLightAndStartAnimation(_blueColor, TimeSpan.FromSeconds(0.5));
-            var buttonVisual = VisualExtensions.GetVisual(StateButton);
+            _blueLight = CreatePointLightAndStartAnimation(_blueColor, TimeSpan.FromSeconds(0.25));
             var focusVisual = VisualExtensions.GetVisual(FocusPanel);
             var relayVisual = VisualExtensions.GetVisual(RelaxPanel);
 
@@ -96,41 +98,45 @@ namespace OnePomodoro.PomodoroViews
 
             _redLight.Targets.Add(relayVisual);
             _blueLight.Targets.Add(relayVisual);
-
-            _redLight.Targets.Add(buttonVisual);
-            _blueLight.Targets.Add(buttonVisual);
         }
 
 
         private void CreateBackgroundLight()
         {
             var compositor = Window.Current.Compositor;
-            _backgroundLight = compositor.CreateAmbientLight();
-            var rootVisual = VisualExtensions.GetVisual(this);
-            _backgroundLight.Color = ViewModel.IsInPomodoro ? _lightRedColor : _lightBlueColor;
-            _backgroundLight.Intensity = 0;
-            var buttonVisual = VisualExtensions.GetVisual(StateButton);
+            var buttonVisual = VisualExtensions.GetVisual(ButtonPanel);
             var focusVisual = VisualExtensions.GetVisual(FocusPanel);
             var relayVisual = VisualExtensions.GetVisual(RelaxPanel);
-            _backgroundLight.Targets.Add(buttonVisual);
+            var footVisual = VisualExtensions.GetVisual(FootBackground);
+
+            _backgroundLight = compositor.CreateAmbientLight();
+            _backgroundLight.Color = ViewModel.IsInPomodoro ? _lightRedColor : _lightBlueColor;
+            _backgroundLight.Intensity = 0;
             _backgroundLight.Targets.Add(focusVisual);
             _backgroundLight.Targets.Add(relayVisual);
+            _backgroundLight.Targets.Add(footVisual);
+
+            _buttonLight = compositor.CreateAmbientLight();
+            _buttonLight.Color = Colors.White;
+            _buttonLight.Intensity = 0;
+            _buttonLight.Targets.Add(buttonVisual);
         }
 
         private PointLight CreatePointLightAndStartAnimation(Color color, TimeSpan delay)
         {
-            var width = 1920f;
-            var height = 1050f;
+            var width = 960;
+            var height = 461;
             var compositor = Window.Current.Compositor;
-            var rootVisual = VisualExtensions.GetVisual(this);
+
+            var rootVisual = VisualExtensions.GetVisual(Root);
             var pointLight = compositor.CreatePointLight();
 
             pointLight.Color = color;
             pointLight.CoordinateSpace = rootVisual;
-            pointLight.Offset = new Vector3(-width * 3, height / 2, 150.0f);
+            pointLight.Offset = new Vector3(-width * 4, height / 2, 75.0f);
 
             var offsetAnimation = compositor.CreateScalarKeyFrameAnimation();
-            offsetAnimation.InsertKeyFrame(1.0f, width * 4, compositor.CreateLinearEasingFunction());
+            offsetAnimation.InsertKeyFrame(1.0f, width * 5, compositor.CreateLinearEasingFunction());
             offsetAnimation.Duration = TimeSpan.FromSeconds(10);
             offsetAnimation.DelayTime = delay;
             offsetAnimation.IterationBehavior = AnimationIterationBehavior.Forever;
@@ -154,22 +160,40 @@ namespace OnePomodoro.PomodoroViews
 
         private void ShowBackgroundLight()
         {
+            if (_backgroundLight == null)
+                return;
+
             var compositor = Window.Current.Compositor;
 
             var scalarAnimation = compositor.CreateScalarKeyFrameAnimation();
             scalarAnimation.InsertKeyFrame(1.0f, 0.5f, compositor.CreateLinearEasingFunction());
             scalarAnimation.Duration = TimeSpan.FromSeconds(1);
             _backgroundLight.StartAnimation(nameof(AmbientLight.Intensity), scalarAnimation);
+
+            scalarAnimation = compositor.CreateScalarKeyFrameAnimation();
+            scalarAnimation.InsertKeyFrame(1.0f, 1f, compositor.CreateLinearEasingFunction());
+            scalarAnimation.Duration = TimeSpan.FromSeconds(1);
+            _buttonLight.StartAnimation(nameof(AmbientLight.Intensity), scalarAnimation);
+
+            var footBackgroundVisual = VisualExtensions.GetVisual(FootBackground);
+            footBackgroundVisual.StartAnimation(nameof(footBackgroundVisual.Opacity), scalarAnimation);
         }
 
         private void HideBackgroundLight()
         {
+            if (_backgroundLight == null)
+                return;
+
             var compositor = Window.Current.Compositor;
 
             var scalarAnimation = compositor.CreateScalarKeyFrameAnimation();
             scalarAnimation.InsertKeyFrame(1.0f, 0, compositor.CreateLinearEasingFunction());
             scalarAnimation.Duration = TimeSpan.FromSeconds(1);
             _backgroundLight.StartAnimation(nameof(AmbientLight.Intensity), scalarAnimation);
+            _buttonLight.StartAnimation(nameof(AmbientLight.Intensity), scalarAnimation);
+
+            var footBackgroundVisual = VisualExtensions.GetVisual(FootBackground);
+            footBackgroundVisual.StartAnimation(nameof(footBackgroundVisual.Opacity), scalarAnimation);
         }
 
 
