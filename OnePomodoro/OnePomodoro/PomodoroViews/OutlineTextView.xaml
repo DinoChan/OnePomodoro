@@ -19,8 +19,8 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Viewbox>
-            <Grid Height="461"
-                  Width="960"
+            <Grid Height="922"
+                  Width="1920"
                   x:Name="Root">
                 <ContentControl FontFamily="{StaticResource TimeFont}"
                                 Foreground="White"
@@ -31,16 +31,16 @@
                                 x:Name="PomodoroPanel">
                         <Grid>
                             <StackPanel x:Name="FocusPanel">
-                                <controls:OutlineTextControl Margin="0,-20,0,0" Width="960" Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}" StrokeWidth="2" OutlineColor="White" DashStyle="Solid"  Height="350"  FontSize="380" />
+                                <controls:OutlineTextControl Margin="0,-40,0,0" Width="1920" Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}" StrokeWidth="4" OutlineColor="White" DashStyle="Solid"  Height="700"  FontSize="760" />
 
-                                <controls:OutlineTextControl Width="960" Text="FOCUS ON JOB" StrokeWidth="2" OutlineColor="White" DashStyle="Solid"  Height="128"  FontSize="128" />
+                                <controls:OutlineTextControl Width="1920" Text="FOCUS ON JOB" StrokeWidth="4" OutlineColor="White" DashStyle="Solid"  Height="256"  FontSize="256" />
 
                             </StackPanel>
                             <StackPanel x:Name="RelaxPanel">
-                                <controls:OutlineTextControl  Margin="0,-20,0,0" Text="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}" StrokeWidth="2" OutlineColor="White" DashStyle="Solid" Height="350"  FontSize="380"  />
+                                <controls:OutlineTextControl  Width="1920"  Margin="0,-40,0,0" Text="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}" StrokeWidth="4" OutlineColor="White" DashStyle="Solid" Height="700"  FontSize="760"  />
 
-                                <controls:OutlineTextControl Text="TAKE A BREAK" StrokeWidth="2" OutlineColor="White" DashStyle="Solid"  Height="128"  FontSize="128" />
-
+                                <controls:OutlineTextControl Width="1920" Text="TAKE A BREAK" StrokeWidth="4" OutlineColor="White" DashStyle="Solid"  Height="256"  FontSize="256" />
+                                <!--<TextBlock Text="sdfdsfds" FontSize="50" Foreground="White"/>-->
                             </StackPanel>
                         </Grid>
 

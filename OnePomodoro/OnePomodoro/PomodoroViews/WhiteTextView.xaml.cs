@@ -33,8 +33,8 @@ using Windows.UI.Xaml.Navigation;
 
 namespace OnePomodoro.PomodoroViews
 {
-    [Title("Hidden Text")]
-    [Screenshot("/Assets/Screenshots/HiddenTextView.png")]
+    [Title("White Text")]
+    [Screenshot("/Assets/Screenshots/WhiteText.png")]
     public sealed partial class WhiteTextView : PomodoroView
     {
         private PointLight _redLight;

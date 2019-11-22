@@ -387,12 +387,15 @@
     <Content Include="Assets\LargeTile.scale-400.png" />
     <Content Include="Assets\Screenshots\Gradients.png" />
     <Content Include="Assets\Screenshots\GradientsWithBlend.png" />
+    <Content Include="Assets\Screenshots\HiddenText.png" />
     <Content Include="Assets\Screenshots\Konosuba.png" />
     <Content Include="Assets\Screenshots\LongShadow.png" />
+    <Content Include="Assets\Screenshots\OutlineText.png" />
     <Content Include="Assets\Screenshots\SimpleCircle.png" />
     <Content Include="Assets\Screenshots\SpringText.png" />
     <Content Include="Assets\Screenshots\TheBigOne.png" />
     <Content Include="Assets\Screenshots\TheFirst.png" />
+    <Content Include="Assets\Screenshots\WhiteText.png" />
     <Content Include="Assets\SmallTile.scale-100.png" />
     <Content Include="Assets\SmallTile.scale-125.png" />
     <Content Include="Assets\SmallTile.scale-150.png" />

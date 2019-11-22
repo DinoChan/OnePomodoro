@@ -33,16 +33,19 @@ using Windows.UI.Xaml.Navigation;
 namespace OnePomodoro.PomodoroViews
 {
     [Title("Outline Text")]
-    [Screenshot("/Assets/Screenshots/OutlineTextView.png")]
+    [Screenshot("/Assets/Screenshots/OutlineText.png")]
     public sealed partial class OutlineTextView : PomodoroView
     {
         private PointLight _redLight;
         private PointLight _blueLight;
         private AmbientLight _backgroundLight;
         private AmbientLight _buttonLight;
+        private AmbientLight _greenLight;
 
         private Color _redColor = Color.FromArgb(255, 217, 17, 83);
         private Color _blueColor = Color.FromArgb(255, 0, 27, 171);
+
+        private Color _greenColor = Color.FromArgb(255, 38, 211, 1);
 
         private Color _lightRedColor = Color.FromArgb(255, 247, 97, 163);
         private Color _lightBlueColor = Color.FromArgb(255, 80, 107, 251);
@@ -53,6 +56,8 @@ namespace OnePomodoro.PomodoroViews
             OnIsInPomodoroChanged();
             Loaded += OnLoaded;
             ViewModel.IsInPomodoroChanged += (s, e) => OnIsInPomodoroChanged();
+            var footBackgroundVisual = VisualExtensions.GetVisual(FootBackground);
+            footBackgroundVisual.Opacity = 0;
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
@@ -85,10 +90,11 @@ namespace OnePomodoro.PomodoroViews
 
         private void ShowTextShimmingAsync()
         {
-            var width = 960;
+            var width = 1920;
 
-            _redLight = CreatePointLightAndStartAnimation(_redColor, -width * 2, width * 5);
-            _blueLight = CreatePointLightAndStartAnimation(_blueColor, width * 3, -width * 4);
+            _redLight = CreatePointLightAndStartAnimation(_redColor, -width * 1, width * 2);
+            _blueLight = CreatePointLightAndStartAnimation(_blueColor, width * 2, -width * 1);
+            _greenLight = CreateAmbientLightAndStartAnimation();
             var focusVisual = VisualExtensions.GetVisual(FocusPanel);
             var relayVisual = VisualExtensions.GetVisual(RelaxPanel);
 
@@ -97,6 +103,9 @@ namespace OnePomodoro.PomodoroViews
 
             _redLight.Targets.Add(relayVisual);
             _blueLight.Targets.Add(relayVisual);
+
+            _greenLight.Targets.Add(focusVisual);
+            _greenLight.Targets.Add(relayVisual);
         }
 
 
@@ -123,7 +132,7 @@ namespace OnePomodoro.PomodoroViews
 
         private PointLight CreatePointLightAndStartAnimation(Color color, float startOffsetX, float endOffsetX)
         {
-            var height = 461;
+            var height = 922;
             var compositor = Window.Current.Compositor;
 
             var rootVisual = VisualExtensions.GetVisual(Root);
@@ -131,15 +140,36 @@ namespace OnePomodoro.PomodoroViews
 
             pointLight.Color = color;
             pointLight.CoordinateSpace = rootVisual;
-            pointLight.Offset = new Vector3(startOffsetX, height / 2, 75.0f);
+            pointLight.Offset = new Vector3(startOffsetX, height / 2, 200.0f);
 
             var offsetAnimation = compositor.CreateScalarKeyFrameAnimation();
             offsetAnimation.InsertKeyFrame(1.0f, endOffsetX, compositor.CreateLinearEasingFunction());
-            offsetAnimation.Duration = TimeSpan.FromSeconds(15);
+            offsetAnimation.Duration = TimeSpan.FromSeconds(10);
             offsetAnimation.IterationBehavior = AnimationIterationBehavior.Forever;
 
             pointLight.StartAnimation("Offset.X", offsetAnimation);
             return pointLight;
+        }
+
+        private AmbientLight CreateAmbientLightAndStartAnimation()
+        {
+            var compositor = Window.Current.Compositor;
+
+            var rootVisual = VisualExtensions.GetVisual(Root);
+            var ambientLight = compositor.CreateAmbientLight();
+
+            ambientLight.Intensity = 0;
+            ambientLight.Color = _greenColor;
+
+            var offsetAnimation = compositor.CreateScalarKeyFrameAnimation();
+            offsetAnimation.InsertKeyFrame(0.3f, 0, compositor.CreateLinearEasingFunction());
+            offsetAnimation.InsertKeyFrame(0.5f, 0.25f, compositor.CreateLinearEasingFunction());
+            offsetAnimation.InsertKeyFrame(0.7f, 0, compositor.CreateLinearEasingFunction());
+            offsetAnimation.Duration = TimeSpan.FromSeconds(10);
+            offsetAnimation.IterationBehavior = AnimationIterationBehavior.Forever;
+
+            ambientLight.StartAnimation(nameof(AmbientLight.Intensity), offsetAnimation);
+            return ambientLight;
         }
 
         private void SwitchBackgroundLightColor()
@@ -157,6 +187,9 @@ namespace OnePomodoro.PomodoroViews
 
         private void ShowBackgroundLight()
         {
+            if (_backgroundLight == null)
+                return;
+
             var compositor = Window.Current.Compositor;
 
             var scalarAnimation = compositor.CreateScalarKeyFrameAnimation();
@@ -168,10 +201,16 @@ namespace OnePomodoro.PomodoroViews
             scalarAnimation.InsertKeyFrame(1.0f, 1f, compositor.CreateLinearEasingFunction());
             scalarAnimation.Duration = TimeSpan.FromSeconds(1);
             _buttonLight.StartAnimation(nameof(AmbientLight.Intensity), scalarAnimation);
+
+            var footBackgroundVisual = VisualExtensions.GetVisual(FootBackground);
+            footBackgroundVisual.StartAnimation(nameof(footBackgroundVisual.Opacity), scalarAnimation);
         }
 
         private void HideBackgroundLight()
         {
+            if (_backgroundLight == null)
+                return;
+
             var compositor = Window.Current.Compositor;
 
             var scalarAnimation = compositor.CreateScalarKeyFrameAnimation();
@@ -179,6 +218,9 @@ namespace OnePomodoro.PomodoroViews
             scalarAnimation.Duration = TimeSpan.FromSeconds(1);
             _backgroundLight.StartAnimation(nameof(AmbientLight.Intensity), scalarAnimation);
             _buttonLight.StartAnimation(nameof(AmbientLight.Intensity), scalarAnimation);
+
+            var footBackgroundVisual = VisualExtensions.GetVisual(FootBackground);
+            footBackgroundVisual.StartAnimation(nameof(footBackgroundVisual.Opacity), scalarAnimation);
         }
 
     }
