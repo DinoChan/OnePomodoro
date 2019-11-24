@@ -161,6 +161,9 @@
     <Compile Include="PomodoroViews\GradientsWithBlend.xaml.cs">
       <DependentUpon>GradientsWithBlend.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PomodoroViews\ShadowTextView.xaml.cs">
+      <DependentUpon>ShadowTextView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PomodoroViews\WhiteTextView.xaml.cs">
       <DependentUpon>WhiteTextView.xaml</DependentUpon>
     </Compile>
@@ -249,6 +252,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PomodoroViews\GradientsWithBlend.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PomodoroViews\ShadowTextView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

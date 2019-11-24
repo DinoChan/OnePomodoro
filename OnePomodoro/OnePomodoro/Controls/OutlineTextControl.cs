@@ -32,7 +32,7 @@ namespace OnePomodoro.Controls
             var graphicsDevice = CanvasComposition.CreateCompositionGraphicsDevice(compositor, CanvasDevice.GetSharedDevice());
 
             var spriteTextVisual = compositor.CreateSpriteVisual();
-            
+
 
 
             ElementCompositionPreview.SetElementChildVisual(this, spriteTextVisual);
@@ -286,6 +286,27 @@ namespace OnePomodoro.Controls
             using (var session = CanvasComposition.CreateDrawingSession(_drawingSurface))
             {
                 session.Clear(Colors.Transparent);
+
+                //CanvasTextFormat fmt = new CanvasTextFormat() { FontSize = 72, FontFamily = "Vladimir Script" };
+                //var myBitmap = new CanvasRenderTarget(session, 512, 96);
+                //using (var ds = myBitmap.CreateDrawingSession())
+                //{
+                //    ds.DrawText("Hello Win2D", 0, 0, Colors.Green, fmt);
+                //}
+
+                //var blur = new GaussianBlurEffect
+                //{
+                //    BlurAmount = 3,
+                //    Source = myBitmap
+                //};
+
+                //session.DrawImage(blur, 4, 4);
+                //session.DrawText("Hello Win2D", 0, 0, Colors.Green, fmt);
+
+
+
+
+
                 using (var textFormat = new CanvasTextFormat()
                 {
                     FontSize = (float)FontSize,
@@ -297,26 +318,40 @@ namespace OnePomodoro.Controls
                 {
                     using (var textLayout = new CanvasTextLayout(session, Text, textFormat, width, height))
                     {
-                        if (ShowNonOutlineText)
+                        var bitmap = new CanvasRenderTarget(session, width, height);
+                        using (var bitmapSession = bitmap.CreateDrawingSession())
                         {
-                            Color semitrans = FontColor;
-                            //semitrans.A = 127;
-                            session.DrawTextLayout(textLayout, 0, 0, semitrans);
+                            DrawText(bitmapSession, textLayout);
                         }
+                        var blur = new GaussianBlurEffect
+                        {
+                            BlurAmount = 40,
+                            Source = bitmap,
+                            BorderMode = EffectBorderMode.Hard
+                        };
 
-                        using (var textGeometry = CanvasGeometry.CreateText(textLayout))
-                        {
-                            var dashedStroke = new CanvasStrokeStyle()
-                            {
-                                DashStyle = DashStyle
-                            };
-                            session.DrawGeometry(textGeometry, OutlineColor, (float)StrokeWidth, dashedStroke);
-                        }
+                        session.DrawImage(blur, 0, 0);
+                        DrawText(session, textLayout);
+
+                        
                     }
                 }
             }
         }
 
+        private void DrawText(CanvasDrawingSession session, CanvasTextLayout textLayout)
+        {
+            if (ShowNonOutlineText)
+                session.DrawTextLayout(textLayout, 0, 0, FontColor);
 
+            using (var textGeometry = CanvasGeometry.CreateText(textLayout))
+            {
+                var dashedStroke = new CanvasStrokeStyle()
+                {
+                    DashStyle = DashStyle
+                };
+                session.DrawGeometry(textGeometry, OutlineColor, (float)StrokeWidth, dashedStroke);
+            }
+        }
     }
 }
