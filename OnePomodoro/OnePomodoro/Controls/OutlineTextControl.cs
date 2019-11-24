@@ -318,6 +318,12 @@ namespace OnePomodoro.Controls
                 {
                     using (var textLayout = new CanvasTextLayout(session, Text, textFormat, width, height))
                     {
+                        var fullSizeGeometry = CanvasGeometry.CreateRectangle(session, 0, 0, width, height);
+                        var textGeometry = CanvasGeometry.CreateText(textLayout);
+                        var finalGeometry = fullSizeGeometry.CombineWith(textGeometry, Matrix3x2.Identity, CanvasGeometryCombine.Exclude);
+
+                        var layer = session.CreateLayer(1, finalGeometry);
+
                         var bitmap = new CanvasRenderTarget(session, width, height);
                         using (var bitmapSession = bitmap.CreateDrawingSession())
                         {
@@ -333,7 +339,8 @@ namespace OnePomodoro.Controls
                         session.DrawImage(blur, 0, 0);
                         DrawText(session, textLayout);
 
-                        
+
+                        layer.Dispose();
                     }
                 }
             }
