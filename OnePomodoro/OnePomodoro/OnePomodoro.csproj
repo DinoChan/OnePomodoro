@@ -144,6 +144,7 @@
     <Compile Include="Controls\PomodoroStateButton.cs" />
     <Compile Include="Controls\ProgressToPointCollectionBridge.cs" />
     <Compile Include="Controls\OutlineTextControl.cs" />
+    <Compile Include="Controls\ShadowTextControl.cs" />
     <Compile Include="Media\TiledImageBrush.cs" />
     <Compile Include="Controls\TitleBar.xaml.cs">
       <DependentUpon>TitleBar.xaml</DependentUpon>
@@ -158,8 +159,12 @@
     <Compile Include="Helpers\TitleAttribute.cs" />
     <Compile Include="Models\IPomodoroSettings.cs" />
     <Compile Include="Models\PomodoroSettings.cs" />
+    <Compile Include="Controls\ColorfulShadowTextControl.cs" />
     <Compile Include="PomodoroViews\GradientsWithBlend.xaml.cs">
       <DependentUpon>GradientsWithBlend.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PomodoroViews\ShadowTextView.xaml.cs">
+      <DependentUpon>ShadowTextView.xaml</DependentUpon>
     </Compile>
     <Compile Include="PomodoroViews\WhiteTextView.xaml.cs">
       <DependentUpon>WhiteTextView.xaml</DependentUpon>
@@ -249,6 +254,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PomodoroViews\GradientsWithBlend.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PomodoroViews\ShadowTextView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -391,6 +400,7 @@
     <Content Include="Assets\Screenshots\Konosuba.png" />
     <Content Include="Assets\Screenshots\LongShadow.png" />
     <Content Include="Assets\Screenshots\OutlineText.png" />
+    <Content Include="Assets\Screenshots\ShaodowText.png" />
     <Content Include="Assets\Screenshots\SimpleCircle.png" />
     <Content Include="Assets\Screenshots\SpringText.png" />
     <Content Include="Assets\Screenshots\TheBigOne.png" />

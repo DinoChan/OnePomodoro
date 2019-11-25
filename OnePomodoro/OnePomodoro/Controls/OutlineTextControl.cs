@@ -24,32 +24,35 @@ namespace OnePomodoro.Controls
     {
         private Compositor Compositor => Window.Current.Compositor;
 
-        private CompositionDrawingSurface _drawingSurface;
+        protected CompositionDrawingSurface DrawingSurface { get; private set; }
 
         public OutlineTextControl()
         {
-            var compositor = ElementCompositionPreview.GetElementVisual(this).Compositor;
-            var graphicsDevice = CanvasComposition.CreateCompositionGraphicsDevice(compositor, CanvasDevice.GetSharedDevice());
+            var graphicsDevice = CanvasComposition.CreateCompositionGraphicsDevice(Compositor, CanvasDevice.GetSharedDevice());
+            var spriteTextVisual = Compositor.CreateSpriteVisual();
 
-            var spriteTextVisual = compositor.CreateSpriteVisual();
-            
 
 
             ElementCompositionPreview.SetElementChildVisual(this, spriteTextVisual);
             SizeChanged += (s, e) =>
             {
-                _drawingSurface = graphicsDevice.CreateDrawingSurface(e.NewSize, DirectXPixelFormat.B8G8R8A8UIntNormalized, DirectXAlphaMode.Premultiplied);
-                DrawText();
-                var maskSurfaceBrush = compositor.CreateSurfaceBrush(_drawingSurface);
-                spriteTextVisual.Brush = maskSurfaceBrush;
+                DrawingSurface = graphicsDevice.CreateDrawingSurface(e.NewSize, DirectXPixelFormat.B8G8R8A8UIntNormalized, DirectXAlphaMode.Premultiplied);
+                DrawSurface();
+                UpdateSpriteVisual(spriteTextVisual, DrawingSurface);
                 spriteTextVisual.Size = e.NewSize.ToVector2();
             };
             RegisterPropertyChangedCallback(FontSizeProperty, new DependencyPropertyChangedCallback((s, e) =>
              {
-                 DrawText();
+                 DrawSurface();
              }));
-
         }
+
+        protected virtual void UpdateSpriteVisual(SpriteVisual spriteVisual, CompositionDrawingSurface drawingSurface)
+        {
+            var maskSurfaceBrush = Compositor.CreateSurfaceBrush(DrawingSurface);
+            spriteVisual.Brush = maskSurfaceBrush;
+        }
+
 
 
         /// <summary>
@@ -85,7 +88,7 @@ namespace OnePomodoro.Controls
         /// <param name="newValue">OutlineColor 属性的新值。</param>
         protected virtual void OnOutlineColorChanged(Color oldValue, Color newValue)
         {
-            DrawText();
+            DrawSurface();
         }
 
 
@@ -123,7 +126,7 @@ namespace OnePomodoro.Controls
         /// <param name="newValue">FontColor 属性的新值。</param>
         protected virtual void OnFontColorChanged(Color oldValue, Color newValue)
         {
-            DrawText();
+            DrawSurface();
         }
 
 
@@ -160,7 +163,7 @@ namespace OnePomodoro.Controls
         /// <param name="newValue">Text 属性的新值。</param>
         protected virtual void OnTextChanged(string oldValue, string newValue)
         {
-            DrawText();
+            DrawSurface();
         }
 
 
@@ -198,7 +201,7 @@ namespace OnePomodoro.Controls
         /// <param name="newValue">StrokeStyle 属性的新值。</param>
         protected virtual void OnDashStyleChanged(CanvasDashStyle oldValue, CanvasDashStyle newValue)
         {
-            DrawText();
+            DrawSurface();
         }
 
 
@@ -236,7 +239,7 @@ namespace OnePomodoro.Controls
         /// <param name="newValue">ShowNonOutlineText 属性的新值。</param>
         protected virtual void OnShowNonOutlineTextChanged(bool oldValue, bool newValue)
         {
-            DrawText();
+            DrawSurface();
         }
 
 
@@ -273,17 +276,23 @@ namespace OnePomodoro.Controls
         /// <param name="newValue">StrokeWidth 属性的新值。</param>
         protected virtual void OnStrokeWidthChanged(double oldValue, double newValue)
         {
-            DrawText();
+            DrawSurface();
         }
 
-        private void DrawText()
+        protected void DrawSurface()
         {
-            if (ActualHeight == 0 || ActualWidth == 0 || string.IsNullOrWhiteSpace(Text) || _drawingSurface == null)
+            if (ActualHeight == 0 || ActualWidth == 0 || string.IsNullOrWhiteSpace(Text) || DrawingSurface == null)
                 return;
 
             var width = (float)ActualWidth;
             var height = (float)ActualHeight;
-            using (var session = CanvasComposition.CreateDrawingSession(_drawingSurface))
+
+            DrawSurfaceCore(DrawingSurface, width, height);
+        }
+
+        protected virtual void DrawSurfaceCore(CompositionDrawingSurface drawingSurface, float width, float height)
+        {
+            using (var session = CanvasComposition.CreateDrawingSession(drawingSurface))
             {
                 session.Clear(Colors.Transparent);
                 using (var textFormat = new CanvasTextFormat()
@@ -292,31 +301,32 @@ namespace OnePomodoro.Controls
                     Direction = CanvasTextDirection.LeftToRightThenTopToBottom,
                     VerticalAlignment = CanvasVerticalAlignment.Center,
                     HorizontalAlignment = CanvasHorizontalAlignment.Center,
-
+                    FontWeight = FontWeight,
+                    FontFamily=FontFamily.Source
                 })
                 {
                     using (var textLayout = new CanvasTextLayout(session, Text, textFormat, width, height))
                     {
-                        if (ShowNonOutlineText)
-                        {
-                            Color semitrans = FontColor;
-                            //semitrans.A = 127;
-                            session.DrawTextLayout(textLayout, 0, 0, semitrans);
-                        }
-
-                        using (var textGeometry = CanvasGeometry.CreateText(textLayout))
-                        {
-                            var dashedStroke = new CanvasStrokeStyle()
-                            {
-                                DashStyle = DashStyle
-                            };
-                            session.DrawGeometry(textGeometry, OutlineColor, (float)StrokeWidth, dashedStroke);
-                        }
+                        DrawText(session, textLayout);
                     }
                 }
             }
         }
 
 
+        protected void DrawText(CanvasDrawingSession session, CanvasTextLayout textLayout)
+        {
+            if (ShowNonOutlineText)
+                session.DrawTextLayout(textLayout, 0, 0, FontColor);
+
+            using (var textGeometry = CanvasGeometry.CreateText(textLayout))
+            {
+                var dashedStroke = new CanvasStrokeStyle()
+                {
+                    DashStyle = DashStyle
+                };
+                session.DrawGeometry(textGeometry, OutlineColor, (float)StrokeWidth, dashedStroke);
+            }
+        }
     }
 }
