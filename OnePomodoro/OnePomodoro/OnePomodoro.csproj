@@ -400,7 +400,7 @@
     <Content Include="Assets\Screenshots\Konosuba.png" />
     <Content Include="Assets\Screenshots\LongShadow.png" />
     <Content Include="Assets\Screenshots\OutlineText.png" />
-    <Content Include="Assets\Screenshots\ShaodowText.png" />
+    <Content Include="Assets\Screenshots\ShadowText.png" />
     <Content Include="Assets\Screenshots\SimpleCircle.png" />
     <Content Include="Assets\Screenshots\SpringText.png" />
     <Content Include="Assets\Screenshots\TheBigOne.png" />
