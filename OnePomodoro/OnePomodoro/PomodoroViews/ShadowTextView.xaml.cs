@@ -42,19 +42,19 @@ namespace OnePomodoro.PomodoroViews
         private AmbientLight _buttonLight;
         private AmbientLight _greenLight;
 
-        private Color _redColor = Color.FromArgb(255, 217, 17, 83);
-        private Color _blueColor = Color.FromArgb(255, 0, 27, 171);
+        private Color _redColor = Color.FromArgb(255, 255, 67, 133);
+        private Color _blueColor = Color.FromArgb(255, 70, 77, 231);
 
-        private Color _greenColor = Color.FromArgb(255, 38, 211, 1);
+        private Color _greenColor = Color.FromArgb(255, 125, 255, 110);
 
-        private Color _lightRedColor = Color.FromArgb(255, 247, 97, 163);
-        private Color _lightBlueColor = Color.FromArgb(255, 80, 107, 251);
+        private Color _lightRedColor = Color.FromArgb(255, 255, 147, 213);
+        private Color _lightBlueColor = Color.FromArgb(255, 130, 157, 255);
 
         public ShadowTextView()
         {
             this.InitializeComponent();
             OnIsInPomodoroChanged();
-            //Loaded += OnLoaded;
+            Loaded += OnLoaded;
             ViewModel.IsInPomodoroChanged += (s, e) => OnIsInPomodoroChanged();
             var footBackgroundVisual = VisualExtensions.GetVisual(FootBackground);
             footBackgroundVisual.Opacity = 0;
@@ -91,9 +91,9 @@ namespace OnePomodoro.PomodoroViews
         private void ShowTextShimmingAsync()
         {
             var width = 1920;
-
-            _redLight = CreatePointLightAndStartAnimation(_redColor, -width * 1, width * 2);
-            _blueLight = CreatePointLightAndStartAnimation(_blueColor, width * 2, -width * 1);
+            float height = 922;
+            _redLight = CreatePointLightAndStartAnimation(_redColor, -width * 1, width * 2, height * 0.5f);
+            _blueLight = CreatePointLightAndStartAnimation(_blueColor, width * 2, -width * 1, height * 0.75f);
             _greenLight = CreateAmbientLightAndStartAnimation();
             var focusVisual = VisualExtensions.GetVisual(FocusPanel);
             var relayVisual = VisualExtensions.GetVisual(RelaxPanel);
@@ -130,9 +130,9 @@ namespace OnePomodoro.PomodoroViews
             _buttonLight.Targets.Add(buttonVisual);
         }
 
-        private PointLight CreatePointLightAndStartAnimation(Color color, float startOffsetX, float endOffsetX)
+        private PointLight CreatePointLightAndStartAnimation(Color color, float startOffsetX, float endOffsetX, float height)
         {
-            var height = 922;
+
             var compositor = Window.Current.Compositor;
 
             var rootVisual = VisualExtensions.GetVisual(Root);
@@ -140,7 +140,7 @@ namespace OnePomodoro.PomodoroViews
 
             pointLight.Color = color;
             pointLight.CoordinateSpace = rootVisual;
-            pointLight.Offset = new Vector3(startOffsetX, height / 2, 200.0f);
+            pointLight.Offset = new Vector3(startOffsetX, height, 300.0f);
 
             var offsetAnimation = compositor.CreateScalarKeyFrameAnimation();
             offsetAnimation.InsertKeyFrame(1.0f, endOffsetX, compositor.CreateLinearEasingFunction());
@@ -159,16 +159,17 @@ namespace OnePomodoro.PomodoroViews
             var ambientLight = compositor.CreateAmbientLight();
 
             ambientLight.Intensity = 0;
-            ambientLight.Color = _greenColor;
+            ambientLight.Color = Colors.White;
 
             var offsetAnimation = compositor.CreateScalarKeyFrameAnimation();
-            offsetAnimation.InsertKeyFrame(0.25f, 0, compositor.CreateLinearEasingFunction());
+            offsetAnimation.InsertKeyFrame(0.2f, 0, compositor.CreateLinearEasingFunction());
             offsetAnimation.InsertKeyFrame(0.5f, 0.20f, compositor.CreateLinearEasingFunction());
-            offsetAnimation.InsertKeyFrame(0.75f, 0, compositor.CreateLinearEasingFunction());
+            offsetAnimation.InsertKeyFrame(0.8f, 0, compositor.CreateLinearEasingFunction());
             offsetAnimation.Duration = TimeSpan.FromSeconds(10);
             offsetAnimation.IterationBehavior = AnimationIterationBehavior.Forever;
 
             ambientLight.StartAnimation(nameof(AmbientLight.Intensity), offsetAnimation);
+
             return ambientLight;
         }
 

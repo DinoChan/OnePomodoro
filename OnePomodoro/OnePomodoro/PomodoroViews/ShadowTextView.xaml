@@ -31,15 +31,15 @@
                                 x:Name="PomodoroPanel">
                         <Grid>
                             <StackPanel x:Name="FocusPanel">
-                                <controls:OutlineTextControl ShowNonOutlineText="True" Margin="0,-40,0,0" Width="1920" Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}" StrokeWidth="0" OutlineColor="White" DashStyle="Solid"  Height="700"  FontSize="760"  FontColor="White"/>
+                                <controls:ColorfulShadowTextControl BlurAmount="40" ShowNonOutlineText="True" Margin="-100,-140,-100,-100" Width="1920" Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}" StrokeWidth="0" OutlineColor="White" DashStyle="Solid"  Height="900"  FontSize="750"  FontColor="White" FontWeight="Bold" FontFamily="{StaticResource TimeFontBold}"/>
 
-                                <controls:OutlineTextControl ShowNonOutlineText="True" Width="1920" Text="FOCUS ON JOB" StrokeWidth="0" OutlineColor="White" DashStyle="Solid"  Height="256"  FontSize="256" FontColor="White"/>
+                                <controls:ColorfulShadowTextControl  BlurAmount="15" ShowNonOutlineText="True" Width="1920" Margin="-50" Text="FOCUS ON JOB" StrokeWidth="0" OutlineColor="White" DashStyle="Solid"  Height="356"  FontSize="266" FontColor="White" FontWeight="Bold" FontFamily="{StaticResource TimeFontBold}"/>
 
                             </StackPanel>
                             <StackPanel x:Name="RelaxPanel">
-                                <controls:OutlineTextControl ShowNonOutlineText="True" Width="1920"  Margin="0,-40,0,0" Text="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}" StrokeWidth="0" OutlineColor="White" DashStyle="Solid" Height="700"  FontSize="760"  FontColor="White"/>
+                                <controls:ColorfulShadowTextControl  BlurAmount="40" ShowNonOutlineText="True" Width="1920" Margin="-100,-140,-100,-100" Text="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}" StrokeWidth="0" OutlineColor="White" DashStyle="Solid" Height="900"  FontSize="750"  FontColor="White" FontWeight="Bold" FontFamily="{StaticResource TimeFontBold}"/>
 
-                                <controls:OutlineTextControl ShowNonOutlineText="True" Width="1920" Text="TAKE A BREAK" StrokeWidth="0" OutlineColor="White" DashStyle="Solid"  Height="256"  FontSize="256" FontColor="White"/>
+                                <controls:ColorfulShadowTextControl  BlurAmount="15" ShowNonOutlineText="True" Width="1920" Margin="-50" Text="TAKE A BREAK" StrokeWidth="0" OutlineColor="White" DashStyle="Solid"  Height="356"  FontSize="266" FontColor="White" FontWeight="Bold" FontFamily="{StaticResource TimeFontBold}"/>
                                 <!--<TextBlock Text="sdfdsfds" FontSize="50" Foreground="White"/>-->
                             </StackPanel>
                         </Grid>

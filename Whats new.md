@@ -30,3 +30,7 @@ Add One Pomodoro.
 **2019-11-22 v1.10:**
 
 Add Some Pomodoro.
+
+**2019-11-25 v1.11:**
+
+Add Some Pomodoro.

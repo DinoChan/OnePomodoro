@@ -24,32 +24,35 @@ namespace OnePomodoro.Controls
     {
         private Compositor Compositor => Window.Current.Compositor;
 
-        private CompositionDrawingSurface _drawingSurface;
+        protected CompositionDrawingSurface DrawingSurface { get; private set; }
 
         public OutlineTextControl()
         {
-            var compositor = ElementCompositionPreview.GetElementVisual(this).Compositor;
-            var graphicsDevice = CanvasComposition.CreateCompositionGraphicsDevice(compositor, CanvasDevice.GetSharedDevice());
-
-            var spriteTextVisual = compositor.CreateSpriteVisual();
+            var graphicsDevice = CanvasComposition.CreateCompositionGraphicsDevice(Compositor, CanvasDevice.GetSharedDevice());
+            var spriteTextVisual = Compositor.CreateSpriteVisual();
 
 
 
             ElementCompositionPreview.SetElementChildVisual(this, spriteTextVisual);
             SizeChanged += (s, e) =>
             {
-                _drawingSurface = graphicsDevice.CreateDrawingSurface(e.NewSize, DirectXPixelFormat.B8G8R8A8UIntNormalized, DirectXAlphaMode.Premultiplied);
-                DrawText();
-                var maskSurfaceBrush = compositor.CreateSurfaceBrush(_drawingSurface);
-                spriteTextVisual.Brush = maskSurfaceBrush;
+                DrawingSurface = graphicsDevice.CreateDrawingSurface(e.NewSize, DirectXPixelFormat.B8G8R8A8UIntNormalized, DirectXAlphaMode.Premultiplied);
+                DrawSurface();
+                UpdateSpriteVisual(spriteTextVisual, DrawingSurface);
                 spriteTextVisual.Size = e.NewSize.ToVector2();
             };
             RegisterPropertyChangedCallback(FontSizeProperty, new DependencyPropertyChangedCallback((s, e) =>
              {
-                 DrawText();
+                 DrawSurface();
              }));
-
         }
+
+        protected virtual void UpdateSpriteVisual(SpriteVisual spriteVisual, CompositionDrawingSurface drawingSurface)
+        {
+            var maskSurfaceBrush = Compositor.CreateSurfaceBrush(DrawingSurface);
+            spriteVisual.Brush = maskSurfaceBrush;
+        }
+
 
 
         /// <summary>
@@ -85,7 +88,7 @@ namespace OnePomodoro.Controls
         /// <param name="newValue">OutlineColor 属性的新值。</param>
         protected virtual void OnOutlineColorChanged(Color oldValue, Color newValue)
         {
-            DrawText();
+            DrawSurface();
         }
 
 
@@ -123,7 +126,7 @@ namespace OnePomodoro.Controls
         /// <param name="newValue">FontColor 属性的新值。</param>
         protected virtual void OnFontColorChanged(Color oldValue, Color newValue)
         {
-            DrawText();
+            DrawSurface();
         }
 
 
@@ -160,7 +163,7 @@ namespace OnePomodoro.Controls
         /// <param name="newValue">Text 属性的新值。</param>
         protected virtual void OnTextChanged(string oldValue, string newValue)
         {
-            DrawText();
+            DrawSurface();
         }
 
 
@@ -198,7 +201,7 @@ namespace OnePomodoro.Controls
         /// <param name="newValue">StrokeStyle 属性的新值。</param>
         protected virtual void OnDashStyleChanged(CanvasDashStyle oldValue, CanvasDashStyle newValue)
         {
-            DrawText();
+            DrawSurface();
         }
 
 
@@ -236,7 +239,7 @@ namespace OnePomodoro.Controls
         /// <param name="newValue">ShowNonOutlineText 属性的新值。</param>
         protected virtual void OnShowNonOutlineTextChanged(bool oldValue, bool newValue)
         {
-            DrawText();
+            DrawSurface();
         }
 
 
@@ -273,80 +276,45 @@ namespace OnePomodoro.Controls
         /// <param name="newValue">StrokeWidth 属性的新值。</param>
         protected virtual void OnStrokeWidthChanged(double oldValue, double newValue)
         {
-            DrawText();
+            DrawSurface();
         }
 
-        private void DrawText()
+        protected void DrawSurface()
         {
-            if (ActualHeight == 0 || ActualWidth == 0 || string.IsNullOrWhiteSpace(Text) || _drawingSurface == null)
+            if (ActualHeight == 0 || ActualWidth == 0 || string.IsNullOrWhiteSpace(Text) || DrawingSurface == null)
                 return;
 
             var width = (float)ActualWidth;
             var height = (float)ActualHeight;
-            using (var session = CanvasComposition.CreateDrawingSession(_drawingSurface))
+
+            DrawSurfaceCore(DrawingSurface, width, height);
+        }
+
+        protected virtual void DrawSurfaceCore(CompositionDrawingSurface drawingSurface, float width, float height)
+        {
+            using (var session = CanvasComposition.CreateDrawingSession(drawingSurface))
             {
                 session.Clear(Colors.Transparent);
-
-                //CanvasTextFormat fmt = new CanvasTextFormat() { FontSize = 72, FontFamily = "Vladimir Script" };
-                //var myBitmap = new CanvasRenderTarget(session, 512, 96);
-                //using (var ds = myBitmap.CreateDrawingSession())
-                //{
-                //    ds.DrawText("Hello Win2D", 0, 0, Colors.Green, fmt);
-                //}
-
-                //var blur = new GaussianBlurEffect
-                //{
-                //    BlurAmount = 3,
-                //    Source = myBitmap
-                //};
-
-                //session.DrawImage(blur, 4, 4);
-                //session.DrawText("Hello Win2D", 0, 0, Colors.Green, fmt);
-
-
-
-
-
                 using (var textFormat = new CanvasTextFormat()
                 {
                     FontSize = (float)FontSize,
                     Direction = CanvasTextDirection.LeftToRightThenTopToBottom,
                     VerticalAlignment = CanvasVerticalAlignment.Center,
                     HorizontalAlignment = CanvasHorizontalAlignment.Center,
-
+                    FontWeight = FontWeight,
+                    FontFamily=FontFamily.Source
                 })
                 {
                     using (var textLayout = new CanvasTextLayout(session, Text, textFormat, width, height))
                     {
-                        var fullSizeGeometry = CanvasGeometry.CreateRectangle(session, 0, 0, width, height);
-                        var textGeometry = CanvasGeometry.CreateText(textLayout);
-                        var finalGeometry = fullSizeGeometry.CombineWith(textGeometry, Matrix3x2.Identity, CanvasGeometryCombine.Exclude);
-
-                        var layer = session.CreateLayer(1, finalGeometry);
-
-                        var bitmap = new CanvasRenderTarget(session, width, height);
-                        using (var bitmapSession = bitmap.CreateDrawingSession())
-                        {
-                            DrawText(bitmapSession, textLayout);
-                        }
-                        var blur = new GaussianBlurEffect
-                        {
-                            BlurAmount = 40,
-                            Source = bitmap,
-                            BorderMode = EffectBorderMode.Hard
-                        };
-
-                        session.DrawImage(blur, 0, 0);
                         DrawText(session, textLayout);
-
-
-                        layer.Dispose();
                     }
                 }
             }
         }
 
-        private void DrawText(CanvasDrawingSession session, CanvasTextLayout textLayout)
+
+        protected void DrawText(CanvasDrawingSession session, CanvasTextLayout textLayout)
         {
             if (ShowNonOutlineText)
                 session.DrawTextLayout(textLayout, 0, 0, FontColor);
