@@ -154,21 +154,18 @@ namespace OnePomodoro.PomodoroViews
         private AmbientLight CreateAmbientLightAndStartAnimation()
         {
             var compositor = Window.Current.Compositor;
-
-            var rootVisual = VisualExtensions.GetVisual(Root);
             var ambientLight = compositor.CreateAmbientLight();
-
             ambientLight.Intensity = 0;
             ambientLight.Color = Colors.White;
 
-            var offsetAnimation = compositor.CreateScalarKeyFrameAnimation();
-            offsetAnimation.InsertKeyFrame(0.2f, 0, compositor.CreateLinearEasingFunction());
-            offsetAnimation.InsertKeyFrame(0.5f, 0.20f, compositor.CreateLinearEasingFunction());
-            offsetAnimation.InsertKeyFrame(0.8f, 0, compositor.CreateLinearEasingFunction());
-            offsetAnimation.Duration = TimeSpan.FromSeconds(10);
-            offsetAnimation.IterationBehavior = AnimationIterationBehavior.Forever;
+            var intensityAnimation = compositor.CreateScalarKeyFrameAnimation();
+            intensityAnimation.InsertKeyFrame(0.2f, 0, compositor.CreateLinearEasingFunction());
+            intensityAnimation.InsertKeyFrame(0.5f, 0.20f, compositor.CreateLinearEasingFunction());
+            intensityAnimation.InsertKeyFrame(0.8f, 0, compositor.CreateLinearEasingFunction());
+            intensityAnimation.Duration = TimeSpan.FromSeconds(10);
+            intensityAnimation.IterationBehavior = AnimationIterationBehavior.Forever;
 
-            ambientLight.StartAnimation(nameof(AmbientLight.Intensity), offsetAnimation);
+            ambientLight.StartAnimation(nameof(AmbientLight.Intensity), intensityAnimation);
 
             return ambientLight;
         }
