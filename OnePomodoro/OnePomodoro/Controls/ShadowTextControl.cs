@@ -68,22 +68,25 @@ namespace OnePomodoro.Controls
                         var fullSizeGeometry = CanvasGeometry.CreateRectangle(session, 0, 0, width, height);
                         var textGeometry = CanvasGeometry.CreateText(textLayout);
                         var finalGeometry = fullSizeGeometry.CombineWith(textGeometry, Matrix3x2.Identity, CanvasGeometryCombine.Exclude);
-                        var layer = session.CreateLayer(1, finalGeometry);
-
-                        var bitmap = new CanvasRenderTarget(session, width, height);
-                        using (var bitmapSession = bitmap.CreateDrawingSession())
+                        using (var layer = session.CreateLayer(1, finalGeometry))
                         {
-                            DrawText(bitmapSession, textLayout);
+                            using (var bitmap = new CanvasRenderTarget(session, width, height))
+                            {
+                                using (var bitmapSession = bitmap.CreateDrawingSession())
+                                {
+                                    DrawText(bitmapSession, textLayout);
+                                }
+                                using (var blur = new GaussianBlurEffect
+                                {
+                                    BlurAmount = (float)BlurAmount,
+                                    Source = bitmap,
+                                    BorderMode = EffectBorderMode.Hard
+                                })
+                                {
+                                    session.DrawImage(blur, 0, 0);
+                                }
+                            }
                         }
-                        var blur = new GaussianBlurEffect
-                        {
-                            BlurAmount = (float)BlurAmount,
-                            Source = bitmap,
-                            BorderMode = EffectBorderMode.Hard
-                        };
-
-                        session.DrawImage(blur, 0, 0);
-                        layer.Dispose();
                     }
                 }
             }

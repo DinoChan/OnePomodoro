@@ -302,7 +302,7 @@ namespace OnePomodoro.Controls
                     VerticalAlignment = CanvasVerticalAlignment.Center,
                     HorizontalAlignment = CanvasHorizontalAlignment.Center,
                     FontWeight = FontWeight,
-                    FontFamily=FontFamily.Source
+                    FontFamily = FontFamily.Source
                 })
                 {
                     using (var textLayout = new CanvasTextLayout(session, Text, textFormat, width, height))
@@ -321,11 +321,11 @@ namespace OnePomodoro.Controls
 
             using (var textGeometry = CanvasGeometry.CreateText(textLayout))
             {
-                var dashedStroke = new CanvasStrokeStyle()
+                using (var dashedStroke = new CanvasStrokeStyle())
                 {
-                    DashStyle = DashStyle
-                };
-                session.DrawGeometry(textGeometry, OutlineColor, (float)StrokeWidth, dashedStroke);
+                    dashedStroke.DashStyle = DashStyle;
+                    session.DrawGeometry(textGeometry, OutlineColor, (float)StrokeWidth, dashedStroke);
+                }
             }
         }
     }
