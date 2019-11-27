@@ -145,6 +145,7 @@
     <Compile Include="Controls\ProgressToPointCollectionBridge.cs" />
     <Compile Include="Controls\OutlineTextControl.cs" />
     <Compile Include="Controls\ShadowTextControl.cs" />
+    <Compile Include="Controls\TimeAndTitleControl.cs" />
     <Compile Include="Media\TiledImageBrush.cs" />
     <Compile Include="Controls\TitleBar.xaml.cs">
       <DependentUpon>TitleBar.xaml</DependentUpon>
@@ -165,6 +166,9 @@
     </Compile>
     <Compile Include="PomodoroViews\ShadowTextView.xaml.cs">
       <DependentUpon>ShadowTextView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PomodoroViews\SplitTo5View.xaml.cs">
+      <DependentUpon>SplitTo5View.xaml</DependentUpon>
     </Compile>
     <Compile Include="PomodoroViews\WhiteTextView.xaml.cs">
       <DependentUpon>WhiteTextView.xaml</DependentUpon>
@@ -258,6 +262,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="PomodoroViews\ShadowTextView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PomodoroViews\SplitTo5View.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
