@@ -52,13 +52,13 @@
 
         <Viewbox>
             <Grid Width="1920" Height="1050">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <StackPanel Orientation="Horizontal" x:Name="ContentAera" >
-                    <Grid Width="1600">
-                        <Grid Background="Red" Height="3050" Margin="0,-1000" >
+                <UIElement.Clip>
+                    <RectangleGeometry Rect="000,-1000,1920,5050"/>
+                </UIElement.Clip>
+                <Grid x:Name="ContentAera" Margin="0,0,-1920,0">
+
+                    <Grid Width="1600" HorizontalAlignment="Left">
+                        <Grid Background="#f8a9a2" Height="3050" Margin="0,-1000" >
                             <UIElement.Clip>
                                 <RectangleGeometry Rect="000,-1000,320,5050"/>
                             </UIElement.Clip>
@@ -68,11 +68,11 @@
                             <UIElement.Clip>
                                 <RectangleGeometry Rect="320,-1000,320,5050"/>
                             </UIElement.Clip>
-                            <controls:HeaderedContentControl x:Name="WorkSection2" Style="{StaticResource ContentStyle}" Foreground="Red" Header="FOCUS ON JOB"  Content="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mmss}">
+                            <controls:HeaderedContentControl x:Name="WorkSection2" Style="{StaticResource ContentStyle}" Foreground="#ed4e5d" Header="FOCUS ON JOB"  Content="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mmss}">
 
                             </controls:HeaderedContentControl>
                         </Grid>
-                        <Grid Height="3050" Margin="0,-1000" Background="Red">
+                        <Grid Height="3050" Margin="0,-1000" Background="#974945">
                             <UIElement.Clip>
                                 <RectangleGeometry Rect="640,-1000,320,5050"/>
                             </UIElement.Clip>
@@ -84,9 +84,9 @@
                             <UIElement.Clip>
                                 <RectangleGeometry Rect="960,-1000,320,5050"/>
                             </UIElement.Clip>
-                            <controls:HeaderedContentControl x:Name="WorkSection4" Style="{StaticResource ContentStyle}" Foreground="Red" Header="FOCUS ON JOB"  Content="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mmss}"/>
+                            <controls:HeaderedContentControl x:Name="WorkSection4" Style="{StaticResource ContentStyle}" Foreground="#ef804b" Header="FOCUS ON JOB"  Content="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mmss}"/>
                         </Grid>
-                        <Grid Height="3050" Margin="0,-1000" Background="Red">
+                        <Grid Height="3050" Margin="0,-1000" Background="#e74b36">
                             <UIElement.Clip>
                                 <RectangleGeometry Rect="1280,-1000,320,5050"/>
                             </UIElement.Clip>
@@ -94,11 +94,12 @@
                         </Grid>
                     </Grid>
 
-                    <StackPanel Width="320" VerticalAlignment="Center">
-                        <controls1:PomodoroStateButton BreakColor="Blue"
+                    <Grid HorizontalAlignment="Left" Margin="1600,-1000,0,-1000" Background="White">
+                        <StackPanel Width="320" VerticalAlignment="Center" Grid.Column="1" Margin="0,-1000" >
+                            <controls1:PomodoroStateButton BreakColor="Black"
                                                    OutlineColor="Black"
-                                                   PomodoroColor="Red"
-                                                 x:Name="StateButton"
+                                                   PomodoroColor="Black"
+                                                   x:Name="StateButton"
                                                   VerticalAlignment="Center"
                                                   HorizontalAlignment="Center"
                                                   Style="{StaticResource HugeButton}"
@@ -108,10 +109,10 @@
                                                   IsTimerInProgress="{x:Bind ViewModel.IsTimerInProgress}"/>
 
 
-                    </StackPanel>
-
-                    <Grid Width="1600">
-                        <Grid Background="CornflowerBlue" Height="3050" Margin="0,-1000" >
+                        </StackPanel>
+                    </Grid>
+                    <Grid Width="1600" Margin="1920,0,0,0" HorizontalAlignment="Left">
+                        <Grid Background="#4eeddd" Height="3050" Margin="0,-1000" >
                             <UIElement.Clip>
                                 <RectangleGeometry Rect="000,-1000,320,5050"/>
                             </UIElement.Clip>
@@ -121,11 +122,11 @@
                             <UIElement.Clip>
                                 <RectangleGeometry Rect="320,-1000,320,5050"/>
                             </UIElement.Clip>
-                            <controls:HeaderedContentControl x:Name="BreakSection2" Style="{StaticResource ContentStyle}" Foreground="CornflowerBlue" Header="TAKE A BREAK"  Content="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mmss}">
+                            <controls:HeaderedContentControl x:Name="BreakSection2" Style="{StaticResource ContentStyle}" Foreground="#8cdcf7" Header="TAKE A BREAK"  Content="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mmss}">
 
                             </controls:HeaderedContentControl>
                         </Grid>
-                        <Grid Height="3050" Margin="0,-1000" Background="CornflowerBlue">
+                        <Grid Height="3050" Margin="0,-1000" Background="#459296">
                             <UIElement.Clip>
                                 <RectangleGeometry Rect="640,-1000,320,5050"/>
                             </UIElement.Clip>
@@ -137,17 +138,16 @@
                             <UIElement.Clip>
                                 <RectangleGeometry Rect="960,-1000,320,5050"/>
                             </UIElement.Clip>
-                            <controls:HeaderedContentControl x:Name="BreakSection4" Style="{StaticResource ContentStyle}" Foreground="CornflowerBlue" Header="TAKE A BREAK"  Content="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mmss}"/>
+                            <controls:HeaderedContentControl x:Name="BreakSection4" Style="{StaticResource ContentStyle}" Foreground="#35d3e8" Header="TAKE A BREAK"  Content="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mmss}"/>
                         </Grid>
-                        <Grid Height="3050" Margin="0,-1000" Background="CornflowerBlue">
+                        <Grid Height="3050" Margin="0,-1000" Background="#4abeef">
                             <UIElement.Clip>
                                 <RectangleGeometry Rect="1280,-1000,320,5050"/>
                             </UIElement.Clip>
                             <controls:HeaderedContentControl x:Name="BreakSection5" Style="{StaticResource ContentStyle}" Foreground="White" Header="TAKE A BREAK"  Content="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mmss}"/>
                         </Grid>
                     </Grid>
-                </StackPanel>
-
+                </Grid>
             </Grid>
         </Viewbox>
 

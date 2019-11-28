@@ -161,6 +161,7 @@
     <Compile Include="Models\IPomodoroSettings.cs" />
     <Compile Include="Models\PomodoroSettings.cs" />
     <Compile Include="Controls\ColorfulShadowTextControl.cs" />
+    <Compile Include="PomodoroViews\EllipseClipView.cs" />
     <Compile Include="PomodoroViews\GradientsWithBlend.xaml.cs">
       <DependentUpon>GradientsWithBlend.xaml</DependentUpon>
     </Compile>

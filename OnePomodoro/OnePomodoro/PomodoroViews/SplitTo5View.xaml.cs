@@ -3,6 +3,7 @@ using Microsoft.Graphics.Canvas.Effects;
 using Microsoft.Graphics.Canvas.Geometry;
 using Microsoft.Graphics.Canvas.Text;
 using Microsoft.Graphics.Canvas.UI.Composition;
+using Microsoft.Toolkit.Uwp.UI.Controls.TextToolbarSymbols;
 using Microsoft.Toolkit.Uwp.UI.Extensions;
 using OnePomodoro.Helpers;
 using System;
@@ -40,10 +41,13 @@ namespace OnePomodoro.PomodoroViews
         private readonly Compositor _compositor;
         private readonly CompositionColorBrush _colorBursh;
 
-        private Color Red = Color.FromArgb(255, 217, 17, 83);
-        private Color Blue = Color.FromArgb(255, 0, 27, 171);
+        private Color Red = Color.FromArgb(255, 248, 169, 162);
+        private Color Blue = Color.FromArgb(255, 140, 220, 247);
+
 
         private Visual _contentAeraVisual;
+        private List<Visual> _workVisuals;
+        private List<Visual> _breakVisuals;
 
         public SplitTo5View()
         {
@@ -76,20 +80,53 @@ namespace OnePomodoro.PomodoroViews
             };
 
             _contentAeraVisual = ElementCompositionPreview.GetElementVisual(ContentAera);
+
+            _workVisuals = new List<Visual>();
+            _workVisuals.Add(ElementCompositionPreview.GetElementVisual(WorkSection1));
+            _workVisuals.Add(ElementCompositionPreview.GetElementVisual(WorkSection2));
+            _workVisuals.Add(ElementCompositionPreview.GetElementVisual(WorkSection3));
+            _workVisuals.Add(ElementCompositionPreview.GetElementVisual(WorkSection4));
+            _workVisuals.Add(ElementCompositionPreview.GetElementVisual(WorkSection5));
+
+            _breakVisuals = new List<Visual>();
+            _breakVisuals.Add(ElementCompositionPreview.GetElementVisual(BreakSection5));
+            _breakVisuals.Add(ElementCompositionPreview.GetElementVisual(BreakSection4));
+            _breakVisuals.Add(ElementCompositionPreview.GetElementVisual(BreakSection3));
+            _breakVisuals.Add(ElementCompositionPreview.GetElementVisual(BreakSection2));
+            _breakVisuals.Add(ElementCompositionPreview.GetElementVisual(BreakSection1));
         }
 
         private void UpdateOffset()
         {
-            var y = (float)1050 / 2;
+            var y = 0;
             var width = 1920f;
             var sectionWidth = 320f;
             if (ViewModel.IsInPomodoro)
             {
                 StartOffsetAnimation(_contentAeraVisual, new Vector2(0, y));
+                for (int i = 0; i < _workVisuals.Count; i++)
+                {
+                    StartOffsetAnimation(_workVisuals[i], new Vector2(0, y), TimeSpan.FromMilliseconds(40 * (1 + i)));
+                }
+
+                for (int i = 0; i < _breakVisuals.Count; i++)
+                {
+                    StartOffsetAnimation(_breakVisuals[i], new Vector2(width * 2, y), TimeSpan.FromMilliseconds(40 * (1 + i)));
+                }
             }
             else
             {
                 StartOffsetAnimation(_contentAeraVisual, new Vector2(-width + sectionWidth, y));
+
+                for (int i = 0; i < _workVisuals.Count; i++)
+                {
+                    StartOffsetAnimation(_workVisuals[i], new Vector2(-width, y), TimeSpan.FromMilliseconds(40 * (1 + i)));
+                }
+
+                for (int i = 0; i < _breakVisuals.Count; i++)
+                {
+                    StartOffsetAnimation(_breakVisuals[i], new Vector2(0, y), TimeSpan.FromMilliseconds(40 * (1 + i)));
+                }
             }
         }
 
@@ -115,13 +152,13 @@ namespace OnePomodoro.PomodoroViews
 
         private void StartOffsetAnimation(Visual visual, Vector2 offset)
         {
-            StartOffsetAnimation(visual, offset, TimeSpan.FromMilliseconds(200));
+            StartOffsetAnimation(visual, offset, TimeSpan.FromMilliseconds(50));
         }
 
         private void StartOffsetAnimation(Visual visual, Vector2 offset, TimeSpan period)
         {
             var springAnimation = _compositor.CreateSpringVector3Animation();
-            springAnimation.DampingRatio = 0.5f;
+            springAnimation.DampingRatio = 0.85f;
             springAnimation.Period = period;
             springAnimation.FinalValue = new Vector3(offset, 0);
             visual.StartAnimation(nameof(visual.Offset), springAnimation);
