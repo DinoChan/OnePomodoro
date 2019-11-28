@@ -16,7 +16,7 @@ namespace OnePomodoro.PomodoroViews
     {
         public EllipseClipView()
         {
-            var clip = CompositionEllipseGeometry.();
+           
         }
     }
 }
