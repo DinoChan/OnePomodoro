@@ -48,7 +48,7 @@
     <Grid x:Name="LayoutRoot" Background="White">
         <Rectangle x:Name="RootBackground"/>
 
-
+ 
 
         <Viewbox>
             <Grid Width="1920" Height="1050">

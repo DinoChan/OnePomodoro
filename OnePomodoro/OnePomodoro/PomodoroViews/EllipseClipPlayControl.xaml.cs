@@ -22,12 +22,12 @@ using Windows.UI.Xaml.Navigation;
 
 namespace OnePomodoro.PomodoroViews
 {
-    public sealed partial class EllipseClipWorkControl : PomodoroView
+    public sealed partial class EllipseClipPlayControl : PomodoroView
     {
         private List<CompositionEllipseGeometry> _compositionEllipseGeometries;
         private List<Visual> _timeVisuals;
 
-        public EllipseClipWorkControl()
+        public EllipseClipPlayControl()
         {
             this.InitializeComponent();
 
@@ -45,7 +45,7 @@ namespace OnePomodoro.PomodoroViews
             MakeOffset(TimeElemnt3);
             MakeOffset(TimeElemnt4);
 
-            ViewModel.RemainingPomodoroTimeChanged += OnTimeChanged;
+            ViewModel.RemainingBreakTimeChanged += OnTimeChanged;
             OnTimeChanged(null, null);
             Loaded += OnLoaded;
             Unloaded += OnUnloaded;
@@ -80,10 +80,10 @@ namespace OnePomodoro.PomodoroViews
 
         private void OnTimeChanged(object sender, EventArgs e)
         {
-            TimeElemnt1.Text  = (ViewModel.RemainingPomodoroTime.Minutes / 10).ToString();
-            TimeElemnt2.Text  = (ViewModel.RemainingPomodoroTime.Minutes % 10).ToString();
-            TimeElemnt3.Text  = (ViewModel.RemainingPomodoroTime.Seconds / 10).ToString();
-            TimeElemnt4.Text = (ViewModel.RemainingPomodoroTime.Seconds % 10).ToString();
+            TimeElemnt1.Text = (ViewModel.RemainingBreakTime.Minutes / 10).ToString();
+            TimeElemnt2.Text = (ViewModel.RemainingBreakTime.Minutes % 10).ToString();
+            TimeElemnt3.Text = (ViewModel.RemainingBreakTime.Seconds / 10).ToString();
+            TimeElemnt4.Text = (ViewModel.RemainingBreakTime.Seconds % 10).ToString();
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)

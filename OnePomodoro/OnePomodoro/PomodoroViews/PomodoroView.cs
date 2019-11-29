@@ -37,7 +37,7 @@ namespace OnePomodoro.PomodoroViews
             typeof(OutlineTextView),
             typeof(ShadowTextView),
             typeof(SplitTo5View),
-            typeof(EllipseClipWorkControl),
+            typeof(EllipseClipView),
         };
 
     }

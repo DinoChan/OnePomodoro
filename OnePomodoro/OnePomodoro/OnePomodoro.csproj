@@ -161,7 +161,12 @@
     <Compile Include="Models\IPomodoroSettings.cs" />
     <Compile Include="Models\PomodoroSettings.cs" />
     <Compile Include="Controls\ColorfulShadowTextControl.cs" />
-    <Compile Include="PomodoroViews\EllipseClipView.cs" />
+    <Compile Include="PomodoroViews\EllipseClipPlayControl.xaml.cs">
+      <DependentUpon>EllipseClipPlayControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PomodoroViews\EllipseClipView.xaml.cs">
+      <DependentUpon>EllipseClipView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PomodoroViews\EllipseClipWorkControl.xaml.cs">
       <DependentUpon>EllipseClipWorkControl.xaml</DependentUpon>
     </Compile>
@@ -258,6 +263,14 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\TitleBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PomodoroViews\EllipseClipPlayControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PomodoroViews\EllipseClipView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -410,6 +423,7 @@
     <Content Include="Assets\LargeTile.scale-150.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />
     <Content Include="Assets\LargeTile.scale-400.png" />
+    <Content Include="Assets\Screenshots\EllipseClip.png" />
     <Content Include="Assets\Screenshots\Gradients.png" />
     <Content Include="Assets\Screenshots\GradientsWithBlend.png" />
     <Content Include="Assets\Screenshots\HiddenText.png" />
@@ -418,6 +432,7 @@
     <Content Include="Assets\Screenshots\OutlineText.png" />
     <Content Include="Assets\Screenshots\ShadowText.png" />
     <Content Include="Assets\Screenshots\SimpleCircle.png" />
+    <Content Include="Assets\Screenshots\SplitTo5.png" />
     <Content Include="Assets\Screenshots\SpringText.png" />
     <Content Include="Assets\Screenshots\TheBigOne.png" />
     <Content Include="Assets\Screenshots\TheFirst.png" />
