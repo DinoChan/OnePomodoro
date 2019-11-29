@@ -159,7 +159,7 @@
                                                VerticalAlignment="Center" />
                                 </Grid>
                             </Grid>
-                            <Grid Background="#0099ff"
+                            <Grid Background="#0295ff"
                                   Grid.Column="6"
                                   Width="1540"
                                   Canvas.ZIndex="0">
