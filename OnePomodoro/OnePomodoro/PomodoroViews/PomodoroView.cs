@@ -38,6 +38,8 @@ namespace OnePomodoro.PomodoroViews
             typeof(ShadowTextView),
             typeof(SplitTo5View),
             typeof(EllipseClipView),
+            typeof(DoNotDisturbView),
+            
         };
 
     }

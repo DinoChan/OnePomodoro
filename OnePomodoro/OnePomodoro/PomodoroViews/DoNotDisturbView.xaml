@@ -15,97 +15,170 @@
                     d:DataContext="{d:DesignInstance Type=viewModels:PomodoroViewModel}"
                     RequestedTheme="Dark"
                     FontWeight="Bold"
-                    FontSize="180"
-                    d:DesignHeight="1050"
+                    FontSize="175"
+                    d:DesignHeight="1080"
                     Foreground="White"
                     d:DesignWidth="1920">
 
-    <Grid x:Name="Root" Background="White">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Rectangle Fill="#fe6902"/>
-            <Rectangle Fill="#0099ff" Grid.Column="1"/>
-        </Grid>
-        <Viewbox >
-            <Grid Height="1050" Width="1920" Margin="-100,0" x:Name="ContentArea" RenderTransformOrigin="0.5,0.5" >
-                <Grid.RenderTransform>
-                    <CompositeTransform Rotation="-30" />
-                </Grid.RenderTransform>
-                <UIElement.Clip>
-                    <RectangleGeometry Rect="-1000,-1000,3920,5050"/>
-                </UIElement.Clip>
-                <Grid Margin="0,-1000">
+    <Grid x:Name="Root"
+          Background="Black">
+        
+        <Viewbox>
+            <Grid Height="1050"
+                  Width="1920">
+                <Grid RenderTransformOrigin="0.5,0.5">
                     <Grid.RenderTransform>
-                        <CompositeTransform TranslateX="-1040"/>
+                        <CompositeTransform Rotation="-30" />
                     </Grid.RenderTransform>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid Width="150" Background="#fe6902"/>
+                    <UIElement.Clip>
+                        <RectangleGeometry Rect="-1000,-2000,3920,7050" />
+                    </UIElement.Clip>
+                    <Grid Margin="-1920,-2000">
+                        <!--<Grid.RenderTransform>
+                            <CompositeTransform TranslateX="-1480"/>
+                        </Grid.RenderTransform>-->
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Horizontal"
+                                    x:Name="ContentArea">
+                            <Grid Width="2100"
+                                  Background="#fe6902"
+                                  Canvas.ZIndex="6">
+                                <Rectangle Fill="#fe6902"
+                                           Margin="-100,0,0,0" />
+                            </Grid>
 
-                    <Grid Background="#c64100" Grid.Column="1" Width="250">
-                        <Rectangle Width="27" Fill="White" HorizontalAlignment="Left"/>
-                        <TextBlock Text="Do" Margin="-14,-300,0,0" VerticalAlignment="Center"/>
-                    </Grid>
-                    <Grid Background="#556366" Grid.Column="2" Width="340">
-                        <Rectangle Width="27" Fill="White"  HorizontalAlignment="Left"/>
-                        <TextBlock Text="Not" Margin="-14,-300,0,0" VerticalAlignment="Center"/>
-                    </Grid>
-                    <Grid  Background="#1b1c1e" Grid.Column="3" Width="1180">
-                        <Rectangle Width="27" Fill="White" HorizontalAlignment="Left"/>
-                        <TextBlock Text="Disturb" Margin="-14,-300,0,0" VerticalAlignment="Center"/>
-                        <Grid>
-                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" >
-                                <controls:PomodoroStateButton VerticalAlignment="Center"
-                                                   HorizontalAlignment="Center"
-                                                   Style="{StaticResource HugeButton}"
-                                                   StartCommand="{Binding StartTimerCommand}"
-                                                   StopCommand="{Binding StopTimerCommand}"
-                                                   IsInPomodoro="{x:Bind ViewModel.IsInPomodoro}"
-                                                   IsTimerInProgress="{x:Bind ViewModel.IsTimerInProgress}"/>
-                                <TextBlock Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
-                           x:Name="InWorkCountDown"
-                               VerticalAlignment="Center"
-                           FontFamily="{StaticResource TimeFont}"
-                           Foreground="White"
-                           Margin="8,0,0,2"
-                           Visibility="{Binding IsInPomodoro,Converter={StaticResource BoolToVisibilityConverter}}"/>
+                            <Grid Background="#c64100"
+                                  Grid.Column="1"
+                                  Width="250"
+                                  Canvas.ZIndex="5">
+                                <Rectangle Width="29"
+                                           Fill="White"
+                                           HorizontalAlignment="Left" />
+                                <Grid x:Name="WorkText1"
+                                      HorizontalAlignment="Left">
+                                    <TextBlock Text="Do"
+                                               Margin="-14,-200,0,0"
+                                               VerticalAlignment="Center" />
+                                </Grid>
+                            </Grid>
+                            <Grid Background="#556366"
+                                  Grid.Column="2"
+                                  Width="340"
+                                  Canvas.ZIndex="4">
+                                <Rectangle Width="29"
+                                           Fill="White"
+                                           HorizontalAlignment="Left" />
+                                <Grid x:Name="WorkText2"
+                                      HorizontalAlignment="Left">
+                                    <TextBlock Text="Not"
+                                               Margin="-14,-200,0,0"
+                                               VerticalAlignment="Center" />
+                                </Grid>
+                            </Grid>
+                            <Grid  Background="#1b1c1e"
+                                   Grid.Column="3"
+                                   Width="1450"
+                                   Canvas.ZIndex="3">
+                                <Rectangle Width="29"
+                                           Fill="White"
+                                           HorizontalAlignment="Left" />
+                                <Grid x:Name="WorkText3"
+                                      HorizontalAlignment="Left">
+                                    <TextBlock Text="Disturb"
+                                               Margin="-14,-200,0,0"
+                                               VerticalAlignment="Center" />
+                                </Grid>
+                                <Grid  x:Name="TimerArea"
+                                       RenderTransformOrigin="0.5,0.5">
+                                    <!--<Grid.RenderTransform>
+                                        <CompositeTransform TranslateX="0" TranslateY="200" />
+                                    </Grid.RenderTransform>-->
+                                    <StackPanel HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Orientation="Horizontal">
+                                        <controls:PomodoroStateButton VerticalAlignment="Center"
+                                                                      HorizontalAlignment="Center"
+                                                                      Style="{StaticResource LargeButton}"
+                                                                      Height="120"
+                                                                      Width="120"
+                                                                      StartCommand="{Binding StartTimerCommand}"
+                                                                      StopCommand="{Binding StopTimerCommand}"
+                                                                      IsInPomodoro="{x:Bind ViewModel.IsInPomodoro}"
+                                                                      IsTimerInProgress="{x:Bind ViewModel.IsTimerInProgress}" />
+                                        <TextBlock Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
+                                                   x:Name="InWorkCountDown"
+                                                   VerticalAlignment="Center"
+                                                   FontFamily="{StaticResource TimeFont}"
+                                                   Foreground="White"
+                                                   Margin="16,0,0,2"
+                                                   Visibility="{Binding IsInPomodoro,Converter={StaticResource BoolToVisibilityConverter}}" />
 
-                                <TextBlock Text="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
-                           x:Name="BreakCountDown"
-                               VerticalAlignment="Center"
-                           FontFamily="{StaticResource TimeFont}"
-                           Foreground="White"
-                               Margin="8,0,0,2"
-                           Visibility="{Binding IsInPomodoro,Converter={StaticResource NegationBoolToVisibilityConverter}}"/>
-                            </StackPanel>
-                        </Grid>
+                                        <TextBlock Text="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
+                                                   x:Name="BreakCountDown"
+                                                   VerticalAlignment="Center"
+                                                   FontFamily="{StaticResource TimeFont}"
+                                                   Foreground="White"
+                                                   Margin="16,0,0,2"
+                                                   Visibility="{Binding IsInPomodoro,Converter={StaticResource NegationBoolToVisibilityConverter}}" />
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                            <Grid Background="#665754"
+                                  Grid.Column="4"
+                                  Width="280"
+                                  Canvas.ZIndex="2">
+                                <Rectangle Width="29"
+                                           Fill="White"
+                                           HorizontalAlignment="Left" />
+                                <Grid x:Name="BreakText1"
+                                      HorizontalAlignment="Left">
+                                    <TextBlock Text="I'm"
+                                               Margin="-14,400,0,0"
+                                               VerticalAlignment="Center" />
+                                </Grid>
+                            </Grid>
+                            <Grid Background="#0185c6"
+                                  Grid.Column="5"
+                                  Width="340"
+                                  Canvas.ZIndex="1">
+                                <Rectangle Width="29"
+                                           Fill="White"
+                                           HorizontalAlignment="Left" />
+                                <Grid x:Name="BreakText2"
+                                      HorizontalAlignment="Left">
+                                    <TextBlock Text="Not"
+                                               Margin="-14,400,0,0"
+                                               VerticalAlignment="Center" />
+                                </Grid>
+                            </Grid>
+                            <Grid Background="#0099ff"
+                                  Grid.Column="6"
+                                  Width="1540"
+                                  Canvas.ZIndex="0">
+                                <Rectangle Width="29"
+                                           Fill="White"
+                                           HorizontalAlignment="Left" />
+                                <Grid x:Name="BreakText3"
+                                      HorizontalAlignment="Left">
+                                    <TextBlock Text="Here"
+                                               Margin="-14,400,0,0"
+                                               VerticalAlignment="Center" />
+                                </Grid>
+                            </Grid>
+                        </StackPanel>
                     </Grid>
-                    <Grid Background="#665754" Grid.Column="4"  Width="280">
-                        <Rectangle Width="27" Fill="White" HorizontalAlignment="Left"/>
-                        <TextBlock Text="I'm" Margin="-14,300,0,0" VerticalAlignment="Center"/>
-                    </Grid>
-                    <Grid Background="#0185c6" Grid.Column="5" Width="340">
-                        <Rectangle Width="27" Fill="White"  HorizontalAlignment="Left"/>
-                        <TextBlock Text="Not" Margin="-14,300,0,0" VerticalAlignment="Center"/>
-                    </Grid>
-                    <Grid Background="#0099ff" Grid.Column="6" Width="540">
-                        <Rectangle Width="27" Fill="White"  HorizontalAlignment="Left"/>
-                        <TextBlock Text="Here" Margin="-14,300,0,0" VerticalAlignment="Center"/>
-                    </Grid>
+
                 </Grid>
-
-
             </Grid>
         </Viewbox>
+
     </Grid>
 </local:PomodoroView>
