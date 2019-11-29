@@ -161,6 +161,9 @@
     <Compile Include="Models\IPomodoroSettings.cs" />
     <Compile Include="Models\PomodoroSettings.cs" />
     <Compile Include="Controls\ColorfulShadowTextControl.cs" />
+    <Compile Include="PomodoroViews\DoNotDisturbView.xaml.cs">
+      <DependentUpon>DoNotDisturbView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PomodoroViews\EllipseClipPlayControl.xaml.cs">
       <DependentUpon>EllipseClipPlayControl.xaml</DependentUpon>
     </Compile>
@@ -263,6 +266,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\TitleBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PomodoroViews\DoNotDisturbView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,0 +1,111 @@
+﻿<local:PomodoroView x:Class="OnePomodoro.PomodoroViews.DoNotDisturbView"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="using:OnePomodoro.PomodoroViews"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    mc:Ignorable="d"
+                    xmlns:converters="using:Microsoft.Toolkit.Uwp.UI.Converters"
+                    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
+                    xmlns:viewModels="using:OnePomodoro.ViewModels"
+                    xmlns:helpers="using:OnePomodoro.Helpers"
+                    xmlns:controls="using:OnePomodoro.Controls"
+                    x:DefaultBindMode="OneWay"
+                    FontFamily="Helvetica"
+                    d:DataContext="{d:DesignInstance Type=viewModels:PomodoroViewModel}"
+                    RequestedTheme="Dark"
+                    FontWeight="Bold"
+                    FontSize="180"
+                    d:DesignHeight="1050"
+                    Foreground="White"
+                    d:DesignWidth="1920">
+
+    <Grid x:Name="Root" Background="White">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Rectangle Fill="#fe6902"/>
+            <Rectangle Fill="#0099ff" Grid.Column="1"/>
+        </Grid>
+        <Viewbox >
+            <Grid Height="1050" Width="1920" x:Name="ContentArea" RenderTransformOrigin="0.5,0.5" >
+                <Grid.RenderTransform>
+                    <CompositeTransform Rotation="-30" />
+                </Grid.RenderTransform>
+                <UIElement.Clip>
+                    <RectangleGeometry Rect="-1000,-1000,3920,5050"/>
+                </UIElement.Clip>
+                <Grid Margin="0,-1000">
+                    <Grid.RenderTransform>
+                        <CompositeTransform TranslateX="-1040"/>
+                    </Grid.RenderTransform>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Width="150" Background="#fe6902"/>
+
+                    <Grid Background="#c64100" Grid.Column="1" Width="250">
+                        <Rectangle Width="27" Fill="White" HorizontalAlignment="Left"/>
+                        <TextBlock Text="Do" Margin="-14,-300,0,0" VerticalAlignment="Center"/>
+                    </Grid>
+                    <Grid Background="#556366" Grid.Column="2" Width="340">
+                        <Rectangle Width="27" Fill="White"  HorizontalAlignment="Left"/>
+                        <TextBlock Text="Not" Margin="-14,-300,0,0" VerticalAlignment="Center"/>
+                    </Grid>
+                    <Grid  Background="#1b1c1e" Grid.Column="3" Width="1180">
+                        <Rectangle Width="27" Fill="White" HorizontalAlignment="Left"/>
+                        <TextBlock Text="Disturb" Margin="-14,-300,0,0" VerticalAlignment="Center"/>
+                        <Grid>
+                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" >
+                                <controls:PomodoroStateButton VerticalAlignment="Center"
+                                                   HorizontalAlignment="Center"
+                                                   Style="{StaticResource HugeButton}"
+                                                   StartCommand="{Binding StartTimerCommand}"
+                                                   StopCommand="{Binding StopTimerCommand}"
+                                                   IsInPomodoro="{x:Bind ViewModel.IsInPomodoro}"
+                                                   IsTimerInProgress="{x:Bind ViewModel.IsTimerInProgress}"/>
+                                <TextBlock Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
+                           x:Name="InWorkCountDown"
+                               VerticalAlignment="Center"
+                           FontFamily="{StaticResource TimeFont}"
+                           Foreground="White"
+                           Margin="8,0,0,2"
+                           Visibility="{Binding IsInPomodoro,Converter={StaticResource BoolToVisibilityConverter}}"/>
+
+                                <TextBlock Text="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
+                           x:Name="BreakCountDown"
+                               VerticalAlignment="Center"
+                           FontFamily="{StaticResource TimeFont}"
+                           Foreground="White"
+                               Margin="8,0,0,2"
+                           Visibility="{Binding IsInPomodoro,Converter={StaticResource NegationBoolToVisibilityConverter}}"/>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                    <Grid Background="#665754" Grid.Column="4"  Width="280">
+                        <Rectangle Width="27" Fill="White" HorizontalAlignment="Left"/>
+                        <TextBlock Text="I'm" Margin="-14,300,0,0" VerticalAlignment="Center"/>
+                    </Grid>
+                    <Grid Background="#0185c6" Grid.Column="5" Width="340">
+                        <Rectangle Width="27" Fill="White"  HorizontalAlignment="Left"/>
+                        <TextBlock Text="Not" Margin="-14,300,0,0" VerticalAlignment="Center"/>
+                    </Grid>
+                    <Grid Background="#0099ff" Grid.Column="6" Width="540">
+                        <Rectangle Width="27" Fill="White"  HorizontalAlignment="Left"/>
+                        <TextBlock Text="Here" Margin="-14,300,0,0" VerticalAlignment="Center"/>
+                    </Grid>
+                </Grid>
+
+
+            </Grid>
+        </Viewbox>
+    </Grid>
+</local:PomodoroView>
