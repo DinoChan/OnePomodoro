@@ -30,7 +30,7 @@
             <Rectangle Fill="#0099ff" Grid.Column="1"/>
         </Grid>
         <Viewbox >
-            <Grid Height="1050" Width="1920" x:Name="ContentArea" RenderTransformOrigin="0.5,0.5" >
+            <Grid Height="1050" Width="1920" Margin="-100,0" x:Name="ContentArea" RenderTransformOrigin="0.5,0.5" >
                 <Grid.RenderTransform>
                     <CompositeTransform Rotation="-30" />
                 </Grid.RenderTransform>
