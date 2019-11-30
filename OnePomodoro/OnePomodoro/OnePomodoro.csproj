@@ -145,6 +145,7 @@
     <Compile Include="Controls\ProgressToPointCollectionBridge.cs" />
     <Compile Include="Controls\OutlineTextControl.cs" />
     <Compile Include="Controls\ShadowTextControl.cs" />
+    <Compile Include="Controls\TimeAndTitleControl.cs" />
     <Compile Include="Media\TiledImageBrush.cs" />
     <Compile Include="Controls\TitleBar.xaml.cs">
       <DependentUpon>TitleBar.xaml</DependentUpon>
@@ -160,11 +161,26 @@
     <Compile Include="Models\IPomodoroSettings.cs" />
     <Compile Include="Models\PomodoroSettings.cs" />
     <Compile Include="Controls\ColorfulShadowTextControl.cs" />
+    <Compile Include="PomodoroViews\DoNotDisturbView.xaml.cs">
+      <DependentUpon>DoNotDisturbView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PomodoroViews\EllipseClipPlayControl.xaml.cs">
+      <DependentUpon>EllipseClipPlayControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PomodoroViews\EllipseClipView.xaml.cs">
+      <DependentUpon>EllipseClipView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PomodoroViews\EllipseClipWorkControl.xaml.cs">
+      <DependentUpon>EllipseClipWorkControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PomodoroViews\GradientsWithBlend.xaml.cs">
       <DependentUpon>GradientsWithBlend.xaml</DependentUpon>
     </Compile>
     <Compile Include="PomodoroViews\ShadowTextView.xaml.cs">
       <DependentUpon>ShadowTextView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PomodoroViews\SplitTo5View.xaml.cs">
+      <DependentUpon>SplitTo5View.xaml</DependentUpon>
     </Compile>
     <Compile Include="PomodoroViews\WhiteTextView.xaml.cs">
       <DependentUpon>WhiteTextView.xaml</DependentUpon>
@@ -253,11 +269,31 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PomodoroViews\DoNotDisturbView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PomodoroViews\EllipseClipPlayControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PomodoroViews\EllipseClipView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PomodoroViews\EllipseClipWorkControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PomodoroViews\GradientsWithBlend.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="PomodoroViews\ShadowTextView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PomodoroViews\SplitTo5View.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -394,6 +430,7 @@
     <Content Include="Assets\LargeTile.scale-150.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />
     <Content Include="Assets\LargeTile.scale-400.png" />
+    <Content Include="Assets\Screenshots\EllipseClip.png" />
     <Content Include="Assets\Screenshots\Gradients.png" />
     <Content Include="Assets\Screenshots\GradientsWithBlend.png" />
     <Content Include="Assets\Screenshots\HiddenText.png" />
@@ -402,6 +439,7 @@
     <Content Include="Assets\Screenshots\OutlineText.png" />
     <Content Include="Assets\Screenshots\ShadowText.png" />
     <Content Include="Assets\Screenshots\SimpleCircle.png" />
+    <Content Include="Assets\Screenshots\SplitTo5.png" />
     <Content Include="Assets\Screenshots\SpringText.png" />
     <Content Include="Assets\Screenshots\TheBigOne.png" />
     <Content Include="Assets\Screenshots\TheFirst.png" />

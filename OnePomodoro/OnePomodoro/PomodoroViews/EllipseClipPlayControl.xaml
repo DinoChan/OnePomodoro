@@ -1,0 +1,100 @@
+﻿<local:PomodoroView x:Class="OnePomodoro.PomodoroViews.EllipseClipPlayControl"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="using:OnePomodoro.PomodoroViews"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    mc:Ignorable="d"
+                    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+                    xmlns:behaviors="using:Microsoft.Toolkit.Uwp.UI.Animations.Behaviors"
+                    xmlns:media="using:OnePomodoro.Media"
+                    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+                    xmlns:controls1="using:OnePomodoro.Controls"
+                    x:DefaultBindMode="OneWay"
+                    RequestedTheme="Light"
+                    FontFamily="{StaticResource TimeFont}"
+                    d:DesignHeight="1050"
+                    d:DesignWidth="1920">
+
+    <UserControl.Resources>
+        <Style TargetType="controls:HeaderedContentControl" x:Key="ContentStyle">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="controls:HeaderedContentControl">
+                        <Grid Margin="-1,-1000" Width="384" Background="{TemplateBinding Background}">
+                            <StackPanel VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                x:Name="PomodoroPanel">
+                                <Grid>
+                                    <StackPanel>
+                                        <ContentPresenter FontSize="750" HorizontalAlignment="Center"/>
+                                        <TextBlock Text="{TemplateBinding Header}" Opacity="0.6" HorizontalAlignment="Center" Margin="0,-255,0,0" FontSize="400" />
+                                    </StackPanel>
+                                </Grid>
+                            </StackPanel>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid x:Name="LayoutRoot" Background="#1f1f1f">
+        <Rectangle x:Name="RootBackground"/>
+        <Viewbox>
+            <Grid Width="1920" Height="1050" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <UIElement.Clip>
+                    <RectangleGeometry Rect="000,0,1920,1050"/>
+                </UIElement.Clip>
+                <controls1:PomodoroStateButton VerticalAlignment="Center"
+                                                   HorizontalAlignment="Center"
+                                                 
+                                                   Style="{StaticResource LargeButton}"
+                                                   StartCommand="{Binding StartTimerCommand}"
+                                                   StopCommand="{Binding StopTimerCommand}"
+                                                   IsInPomodoro="{x:Bind ViewModel.IsInPomodoro}"
+                                                   IsTimerInProgress="{x:Bind ViewModel.IsTimerInProgress}"/>
+               
+                <TextBlock Text="P" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="100" FontWeight="Bold" Foreground="White" Grid.Column="1"/>
+                <TextBlock Text="L" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="100" FontWeight="Bold" Foreground="White" Grid.Column="2"/>
+                <TextBlock Text="A" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="100" FontWeight="Bold" Foreground="White" Grid.Column="3"/>
+                <TextBlock Text="Y" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="100" FontWeight="Bold" Foreground="White" Grid.Column="4"/>
+
+                <controls:HeaderedContentControl x:Name="Section0" Style="{StaticResource ContentStyle}" Background="#4eeddd" Foreground="White"  >
+                    <controls1:PomodoroStateButton VerticalAlignment="Center"
+                                                    x:Name="TimeElemnt0"
+                                                   HorizontalAlignment="Center"
+                                                   Margin="0,270,0,0"
+                                                   Style="{StaticResource HugeButton}"
+                                                   StartCommand="{Binding StartTimerCommand}"
+                                                   StopCommand="{Binding StopTimerCommand}"
+                                                   IsInPomodoro="{x:Bind ViewModel.IsInPomodoro}"
+                                                   IsTimerInProgress="{x:Bind ViewModel.IsTimerInProgress}"/>
+                </controls:HeaderedContentControl>
+
+                <controls:HeaderedContentControl x:Name="Section1" Style="{StaticResource ContentStyle}" Background="#8cdcf7" Foreground="White" Header="P"  Grid.Column="1">
+                    <TextBlock Text="2" x:Name="TimeElemnt1"/>
+                </controls:HeaderedContentControl>
+
+                <controls:HeaderedContentControl x:Name="Section2" Style="{StaticResource ContentStyle}" Background="#459296" Foreground="White" Header="L"  Grid.Column="2">
+                    <TextBlock Text="5" x:Name="TimeElemnt2"/>
+                </controls:HeaderedContentControl>
+
+                <controls:HeaderedContentControl x:Name="Section3" Style="{StaticResource ContentStyle}" Background="#35d3e8" Foreground="White" Header="A"  Grid.Column="3">
+                    <TextBlock Text="0" x:Name="TimeElemnt3"/>
+                </controls:HeaderedContentControl>
+
+                <controls:HeaderedContentControl x:Name="Section4" Style="{StaticResource ContentStyle}" Background="#4abeef" Foreground="White" Header="Y"  Grid.Column="4">
+                    <TextBlock Text="0" x:Name="TimeElemnt4"/>
+                </controls:HeaderedContentControl>
+            </Grid>
+        </Viewbox>
+    </Grid>
+</local:PomodoroView>
+    

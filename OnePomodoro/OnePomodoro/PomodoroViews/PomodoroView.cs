@@ -1,4 +1,5 @@
-﻿using Microsoft.Toolkit.Uwp.UI.Controls.TextToolbarSymbols;
+﻿using Microsoft.Practices.Unity;
+using Microsoft.Toolkit.Uwp.UI.Controls.TextToolbarSymbols;
 using OnePomodoro.ViewModels;
 using System;
 using System.Collections;
@@ -35,6 +36,10 @@ namespace OnePomodoro.PomodoroViews
             typeof(WhiteTextView),
             typeof(OutlineTextView),
             typeof(ShadowTextView),
+            typeof(SplitTo5View),
+            typeof(EllipseClipView),
+            typeof(DoNotDisturbView),
+            
         };
 
     }
