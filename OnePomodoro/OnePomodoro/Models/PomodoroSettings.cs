@@ -29,6 +29,11 @@ namespace OnePomodoro.Models
 
         public bool IsNotifyWhenBreakFinished { get; set; }
 
+        public int PomodoroLength { get; set; }
+        public int ShortBreakLength { get; set; }
+        public int LongBreakLength { get; set; }
+        public int LongBreakAfter { get; set; }
+
         public string ViewType
         {
             get { return _viewType; }
@@ -41,5 +46,7 @@ namespace OnePomodoro.Models
                 ViewTypeChanged?.Invoke(this, EventArgs.Empty);
             }
         }
+
+       
     }
 }

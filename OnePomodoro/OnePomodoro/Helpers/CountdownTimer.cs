@@ -14,12 +14,12 @@ namespace OnePomodoro.Helpers
     {
 
         private DispatcherTimer _innerTimer;
-        private DateTime _timerStartTime;
         private TimeSpan _totalTime;
         private TimeSpan _remainingTime;
 
-        public CountdownTimer(TimeSpan totalTime)
+        public CountdownTimer(DateTime startTime ,TimeSpan totalTime)
         {
+            StartTime = startTime;
             _totalTime = totalTime;
             _innerTimer = new DispatcherTimer();
             _innerTimer.Tick += OnInnerTimerTick;
@@ -31,6 +31,8 @@ namespace OnePomodoro.Helpers
         public event EventHandler Elapsed;
 
         public TimeSpan TotalTime => _totalTime;
+
+        public DateTime StartTime { get; private set; }
 
         /// <summary>
         /// 获取或设置 RemainingInterval 的值
@@ -55,8 +57,8 @@ namespace OnePomodoro.Helpers
 
         public void Start()
         {
-            _timerStartTime = DateTime.Now;
             _innerTimer.Start();
+            CheckTime();
         }
 
         public void Stop()
@@ -67,7 +69,12 @@ namespace OnePomodoro.Helpers
 
         private void OnInnerTimerTick(object sender, object e)
         {
-            var remainingTime = _totalTime - (DateTime.Now - _timerStartTime);
+            CheckTime();
+        }
+
+        private void CheckTime()
+        {
+            var remainingTime = _totalTime - (DateTime.Now - StartTime);
             if (Math.Abs((remainingTime - RemainingTime).TotalSeconds) < 1)
                 return;
 
