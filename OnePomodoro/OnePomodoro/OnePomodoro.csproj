@@ -430,7 +430,7 @@
     <Content Include="Assets\LargeTile.scale-150.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />
     <Content Include="Assets\LargeTile.scale-400.png" />
-    <Content Include="Assets\Screenshots\DoNotDisturbView.png" />
+    <Content Include="Assets\Screenshots\DoNotDisturb.png" />
     <Content Include="Assets\Screenshots\EllipseClip.png" />
     <Content Include="Assets\Screenshots\Gradients.png" />
     <Content Include="Assets\Screenshots\GradientsWithBlend.png" />
