@@ -13,14 +13,14 @@
 
     <Grid>
         <StackPanel Margin="40">
-            <!--<ToggleSwitch Header="Auto Start Of Next Pomodoro"
+            <ToggleSwitch Header="Auto Start Of Next Pomodoro"
                           IsOn="{x:Bind ViewModel.Settings.AutoStartOfNextPomodoro,Mode=TwoWay}"
                           Toggled="{x:Bind ViewModel.OnSettingChanged}"/>
             
             <ToggleSwitch Header="Auto Start Of Break"
                           IsOn="{x:Bind ViewModel.Settings.AutoStartOfBreak,Mode=TwoWay}"
                           Margin="0,16,0,0"
-                          Toggled="{x:Bind ViewModel.OnSettingChanged}"/>-->
+                          Toggled="{x:Bind ViewModel.OnSettingChanged}"/>
             <ToggleSwitch Header="Notify When Pomodoro Finished"
                           IsOn="{x:Bind ViewModel.Settings.IsNotifyWhenPomodoroFinished,Mode=TwoWay}"
                           Margin="0,16,0,0"

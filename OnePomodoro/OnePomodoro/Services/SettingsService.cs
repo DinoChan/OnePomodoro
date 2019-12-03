@@ -32,7 +32,7 @@ namespace OnePomodoro.Services
                 Current.ShortBreakLength = 5;
 
             if (Current.LongBreakLength == 0)
-                Current.ShortBreakLength = 15;
+                Current.LongBreakLength = 15;
 
             if (Current.LongBreakAfter == 0)
                 Current.LongBreakAfter = 4;

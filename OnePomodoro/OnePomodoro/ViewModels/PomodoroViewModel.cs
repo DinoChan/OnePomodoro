@@ -15,9 +15,9 @@ namespace OnePomodoro.ViewModels
 {
     public class PomodoroViewModel : ViewModelBase
     {
-        private TimeSpan PomodoroLength => TimeSpan.FromMinutes(SettingsService.Current.PomodoroLength);
-        private TimeSpan ShortBreakLength => TimeSpan.FromMinutes(SettingsService.Current.ShortBreakLength);
-        private TimeSpan LongBreakLength => TimeSpan.FromMinutes(SettingsService.Current.LongBreakLength);
+        private TimeSpan PomodoroLength => TimeSpan.FromSeconds(SettingsService.Current.PomodoroLength);
+        private TimeSpan ShortBreakLength => TimeSpan.FromSeconds(SettingsService.Current.ShortBreakLength);
+        private TimeSpan LongBreakLength => TimeSpan.FromSeconds(SettingsService.Current.LongBreakLength);
         private int LongBreakAfter => SettingsService.Current.LongBreakAfter;
 
         public static PomodoroViewModel Current { get; } = new PomodoroViewModel();
@@ -28,6 +28,7 @@ namespace OnePomodoro.ViewModels
         private bool _isTimerInProgress;
         private int _completedPomodoros;
         private IToastNotificationsService _toastNotificationsService;
+        private bool _isStopByUser;
 
         private CountdownTimer _currentTimer;
 
@@ -39,13 +40,10 @@ namespace OnePomodoro.ViewModels
 
             IsInPomodoro = true;
             RemainingPomodoroTime = PomodoroLength;
-
-            CurrentTimer = new CountdownTimer(DateTime.Now, PomodoroLength);
+            TotalPomodoroTime = PomodoroLength;
 
             if (DesignMode.DesignMode2Enabled == false && App.Current is PrismUnityApplication)
                 _toastNotificationsService = App.Current.Container.Resolve<IToastNotificationsService>();
-
-            TotalPomodoroTime = PomodoroLength;
         }
 
         public event EventHandler RemainingPomodoroTimeChanged;
@@ -107,6 +105,7 @@ namespace OnePomodoro.ViewModels
         public DelegateCommand StartTimerCommand { get; }
 
         public DelegateCommand StopTimerCommand { get; }
+
         public CountdownTimer CurrentTimer
         {
             get
@@ -118,6 +117,16 @@ namespace OnePomodoro.ViewModels
                 _currentTimer = value;
                 _currentTimer.Elapsed += OnCurrentTimerElapsed;
                 _currentTimer.Finished += OnCurrentFinished; ;
+            }
+        }
+
+        public int CompletedPomodoros
+        {
+            get { return _completedPomodoros; }
+            set
+            {
+                _completedPomodoros = value;
+                RaisePropertyChanged();
             }
         }
 
@@ -139,50 +148,58 @@ namespace OnePomodoro.ViewModels
 
         private void StartTimer()
         {
-            CurrentTimer.Start();
+            if (_isInPomodoro)
+                StartPomodoro();
+            else
+                StartBreak();
         }
 
         private void StopTimer()
         {
             if (_isInPomodoro)
-            {
                 _toastNotificationsService.RemovePomodoroFinishedToastNotificationSchedule();
-            }
             else
-            {
                 _toastNotificationsService.RemoveBreakFinishedToastNotificationSchedule();
-            }
 
             CurrentTimer.Stop();
         }
 
         private void StartPomodoro()
         {
-
-            CurrentTimer.Start();
             IsTimerInProgress = true;
             if (SettingsService.Current.IsNotifyWhenPomodoroFinished)
                 _toastNotificationsService.AddPomodoroFinishedToastNotificationSchedule(DateTime.Now + RemainingPomodoroTime);
+
+            if (SettingsService.Current.AutoStartOfNextPomodoro && CurrentTimer != null && CurrentTimer.RemainingTime == TimeSpan.Zero)
+                CurrentTimer = new CountdownTimer(CurrentTimer.StartTime + CurrentTimer.TotalTime, PomodoroLength);
+            else
+                CurrentTimer = new CountdownTimer(DateTime.Now, PomodoroLength);
+
+            CurrentTimer.Start();
         }
+
         private void StartBreak()
         {
-            CurrentTimer.Start();
             IsTimerInProgress = true;
             if (SettingsService.Current.IsNotifyWhenBreakFinished)
                 _toastNotificationsService.AddBreakFinishedToastNotificationSchedule(DateTime.Now + RemainingBreakTime);
+
+            var breakLength = (CompletedPomodoros % LongBreakAfter == 0) ? LongBreakLength : ShortBreakLength;
+            if (SettingsService.Current.AutoStartOfNextPomodoro && CurrentTimer != null && CurrentTimer.RemainingTime == TimeSpan.Zero)
+                CurrentTimer = new CountdownTimer(CurrentTimer.StartTime + CurrentTimer.TotalTime, breakLength);
+            else
+                CurrentTimer = new CountdownTimer(DateTime.Now, breakLength);
+
+            CurrentTimer.Start();
         }
 
         private void OnPomodoroTimerFinished()
         {
             IsTimerInProgress = false;
             IsInPomodoro = false;
-            _completedPomodoros++;
+            CompletedPomodoros++;
 
-            var breakLength = (_completedPomodoros % LongBreakAfter == 0) ? ShortBreakLength : LongBreakLength;
-            if (SettingsService.Current.AutoStartOfNextPomodoro)
-                CurrentTimer = new CountdownTimer(DateTime.Now, breakLength);
-            else
-                CurrentTimer = new CountdownTimer(CurrentTimer.StartTime + CurrentTimer.TotalTime, breakLength);
+            var breakLength = (CompletedPomodoros % LongBreakAfter == 0) ? LongBreakLength : ShortBreakLength;
 
             TotalBreakTime = breakLength;
             RemainingBreakTime = breakLength;
@@ -193,11 +210,6 @@ namespace OnePomodoro.ViewModels
 
         private void OnBreakTimerFinished()
         {
-            if (SettingsService.Current.AutoStartOfNextPomodoro)
-                CurrentTimer = new CountdownTimer(DateTime.Now, PomodoroLength);
-            else
-                CurrentTimer = new CountdownTimer(CurrentTimer.StartTime + CurrentTimer.TotalTime, PomodoroLength);
-
             RemainingPomodoroTime = PomodoroLength;
             IsTimerInProgress = false;
             IsInPomodoro = true;
