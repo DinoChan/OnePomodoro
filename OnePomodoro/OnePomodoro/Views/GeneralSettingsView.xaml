@@ -387,9 +387,13 @@
                                         Grid.Column="1"
                                         Margin="12,0,0,0"
                                         VerticalAlignment="Center">
-                                <ContentControl Content="{TemplateBinding Value}" Foreground="{ThemeResource SystemBaseHighColor}"/>
-                                <TextBlock Text="{TemplateBinding Tag}"
-                                           Foreground="{ThemeResource SystemBaseHighColor}" Margin="6,0,0,0" />
+                                <ContentControl Content="{TemplateBinding Value}"
+                                                VerticalAlignment="Center"
+                                                Width="15"
+                                                Foreground="{ThemeResource SystemBaseHighColor}" />
+                                <ContentControl Content="{TemplateBinding Tag}"
+                                                Foreground="{ThemeResource SystemBaseHighColor}"
+                                                Margin="6,0,0,0" />
                             </StackPanel>
                         </Grid>
 
@@ -415,36 +419,80 @@
                               Margin="0,16,0,0" />
 
                 <Slider Header="Pomodoro Length"
-                        Value="{x:Bind ViewModel.Settings.PomodoroLength,Mode=TwoWay}"
+                        Value="{Binding Settings.PomodoroLength,Mode=TwoWay}"
                         Margin="0,48,0,0"
                         Minimum="15"
                         Maximum="45"
-                        StepFrequency="1"
-                        Tag="Minutes"/>
+                        StepFrequency="1">
+                    <Slider.Tag>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Minutes"
+                                       Width="80"
+                                       VerticalAlignment="Center" />
+                            <HyperlinkButton Content="Default"
+                                             Margin="12,0,0,0"
+                                             Click="OnDefaultPomodoroLengthClick"/>
+                        </StackPanel>
+
+                    </Slider.Tag>
+                </Slider>
 
                 <Slider Header="Short Break Length"
-                        Value="{x:Bind ViewModel.Settings.ShortBreakLength,Mode=TwoWay}"
+                        Value="{Binding Settings.ShortBreakLength,Mode=TwoWay}"
                         Margin="0,16,0,0"
                         Minimum="3"
                         Maximum="15"
-                        StepFrequency="1"
-                        Tag="Minutes"/>
+                        StepFrequency="1">
+                    <Slider.Tag>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Minutes"
+                                       Width="80"
+                                       VerticalAlignment="Center" />
+                            <HyperlinkButton Content="Default"
+                                             Margin="12,0,0,0"
+                                             Click="OnDefaultShortBreakLengthClick" />
+                        </StackPanel>
+
+                    </Slider.Tag>
+                </Slider>
 
                 <Slider Header="Long Break Length"
-                        Value="{x:Bind ViewModel.Settings.LongBreakLength,Mode=TwoWay}"
+                        Value="{Binding Settings.LongBreakLength,Mode=TwoWay}"
                         Margin="0,16,0,0"
                         Minimum="5"
                         Maximum="25"
-                        StepFrequency="1"
-                        Tag="Minutes"/>
+                        StepFrequency="1">
+                    <Slider.Tag>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Minutes"
+                                       Width="80"
+                                       VerticalAlignment="Center" />
+                            <HyperlinkButton Content="Default"
+                                             Margin="12,0,0,0"
+                                             Click="OnDefaultLongBreakLengthClick" />
+                        </StackPanel>
+
+                    </Slider.Tag>
+                </Slider>
 
                 <Slider Header="Long Break After"
-                        Value="{x:Bind ViewModel.Settings.LongBreakAfter,Mode=TwoWay}"
+                        Value="{Binding Settings.LongBreakAfter,Mode=TwoWay}"
                         Margin="0,16,0,0"
                         Minimum="1"
                         Maximum="8"
-                        StepFrequency="1"
-                        Tag="Pomodoros"/>
+                        StepFrequency="1">
+                    <Slider.Tag>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Pomodoros"
+                                       Width="80"
+                                       VerticalAlignment="Center" />
+                            <HyperlinkButton Content="Default"
+                                             Margin="12,0,0,0"
+                                             Click="OnDefaultLongBreakAfterClick" />
+                        </StackPanel>
+
+                    </Slider.Tag>
+                </Slider>
             </StackPanel>
         </ScrollViewer>
     </Grid>

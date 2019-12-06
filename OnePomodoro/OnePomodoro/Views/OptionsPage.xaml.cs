@@ -32,42 +32,33 @@ namespace OnePomodoro.Views
             base.OnNavigatedTo(e);
             _ = Task.Run(async () =>
               {
-                  if (PrivacyStatementMarkdownTextBlock.Text != null)
+                  var uri = new Uri("ms-appx:///Assets/Privacy Statement.md");
+                  var storageFile = await StorageFile.GetFileFromApplicationUriAsync(uri);
+                  var text = await FileIO.ReadTextAsync(storageFile);
+                  _ = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                   {
-                      var uri = new Uri("ms-appx:///Assets/Privacy Statement.md");
-                      var storageFile = await StorageFile.GetFileFromApplicationUriAsync(uri);
-                      var text = await FileIO.ReadTextAsync(storageFile);
-                      _ = Dispatcher.RunAsync(CoreDispatcherPriority.Idle, () =>
+                      PrivacyStatementMarkdownTextBlock.Text = text;
+                  });
+
+                  uri = new Uri("ms-appx:///Assets/License.md");
+                  storageFile = await StorageFile.GetFileFromApplicationUriAsync(uri);
+                  text = await FileIO.ReadTextAsync(storageFile);
+                  _ = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                  {
+                      LicenseMarkdownTextBlock.Text = text;
+                  });
+
+                  try
+                  {
+                      var client = new HttpClient();
+                      text = await client.GetStringAsync("https://raw.githubusercontent.com/DinoChan/OnePomodoro/master/Whats%20new.md"); ;
+                      _ = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                       {
-                          PrivacyStatementMarkdownTextBlock.Text = text;
+                          WhatsNewMarkdownTextBlock.Text = text;
                       });
                   }
-
-                  if (LicenseMarkdownTextBlock.Text != null)
+                  catch (Exception)
                   {
-                      var uri = new Uri("ms-appx:///Assets/License.md");
-                      var storageFile = await StorageFile.GetFileFromApplicationUriAsync(uri);
-                      var text = await FileIO.ReadTextAsync(storageFile);
-                      _ = Dispatcher.RunAsync(CoreDispatcherPriority.Idle, () =>
-                      {
-                          LicenseMarkdownTextBlock.Text = text;
-                      });
-                  }
-
-                  if (WhatsNewMarkdownTextBlock.Text != null)
-                  {
-                      try
-                      {
-                          HttpClient client = new HttpClient();
-                          var text = await client.GetStringAsync("https://raw.githubusercontent.com/DinoChan/OnePomodoro/master/Whats%20new.md"); ;
-                          _ = Dispatcher.RunAsync(CoreDispatcherPriority.Idle, () =>
-                          {
-                              WhatsNewMarkdownTextBlock.Text = text;
-                          });
-                      }
-                      catch (Exception)
-                      {
-                      }
                   }
               });
         }
