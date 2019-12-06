@@ -35,6 +35,10 @@ Add some Pomodoros.
 
 Add some Pomodoros.
 
-**2019-12-21 v1.12:**
+**2019-12-1 v1.12:**
 
 Add some Pomodoros.
+
+**2019-12-6 v1.13:**
+
+Can auto start next timer.
