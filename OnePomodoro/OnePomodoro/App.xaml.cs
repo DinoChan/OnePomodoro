@@ -15,6 +15,7 @@ using Windows.ApplicationModel.Core;
 using Windows.ApplicationModel.Resources;
 using Windows.Foundation.Metadata;
 using Windows.UI;
+using Windows.UI.Core.Preview;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -39,6 +40,13 @@ namespace OnePomodoro
 
                 _ = dialog.ShowAsync();
             };
+
+            CoreApplication.Exiting += (s, e) =>
+            {
+               
+            };
+
+           
         }
 
         protected override void ConfigureContainer()
@@ -48,7 +56,6 @@ namespace OnePomodoro
             Container.RegisterType<IWhatsNewDisplayService, WhatsNewDisplayService>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IFirstRunDisplayService, FirstRunDisplayService>(new ContainerControlledLifetimeManager());
             Container.RegisterType<ILiveTileService, LiveTileService>(new ContainerControlledLifetimeManager());
-            Container.RegisterType<IToastNotificationsService, ToastNotificationsService>(new ContainerControlledLifetimeManager());
             Container.RegisterInstance<IResourceLoader>(new ResourceLoaderAdapter(new ResourceLoader()));
         }
 
@@ -65,6 +72,15 @@ namespace OnePomodoro
             await ThemeSelectorService.SetRequestedThemeAsync();
             NavigationService.Navigate(page, launchParam);
             Window.Current.Activate();
+            
+            SystemNavigationManagerPreview.GetForCurrentView().CloseRequested += (s, e) =>
+            {
+                NotificationManager.Current.IsEnabled = false;
+                NotificationManager.Current.RemoveBreakFinishedToastNotificationSchedule();
+                NotificationManager.Current.RemovePomodoroFinishedToastNotificationSchedule();
+            };
+            NotificationManager.Current.RemoveBreakFinishedToastNotificationSchedule();
+            NotificationManager.Current.RemovePomodoroFinishedToastNotificationSchedule();
             //await Container.Resolve<IWhatsNewDisplayService>().ShowIfAppropriateAsync();
             //await Container.Resolve<IFirstRunDisplayService>().ShowIfAppropriateAsync();
             //Container.Resolve<ILiveTileService>().SampleUpdate();

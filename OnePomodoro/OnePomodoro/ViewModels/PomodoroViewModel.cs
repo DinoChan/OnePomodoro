@@ -1,23 +1,28 @@
-﻿using Prism.Windows.Mvvm;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OnePomodoro.Helpers;
+﻿using OnePomodoro.Helpers;
 using OnePomodoro.Services;
 using Prism.Commands;
-using Microsoft.Practices.Unity;
-using Prism.Unity.Windows;
+using Prism.Windows.Mvvm;
+using System;
 using Windows.ApplicationModel;
+using Windows.ApplicationModel.Core;
 
 namespace OnePomodoro.ViewModels
 {
+    /// <summary>
+    /// 2019年12月5日：添加了自动开始功能。
+    /// 但最小化后程序进入后台模式Timer不能运行。但是……
+    ///
+    /// 最小化后，用户看不到程序，他怎么知道下一个番茄钟有自动开始运行？
+    /// 最小化后，用户看不到程序，他怎么知道下一个番茄钟没有自动开始运行？
+    /// 应用怎么知道用户知道或者不知道下一个番茄钟有开始或者没有开始运行？
+    ///
+    /// 所以在退出后台模式时更新一下就好了，不需要后台任务，简单就好。
+    /// </summary>
     public class PomodoroViewModel : ViewModelBase
     {
-        private TimeSpan PomodoroLength => TimeSpan.FromSeconds(SettingsService.Current.PomodoroLength);
-        private TimeSpan ShortBreakLength => TimeSpan.FromSeconds(SettingsService.Current.ShortBreakLength);
-        private TimeSpan LongBreakLength => TimeSpan.FromSeconds(SettingsService.Current.LongBreakLength);
+        private TimeSpan PomodoroLength => TimeSpan.FromMinutes(SettingsService.Current.PomodoroLength);
+        private TimeSpan ShortBreakLength => TimeSpan.FromMinutes(SettingsService.Current.ShortBreakLength);
+        private TimeSpan LongBreakLength => TimeSpan.FromMinutes(SettingsService.Current.LongBreakLength);
         private int LongBreakAfter => SettingsService.Current.LongBreakAfter;
 
         public static PomodoroViewModel Current { get; } = new PomodoroViewModel();
@@ -27,8 +32,6 @@ namespace OnePomodoro.ViewModels
         private bool _isInPomodoro;
         private bool _isTimerInProgress;
         private int _completedPomodoros;
-        private IToastNotificationsService _toastNotificationsService;
-        private bool _isStopByUser;
 
         private CountdownTimer _currentTimer;
 
@@ -42,8 +45,26 @@ namespace OnePomodoro.ViewModels
             RemainingPomodoroTime = PomodoroLength;
             TotalPomodoroTime = PomodoroLength;
 
-            if (DesignMode.DesignMode2Enabled == false && App.Current is PrismUnityApplication)
-                _toastNotificationsService = App.Current.Container.Resolve<IToastNotificationsService>();
+            CoreApplication.LeavingBackground += OnLeavingBackground;
+            CoreApplication.EnteredBackground += OnEnteredBackground;
+        }
+
+        private void OnEnteredBackground(object sender, EnteredBackgroundEventArgs e)
+        {
+            if (IsTimerInProgress)
+                NotificationManager.Current.AddAllNotifications(IsInPomodoro, CurrentTimer.StartTime + CurrentTimer.TotalTime,
+                 SettingsService.Current.AutoStartOfNextPomodoro, SettingsService.Current.AutoStartOfBreak,
+                 _completedPomodoros, LongBreakAfter, PomodoroLength,
+                 ShortBreakLength, LongBreakLength);
+        }
+
+        private void OnLeavingBackground(object sender, LeavingBackgroundEventArgs e)
+        {
+            if (CurrentTimer != null)
+                CurrentTimer.CheckTime();
+
+            if (IsTimerInProgress)
+                NotificationManager.Current.RemoveAllNotificationsButFirst(IsInPomodoro, CurrentTimer.StartTime + CurrentTimer.TotalTime);
         }
 
         public event EventHandler RemainingPomodoroTimeChanged;
@@ -156,10 +177,8 @@ namespace OnePomodoro.ViewModels
 
         private void StopTimer()
         {
-            if (_isInPomodoro)
-                _toastNotificationsService.RemovePomodoroFinishedToastNotificationSchedule();
-            else
-                _toastNotificationsService.RemoveBreakFinishedToastNotificationSchedule();
+            NotificationManager.Current.RemovePomodoroFinishedToastNotificationSchedule();
+            NotificationManager.Current.RemoveBreakFinishedToastNotificationSchedule();
 
             CurrentTimer.Stop();
         }
@@ -167,13 +186,15 @@ namespace OnePomodoro.ViewModels
         private void StartPomodoro()
         {
             IsTimerInProgress = true;
-            if (SettingsService.Current.IsNotifyWhenPomodoroFinished)
-                _toastNotificationsService.AddPomodoroFinishedToastNotificationSchedule(DateTime.Now + RemainingPomodoroTime);
+
 
             if (SettingsService.Current.AutoStartOfNextPomodoro && CurrentTimer != null && CurrentTimer.RemainingTime == TimeSpan.Zero)
                 CurrentTimer = new CountdownTimer(CurrentTimer.StartTime + CurrentTimer.TotalTime, PomodoroLength);
             else
                 CurrentTimer = new CountdownTimer(DateTime.Now, PomodoroLength);
+
+            if (SettingsService.Current.IsNotifyWhenPomodoroFinished && (CurrentTimer.StartTime + CurrentTimer.TotalTime) > DateTime.Now)
+                NotificationManager.Current.AddPomodoroFinishedToastNotificationSchedule(CurrentTimer.StartTime + CurrentTimer.TotalTime);
 
             CurrentTimer.Start();
         }
@@ -181,14 +202,16 @@ namespace OnePomodoro.ViewModels
         private void StartBreak()
         {
             IsTimerInProgress = true;
-            if (SettingsService.Current.IsNotifyWhenBreakFinished)
-                _toastNotificationsService.AddBreakFinishedToastNotificationSchedule(DateTime.Now + RemainingBreakTime);
+
 
             var breakLength = (CompletedPomodoros % LongBreakAfter == 0) ? LongBreakLength : ShortBreakLength;
-            if (SettingsService.Current.AutoStartOfNextPomodoro && CurrentTimer != null && CurrentTimer.RemainingTime == TimeSpan.Zero)
+            if (SettingsService.Current.AutoStartOfBreak && CurrentTimer != null && CurrentTimer.RemainingTime == TimeSpan.Zero)
                 CurrentTimer = new CountdownTimer(CurrentTimer.StartTime + CurrentTimer.TotalTime, breakLength);
             else
                 CurrentTimer = new CountdownTimer(DateTime.Now, breakLength);
+
+            if (SettingsService.Current.IsNotifyWhenBreakFinished && (CurrentTimer.StartTime + CurrentTimer.TotalTime) > DateTime.Now)
+                NotificationManager.Current.AddBreakFinishedToastNotificationSchedule(CurrentTimer.StartTime + CurrentTimer.TotalTime);
 
             CurrentTimer.Start();
         }

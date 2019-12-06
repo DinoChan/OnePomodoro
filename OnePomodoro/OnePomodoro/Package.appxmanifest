@@ -5,6 +5,7 @@
   xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
   xmlns:genTemplate="http://schemas.microsoft.com/appx/developer/windowsTemplateStudio"
+  xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
   IgnorableNamespaces="uap mp genTemplate">
 
   <Identity
@@ -49,6 +50,7 @@
   </Applications>
 
   <Capabilities>
+  	<rescap:Capability Name="confirmAppClose"/>
     <Capability Name="internetClient" />
   </Capabilities>
 

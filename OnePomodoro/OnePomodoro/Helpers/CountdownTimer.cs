@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Timers;
 using Windows.System.Threading;
 using Windows.UI.Xaml;
-
+//https://docs.microsoft.com/zh-cn/windows/uwp/launch-resume/app-lifecycle
 namespace OnePomodoro.Helpers
 {
     public class CountdownTimer : BindableBase
@@ -72,7 +72,7 @@ namespace OnePomodoro.Helpers
             CheckTime();
         }
 
-        private void CheckTime()
+        public void CheckTime()
         {
             var remainingTime = _totalTime - (DateTime.Now - StartTime);
             if (Math.Abs((remainingTime - RemainingTime).TotalSeconds) < 1)

@@ -179,9 +179,5 @@
                 </Grid>
             </Grid>
         </Viewbox>
-        <TextBlock FontSize="20"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Bottom"
-                   Text="{Binding CompletedPomodoros}" />
     </Grid>
 </local:PomodoroView>

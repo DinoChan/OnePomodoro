@@ -10,46 +10,51 @@ using Prism.Commands;
 using Microsoft.Practices.Unity;
 using Prism.Unity.Windows;
 using Windows.ApplicationModel;
+using OnePomodoro.Helpers;
+using Windows.UI.Core;
+using System.ComponentModel;
 
 namespace OnePomodoro.ViewModels
 {
     public class GeneralSettingsViewModel : ViewModelBase
     {
-        private IToastNotificationsService _toastNotificationsService;
+        private ToastNotificationsService _toastNotificationsService;
 
         public GeneralSettingsViewModel()
         {
             Settings = SettingsService.Current;
+            (Settings as INotifyPropertyChanged).PropertyChanged += OnPropertyChanged;
             if (DesignMode.DesignMode2Enabled == false && App.Current is PrismUnityApplication)
-                _toastNotificationsService = App.Current.Container.Resolve<IToastNotificationsService>();
+                _toastNotificationsService = App.Current.Container.Resolve<ToastNotificationsService>();
         }
 
-        public IPomodoroSettings Settings { get; }
-
-        public async void OnSettingChanged()
+        private async void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             await SettingsService.SaveAsync();
 
             if (Settings.IsNotifyWhenPomodoroFinished)
             {
                 if (PomodoroViewModel.Current.IsInPomodoro && PomodoroViewModel.Current.IsTimerInProgress)
-                    _toastNotificationsService.AddPomodoroFinishedToastNotificationSchedule(DateTime.Now + PomodoroViewModel.Current.RemainingPomodoroTime);
+                    NotificationManager.Current.AddPomodoroFinishedToastNotificationSchedule(DateTime.Now + PomodoroViewModel.Current.RemainingPomodoroTime);
             }
             else
             {
-                _toastNotificationsService.RemovePomodoroFinishedToastNotificationSchedule();
+                NotificationManager.Current.RemovePomodoroFinishedToastNotificationSchedule();
             }
 
             if (Settings.IsNotifyWhenBreakFinished)
             {
                 if (PomodoroViewModel.Current.IsInPomodoro == false && PomodoroViewModel.Current.IsTimerInProgress)
-                    _toastNotificationsService.AddBreakFinishedToastNotificationSchedule(DateTime.Now + PomodoroViewModel.Current.RemainingBreakTime);
+                    NotificationManager.Current.AddBreakFinishedToastNotificationSchedule(DateTime.Now + PomodoroViewModel.Current.RemainingBreakTime);
             }
             else
             {
-                _toastNotificationsService.RemoveBreakFinishedToastNotificationSchedule();
+                NotificationManager.Current.RemoveBreakFinishedToastNotificationSchedule();
 
             }
         }
+
+        public IPomodoroSettings Settings { get; }
+
     }
 }
