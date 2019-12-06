@@ -2,6 +2,7 @@
 using OnePomodoro.ViewModels;
 using System;
 using System.Net.Http;
+using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
 using Windows.Storage;
 using Windows.System;
@@ -21,7 +22,7 @@ namespace OnePomodoro.Views
         public OptionsPage()
         {
             InitializeComponent();
-          
+
             SystemNavigationManager.GetForCurrentView().BackRequested += BlankPage1_BackRequested;
         }
 
@@ -29,35 +30,46 @@ namespace OnePomodoro.Views
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            
-            if (PrivacyStatementMarkdownTextBlock.Text != null)
-            {
-                var uri = new Uri("ms-appx:///Assets/Privacy Statement.md");
-                var storageFile = await StorageFile.GetFileFromApplicationUriAsync(uri);
-                var text = await FileIO.ReadTextAsync(storageFile);
-                PrivacyStatementMarkdownTextBlock.Text = text;
-            }
+            _ = Task.Run(async () =>
+              {
+                  if (PrivacyStatementMarkdownTextBlock.Text != null)
+                  {
+                      var uri = new Uri("ms-appx:///Assets/Privacy Statement.md");
+                      var storageFile = await StorageFile.GetFileFromApplicationUriAsync(uri);
+                      var text = await FileIO.ReadTextAsync(storageFile);
+                      _ = Dispatcher.RunAsync(CoreDispatcherPriority.Idle, () =>
+                      {
+                          PrivacyStatementMarkdownTextBlock.Text = text;
+                      });
+                  }
 
-            if (LicenseMarkdownTextBlock.Text != null)
-            {
-                var uri = new Uri("ms-appx:///Assets/License.md");
-                var storageFile = await StorageFile.GetFileFromApplicationUriAsync(uri);
-                var text = await FileIO.ReadTextAsync(storageFile);
-                LicenseMarkdownTextBlock.Text = text;
-            }
+                  if (LicenseMarkdownTextBlock.Text != null)
+                  {
+                      var uri = new Uri("ms-appx:///Assets/License.md");
+                      var storageFile = await StorageFile.GetFileFromApplicationUriAsync(uri);
+                      var text = await FileIO.ReadTextAsync(storageFile);
+                      _ = Dispatcher.RunAsync(CoreDispatcherPriority.Idle, () =>
+                      {
+                          LicenseMarkdownTextBlock.Text = text;
+                      });
+                  }
 
-            if (WhatsNewMarkdownTextBlock.Text != null)
-            {
-                try
-                {
-                    HttpClient client = new HttpClient();
-                    var text = await client.GetStringAsync("https://raw.githubusercontent.com/DinoChan/OnePomodoro/master/Whats%20new.md"); ;
-                    WhatsNewMarkdownTextBlock.Text = text;
-                }
-                catch (Exception)
-                {
-                }
-            }
+                  if (WhatsNewMarkdownTextBlock.Text != null)
+                  {
+                      try
+                      {
+                          HttpClient client = new HttpClient();
+                          var text = await client.GetStringAsync("https://raw.githubusercontent.com/DinoChan/OnePomodoro/master/Whats%20new.md"); ;
+                          _ = Dispatcher.RunAsync(CoreDispatcherPriority.Idle, () =>
+                          {
+                              WhatsNewMarkdownTextBlock.Text = text;
+                          });
+                      }
+                      catch (Exception)
+                      {
+                      }
+                  }
+              });
         }
 
         private void BlankPage1_BackRequested(object sender, BackRequestedEventArgs e)
@@ -65,7 +77,7 @@ namespace OnePomodoro.Views
             On_BackRequested();
         }
 
-       
+
 
 
         private void OnBackClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
