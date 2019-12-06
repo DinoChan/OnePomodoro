@@ -16,6 +16,14 @@ namespace OnePomodoro.Models
 
         bool IsNotifyWhenBreakFinished { get; set; }
 
+        int PomodoroLength { get; set; }
+
+        int ShortBreakLength { get; set; }
+
+        int LongBreakLength { get; set; }
+
+        int LongBreakAfter { get; set; }
+
         string ViewType { get; set; }
 
         event EventHandler ViewTypeChanged;

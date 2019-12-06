@@ -14,6 +14,14 @@ namespace OnePomodoro.Models
     public class PomodoroSettings : ViewModelBase, IPomodoroSettings
     {
         private string _viewType;
+        private bool _autoStartOfNextPomodoro;
+        private bool _autoStartOfBreak;
+        private bool _isNotifyWhenPomodoroFinished;
+        private bool _isNotifyWhenBreakFinished;
+        private int _pomodoroLength;
+        private int _shortBreakLength;
+        private int _longBreakLength;
+        private int _longBreakAfter;
 
         public PomodoroSettings()
         {
@@ -21,13 +29,86 @@ namespace OnePomodoro.Models
 
         public event EventHandler ViewTypeChanged;
 
-        public bool AutoStartOfNextPomodoro { get; set; }
+        public bool AutoStartOfNextPomodoro
+        {
+            get { return _autoStartOfNextPomodoro; }
+            set
+            {
+                _autoStartOfNextPomodoro = value;
+                RaisePropertyChanged();
+            }
+        }
 
-        public bool AutoStartOfBreak { get; set; }
+        public bool AutoStartOfBreak
+        {
+            get { return _autoStartOfBreak; }
+            set
+            {
+                _autoStartOfBreak = value;
+                RaisePropertyChanged();
+            }
+        }
 
-        public bool IsNotifyWhenPomodoroFinished { get; set; }
+        public bool IsNotifyWhenPomodoroFinished
+        {
+            get { return _isNotifyWhenPomodoroFinished; }
+            set
+            {
+                _isNotifyWhenPomodoroFinished = value;
+                RaisePropertyChanged();
+            }
+        }
 
-        public bool IsNotifyWhenBreakFinished { get; set; }
+        public bool IsNotifyWhenBreakFinished
+        {
+            get { return _isNotifyWhenBreakFinished; }
+            set
+            {
+                _isNotifyWhenBreakFinished = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public int PomodoroLength
+        {
+            get { return _pomodoroLength; }
+            set
+            {
+                _pomodoroLength = value;
+                RaisePropertyChanged();
+            }
+        }
+        public int ShortBreakLength
+        {
+            get
+            {
+                return _shortBreakLength;
+            }
+
+            set
+            {
+                _shortBreakLength = value;
+                RaisePropertyChanged();
+            }
+        }
+        public int LongBreakLength
+        {
+            get { return _longBreakLength; }
+            set
+            {
+                _longBreakLength = value;
+                RaisePropertyChanged();
+            }
+        }
+        public int LongBreakAfter
+        {
+            get { return _longBreakAfter; }
+            set
+            {
+                _longBreakAfter = value;
+                RaisePropertyChanged();
+            }
+        }
 
         public string ViewType
         {
@@ -41,5 +122,7 @@ namespace OnePomodoro.Models
                 ViewTypeChanged?.Invoke(this, EventArgs.Empty);
             }
         }
+
+
     }
 }

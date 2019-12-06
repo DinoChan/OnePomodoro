@@ -146,6 +146,7 @@
     <Compile Include="Controls\OutlineTextControl.cs" />
     <Compile Include="Controls\ShadowTextControl.cs" />
     <Compile Include="Controls\TimeAndTitleControl.cs" />
+    <Compile Include="Helpers\NotificationManager.cs" />
     <Compile Include="Media\TiledImageBrush.cs" />
     <Compile Include="Controls\TitleBar.xaml.cs">
       <DependentUpon>TitleBar.xaml</DependentUpon>

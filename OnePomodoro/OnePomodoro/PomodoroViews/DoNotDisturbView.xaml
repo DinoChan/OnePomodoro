@@ -179,6 +179,5 @@
                 </Grid>
             </Grid>
         </Viewbox>
-
     </Grid>
 </local:PomodoroView>

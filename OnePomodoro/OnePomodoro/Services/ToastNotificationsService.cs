@@ -2,10 +2,12 @@
 using System;
 using Windows.Data.Xml.Dom;
 using Windows.UI.Notifications;
+using System.Linq;
+using System.Diagnostics;
 
 namespace OnePomodoro.Services
 {
-    internal partial class ToastNotificationsService : IToastNotificationsService
+    internal partial class ToastNotificationsService
     {
         private const string ToastTag = "ToastTag";
         private const string PomodoroGroup = "Pomodoro";
@@ -17,6 +19,13 @@ namespace OnePomodoro.Services
         private readonly XmlDocument PomodoroToastContent = GetPomodoroToastContent();
 
         private readonly XmlDocument BreakToastContent = GetBreakToastContent();
+
+        private int _id;
+
+        public ToastNotificationsService()
+        {
+            _id = 0;
+        }
 
         private static XmlDocument GetPomodoroToastContent()
         {
@@ -107,51 +116,67 @@ namespace OnePomodoro.Services
             ShowToastNotification(toast);
         }
 
-        public void AddPomodoroFinishedToastNotificationSchedule(DateTime time)
+        public ScheduledToastNotification AddPomodoroFinishedToastNotificationSchedule(DateTime time, bool isRemoveOthers = true)
         {
-            RemovePomodoroFinishedToastNotificationSchedule();
+            if (isRemoveOthers)
+                RemovePomodoroFinishedToastNotificationSchedule();
+
             var notifier = ToastNotificationManager.CreateToastNotifier();
 
             var toast = new ScheduledToastNotification(PomodoroToastContent, time)
             {
                 Tag = ToastTag,
-
+                ExpirationTime = time.AddHours(1),
+                Id = _id++.ToString()
             };
 
             notifier.AddToSchedule(toast);
+            Debug.WriteLine("add pomodoro:" + toast.Id);
+            return toast;
         }
 
-        public void AddBreakFinishedToastNotificationSchedule(DateTime time)
+        public ScheduledToastNotification AddBreakFinishedToastNotificationSchedule(DateTime time, bool isRemoveOthers = true)
         {
-            RemoveBreakFinishedToastNotificationSchedule();
+            if (isRemoveOthers)
+                RemoveBreakFinishedToastNotificationSchedule();
+
             var notifier = ToastNotificationManager.CreateToastNotifier();
 
             var toast = new ScheduledToastNotification(BreakToastContent, time)
             {
                 Tag = ToastTag,
-
+                ExpirationTime = time.AddHours(1),
+                Id = _id++.ToString()
             };
 
             notifier.AddToSchedule(toast);
+            Debug.WriteLine("add break:" + toast.Id);
+            return toast;
         }
 
-        public void RemovePomodoroFinishedToastNotificationSchedule()
+        public void RemovePomodoroFinishedToastNotificationSchedule(string id = null)
         {
             var notifier = ToastNotificationManager.CreateToastNotifier();
             foreach (var scheduledToast in notifier.GetScheduledToastNotifications())
             {
-                if (scheduledToast.Content.InnerText == PomodoroToastContent.InnerText)
+                if (scheduledToast.Content.InnerText == PomodoroToastContent.InnerText && (string.IsNullOrWhiteSpace(id) || scheduledToast.Id == id))
+                {
                     notifier.RemoveFromSchedule(scheduledToast);
+                    Debug.WriteLine("remove pomodoro:" + scheduledToast.Id);
+                }
             }
         }
 
-        public void RemoveBreakFinishedToastNotificationSchedule()
+        public void RemoveBreakFinishedToastNotificationSchedule(string id = null)
         {
             var notifier = ToastNotificationManager.CreateToastNotifier();
             foreach (var scheduledToast in notifier.GetScheduledToastNotifications())
             {
-                if (scheduledToast.Content.InnerText == BreakToastContent.InnerText)
+                if (scheduledToast.Content.InnerText == BreakToastContent.InnerText && (string.IsNullOrWhiteSpace(id) || scheduledToast.Id == id))
+                {
                     notifier.RemoveFromSchedule(scheduledToast);
+                    Debug.WriteLine("remove break:" + scheduledToast.Id);
+                }
             }
         }
     }

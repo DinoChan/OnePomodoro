@@ -24,6 +24,18 @@ namespace OnePomodoro.Services
                 Current = new PomodoroSettings();
                 await SaveAsync();
             }
+
+            if (Current.PomodoroLength == 0)
+                Current.PomodoroLength = 25;
+
+            if (Current.ShortBreakLength == 0)
+                Current.ShortBreakLength = 5;
+
+            if (Current.LongBreakLength == 0)
+                Current.LongBreakLength = 15;
+
+            if (Current.LongBreakAfter == 0)
+                Current.LongBreakAfter = 4;
         }
 
         public static async Task SaveAsync()
