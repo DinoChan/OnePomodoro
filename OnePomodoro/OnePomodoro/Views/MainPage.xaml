@@ -19,7 +19,8 @@
         <ContentControl x:Name="PomodoroContent"
                         HorizontalContentAlignment="Stretch"
                         VerticalContentAlignment="Stretch" />
-        <controls:TitleBar VerticalAlignment="Top" IsTitleVisibile="False">
+        <controls:TitleBar VerticalAlignment="Top"
+                           IsTitleVisibile="False">
             <controls:TitleBar.Buttons>
                 <Button x:Name="OptionsButton"
                         Click="OnOptionsClick"
@@ -33,6 +34,11 @@
                         Click="OnPinClick"
                         Content="&#xE141;"
                         ToolTipService.ToolTip="Pin" />
+                <Button x:Name="UnpinButton"
+                        Click="OnUnpinClick"
+                        Content="&#xE196;"
+                        ToolTipService.ToolTip="Unpin"
+                        Visibility="Collapsed"/>
             </controls:TitleBar.Buttons>
         </controls:TitleBar>
     </Grid>

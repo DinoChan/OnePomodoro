@@ -18,7 +18,11 @@ namespace OnePomodoro.Views
 
         private Type _pomodoroViewType;
 
-        private bool _isInCompactMode;
+        private bool _isInCompactOverlay;
+
+        private bool _canEnterCompactOverlay;
+
+        private CompactOverlayAttribute _currentCompactOverlayAttribute;
 
         public MainPage()
         {
@@ -30,17 +34,7 @@ namespace OnePomodoro.Views
 
         private void OnWindowCurrentSizeChanged(object sender, Windows.UI.Core.WindowSizeChangedEventArgs e)
         {
-            var view = ApplicationView.GetForCurrentView();
-            if (view.IsFullScreenMode)
-            {
-                FullScreenButton.Visibility = Visibility.Collapsed;
-                PinButton.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                FullScreenButton.Visibility = Visibility.Visible;
-                PinButton.Visibility = Visibility.Visible;
-            }
+            UpdateButtonsVisibility();
         }
 
         private void OnOptionsClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
@@ -58,11 +52,10 @@ namespace OnePomodoro.Views
             if (viewType == null)
                 viewType = PomodoroView.Views.FirstOrDefault();
 
-            if (_pomodoroViewType != viewType || _isInCompactMode)
+            if (_pomodoroViewType != viewType)
                 ChangePomodoroContent(viewType);
 
             _pomodoroViewType = viewType;
-            _isInCompactMode = false;
         }
 
 
@@ -71,22 +64,62 @@ namespace OnePomodoro.Views
             var view = Activator.CreateInstance(type) as PomodoroView;
             PomodoroContent.Content = view;
             RequestedTheme = (view as FrameworkElement).RequestedTheme;
+
+            var attributes = type.GetCustomAttributes(true);
+            _currentCompactOverlayAttribute = attributes.OfType<CompactOverlayAttribute>().FirstOrDefault();
+            UpdateButtonsVisibility();
         }
 
 
         private async void OnPinClick(object sender, RoutedEventArgs e)
         {
             var preferences = ViewModePreferences.CreateDefault(ApplicationViewMode.CompactOverlay);
-            preferences.CustomSize = new Windows.Foundation.Size(200, 200);
+            preferences.CustomSize = new Windows.Foundation.Size(_currentCompactOverlayAttribute.CustomWidth, _currentCompactOverlayAttribute.CustomHeight);
             await ApplicationView.GetForCurrentView().TryEnterViewModeAsync(ApplicationViewMode.CompactOverlay, preferences);
-            Frame.Navigate(typeof(CompactPage));
-            _isInCompactMode = true;
+            _isInCompactOverlay = true;
+            UpdateButtonsVisibility();
+        }
+
+        private async void OnUnpinClick(object sender, RoutedEventArgs e)
+        {
+            var preferences = ViewModePreferences.CreateDefault(ApplicationViewMode.Default);
+            await ApplicationView.GetForCurrentView().TryEnterViewModeAsync(ApplicationViewMode.Default, preferences);
+            _isInCompactOverlay = false;
+            UpdateButtonsVisibility();
         }
 
         private void OnFullScreenClick(object sender, RoutedEventArgs e)
         {
-            ApplicationView view = ApplicationView.GetForCurrentView();
+            var view = ApplicationView.GetForCurrentView();
             view.TryEnterFullScreenMode();
+        }
+
+        private void UpdateButtonsVisibility()
+        {
+            var view = ApplicationView.GetForCurrentView();
+            if (view.IsFullScreenMode)
+            {
+                FullScreenButton.Visibility = Visibility.Collapsed;
+                PinButton.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                if (_isInCompactOverlay)
+                {
+                    FullScreenButton.Visibility = Visibility.Collapsed;
+                    OptionsButton.Visibility = Visibility.Collapsed;
+                    PinButton.Visibility = Visibility.Collapsed;
+                    UnpinButton.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    FullScreenButton.Visibility = Visibility.Visible;
+                    OptionsButton.Visibility = Visibility.Visible;
+                    UnpinButton.Visibility = Visibility.Collapsed;
+                    PinButton.Visibility = _currentCompactOverlayAttribute == null ? Visibility.Collapsed : Visibility.Visible;
+                }
+
+            }
         }
     }
 }

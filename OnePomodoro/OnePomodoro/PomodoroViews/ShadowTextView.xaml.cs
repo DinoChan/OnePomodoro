@@ -34,6 +34,7 @@ namespace OnePomodoro.PomodoroViews
 {
     [Title("Shadow Text")]
     [Screenshot("/Assets/Screenshots/ShadowText.png")]
+    [CompactOverlay(CustomWidth = 288, CustomHeight = 157.5)]
     public sealed partial class ShadowTextView : PomodoroView
     {
         private PointLight _redLight;

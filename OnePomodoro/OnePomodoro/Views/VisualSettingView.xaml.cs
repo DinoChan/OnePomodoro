@@ -52,6 +52,7 @@ namespace OnePomodoro.Views
         public string Title { get; }
 
         public Type Type { get; }
+
         private readonly string DefaultScreenshotUri = "/Assets/SplashScreen.png";
 
         public VisualSettingItem(Type pomodoroViewType)

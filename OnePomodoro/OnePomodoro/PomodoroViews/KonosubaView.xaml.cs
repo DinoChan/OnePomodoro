@@ -27,6 +27,7 @@ namespace OnePomodoro.PomodoroViews
     /// </summary>
     [Title("konosuba")]
     [Screenshot("/Assets/Screenshots/Konosuba.png")]
+    [CompactOverlay(CustomWidth = 288, CustomHeight = 157.5)]
     public sealed partial class KonosubaView : PomodoroView
     {
         private readonly Compositor _compositor;

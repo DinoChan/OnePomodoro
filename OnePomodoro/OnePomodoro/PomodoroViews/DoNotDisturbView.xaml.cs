@@ -23,6 +23,7 @@ namespace OnePomodoro.PomodoroViews
 {
     [Title("Do Not Disturb")]
     [Screenshot("/Assets/Screenshots/DoNotDisturb.png")]
+    [CompactOverlay(CustomWidth = 380, CustomHeight = 210)]
     public sealed partial class DoNotDisturbView
     {
         private Compositor Compositor => Window.Current.Compositor;
@@ -96,7 +97,7 @@ namespace OnePomodoro.PomodoroViews
         {
             var visual = ElementCompositionPreview.GetElementVisual(element);
             visual.Offset = new Vector3(-(float)element.ActualWidth, 0, 0);
-            
+
             var easing = Compositor.CreateCubicBezierEasingFunction(new Vector2(0.1f, 0.9f), new Vector2(0.2f, 1f));
             var offsetAnimation = Compositor.CreateVector3KeyFrameAnimation();
             offsetAnimation.Duration = TimeSpan.FromSeconds(1);

@@ -35,6 +35,7 @@ namespace OnePomodoro.PomodoroViews
 {
     [Title("Hidden Text")]
     [Screenshot("/Assets/Screenshots/HiddenText.png")]
+    [CompactOverlay(CustomWidth = 288, CustomHeight = 157.5)]
     public sealed partial class HiddenTextView : PomodoroView
     {
         private PointLight _redLight;

@@ -35,6 +35,7 @@ namespace OnePomodoro.PomodoroViews
 {
     [Title("White Text")]
     [Screenshot("/Assets/Screenshots/WhiteText.png")]
+    [CompactOverlay(CustomWidth = 288, CustomHeight = 157.5)]
     public sealed partial class WhiteTextView : PomodoroView
     {
         private PointLight _redLight;

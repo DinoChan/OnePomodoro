@@ -142,10 +142,12 @@
     <Compile Include="Controls\FlipSide.cs" />
     <Compile Include="Controls\OutlinePanel.cs" />
     <Compile Include="Controls\PomodoroStateButton.cs" />
+    <Compile Include="Controls\PomodoroViewFunctionAttribute.cs" />
     <Compile Include="Controls\ProgressToPointCollectionBridge.cs" />
     <Compile Include="Controls\OutlineTextControl.cs" />
     <Compile Include="Controls\ShadowTextControl.cs" />
     <Compile Include="Controls\TimeAndTitleControl.cs" />
+    <Compile Include="Helpers\CompactOverlayAttribute.cs" />
     <Compile Include="Helpers\NotificationManager.cs" />
     <Compile Include="Media\TiledImageBrush.cs" />
     <Compile Include="Controls\TitleBar.xaml.cs">

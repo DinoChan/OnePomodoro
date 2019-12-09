@@ -25,6 +25,7 @@ namespace OnePomodoro.PomodoroViews
 {
     [Title("Gradients")]
     [Screenshot("/Assets/Screenshots/Gradients.png")]
+    [CompactOverlay]
     public sealed partial class Gradients : PomodoroView
     {
 

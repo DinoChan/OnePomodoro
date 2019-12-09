@@ -26,6 +26,7 @@ namespace OnePomodoro.PomodoroViews
 {
     [Title("Ellipse Clip")]
     [Screenshot("/Assets/Screenshots/EllipseClip.png")]
+    [CompactOverlay(CustomWidth = 288, CustomHeight = 157.5)]
     public sealed partial class EllipseClipView : PomodoroView
     {
         private Compositor Compositor => Window.Current.Compositor;
