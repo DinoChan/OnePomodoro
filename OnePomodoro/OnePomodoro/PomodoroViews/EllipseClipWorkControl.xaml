@@ -21,7 +21,9 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="controls:HeaderedContentControl">
-                        <Grid Margin="-1,-1000" Width="384" Background="{TemplateBinding Background}">
+                        <Grid Margin="-5,-1000"
+                              Width="390"
+                              Background="{TemplateBinding Background}">
                             <StackPanel VerticalAlignment="Center"
                                 HorizontalAlignment="Center"
                                 x:Name="PomodoroPanel">
@@ -50,7 +52,7 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <UIElement.Clip>
-                    <RectangleGeometry Rect="000,0,1920,1050"/>
+                    <RectangleGeometry Rect="000,-30,1920,1110" />
                 </UIElement.Clip>
 
                 <controls1:PomodoroStateButton VerticalAlignment="Center"
