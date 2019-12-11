@@ -10,8 +10,8 @@ namespace OnePomodoro.Helpers
     {
         public CompactOverlayAttribute()
         {
-            CustomWidth = 200;
-            CustomHeight = 200;
+            CustomWidth = 150;
+            CustomHeight = 150;
         }
 
         public double CustomWidth { get; set; }
