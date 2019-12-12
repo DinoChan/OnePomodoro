@@ -29,11 +29,24 @@
         </Style>
     </UserControl.Resources>
     <Grid x:Name="ContentArea">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <helpers:IsCompactOverlayModeTrigger />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <Rectangle x:Name="Gradient"
                    Grid.RowSpan="2"
                    Grid.ColumnSpan="2" />
         <Viewbox>
-            <Grid Width="384" Height="210">
+            <Grid Width="384"
+                  Height="210">
                 <Grid x:Name="LayoutRoot">
 
                     <StackPanel HorizontalAlignment="Left"
