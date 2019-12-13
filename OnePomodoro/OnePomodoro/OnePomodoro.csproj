@@ -148,6 +148,7 @@
     <Compile Include="Controls\ShadowTextControl.cs" />
     <Compile Include="Controls\TimeAndTitleControl.cs" />
     <Compile Include="Helpers\CompactOverlayAttribute.cs" />
+    <Compile Include="Helpers\FunctionTagsAttribute.cs" />
     <Compile Include="Helpers\IsCompactOverlayModeTrigger.cs" />
     <Compile Include="Helpers\NotificationManager.cs" />
     <Compile Include="Media\TiledImageBrush.cs" />

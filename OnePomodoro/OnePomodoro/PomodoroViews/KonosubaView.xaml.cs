@@ -28,6 +28,7 @@ namespace OnePomodoro.PomodoroViews
     [Title("konosuba")]
     [Screenshot("/Assets/Screenshots/Konosuba.png")]
     [CompactOverlay(CustomWidth = 288, CustomHeight = 157.5)]
+    [FunctionTags(Tags.SpringAnimation, Tags.Clip)]
     public sealed partial class KonosubaView : PomodoroView
     {
         private readonly Compositor _compositor;

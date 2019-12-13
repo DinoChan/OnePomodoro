@@ -24,6 +24,7 @@ namespace OnePomodoro.PomodoroViews
 {
     [Title("LongShadow")]
     [Screenshot("/Assets/Screenshots/LongShadow.png")]
+    [FunctionTags(Tags.ContainerVisual, Tags.ExpressionAnimation, Tags.CompositionMaskBrush, Tags.RotationAngle, Tags.TransformMatrix)]
     public sealed partial class LongShadow : PomodoroView
     {
 

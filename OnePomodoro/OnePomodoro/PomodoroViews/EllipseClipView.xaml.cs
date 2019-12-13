@@ -27,6 +27,7 @@ namespace OnePomodoro.PomodoroViews
     [Title("Ellipse Clip")]
     [Screenshot("/Assets/Screenshots/EllipseClip.png")]
     [CompactOverlay(CustomWidth = 288, CustomHeight = 157.5)]
+    [FunctionTags(Tags.CompositionAnimation, Tags.CompositionGeometricClip)]
     public sealed partial class EllipseClipView : PomodoroView
     {
         private Compositor Compositor => Window.Current.Compositor;
@@ -72,9 +73,9 @@ namespace OnePomodoro.PomodoroViews
 
                 _oldVisual.StartAnimation(nameof(Visual.Offset), animation);
 
-                batch.Completed += (s,e)=>Root.Children.RemoveAt(0);
+                batch.Completed += (s, e) => Root.Children.RemoveAt(0);
                 batch.End();
-                
+
             }
 
             _oldVisual = visual;

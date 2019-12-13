@@ -27,6 +27,7 @@ namespace OnePomodoro.PomodoroViews
     [Title("GradientsWithBlend")]
     [Screenshot("/Assets/Screenshots/GradientsWithBlend.png")]
     [CompactOverlay]
+    [FunctionTags(Tags.CompositionAnimation, Tags.CompositionLinearGradientBrush,Tags.BlendEffect)]
     public sealed partial class GradientsWithBlend : PomodoroView
     {
 

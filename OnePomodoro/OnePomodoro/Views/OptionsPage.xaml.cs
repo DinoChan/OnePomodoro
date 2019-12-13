@@ -40,21 +40,21 @@ namespace OnePomodoro.Views
                       PrivacyStatementMarkdownTextBlock.Text = text;
                   });
 
-                  uri = new Uri("ms-appx:///Assets/License.md");
-                  storageFile = await StorageFile.GetFileFromApplicationUriAsync(uri);
-                  text = await FileIO.ReadTextAsync(storageFile);
+                  var licenseUri = new Uri("ms-appx:///Assets/License.md");
+                  var licenseFile = await StorageFile.GetFileFromApplicationUriAsync(licenseUri);
+                  var licenseText = await FileIO.ReadTextAsync(licenseFile);
                   _ = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                   {
-                      LicenseMarkdownTextBlock.Text = text;
+                      LicenseMarkdownTextBlock.Text = licenseText;
                   });
 
                   try
                   {
                       var client = new HttpClient();
-                      text = await client.GetStringAsync("https://raw.githubusercontent.com/DinoChan/OnePomodoro/master/Whats%20new.md"); ;
+                    var whatsNewText = await client.GetStringAsync("https://raw.githubusercontent.com/DinoChan/OnePomodoro/master/Whats%20new.md"); ;
                       _ = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                       {
-                          WhatsNewMarkdownTextBlock.Text = text;
+                          WhatsNewMarkdownTextBlock.Text = whatsNewText;
                       });
                   }
                   catch (Exception)
