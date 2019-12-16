@@ -30,6 +30,13 @@ namespace OnePomodoro.Views
             NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
             Window.Current.SizeChanged += OnWindowCurrentSizeChanged;
             //ChangePomodoroContent(typeof(TheFirst));
+            Loaded += OnLoaded;
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            Loaded -= OnLoaded;
+            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Windows.Foundation.Size(300, 300));
         }
 
         private void OnWindowCurrentSizeChanged(object sender, Windows.UI.Core.WindowSizeChangedEventArgs e)

@@ -10,10 +10,10 @@ namespace OnePomodoro.Helpers
     {
         public FunctionTagsAttribute(params string[] tags)
         {
-            Tage = tags;
+            Tags = tags;
         }
 
-        public string[] Tage { get; }
+        public string[] Tags { get; }
     }
 
     public class Tags

@@ -34,14 +34,14 @@ namespace OnePomodoro.Views
 
         private async void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var item = VisualsElement.SelectedItem as VisualSettingItem;
-            if (item == null)
-                return;
+            //var item = VisualsElement.SelectedItem as VisualSettingItem;
+            //if (item == null)
+            //    return;
 
-            SettingsService.Current.ViewType = item.Type.Name;
-            VisualChanged?.Invoke(this, EventArgs.Empty);
+            //SettingsService.Current.ViewType = item.Type.Name;
+            //VisualChanged?.Invoke(this, EventArgs.Empty);
 
-            await SettingsService.SaveAsync();
+            //await SettingsService.SaveAsync();
         }
     }
 
@@ -53,12 +53,16 @@ namespace OnePomodoro.Views
 
         public Type Type { get; }
 
+        public string[] Tags { get; }
+
+        public bool Pinable { get; }
+
         private readonly string DefaultScreenshotUri = "/Assets/SplashScreen.png";
 
         public VisualSettingItem(Type pomodoroViewType)
         {
             Type = pomodoroViewType;
-           
+
 
             var attributes = Type.GetCustomAttributes(true);
             var titleAttribute = attributes.OfType<TitleAttribute>().FirstOrDefault();
@@ -67,9 +71,15 @@ namespace OnePomodoro.Views
 
             var screenshotAttribute = attributes.OfType<ScreenshotAttribute>().FirstOrDefault();
             if (screenshotAttribute != null && string.IsNullOrWhiteSpace(screenshotAttribute.Uri) == false)
-                ScreenshotUri =screenshotAttribute.Uri;
+                ScreenshotUri = screenshotAttribute.Uri;
             else
                 ScreenshotUri = DefaultScreenshotUri;
+
+            var compactOverlayAttribute = attributes.OfType<CompactOverlayAttribute>().FirstOrDefault();
+            Pinable = compactOverlayAttribute != null;
+
+            var  tagsAttribute = attributes.OfType<FunctionTagsAttribute>().FirstOrDefault();
+            Tags = tagsAttribute?.Tags;
         }
     }
 }
