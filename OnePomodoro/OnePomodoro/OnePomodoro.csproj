@@ -140,11 +140,13 @@
     <Compile Include="Controls\DropShadowPanel.Properties.cs" />
     <Compile Include="Controls\ElementDecorator.cs" />
     <Compile Include="Controls\FlipSide.cs" />
+    <Compile Include="Controls\InnerContentControl.cs" />
     <Compile Include="Controls\OutlinePanel.cs" />
     <Compile Include="Controls\PomodoroStateButton.cs" />
     <Compile Include="Controls\PomodoroViewFunctionAttribute.cs" />
     <Compile Include="Controls\ProgressToPointCollectionBridge.cs" />
     <Compile Include="Controls\OutlineTextControl.cs" />
+    <Compile Include="Controls\Resizer.cs" />
     <Compile Include="Controls\ShadowTextControl.cs" />
     <Compile Include="Controls\TimeAndTitleControl.cs" />
     <Compile Include="Helpers\CompactOverlayAttribute.cs" />

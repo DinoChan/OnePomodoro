@@ -36,7 +36,16 @@
                         <helpers:IsCompactOverlayModeTrigger />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-
+                        <Setter Target="Root.Height"
+                                Value="220" />
+                        <Setter Target="Root.Width"
+                                Value="220" />
+                        <Setter Target="FocusText.Margin"
+                                Value="20,0,0,0" />
+                        <Setter Target="FocusHideAnimation.To"
+                                Value="-00,-20,0" />
+                        <Setter Target="FocusShowAnimation.From"
+                                Value="-0,-20,0" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -44,9 +53,8 @@
         <Rectangle x:Name="Gradient"
                    Grid.RowSpan="2"
                    Grid.ColumnSpan="2" />
-        <Viewbox>
-            <Grid Width="220"
-                  Height="230">
+        <Viewbox StretchDirection="DownOnly">
+            <Grid x:Name="Root">
                 <Grid.RowDefinitions>
                     <RowDefinition />
                     <RowDefinition Height="Auto" />
@@ -55,14 +63,15 @@
 
                     <StackPanel HorizontalAlignment="Left"
                                 VerticalAlignment="Top"
-                                Margin="20,0,00,0"
+                                Margin="200,200,00,0"
                                 x:Name="FocusText"
                                >
                         <animations:Implicit.HideAnimations>
                             <animations:TranslationAnimation SetInitialValueBeforeDelay="True"
                                                              From="0,0,0"
-                                                             To="-00,-20,0"
-                                                             Duration="0:0:0.6" />
+                                                             To="-40,-120,0"
+                                                             Duration="0:0:0.6"
+                                                             x:Name="FocusHideAnimation"/>
                             <animations:OpacityAnimation SetInitialValueBeforeDelay="True"
                                                          From="1"
                                                          To="0"
@@ -70,9 +79,10 @@
                         </animations:Implicit.HideAnimations>
                         <animations:Implicit.ShowAnimations>
                             <animations:TranslationAnimation SetInitialValueBeforeDelay="True"
-                                                             From="-0,-20,0"
+                                                             From="-40,-120,0"
                                                              To="0,0,0"
-                                                             Duration="0:0:0.6" />
+                                                             Duration="0:0:0.6"
+                                                             x:Name="FocusShowAnimation"/>
                             <animations:OpacityAnimation SetInitialValueBeforeDelay="True"
                                                          From="0"
                                                          To="1"

@@ -615,4 +615,34 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style TargetType="controls:Resizer">
+        <Setter Property="HorizontalContentAlignment"
+                Value="Left" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Top" />
+        <Setter Property="IsTabStop"
+                Value="False" />
+        <Setter Property="Animation">
+            <Setter.Value>
+                <DoubleAnimation BeginTime="0:0:0"
+                                 Duration="0:0:0.3">
+                    <DoubleAnimation.EasingFunction>
+                        <QuinticEase EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:Resizer">
+                    <controls:InnerContentControl x:Name="InnerContentControl"
+                                               Content="{TemplateBinding Content}"
+                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                    </controls:InnerContentControl>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>
