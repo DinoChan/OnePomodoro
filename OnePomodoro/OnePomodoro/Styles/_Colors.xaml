@@ -11,9 +11,5 @@
                      Color="#FF001BAB" />-->
     <SolidColorBrush x:Key="BreakBrush" Color="{StaticResource BreakColor}" />
 
-    <AcrylicBrush x:Key="OpionsPageBrush"
-                  BackgroundSource="HostBackdrop"
-                  TintColor="#232430"
-                  TintOpacity="0.8"
-                  FallbackColor="#232430" />
+  
 </ResourceDictionary>

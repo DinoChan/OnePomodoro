@@ -11,6 +11,13 @@
              d:DesignHeight="900"
              d:DesignWidth="900">
     <UserControl.Resources>
+
+        <AcrylicBrush x:Key="OpionsPageBrush"
+                      BackgroundSource="HostBackdrop"
+                      TintColor="#131417"
+                      TintOpacity="0.8"
+                      FallbackColor="#131417" />
+
         <Style TargetType="Button">
             <Setter Property="Background"
                     Value="{ThemeResource ButtonRevealBackground}" />
@@ -38,6 +45,8 @@
                     Value="-3" />
             <Setter Property="Margin"
                     Value="16" />
+            <Setter Property="Height"
+                    Value="344" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -46,8 +55,54 @@
 
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
-                                    <VisualState x:Name="Normal">
+                                    <VisualStateGroup.Transitions>
+                                        <VisualTransition From="Normal"
+                                                          To="*">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="MoreInformationPanel"
+                                                                 Storyboard.TargetProperty="Height"
+                                                                 To="76"
+                                                                 EnableDependentAnimation="True"
+                                                                 Duration="0:0:0.5">
+                                                    <DoubleAnimation.EasingFunction>
+                                                        <CubicEase EasingMode="EaseOut" />
+                                                    </DoubleAnimation.EasingFunction>
+                                                </DoubleAnimation>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RippleBackground"
+                                                                               Storyboard.TargetProperty="IsShowRipple">
+                                                    <DiscreteObjectKeyFrame KeyTime="00:00:0.0"
+                                                                            Value="True" />
+                                                </ObjectAnimationUsingKeyFrames>
 
+
+                                            </Storyboard>
+                                        </VisualTransition>
+                                        <VisualTransition From="*"
+                                                          To="Normal">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="MoreInformationPanel"
+                                                                 Storyboard.TargetProperty="Height"
+                                                                 To="0"
+                                                                 EnableDependentAnimation="True"
+                                                                 Duration="0:0:0.5">
+                                                    <DoubleAnimation.EasingFunction>
+                                                        <CubicEase EasingMode="EaseOut" />
+                                                    </DoubleAnimation.EasingFunction>
+                                                </DoubleAnimation>
+                                                <DoubleAnimation Storyboard.TargetName="DropShadowPanel"
+                                                                 Storyboard.TargetProperty="ShadowOpacity"
+                                                                 To="0"
+                                                                 EnableDependentAnimation="True"
+                                                                 Duration="0:0:0.5">
+                                                    <DoubleAnimation.EasingFunction>
+                                                        <CubicEase EasingMode="EaseOut" />
+                                                    </DoubleAnimation.EasingFunction>
+                                                </DoubleAnimation>
+
+                                            </Storyboard>
+                                        </VisualTransition>
+                                    </VisualStateGroup.Transitions>
+                                    <VisualState x:Name="Normal">
                                         <Storyboard>
                                             <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
                                         </Storyboard>
@@ -57,24 +112,47 @@
                                         <VisualState.Setters>
                                             <Setter Target="ContentGrid.(RevealBrush.State)"
                                                     Value="PointerOver" />
+                                            <Setter Target="MoreInformationPanel.Height"
+                                                    Value="76" />
+                                            <Setter Target="RippleBackground.IsShowRipple"
+                                                    Value="True" />
 
-                                            <Setter Target="MoreInformationPanel.Visibility"
-                                                    Value="Visible" />
                                         </VisualState.Setters>
-
-
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="DropShadowPanel"
+                                                             Storyboard.TargetProperty="ShadowOpacity"
+                                                             To="0.6"
+                                                             EnableDependentAnimation="True"
+                                                             Duration="0:0:0.5">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <CubicEase EasingMode="EaseOut" />
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                        </Storyboard>
                                     </VisualState>
 
                                     <VisualState x:Name="Pressed">
                                         <VisualState.Setters>
                                             <Setter Target="ContentGrid.(RevealBrush.State)"
                                                     Value="Pressed" />
-
-
+                                            <Setter Target="MoreInformationPanel.Height"
+                                                    Value="76" />
+                                            <Setter Target="RippleBackground.IsShowRipple"
+                                                    Value="True" />
+                                            <Setter Target="RippleBackground.Opacity"
+                                                    Value="0.7" />
                                         </VisualState.Setters>
 
-
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="DropShadowPanel"
+                                                             Storyboard.TargetProperty="ShadowOpacity"
+                                                             To="0"
+                                                             EnableDependentAnimation="True"
+                                                             Duration="0:0:0">
+                                            </DoubleAnimation>
+                                        </Storyboard>
                                     </VisualState>
+
 
 
                                 </VisualStateGroup>
@@ -82,25 +160,36 @@
                             </VisualStateManager.VisualStateGroups>
                             <Grid HorizontalAlignment="Center"
                                   x:Name="ContentGrid"
-                                  CornerRadius="6"
-                                  Background="#1f2229"
+                                  CornerRadius="8"
+                                  Background="#ff1f2229"
                                   BorderThickness="{TemplateBinding BorderThickness}"
                                   BorderBrush="{TemplateBinding BorderBrush}"
                                   VerticalAlignment="Top">
+                                <controls1:RippleControl Background="#ff2f3239"
+                                                     CornerRadius="8"
+                                                     x:Name="RippleBackground" />
+                                
                                 <StackPanel Margin="12"
                                             Width="384">
-                                    <Border Width="384"
-                                            Height="210"
-                                            CornerRadius="6">
-                                        <Image Source="{Binding ScreenshotUri}"
-                                               ToolTipService.ToolTip="{Binding Title}" />
-                                    </Border>
+                                    <controls:DropShadowPanel x:Name="DropShadowPanel"
+                                                              BlurRadius="32"
+                                                              OffsetX="0"
+                                                              ShadowOpacity="0"
+                                                              OffsetY="6">
+                                        <Border Width="384"
+                                                Height="210"
+                                                CornerRadius="8">
+                                            <Image Source="{Binding ScreenshotUri}"/>
+                                        </Border>
+                                    </controls:DropShadowPanel>
+
                                     <TextBlock FontSize="18"
                                                Text="{Binding Title}"
-                                               Margin="0,0,0,0" />
-                                    <controls1:Resizer>
-                                        <StackPanel x:Name="MoreInformationPanel" Visibility="Collapsed">
-                                            <HyperlinkButton Content="SourceCode" />
+                                               Margin="0,6,0,0" />
+                                   
+                                        <StackPanel x:Name="MoreInformationPanel" >
+                                            <HyperlinkButton Content="SourceCode"
+                                                             Padding="0,3,0,7" />
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto" />
@@ -142,7 +231,6 @@
                                                 </ItemsControl>
                                             </Grid>
                                         </StackPanel>
-                                    </controls1:Resizer>
                                 </StackPanel>
                             </Grid>
                         </Grid>
