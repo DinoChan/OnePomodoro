@@ -12,11 +12,14 @@
              d:DesignWidth="900">
     <UserControl.Resources>
 
-        <AcrylicBrush x:Key="OpionsPageBrush"
+        <!--<AcrylicBrush x:Key="OpionsPageBrush"
                       BackgroundSource="HostBackdrop"
                       TintColor="#131417"
                       TintOpacity="0.8"
-                      FallbackColor="#131417" />
+                      FallbackColor="#131417" />-->
+
+        <SolidColorBrush x:Key="OpionsPageBrush"
+                         Color="#131417" />
 
         <Style TargetType="Button">
             <Setter Property="Background"
@@ -43,16 +46,13 @@
                     Value="{StaticResource UseSystemFocusVisuals}" />
             <Setter Property="FocusVisualMargin"
                     Value="-3" />
-            <Setter Property="Margin"
-                    Value="16" />
+          
             <Setter Property="Height"
                     Value="344" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Grid x:Name="RootGrid"
-                              MinHeight="320">
-
+                        <Grid x:Name="RootGrid">
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
                                     <VisualStateGroup.Transitions>
@@ -69,7 +69,8 @@
                                                     </DoubleAnimation.EasingFunction>
                                                 </DoubleAnimation>
                                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RippleBackground"
-                                                                               Storyboard.TargetProperty="IsShowRipple">
+                                                                               Storyboard.TargetProperty="IsShowRipple"
+                                                                               EnableDependentAnimation="True">
                                                     <DiscreteObjectKeyFrame KeyTime="00:00:0.0"
                                                                             Value="True" />
                                                 </ObjectAnimationUsingKeyFrames>
@@ -160,15 +161,15 @@
                             </VisualStateManager.VisualStateGroups>
                             <Grid HorizontalAlignment="Center"
                                   x:Name="ContentGrid"
-                                  CornerRadius="8"
+                                  CornerRadius="0"
                                   Background="#ff1f2229"
                                   BorderThickness="{TemplateBinding BorderThickness}"
                                   BorderBrush="{TemplateBinding BorderBrush}"
                                   VerticalAlignment="Top">
-                                <controls1:RippleControl Background="#ff2f3239"
-                                                     CornerRadius="8"
-                                                     x:Name="RippleBackground" />
-                                
+                                <controls1:RippleControl Background="White"
+                                                         CornerRadius="8"
+                                                         x:Name="RippleBackground" />
+
                                 <StackPanel Margin="12"
                                             Width="384">
                                     <controls:DropShadowPanel x:Name="DropShadowPanel"
@@ -178,59 +179,60 @@
                                                               OffsetY="6">
                                         <Border Width="384"
                                                 Height="210"
-                                                CornerRadius="8">
-                                            <Image Source="{Binding ScreenshotUri}"/>
+                                                CornerRadius="0">
+                                            <Image Source="{Binding ScreenshotUri}" />
                                         </Border>
                                     </controls:DropShadowPanel>
 
                                     <TextBlock FontSize="18"
                                                Text="{Binding Title}"
                                                Margin="0,6,0,0" />
-                                   
-                                        <StackPanel x:Name="MoreInformationPanel" >
-                                            <HyperlinkButton Content="SourceCode"
-                                                             Padding="0,3,0,7" />
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="Auto" />
-                                                    <ColumnDefinition />
-                                                </Grid.ColumnDefinitions>
-                                                <Border Padding="6,2"
-                                                        Visibility="{Binding Pinable,Converter={StaticResource BoolToVisibilityConverter}}"
-                                                        CornerRadius="3"
-                                                        Margin="0,0,6,0"
-                                                        VerticalAlignment="Top"
-                                                        Background="#FFFF276E">
-                                                    <TextBlock Text="Pinable"
-                                                               VerticalAlignment="Center"
-                                                               Foreground="White"
-                                                               FontSize="12" />
-                                                </Border>
 
-                                                <ItemsControl ItemsSource="{Binding Tags}"
-                                                              Grid.Column="1">
-                                                    <ItemsControl.ItemsPanel>
-                                                        <ItemsPanelTemplate>
-                                                            <controls:WrapPanel HorizontalSpacing="6"
-                                                                                VerticalSpacing="6" />
-                                                        </ItemsPanelTemplate>
-                                                    </ItemsControl.ItemsPanel>
-                                                    <ItemsControl.ItemTemplate>
-                                                        <DataTemplate>
-                                                            <Border Padding="6,2"
-                                                                    Background="#030304"
-                                                                    CornerRadius="3">
-                                                                <TextBlock Text="{Binding}"
-                                                                           FontSize="12"
-                                                                           Foreground="White"
-                                                                           TextTrimming="CharacterEllipsis" />
-                                                            </Border>
+                                    <StackPanel x:Name="MoreInformationPanel"
+                                                Height="0">
+                                        <HyperlinkButton Content="SourceCode"
+                                                         Padding="0,3,0,7" />
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+                                            <Border Padding="6,2"
+                                                    Visibility="{Binding Pinable,Converter={StaticResource BoolToVisibilityConverter}}"
+                                                    CornerRadius="3"
+                                                    Margin="0,0,6,0"
+                                                    VerticalAlignment="Top"
+                                                    Background="#FFFF276E">
+                                                <TextBlock Text="Pinable"
+                                                           VerticalAlignment="Center"
+                                                           Foreground="White"
+                                                           FontSize="12" />
+                                            </Border>
 
-                                                        </DataTemplate>
-                                                    </ItemsControl.ItemTemplate>
-                                                </ItemsControl>
-                                            </Grid>
-                                        </StackPanel>
+                                            <ItemsControl ItemsSource="{Binding Tags}"
+                                                          Grid.Column="1">
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <controls:WrapPanel HorizontalSpacing="6"
+                                                                            VerticalSpacing="6" />
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Border Padding="6,2"
+                                                                Background="#030304"
+                                                                CornerRadius="3">
+                                                            <TextBlock Text="{Binding}"
+                                                                       FontSize="12"
+                                                                       Foreground="White"
+                                                                       TextTrimming="CharacterEllipsis" />
+                                                        </Border>
+
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </Grid>
+                                    </StackPanel>
                                 </StackPanel>
                             </Grid>
                         </Grid>
@@ -244,10 +246,10 @@
 
         <ScrollViewer HorizontalScrollMode="Disabled"
                       VerticalScrollMode="Auto">
-            <ItemsControl ItemsSource="{x:Bind Items,Mode=OneWay}">
+            <ItemsControl ItemsSource="{x:Bind Items,Mode=OneWay}" Margin="96" HorizontalAlignment="Center">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <controls:WrapPanel />
+                        <controls:WrapPanel HorizontalSpacing="48" VerticalSpacing="48"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
