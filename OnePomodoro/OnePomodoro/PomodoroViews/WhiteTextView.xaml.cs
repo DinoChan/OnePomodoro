@@ -36,6 +36,8 @@ namespace OnePomodoro.PomodoroViews
     [Title("White Text")]
     [Screenshot("/Assets/Screenshots/WhiteText.png")]
     [CompactOverlay(CustomWidth = 288, CustomHeight = 157.5)]
+    [FunctionTags(Tags.PointLight)]
+    [SourceCode("https://github.com/DinoChan/OnePomodoro/blob/master/OnePomodoro/OnePomodoro/PomodoroViews/WhiteTextView.xaml.cs")]
     public sealed partial class WhiteTextView : PomodoroView
     {
         private PointLight _redLight;

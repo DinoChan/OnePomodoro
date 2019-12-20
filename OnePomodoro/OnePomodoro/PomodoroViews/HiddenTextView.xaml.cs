@@ -37,6 +37,7 @@ namespace OnePomodoro.PomodoroViews
     [Screenshot("/Assets/Screenshots/HiddenText.png")]
     [CompactOverlay(CustomWidth = 288, CustomHeight = 157.5)]
     [FunctionTags(Tags.CompositionAnimation, Tags.PointLight,Tags.AmbientLight)]
+    [SourceCode("https://github.com/DinoChan/OnePomodoro/blob/master/OnePomodoro/OnePomodoro/PomodoroViews/HiddenTextView.xaml.cs")]
     public sealed partial class HiddenTextView : PomodoroView
     {
         private PointLight _redLight;

@@ -37,6 +37,8 @@ namespace OnePomodoro.PomodoroViews
     [Title("Split To 5")]
     [Screenshot("/Assets/Screenshots/SplitTo5.png")]
     [CompactOverlay(CustomWidth = 288, CustomHeight = 157.5)]
+    [FunctionTags(Tags.SpringAnimation, Tags.Clip)]
+    [SourceCode("https://github.com/DinoChan/OnePomodoro/blob/master/OnePomodoro/OnePomodoro/PomodoroViews/SplitTo5View.xaml.cs")]
     public sealed partial class SplitTo5View : PomodoroView
     {
         private readonly Compositor _compositor;

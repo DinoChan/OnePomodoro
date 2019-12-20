@@ -35,6 +35,8 @@ namespace OnePomodoro.PomodoroViews
     [Title("Outline Text")]
     [Screenshot("/Assets/Screenshots/OutlineText.png")]
     [CompactOverlay(CustomWidth = 288, CustomHeight = 157.5)]
+    [FunctionTags(Tags.CompositionAnimation, Tags.PointLight, Tags.AmbientLight,Tags.Win2D)]
+    [SourceCode("https://github.com/DinoChan/OnePomodoro/blob/master/OnePomodoro/OnePomodoro/PomodoroViews/OutlineTextView.xaml.cs")]
     public sealed partial class OutlineTextView : PomodoroView
     {
         private PointLight _redLight;

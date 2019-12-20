@@ -18,8 +18,8 @@ namespace OnePomodoro.Helpers
 
     public class Tags
     {
-        public const string CompositionAnimation = "CompositionAnimation";
-        public const string SpringAnimation = "SpringAnimation";
+        public const string CompositionAnimation = "Composition Animation";
+        public const string SpringAnimation = "Spring Animation";
         public const string CompositionGeometricClip = "CompositionGeometricClip";
         public const string CompositionLinearGradientBrush = "CompositionLinearGradientBrush";
         public const string BlendEffect = "BlendEffect";
@@ -31,5 +31,8 @@ namespace OnePomodoro.Helpers
         public const string CompositionMaskBrush = "CompositionMaskBrush";
         public const string RotationAngle = "RotationAngle";
         public const string TransformMatrix = "TransformMatrix";
+        public const string Win2D = "Win2D";
+        public const string ImplicitAnimation = "Implicit Animation";
+        
     }
 }

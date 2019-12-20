@@ -85,7 +85,7 @@ namespace OnePomodoro.Views
             Tags = tagsAttribute?.Tags;
 
             var sourceCodeAttribute = attributes.OfType<SourceCodeAttribute>().FirstOrDefault();
-            SourceCodeUri = sourceCodeAttribute == null ? "https://github.com/DinoChan/OnePomodoro" : SourceCodeUri;
+            SourceCodeUri = sourceCodeAttribute == null ? "https://github.com/DinoChan/OnePomodoro" : sourceCodeAttribute.SourceCodeUri;
         }
     }
 }

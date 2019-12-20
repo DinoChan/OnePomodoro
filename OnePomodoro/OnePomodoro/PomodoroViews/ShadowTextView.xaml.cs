@@ -35,6 +35,8 @@ namespace OnePomodoro.PomodoroViews
     [Title("Shadow Text")]
     [Screenshot("/Assets/Screenshots/ShadowText.png")]
     [CompactOverlay(CustomWidth = 288, CustomHeight = 157.5)]
+    [FunctionTags(Tags.CompositionAnimation, Tags.PointLight, Tags.AmbientLight, Tags.Win2D)]
+    [SourceCode("https://github.com/DinoChan/OnePomodoro/blob/master/OnePomodoro/OnePomodoro/PomodoroViews/ShadowTextView.xaml.cs")]
     public sealed partial class ShadowTextView : PomodoroView
     {
         private PointLight _redLight;

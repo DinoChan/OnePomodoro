@@ -25,6 +25,7 @@ namespace OnePomodoro.PomodoroViews
     [Screenshot("/Assets/Screenshots/DoNotDisturb.png")]
     [CompactOverlay(CustomWidth = 288, CustomHeight = 157.5)]
     [FunctionTags(Tags.CompositionAnimation)]
+    [SourceCode("https://github.com/DinoChan/OnePomodoro/blob/master/OnePomodoro/OnePomodoro/PomodoroViews/DoNotDisturbView.xaml.cs")]
     public sealed partial class DoNotDisturbView
     {
         private Compositor Compositor => Window.Current.Compositor;

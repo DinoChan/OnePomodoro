@@ -27,6 +27,8 @@ namespace OnePomodoro.PomodoroViews
     /// </summary>
     [Title("SpringText")]
     [Screenshot("/Assets/Screenshots/SpringText.png")]
+    [FunctionTags(Tags.SpringAnimation)]
+    [SourceCode("https://github.com/DinoChan/OnePomodoro/blob/master/OnePomodoro/OnePomodoro/PomodoroViews/SpringTextView.xaml.cs")]
     public sealed partial class SpringTextView : PomodoroView
     {
         private readonly Compositor _compositor;
