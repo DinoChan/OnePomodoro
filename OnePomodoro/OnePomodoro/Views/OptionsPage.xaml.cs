@@ -10,6 +10,7 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 namespace OnePomodoro.Views
@@ -51,7 +52,7 @@ namespace OnePomodoro.Views
                   try
                   {
                       var client = new HttpClient();
-                    var whatsNewText = await client.GetStringAsync("https://raw.githubusercontent.com/DinoChan/OnePomodoro/master/Whats%20new.md"); ;
+                      var whatsNewText = await client.GetStringAsync("https://raw.githubusercontent.com/DinoChan/OnePomodoro/master/Whats%20new.md"); ;
                       _ = Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                       {
                           WhatsNewMarkdownTextBlock.Text = whatsNewText;
@@ -69,8 +70,6 @@ namespace OnePomodoro.Views
         }
 
 
-
-
         private void OnBackClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             On_BackRequested();
@@ -86,14 +85,30 @@ namespace OnePomodoro.Views
             return false;
         }
 
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            if (e.NavigationMode == NavigationMode.Back)
+            {
+                if (_visualImage != null)
+                {
+                    var animation = ConnectedAnimationService.GetForCurrentView().PrepareToAnimate("backAnimation", _visualImage);
+                    animation.Configuration = new GravityConnectedAnimationConfiguration();
+                    _visualImage = null;
+                }
+            }
+        }
+
         private void BackInvoked(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
         {
             On_BackRequested();
             args.Handled = true;
         }
 
-        private void OnVisualChanged(object sender, EventArgs e)
+        private Image _visualImage;
+
+        private void OnVisualChanged(object sender, Tuple<Type, Image> e)
         {
+            _visualImage = e.Item2;
             On_BackRequested();
         }
     }

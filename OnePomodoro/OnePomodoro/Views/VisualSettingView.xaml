@@ -69,8 +69,7 @@
                                                     </DoubleAnimation.EasingFunction>
                                                 </DoubleAnimation>
                                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RippleBackground"
-                                                                               Storyboard.TargetProperty="IsShowRipple"
-                                                                               EnableDependentAnimation="True">
+                                                                               Storyboard.TargetProperty="IsShowRipple">
                                                     <DiscreteObjectKeyFrame KeyTime="00:00:0.0"
                                                                             Value="True" />
                                                 </ObjectAnimationUsingKeyFrames>
@@ -166,14 +165,14 @@
                                   BorderThickness="{TemplateBinding BorderThickness}"
                                   BorderBrush="{TemplateBinding BorderBrush}"
                                   VerticalAlignment="Top">
-                                <controls1:RippleControl Background="White"
-                                                         CornerRadius="8"
+                                <controls1:RippleControl Background="#ff2f3239"
+                                                         CornerRadius="0"
                                                          x:Name="RippleBackground" />
 
                                 <StackPanel Margin="12"
                                             Width="384">
                                     <controls:DropShadowPanel x:Name="DropShadowPanel"
-                                                              BlurRadius="32"
+                                                              BlurRadius="50"
                                                               OffsetX="0"
                                                               ShadowOpacity="0"
                                                               OffsetY="6">
@@ -191,6 +190,7 @@
                                     <StackPanel x:Name="MoreInformationPanel"
                                                 Height="0">
                                         <HyperlinkButton Content="SourceCode"
+                                                         NavigateUri="{Binding SourceCodeUri}"
                                                          Padding="0,3,0,7" />
                                         <Grid>
                                             <Grid.ColumnDefinitions>
@@ -246,7 +246,7 @@
 
         <ScrollViewer HorizontalScrollMode="Disabled"
                       VerticalScrollMode="Auto">
-            <ItemsControl ItemsSource="{x:Bind Items,Mode=OneWay}" Margin="96" HorizontalAlignment="Center">
+            <ItemsControl ItemsSource="{x:Bind Items,Mode=OneWay}" Margin="64" HorizontalAlignment="Center">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <controls:WrapPanel HorizontalSpacing="48" VerticalSpacing="48"/>
@@ -254,7 +254,7 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Button>
+                        <Button Click="OnSelectVisual">
 
                         </Button>
                     </DataTemplate>

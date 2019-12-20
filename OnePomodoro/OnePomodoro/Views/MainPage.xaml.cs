@@ -9,6 +9,7 @@ using Windows.UI.Xaml.Navigation;
 using System.Linq;
 using Windows.UI.ViewManagement;
 using OnePomodoro.Helpers;
+using Windows.UI.Xaml.Media.Animation;
 
 namespace OnePomodoro.Views
 {
@@ -63,6 +64,13 @@ namespace OnePomodoro.Views
                 ChangePomodoroContent(viewType);
 
             _pomodoroViewType = viewType;
+
+
+            ConnectedAnimation animation = ConnectedAnimationService.GetForCurrentView().GetAnimation("backAnimation");
+            if (animation != null)
+            {
+                animation.TryStart(PomodoroContent);
+            }
         }
 
 

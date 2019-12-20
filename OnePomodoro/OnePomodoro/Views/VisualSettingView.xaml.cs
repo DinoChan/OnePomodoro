@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Microsoft.Toolkit.Uwp.UI.Extensions;
 
 //https://go.microsoft.com/fwlink/?LinkId=234236 上介绍了“用户控件”项模板
 
@@ -30,24 +31,26 @@ namespace OnePomodoro.Views
 
         public IEnumerable<VisualSettingItem> Items { get; }
 
-        public event EventHandler VisualChanged;
+        public event EventHandler<Tuple<Type, Image>> VisualChanged;
 
-        private async void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+
+        private async void OnSelectVisual(object sender, RoutedEventArgs e)
         {
-            //var item = VisualsElement.SelectedItem as VisualSettingItem;
-            //if (item == null)
-            //    return;
+            var element = (sender as FrameworkElement);
+            var image = element.FindDescendant<Image>();
+            var item = element.DataContext as VisualSettingItem;
 
-            //SettingsService.Current.ViewType = item.Type.Name;
-            //VisualChanged?.Invoke(this, EventArgs.Empty);
-
-            //await SettingsService.SaveAsync();
+            SettingsService.Current.ViewType = item.Type.Name;
+            VisualChanged?.Invoke(item.Type, new Tuple<Type, Image>(item.Type, image));
+            await SettingsService.SaveAsync();
         }
     }
 
     public class VisualSettingItem
     {
         public string ScreenshotUri { get; }
+
+        public string SourceCodeUri { get; }
 
         public string Title { get; }
 
@@ -78,8 +81,11 @@ namespace OnePomodoro.Views
             var compactOverlayAttribute = attributes.OfType<CompactOverlayAttribute>().FirstOrDefault();
             Pinable = compactOverlayAttribute != null;
 
-            var  tagsAttribute = attributes.OfType<FunctionTagsAttribute>().FirstOrDefault();
+            var tagsAttribute = attributes.OfType<FunctionTagsAttribute>().FirstOrDefault();
             Tags = tagsAttribute?.Tags;
+
+            var sourceCodeAttribute = attributes.OfType<SourceCodeAttribute>().FirstOrDefault();
+            SourceCodeUri = sourceCodeAttribute == null ? "https://github.com/DinoChan/OnePomodoro" : SourceCodeUri;
         }
     }
 }
