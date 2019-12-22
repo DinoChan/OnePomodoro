@@ -92,6 +92,8 @@ namespace OnePomodoro.PomodoroViews
         {
             FocusText.Visibility = ViewModel.IsInPomodoro ? Visibility.Visible : Visibility.Collapsed;
             RelaxText.Visibility = ViewModel.IsInPomodoro ? Visibility.Collapsed : Visibility.Visible;
+            FocusTextCompact.Visibility = ViewModel.IsInPomodoro ? Visibility.Visible : Visibility.Collapsed;
+            RelaxTextCompact.Visibility = ViewModel.IsInPomodoro ? Visibility.Collapsed : Visibility.Visible;
         }
 
         private void UpdateGradients()
