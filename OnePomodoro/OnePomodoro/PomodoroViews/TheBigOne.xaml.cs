@@ -27,6 +27,9 @@ namespace OnePomodoro.PomodoroViews
 {
     [Title("The Big One")]
     [Screenshot("/Assets/Screenshots/TheBigOne.png")]
+    [FunctionTags( Tags.PointLight)]
+    [CompactOverlay]
+    [SourceCode("https://github.com/DinoChan/OnePomodoro/blob/master/OnePomodoro/OnePomodoro/PomodoroViews/TheBigOne.xaml.cs")]
     public sealed partial class TheBigOne : PomodoroView
     {
         private PointLight _inworkPointLight;

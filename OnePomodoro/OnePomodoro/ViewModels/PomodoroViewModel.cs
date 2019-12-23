@@ -20,10 +20,10 @@ namespace OnePomodoro.ViewModels
     /// </summary>
     public class PomodoroViewModel : ViewModelBase
     {
-        private TimeSpan PomodoroLength => TimeSpan.FromMinutes(SettingsService.Current.PomodoroLength);
-        private TimeSpan ShortBreakLength => TimeSpan.FromMinutes(SettingsService.Current.ShortBreakLength);
-        private TimeSpan LongBreakLength => TimeSpan.FromMinutes(SettingsService.Current.LongBreakLength);
-        private int LongBreakAfter => SettingsService.Current.LongBreakAfter;
+        private TimeSpan PomodoroLength => TimeSpan.FromMinutes(SettingsService.Current == null ? 25 : SettingsService.Current.PomodoroLength);
+        private TimeSpan ShortBreakLength => TimeSpan.FromMinutes(SettingsService.Current == null ? 5 : SettingsService.Current.ShortBreakLength);
+        private TimeSpan LongBreakLength => TimeSpan.FromMinutes(SettingsService.Current == null ? 15 : SettingsService.Current.LongBreakLength);
+        private int LongBreakAfter => SettingsService.Current == null ? 4 : SettingsService.Current.LongBreakAfter;
 
         public static PomodoroViewModel Current { get; } = new PomodoroViewModel();
 

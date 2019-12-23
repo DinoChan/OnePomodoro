@@ -24,6 +24,9 @@ namespace OnePomodoro.PomodoroViews
 {
     [Title("LongShadow")]
     [Screenshot("/Assets/Screenshots/LongShadow.png")]
+    [FunctionTags(Tags.ContainerVisual, Tags.ExpressionAnimation, Tags.CompositionMaskBrush, Tags.RotationAngle, Tags.TransformMatrix)]
+    [CompactOverlay]
+    [SourceCode("https://github.com/DinoChan/OnePomodoro/blob/master/OnePomodoro/OnePomodoro/PomodoroViews/LongShadow.xaml.cs")]
     public sealed partial class LongShadow : PomodoroView
     {
 
@@ -36,9 +39,16 @@ namespace OnePomodoro.PomodoroViews
             MackLongShadow(108, 0.3f, BreakCountDown, BreakBackground, Color.FromArgb(255, 82, 113, 194));
             MackLongShadow(108, 0.3f, BreakCountDownSecond, BreakSecondBackground, Color.FromArgb(255, 82, 113, 194));
 
+            MackLongShadow(108, 0.3f, CompactInWorkCountDown, CompactInworkBackground, Color.FromArgb(255, 232, 122, 105));
+            MackLongShadow(108, 0.3f, CompactInWorkCountDownSecond, CompactInworkSecondBackground, Color.FromArgb(255, 232, 122, 105));
+
+            MackLongShadow(108, 0.3f, CompactBreakCountDown, CompactBreakBackground, Color.FromArgb(255, 82, 113, 194));
+            MackLongShadow(108, 0.3f, CompactBreakCountDownSecond, CompactBreakSecondBackground, Color.FromArgb(255, 82, 113, 194));
+
             ViewModel.IsInPomodoroChanged += (s, e) =>
               {
                   FlipSide.IsFlipped = ViewModel.IsInPomodoro == false;
+                  CompactFlipSide.IsFlipped= ViewModel.IsInPomodoro == false;
               };
         }
 

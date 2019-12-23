@@ -13,82 +13,141 @@
                     x:DefaultBindMode="OneWay"
                     d:DataContext="{d:DesignInstance Type=viewModels:PomodoroViewModel}"
                     RequestedTheme="Light"
-                    d:DesignHeight="1050"
+                    d:DesignHeight="1920"
                     d:DesignWidth="1920">
     <UserControl.Resources>
-        <Style x:Key="TextStyle" TargetType="TextBlock">
-            <Setter Property="FontFamily" Value="Noto Sans JP,ヒラギノ角ゴシック Pro,Hiragino Kaku Gothic Pro,メイリオ,'ヒラギノ角ゴ W3', Meiryo, Osaka,ＭＳ Ｐゴシック,MS PGothic,sans-serif"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="FontSize" Value="570"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Margin" Value="-1000"/>
+        <Style x:Key="TextStyle"
+               TargetType="TextBlock">
+            <Setter Property="FontFamily"
+                    Value="Noto Sans JP,ヒラギノ角ゴシック Pro,Hiragino Kaku Gothic Pro,メイリオ,'ヒラギノ角ゴ W3', Meiryo, Osaka,ＭＳ Ｐゴシック,MS PGothic,sans-serif" />
+            <Setter Property="FontWeight"
+                    Value="Bold" />
+            <Setter Property="FontSize"
+                    Value="570" />
+            <Setter Property="HorizontalAlignment"
+                    Value="Center" />
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+            <Setter Property="Margin"
+                    Value="-1000" />
         </Style>
 
-        <SolidColorBrush x:Key="FocusBrush" Color="#e4006e"/>
-        <SolidColorBrush x:Key="RelaxBrush" Color="#009ce1"/>
+        <SolidColorBrush x:Key="FocusBrush"
+                         Color="#e4006e" />
+        <SolidColorBrush x:Key="RelaxBrush"
+                         Color="#009ce1" />
 
-        <Style x:Key="FocusText" TargetType="TextBlock" BasedOn="{StaticResource TextStyle}">
-            <Setter Property="Foreground" Value="{StaticResource FocusBrush}"/>
-            <Setter Property="FontSize" Value="1040"/>
-            <Setter Property="Text" Value="爆裂"/>
+        <Style x:Key="FocusText"
+               TargetType="TextBlock"
+               BasedOn="{StaticResource TextStyle}">
+            <Setter Property="Foreground"
+                    Value="{StaticResource FocusBrush}" />
+            <Setter Property="FontSize"
+                    Value="1040" />
+            <Setter Property="Text"
+                    Value="爆裂" />
         </Style>
 
-        <Style x:Key="RelaxText" TargetType="TextBlock" BasedOn="{StaticResource TextStyle}">
-            <Setter Property="Foreground" Value="{StaticResource RelaxBrush}"/>
-            <Setter Property="FontSize" Value="570"/>
-            <Setter Property="Text" Value="花鳥風月"/>
+        <Style x:Key="RelaxText"
+               TargetType="TextBlock"
+               BasedOn="{StaticResource TextStyle}">
+            <Setter Property="Foreground"
+                    Value="{StaticResource RelaxBrush}" />
+            <Setter Property="FontSize"
+                    Value="570" />
+            <Setter Property="Text"
+                    Value="花鳥風月" />
         </Style>
 
     </UserControl.Resources>
-    <Grid x:Name="Root" Background="White">
-        <Viewbox >
-            <Grid Height="1050" Width="1920" x:Name="ContentArea" RenderTransformOrigin="0.5,0.5" >
+    <Grid x:Name="Root"
+          Background="White">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <helpers:IsCompactOverlayModeTrigger />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="NormalFocusPanel.Opacity"
+                                Value="0" />
+                        <Setter Target="NormalFocusPanel.IsHitTestVisible"
+                                Value="False" />
+                        <Setter Target="NormalRelaxPanel.Opacity"
+                                Value="0" />
+                        <Setter Target="NormalRelaxPanel.IsHitTestVisible"
+                                Value="False" />
+                        <Setter Target="CompactFocusPanel.Opacity"
+                                Value="1" />
+                        <Setter Target="CompactFocusPanel.IsHitTestVisible"
+                                Value="True" />
+                        <Setter Target="CompactRelaxPanel.Opacity"
+                                Value="1" />
+                        <Setter Target="CompactRelaxPanel.IsHitTestVisible"
+                                Value="True" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Viewbox>
+            <Grid Height="1050" 
+                  Width="1920"
+                  x:Name="ContentArea"
+                  RenderTransformOrigin="0.5,0.5">
                 <Grid.RenderTransform>
-                    <CompositeTransform Rotation="-8"/>
+                    <CompositeTransform Rotation="-8" />
                 </Grid.RenderTransform>
-                <Grid >
-
+                <Grid>
                     <Grid x:Name="FocusElementTop">
                         <Grid.Clip>
-                            <RectangleGeometry Rect="-1000,-1000,3920,1525"/>
+                            <RectangleGeometry Rect="-1000,-1000,3920,1525" />
                         </Grid.Clip>
                         <TextBlock Style="{StaticResource FocusText}" />
                     </Grid>
                     <Grid x:Name="FocusElementBottom">
                         <Grid.Clip>
-                            <RectangleGeometry Rect="-1000,525,3920,1525"/>
+                            <RectangleGeometry Rect="-1000,525,3920,1525" />
                         </Grid.Clip>
                         <TextBlock Style="{StaticResource FocusText}" />
-                        <Grid HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="1300,0,0,-80" Height="200" Width="200"
-                            RenderTransformOrigin="0.5,0.5" >
+                        <Grid HorizontalAlignment="Center"
+                              VerticalAlignment="Bottom"
+                              Margin="1300,0,0,-80"
+                              Height="200"
+                              Width="200"
+                              RenderTransformOrigin="0.5,0.5"
+                              x:Name="NormalFocusPanel"
+                            >
                             <Grid.RenderTransform>
-                                <CompositeTransform Rotation="-48"/>
+                                <CompositeTransform Rotation="-48" />
                             </Grid.RenderTransform>
-                            <Ellipse Fill="{StaticResource FocusBrush}"/>
-                            <Polygon Fill="{StaticResource FocusBrush}" HorizontalAlignment="Center" VerticalAlignment="Top"
+                            <Ellipse Fill="{StaticResource FocusBrush}" />
+                            <Polygon Fill="{StaticResource FocusBrush}"
+                                     HorizontalAlignment="Center"
+                                     VerticalAlignment="Top"
                                      Points="0,60 15,0 30,60"
-                                     Margin="0,-50,0,0"/>
-                            <Grid  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" >
+                                     Margin="0,-50,0,0" />
+                            <Grid  HorizontalAlignment="Center"
+                                   RenderTransformOrigin="0.5,0.5">
                                 <Grid.RenderTransform>
-                                    <CompositeTransform Rotation="56"/>
+                                    <CompositeTransform Rotation="56" />
                                 </Grid.RenderTransform>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition/>
+                                    <RowDefinition />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition />
                                 </Grid.RowDefinitions>
-                                <TextBlock Text="Focus" HorizontalAlignment="Center"
+                                <TextBlock Text="Focus"
+                                           HorizontalAlignment="Center"
                                            Foreground="White"
                                            Style="{StaticResource TextStyle}"
                                            Margin="0,0,0,-38"
-                                           FontSize="52"/>
+                                           FontSize="52" />
                                 <TextBlock Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
                                            Style="{StaticResource TextStyle}"
                                            FontSize="68"
                                            Grid.Row="1"
                                            Foreground="White"
-                                           Margin="0,22,0,0"/>
+                                           Margin="0,22,0,0" />
 
                                 <controls:PomodoroStateButton HorizontalAlignment="Center"
                                                               Style="{StaticResource LargeButton}"
@@ -99,54 +158,93 @@
                                                               Height="48"
                                                               Width="48"
                                                               Grid.Row="2"
-                                                              Margin="0,-20,0,0"/>
+                                                              Margin="0,-20,0,0" />
 
-                                
+
                             </Grid>
                         </Grid>
+                        <Viewbox  Margin="1100,0,0,-1400"
+                                  Height="500"
+                                  Width="500"
+                                  IsHitTestVisible="False"
+                                  Opacity="0"
+                                  x:Name="CompactFocusPanel">
+                            <Grid HorizontalAlignment="Center"
+                                  VerticalAlignment="Bottom"
+                                  Height="200"
+                                  Width="200"
+                                  RenderTransformOrigin="0.5,0.5"
+                                 >
+                                <Grid.RenderTransform>
+                                    <CompositeTransform Rotation="-48" />
+                                </Grid.RenderTransform>
+                                <Ellipse Fill="{StaticResource FocusBrush}" />
+                                <Polygon Fill="{StaticResource FocusBrush}"
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Top"
+                                         Points="0,60 15,0 30,60"
+                                         Margin="0,-50,0,0" />
+                                <Grid RenderTransformOrigin="0.5,0.5">
+                                    <Grid.RenderTransform>
+                                        <CompositeTransform Rotation="56" />
+                                    </Grid.RenderTransform>
+                                    <controls:TimeAndButtonSwitcher />
+
+                                </Grid>
+                            </Grid>
+                        </Viewbox>
                     </Grid>
                     <Grid x:Name="RelaxElementTop">
                         <Grid.Clip>
-                            <RectangleGeometry Rect="-1000,-1000,3920,1525"/>
+                            <RectangleGeometry Rect="-1000,-1000,3920,1525" />
                         </Grid.Clip>
-                        <TextBlock Style="{StaticResource RelaxText}"/>
+                        <TextBlock Style="{StaticResource RelaxText}" />
                     </Grid>
                     <Grid x:Name="RelaxElementBottom">
                         <Grid.Clip>
-                            <RectangleGeometry Rect="-1000,525,3920,1525"/>
+                            <RectangleGeometry Rect="-1000,525,3920,1525" />
                         </Grid.Clip>
-                        <TextBlock Style="{StaticResource RelaxText}"/>
+                        <TextBlock Style="{StaticResource RelaxText}" />
 
-                        <Grid HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="1300,0,0,-80" Height="200" Width="200" RenderTransformOrigin="0.5,0.5" >
+                        <Grid HorizontalAlignment="Center"
+                              VerticalAlignment="Bottom"
+                              Margin="1300,0,0,-80"
+                              Height="200"
+                              Width="200"
+                              RenderTransformOrigin="0.5,0.5"
+                              x:Name="NormalRelaxPanel">
                             <Grid.RenderTransform>
-                                <CompositeTransform Rotation="-48"/>
+                                <CompositeTransform Rotation="-48" />
                             </Grid.RenderTransform>
 
                             <Ellipse Fill="{StaticResource RelaxBrush}" />
-                            <Polygon Fill="{StaticResource RelaxBrush}" HorizontalAlignment="Center" VerticalAlignment="Top"
+                            <Polygon Fill="{StaticResource RelaxBrush}"
+                                     HorizontalAlignment="Center"
+                                     VerticalAlignment="Top"
                                      Points="0,60 15,0 30,60"
-                                     Margin="0,-50,0,0"/>
-                            <Grid  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" >
+                                     Margin="0,-50,0,0" />
+                            <Grid  HorizontalAlignment="Center"
+                                   RenderTransformOrigin="0.5,0.5">
                                 <Grid.RenderTransform>
-                                    <CompositeTransform Rotation="56"/>
+                                    <CompositeTransform Rotation="56" />
                                 </Grid.RenderTransform>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition/>
+                                    <RowDefinition />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition />
                                 </Grid.RowDefinitions>
-                                <TextBlock Text="Relax" HorizontalAlignment="Center"
+                                <TextBlock Text="Relax"
+                                           HorizontalAlignment="Center"
                                            Foreground="White"
                                            Style="{StaticResource TextStyle}"
                                            Margin="0,0,0,-38"
-                                           FontSize="52"
-                                              />
+                                           FontSize="52" />
                                 <TextBlock Text="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
                                            Style="{StaticResource TextStyle}"
                                            FontSize="68"
                                            Grid.Row="1"
                                            Foreground="White"
-                                           Margin="0,22,0,0"/>
+                                           Margin="0,22,0,0" />
 
                                 <controls:PomodoroStateButton HorizontalAlignment="Center"
                                                               Style="{StaticResource LargeButton}"
@@ -157,11 +255,42 @@
                                                               Height="48"
                                                               Width="48"
                                                               Margin="0,-20,0,0"
-                                                              Grid.Row="2"/>
+                                                              Grid.Row="2" />
 
-                              
+
                             </Grid>
                         </Grid>
+
+                        <Viewbox  Margin="1100,0,0,-1400"
+                                  Height="500"
+                                  Width="500"
+                                  x:Name="CompactRelaxPanel"
+                                  IsHitTestVisible="False"
+                                  Opacity="0">
+                            <Grid HorizontalAlignment="Center"
+                                  VerticalAlignment="Bottom"
+                                  Height="200"
+                                  Width="200"
+                                  RenderTransformOrigin="0.5,0.5"
+                                >
+                                <Grid.RenderTransform>
+                                    <CompositeTransform Rotation="-48" />
+                                </Grid.RenderTransform>
+                                <Ellipse Fill="{StaticResource RelaxBrush}" />
+                                <Polygon Fill="{StaticResource RelaxBrush}"
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Top"
+                                         Points="0,60 15,0 30,60"
+                                         Margin="0,-50,0,0" />
+                                <Grid RenderTransformOrigin="0.5,0.5">
+                                    <Grid.RenderTransform>
+                                        <CompositeTransform Rotation="56" />
+                                    </Grid.RenderTransform>
+                                    <controls:TimeAndButtonSwitcher />
+
+                                </Grid>
+                            </Grid>
+                        </Viewbox>
                     </Grid>
                 </Grid>
 

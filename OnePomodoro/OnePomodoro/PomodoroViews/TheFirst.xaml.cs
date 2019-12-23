@@ -20,6 +20,8 @@ namespace OnePomodoro.PomodoroViews
 {
     [Title("TheFirst")]
     [Screenshot("/Assets/Screenshots/TheFirst.png")]
+    [FunctionTags(Tags.ImplicitAnimation)]
+    [SourceCode("https://github.com/DinoChan/OnePomodoro/blob/master/OnePomodoro/OnePomodoro/PomodoroViews/TheFirst.xaml.cs")]
     public sealed partial class TheFirst : PomodoroView
     {
         public TheFirst()
@@ -27,7 +29,7 @@ namespace OnePomodoro.PomodoroViews
             InitializeComponent();
         }
 
-        
+
 
         //private void OnOptionsClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         //{

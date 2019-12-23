@@ -12,7 +12,6 @@ namespace OnePomodoro.Services
     public class SettingsService
     {
         private const string SettingsKey = "PomodoroSettings";
-        private static PomodoroSettings _current = new PomodoroSettings();
 
         public static IPomodoroSettings Current { get; private set; }
 

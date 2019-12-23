@@ -8,11 +8,31 @@
                     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
                     xmlns:behaviors="using:Microsoft.Toolkit.Uwp.UI.Animations.Behaviors"
                     xmlns:controls="using:OnePomodoro.Controls"
+                    xmlns:helpers="using:OnePomodoro.Helpers"
                     x:DefaultBindMode="OneWay"
-                    d:DesignHeight="1000"
-                    d:DesignWidth="1900">
+                    d:DesignHeight="1050"
+                    d:DesignWidth="1920">
 
     <Grid x:Name="LayoutRoot">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <helpers:IsCompactOverlayModeTrigger />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="StateButton.Height"
+                                Value="256" />
+                        <Setter Target="StateButton.Width"
+                                Value="256" />
+                        <Setter Target="StateButton.Margin"
+                                Value="45,0,35,-160" />
+                        <Setter Target="ViewBox.Margin"
+                                Value="0,0,0,12" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1"
                                  StartPoint="0.5,0">
@@ -25,9 +45,10 @@
                         FontSize="480"
                         HorizontalContentAlignment="Stretch"
                         VerticalContentAlignment="Stretch">
+            <Viewbox StretchDirection="DownOnly" x:Name="ViewBox" >
             <StackPanel VerticalAlignment="Center"
                         HorizontalAlignment="Center"
-                        x:Name="PomodoroPanel">
+                        x:Name="PomodoroPanel" Margin="40">
                 <Grid x:Name="InworkPanel"
                       Visibility="{Binding IsInPomodoro,Converter={StaticResource BoolToVisibilityConverter}}">
                     <TextBlock Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
@@ -90,16 +111,18 @@
                                FontFamily="{StaticResource TimeFont}"
                                Foreground="White" />
                 </Grid>
+                    <controls:PomodoroStateButton  Margin="45,0,35,-80"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Bottom" 
+                                                   StartCommand="{Binding StartTimerCommand}"
+                                                   StopCommand="{Binding StopTimerCommand}"
+                                                   IsInPomodoro="{x:Bind ViewModel.IsInPomodoro}"
+                                                   IsTimerInProgress="{x:Bind ViewModel.IsTimerInProgress}"
+                                                   x:Name="StateButton" />
 
-                <controls:PomodoroStateButton Margin="45,0,35,-100"
-                                              HorizontalAlignment="Center"
-                                              VerticalAlignment="Center"
-                                              StartCommand="{Binding StartTimerCommand}"
-                                              StopCommand="{Binding StopTimerCommand}"
-                                              IsInPomodoro="{x:Bind ViewModel.IsInPomodoro}"
-                                              IsTimerInProgress="{x:Bind ViewModel.IsTimerInProgress}"/>
-            </StackPanel>
+                </StackPanel>
+            </Viewbox>
         </ContentControl>
-
+    
     </Grid>
 </local:PomodoroView>

@@ -20,6 +20,8 @@ namespace OnePomodoro.PomodoroViews
 {
     [Title("SimpleCircle")]
     [Screenshot("/Assets/Screenshots/SimpleCircle.png")]
+    [CompactOverlay]
+    [SourceCode("https://github.com/DinoChan/OnePomodoro/blob/master/OnePomodoro/OnePomodoro/PomodoroViews/SimpleCircle.xaml.cs")]
     public sealed partial class SimpleCircle : PomodoroView
     {
         public SimpleCircle() : base()

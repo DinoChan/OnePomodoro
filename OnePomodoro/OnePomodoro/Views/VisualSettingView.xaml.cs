@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Microsoft.Toolkit.Uwp.UI.Extensions;
 
 //https://go.microsoft.com/fwlink/?LinkId=234236 上介绍了“用户控件”项模板
 
@@ -30,17 +31,17 @@ namespace OnePomodoro.Views
 
         public IEnumerable<VisualSettingItem> Items { get; }
 
-        public event EventHandler VisualChanged;
+        public event EventHandler<Tuple<Type, Image>> VisualChanged;
 
-        private async void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+
+        private async void OnSelectVisual(object sender, RoutedEventArgs e)
         {
-            var item = VisualsElement.SelectedItem as VisualSettingItem;
-            if (item == null)
-                return;
+            var element = (sender as FrameworkElement);
+            var image = element.FindDescendant<Image>();
+            var item = element.DataContext as VisualSettingItem;
 
             SettingsService.Current.ViewType = item.Type.Name;
-            VisualChanged?.Invoke(this, EventArgs.Empty);
-
+            VisualChanged?.Invoke(item.Type, new Tuple<Type, Image>(item.Type, image));
             await SettingsService.SaveAsync();
         }
     }
@@ -49,15 +50,22 @@ namespace OnePomodoro.Views
     {
         public string ScreenshotUri { get; }
 
+        public string SourceCodeUri { get; }
+
         public string Title { get; }
 
         public Type Type { get; }
+
+        public string[] Tags { get; }
+
+        public bool Pinable { get; }
+
         private readonly string DefaultScreenshotUri = "/Assets/SplashScreen.png";
 
         public VisualSettingItem(Type pomodoroViewType)
         {
             Type = pomodoroViewType;
-           
+
 
             var attributes = Type.GetCustomAttributes(true);
             var titleAttribute = attributes.OfType<TitleAttribute>().FirstOrDefault();
@@ -66,9 +74,18 @@ namespace OnePomodoro.Views
 
             var screenshotAttribute = attributes.OfType<ScreenshotAttribute>().FirstOrDefault();
             if (screenshotAttribute != null && string.IsNullOrWhiteSpace(screenshotAttribute.Uri) == false)
-                ScreenshotUri =screenshotAttribute.Uri;
+                ScreenshotUri = screenshotAttribute.Uri;
             else
                 ScreenshotUri = DefaultScreenshotUri;
+
+            var compactOverlayAttribute = attributes.OfType<CompactOverlayAttribute>().FirstOrDefault();
+            Pinable = compactOverlayAttribute != null;
+
+            var tagsAttribute = attributes.OfType<FunctionTagsAttribute>().FirstOrDefault();
+            Tags = tagsAttribute?.Tags;
+
+            var sourceCodeAttribute = attributes.OfType<SourceCodeAttribute>().FirstOrDefault();
+            SourceCodeUri = sourceCodeAttribute == null ? "https://github.com/DinoChan/OnePomodoro" : sourceCodeAttribute.SourceCodeUri;
         }
     }
 }

@@ -10,4 +10,6 @@
     <!--<SolidColorBrush x:Key="BreakBrush"
                      Color="#FF001BAB" />-->
     <SolidColorBrush x:Key="BreakBrush" Color="{StaticResource BreakColor}" />
+
+  
 </ResourceDictionary>

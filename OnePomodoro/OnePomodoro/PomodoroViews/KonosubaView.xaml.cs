@@ -27,6 +27,9 @@ namespace OnePomodoro.PomodoroViews
     /// </summary>
     [Title("konosuba")]
     [Screenshot("/Assets/Screenshots/Konosuba.png")]
+    [CompactOverlay]
+    [FunctionTags(Tags.SpringAnimation, Tags.Clip)]
+    [SourceCode("https://github.com/DinoChan/OnePomodoro/blob/master/OnePomodoro/OnePomodoro/PomodoroViews/KonosubaView.xaml.cs")]
     public sealed partial class KonosubaView : PomodoroView
     {
         private readonly Compositor _compositor;

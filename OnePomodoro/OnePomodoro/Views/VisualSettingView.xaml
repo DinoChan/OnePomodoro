@@ -5,35 +5,262 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+             xmlns:controls1="using:OnePomodoro.Controls"
              mc:Ignorable="d"
-             d:DesignHeight="300"
-             d:DesignWidth="400">
+             Foreground="White"
+             d:DesignHeight="900"
+             d:DesignWidth="900">
     <UserControl.Resources>
-        <Style TargetType="ListViewItem"
-               BasedOn="{StaticResource ListViewItemRevealStyle}">
+
+        <!--<AcrylicBrush x:Key="OpionsPageBrush"
+                      BackgroundSource="HostBackdrop"
+                      TintColor="#131417"
+                      TintOpacity="0.8"
+                      FallbackColor="#131417" />-->
+
+        <SolidColorBrush x:Key="OpionsPageBrush"
+                         Color="#131417" />
+
+        <Style TargetType="Button">
+            <Setter Property="Background"
+                    Value="{ThemeResource ButtonRevealBackground}" />
+            <Setter Property="Foreground"
+                    Value="{ThemeResource ButtonForeground}" />
+            <Setter Property="BorderBrush"
+                    Value="{ThemeResource ButtonRevealBorderBrush}" />
+            <Setter Property="BorderThickness"
+                    Value="{ThemeResource ButtonRevealBorderThemeThickness}" />
             <Setter Property="Padding"
-                    Value="3" />
+                    Value="{StaticResource ButtonPadding}" />
+            <Setter Property="HorizontalAlignment"
+                    Value="Left" />
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+            <Setter Property="FontFamily"
+                    Value="{ThemeResource ContentControlThemeFontFamily}" />
+            <Setter Property="FontWeight"
+                    Value="Normal" />
+            <Setter Property="FontSize"
+                    Value="{ThemeResource ControlContentThemeFontSize}" />
+            <Setter Property="UseSystemFocusVisuals"
+                    Value="{StaticResource UseSystemFocusVisuals}" />
+            <Setter Property="FocusVisualMargin"
+                    Value="-3" />
+          
+            <Setter Property="Height"
+                    Value="344" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid x:Name="RootGrid">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualStateGroup.Transitions>
+                                        <VisualTransition From="Normal"
+                                                          To="*">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="MoreInformationPanel"
+                                                                 Storyboard.TargetProperty="Height"
+                                                                 To="76"
+                                                                 EnableDependentAnimation="True"
+                                                                 Duration="0:0:0.5">
+                                                    <DoubleAnimation.EasingFunction>
+                                                        <CubicEase EasingMode="EaseOut" />
+                                                    </DoubleAnimation.EasingFunction>
+                                                </DoubleAnimation>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RippleBackground"
+                                                                               Storyboard.TargetProperty="IsShowRipple">
+                                                    <DiscreteObjectKeyFrame KeyTime="00:00:0.0"
+                                                                            Value="True" />
+                                                </ObjectAnimationUsingKeyFrames>
+
+
+                                            </Storyboard>
+                                        </VisualTransition>
+                                        <VisualTransition From="*"
+                                                          To="Normal">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="MoreInformationPanel"
+                                                                 Storyboard.TargetProperty="Height"
+                                                                 To="0"
+                                                                 EnableDependentAnimation="True"
+                                                                 Duration="0:0:0.5">
+                                                    <DoubleAnimation.EasingFunction>
+                                                        <CubicEase EasingMode="EaseOut" />
+                                                    </DoubleAnimation.EasingFunction>
+                                                </DoubleAnimation>
+                                                <DoubleAnimation Storyboard.TargetName="DropShadowPanel"
+                                                                 Storyboard.TargetProperty="ShadowOpacity"
+                                                                 To="0"
+                                                                 EnableDependentAnimation="True"
+                                                                 Duration="0:0:0.5">
+                                                    <DoubleAnimation.EasingFunction>
+                                                        <CubicEase EasingMode="EaseOut" />
+                                                    </DoubleAnimation.EasingFunction>
+                                                </DoubleAnimation>
+
+                                            </Storyboard>
+                                        </VisualTransition>
+                                    </VisualStateGroup.Transitions>
+                                    <VisualState x:Name="Normal">
+                                        <Storyboard>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
+                                        </Storyboard>
+                                    </VisualState>
+
+                                    <VisualState x:Name="PointerOver">
+                                        <VisualState.Setters>
+                                            <Setter Target="ContentGrid.(RevealBrush.State)"
+                                                    Value="PointerOver" />
+                                            <Setter Target="MoreInformationPanel.Height"
+                                                    Value="76" />
+                                            <Setter Target="RippleBackground.IsShowRipple"
+                                                    Value="True" />
+
+                                        </VisualState.Setters>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="DropShadowPanel"
+                                                             Storyboard.TargetProperty="ShadowOpacity"
+                                                             To="0.6"
+                                                             EnableDependentAnimation="True"
+                                                             Duration="0:0:0.5">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <CubicEase EasingMode="EaseOut" />
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </VisualState>
+
+                                    <VisualState x:Name="Pressed">
+                                        <VisualState.Setters>
+                                            <Setter Target="ContentGrid.(RevealBrush.State)"
+                                                    Value="Pressed" />
+                                            <Setter Target="MoreInformationPanel.Height"
+                                                    Value="76" />
+                                            <Setter Target="RippleBackground.IsShowRipple"
+                                                    Value="True" />
+                                            <Setter Target="RippleBackground.Opacity"
+                                                    Value="0.7" />
+                                        </VisualState.Setters>
+
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="DropShadowPanel"
+                                                             Storyboard.TargetProperty="ShadowOpacity"
+                                                             To="0"
+                                                             EnableDependentAnimation="True"
+                                                             Duration="0:0:0">
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </VisualState>
+
+
+
+                                </VisualStateGroup>
+
+                            </VisualStateManager.VisualStateGroups>
+                            <Grid HorizontalAlignment="Center"
+                                  x:Name="ContentGrid"
+                                  CornerRadius="0"
+                                  Background="#ff1f2229"
+                                  BorderThickness="{TemplateBinding BorderThickness}"
+                                  BorderBrush="{TemplateBinding BorderBrush}"
+                                  VerticalAlignment="Top">
+                                <controls1:RippleControl Background="#ff2f3239"
+                                                         CornerRadius="0"
+                                                         x:Name="RippleBackground" />
+
+                                <StackPanel Margin="12"
+                                            Width="384">
+                                    <controls:DropShadowPanel x:Name="DropShadowPanel"
+                                                              BlurRadius="50"
+                                                              OffsetX="0"
+                                                              ShadowOpacity="0"
+                                                              OffsetY="6">
+                                        <Border Width="384"
+                                                Height="210"
+                                                CornerRadius="0">
+                                            <Image Source="{Binding ScreenshotUri}" />
+                                        </Border>
+                                    </controls:DropShadowPanel>
+
+                                    <TextBlock FontSize="18"
+                                               Text="{Binding Title}"
+                                               Margin="0,6,0,0" />
+
+                                    <StackPanel x:Name="MoreInformationPanel"
+                                                Height="0">
+                                        <HyperlinkButton Content="SourceCode"
+                                                         NavigateUri="{Binding SourceCodeUri}"
+                                                         Padding="0,3,0,7" />
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+                                            <Border Padding="6,2"
+                                                    Visibility="{Binding Pinable,Converter={StaticResource BoolToVisibilityConverter}}"
+                                                    CornerRadius="3"
+                                                    Margin="0,0,6,0"
+                                                    VerticalAlignment="Top"
+                                                    Background="#FFFF276E">
+                                                <TextBlock Text="Pinable"
+                                                           VerticalAlignment="Center"
+                                                           Foreground="White"
+                                                           FontSize="12" />
+                                            </Border>
+
+                                            <ItemsControl ItemsSource="{Binding Tags}"
+                                                          Grid.Column="1">
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <controls:WrapPanel HorizontalSpacing="6"
+                                                                            VerticalSpacing="6" />
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Border Padding="6,2"
+                                                                Background="#030304"
+                                                                CornerRadius="3">
+                                                            <TextBlock Text="{Binding}"
+                                                                       FontSize="12"
+                                                                       Foreground="White"
+                                                                       TextTrimming="CharacterEllipsis" />
+                                                        </Border>
+
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </Grid>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
     </UserControl.Resources>
-    <Grid>
-        <ListView ItemsSource="{x:Bind Items,Mode=OneWay}"
-                  SelectionChanged="OnSelectionChanged"
-                  SelectionMode="Single"
-                  x:Name="VisualsElement">
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <controls:WrapPanel />
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Image Width="320"
-                           Height="175"
-                           Source="{Binding ScreenshotUri}"
-                           ToolTipService.ToolTip="{Binding Title}" />
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+    <Grid Background="{StaticResource OpionsPageBrush}">
 
+        <ScrollViewer HorizontalScrollMode="Disabled"
+                      VerticalScrollMode="Auto">
+            <ItemsControl ItemsSource="{x:Bind Items,Mode=OneWay}" Margin="64" HorizontalAlignment="Center">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <controls:WrapPanel HorizontalSpacing="48" VerticalSpacing="48"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Click="OnSelectVisual">
+
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
     </Grid>
+
 </UserControl>

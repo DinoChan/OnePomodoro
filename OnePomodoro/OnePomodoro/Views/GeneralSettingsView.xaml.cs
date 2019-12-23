@@ -23,8 +23,34 @@ namespace OnePomodoro.Views
         public GeneralSettingsView()
         {
             this.InitializeComponent();
+            Loaded += GeneralSettingsView_Loaded;
+        }
+
+        private void GeneralSettingsView_Loaded(object sender, RoutedEventArgs e)
+        {
+          
         }
 
         private GeneralSettingsViewModel ViewModel => DataContext as GeneralSettingsViewModel;
+
+        private void OnDefaultPomodoroLengthClick(object sender, RoutedEventArgs e)
+        {
+            ViewModel.Settings.PomodoroLength = 25;
+        }
+
+        private void OnDefaultShortBreakLengthClick(object sender, RoutedEventArgs e)
+        {
+            ViewModel.Settings.ShortBreakLength = 5;
+        }
+
+        private void OnDefaultLongBreakLengthClick(object sender, RoutedEventArgs e)
+        {
+            ViewModel.Settings.LongBreakLength= 15;
+        }
+
+        private void OnDefaultLongBreakAfterClick(object sender, RoutedEventArgs e)
+        {
+            ViewModel.Settings.LongBreakAfter = 4;
+        }
     }
 }

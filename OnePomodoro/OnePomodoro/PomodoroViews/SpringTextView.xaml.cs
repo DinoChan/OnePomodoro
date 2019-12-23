@@ -27,6 +27,9 @@ namespace OnePomodoro.PomodoroViews
     /// </summary>
     [Title("SpringText")]
     [Screenshot("/Assets/Screenshots/SpringText.png")]
+    [FunctionTags(Tags.SpringAnimation)]
+    [CompactOverlay]
+    [SourceCode("https://github.com/DinoChan/OnePomodoro/blob/master/OnePomodoro/OnePomodoro/PomodoroViews/SpringTextView.xaml.cs")]
     public sealed partial class SpringTextView : PomodoroView
     {
         private readonly Compositor _compositor;
@@ -84,16 +87,16 @@ namespace OnePomodoro.PomodoroViews
 
         private void UpdateOffset()
         {
-            var y = (float)(ContentArea.ActualHeight - FocusElement.ActualHeight) / 2;
+            var y = 0;
             if (ViewModel.IsInPomodoro)
             {
-                StartOffsetAnimation(_focusVisual, new Vector2((float)(ContentArea.ActualWidth - FocusElement.ActualWidth) / 2, y));
-                StartOffsetAnimation(_relaxVisual, new Vector2((float)(ContentArea.ActualWidth + RelaxElement.ActualWidth), y));
+                StartOffsetAnimation(_focusVisual, new Vector2(0, y));
+                StartOffsetAnimation(_relaxVisual, new Vector2((float)(ContentArea.ActualWidth * 3), y));
             }
             else
             {
-                StartOffsetAnimation(_focusVisual, new Vector2(-(float)(RelaxElement.ActualWidth) * 2, y));
-                StartOffsetAnimation(_relaxVisual, new Vector2((float)(ContentArea.ActualWidth - RelaxElement.ActualWidth) / 2, y));
+                StartOffsetAnimation(_focusVisual, new Vector2(-(float)(ContentArea.ActualWidth) * 3, y));
+                StartOffsetAnimation(_relaxVisual, new Vector2(0, y));
             }
         }
 

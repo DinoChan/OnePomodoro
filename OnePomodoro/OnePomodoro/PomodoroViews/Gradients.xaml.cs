@@ -25,6 +25,9 @@ namespace OnePomodoro.PomodoroViews
 {
     [Title("Gradients")]
     [Screenshot("/Assets/Screenshots/Gradients.png")]
+    [CompactOverlay]
+    [FunctionTags(Tags.CompositionAnimation,Tags.CompositionLinearGradientBrush)]
+    [SourceCode("https://github.com/DinoChan/OnePomodoro/blob/master/OnePomodoro/OnePomodoro/PomodoroViews/Gradients.xaml.cs")]
     public sealed partial class Gradients : PomodoroView
     {
 
@@ -89,6 +92,8 @@ namespace OnePomodoro.PomodoroViews
         {
             FocusText.Visibility = ViewModel.IsInPomodoro ? Visibility.Visible : Visibility.Collapsed;
             RelaxText.Visibility = ViewModel.IsInPomodoro ? Visibility.Collapsed : Visibility.Visible;
+            FocusTextCompact.Visibility = ViewModel.IsInPomodoro ? Visibility.Visible : Visibility.Collapsed;
+            RelaxTextCompact.Visibility = ViewModel.IsInPomodoro ? Visibility.Collapsed : Visibility.Visible;
         }
 
         private void UpdateGradients()

@@ -16,60 +16,91 @@
                     d:DesignHeight="900"
                     d:DesignWidth="1920">
     <Grid x:Name="Root">
-        <Rectangle x:Name="RootBackground"/>
-        <Grid >
+        <Rectangle x:Name="RootBackground" />
+        <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <Grid HorizontalAlignment="Center" Height="32">
-                <TextBlock Text="OnePomodoro" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+            <Grid HorizontalAlignment="Center"
+                  Height="32">
+                <TextBlock Text="OnePomodoro"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="16" />
             </Grid>
-            <Grid Grid.Row="1" x:Name="ContentArea" Background="#FF202020">
-                <TextBlock Text="o(*≧▽≦)ツ" FontFamily="Arial" x:Name="FocusElement" FontSize="72" HorizontalAlignment="Left" VerticalAlignment="Top">
-                    <TextBlock.Foreground>
-                        <LinearGradientBrush EndPoint="0,0" StartPoint="1,1">
-                            <GradientStop Color="#FFf093fb" Offset="0"/>
-                            <GradientStop Color="#FFf5576c" Offset="1"/>
-                        </LinearGradientBrush>
-                    </TextBlock.Foreground>
-                </TextBlock>
-                <TextBlock Text="╮( •́ω•̀ )╭" FontFamily="Arial" x:Name="RelaxElement" FontSize="72" HorizontalAlignment="Left" VerticalAlignment="Top">
-                        <TextBlock.Foreground>
-                            <LinearGradientBrush EndPoint="0,0" StartPoint="1,1">
-                            <GradientStop Color="#FF4b8dbf" Offset="0"/>
-                            <GradientStop Color="#FFa78ee9" Offset="1"/>
-                            </LinearGradientBrush>
-                        </TextBlock.Foreground>
-                </TextBlock>
+            <Grid Grid.Row="1"
+                  x:Name="ContentArea"
+                  Background="#FF202020">
+                <Viewbox
+                         StretchDirection="DownOnly">
+                    <Grid 
+                          Margin="40,0">
+                        <TextBlock Text="o(*≧▽≦)ツ"
+                                   FontFamily="Arial"
+                                   x:Name="FocusElement"
+                                   FontSize="72"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top">
+                            <TextBlock.Foreground>
+                                <LinearGradientBrush EndPoint="0,0"
+                                                     StartPoint="1,1">
+                                    <GradientStop Color="#FFf093fb"
+                                                  Offset="0" />
+                                    <GradientStop Color="#FFf5576c"
+                                                  Offset="1" />
+                                </LinearGradientBrush>
+                            </TextBlock.Foreground>
+                        </TextBlock>
+                        <TextBlock Text="╮( •́ω•̀ )╭"
+                                   FontFamily="Arial"
+                                   x:Name="RelaxElement"
+                                   FontSize="72"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top">
+                            <TextBlock.Foreground>
+                                <LinearGradientBrush EndPoint="0,0"
+                                                     StartPoint="1,1">
+                                    <GradientStop Color="#FF4b8dbf"
+                                                  Offset="0" />
+                                    <GradientStop Color="#FFa78ee9"
+                                                  Offset="1" />
+                                </LinearGradientBrush>
+                            </TextBlock.Foreground>
+                        </TextBlock>
+                    </Grid>
+                </Viewbox>
             </Grid>
-            <Grid Height="32" Grid.Row="2">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid Height="32"
+                  Grid.Row="2">
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
                     <controls:PomodoroStateButton Grid.Row="2"
                                                   VerticalAlignment="Center"
                                                   Style="{StaticResource SmallButton}"
                                                   StartCommand="{Binding StartTimerCommand}"
                                                   StopCommand="{Binding StopTimerCommand}"
                                                   IsInPomodoro="{x:Bind ViewModel.IsInPomodoro}"
-                                                  IsTimerInProgress="{x:Bind ViewModel.IsTimerInProgress}"/>
+                                                  IsTimerInProgress="{x:Bind ViewModel.IsTimerInProgress}" />
                     <TextBlock Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
-                           x:Name="InWorkCountDown"
+                               x:Name="InWorkCountDown"
                                VerticalAlignment="Center"
-                           FontFamily="{StaticResource TimeFont}"
-                           FontSize="20"
-                           Foreground="White"
-                           Margin="8,0,0,2"
-                           Visibility="{Binding IsInPomodoro,Converter={StaticResource BoolToVisibilityConverter}}"/>
+                               FontFamily="{StaticResource TimeFont}"
+                               FontSize="20"
+                               Foreground="White"
+                               Margin="8,0,0,2"
+                               Visibility="{Binding IsInPomodoro,Converter={StaticResource BoolToVisibilityConverter}}" />
 
                     <TextBlock Text="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
-                           x:Name="BreakCountDown"
+                               x:Name="BreakCountDown"
                                VerticalAlignment="Center"
-                          FontSize="20"
-                           FontFamily="{StaticResource TimeFont}"
-                           Foreground="White"
+                               FontSize="20"
+                               FontFamily="{StaticResource TimeFont}"
+                               Foreground="White"
                                Margin="8,0,0,2"
-                           Visibility="{Binding IsInPomodoro,Converter={StaticResource NegationBoolToVisibilityConverter}}"/>
+                               Visibility="{Binding IsInPomodoro,Converter={StaticResource NegationBoolToVisibilityConverter}}" />
 
                 </StackPanel>
             </Grid>
