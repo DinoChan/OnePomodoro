@@ -42,3 +42,7 @@ Add some Pomodoros.
 **2019-12-6 v1.13:**
 
 Can auto start next timer.
+
+**2019-12-23 v1.14:**
+
+Mak most pomodoros pinable.
