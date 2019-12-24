@@ -52,7 +52,7 @@
         <Grid>
             <Grid x:Name="NormalView" >
 
-                <StackPanel Orientation="Horizontal" 
+                <StackPanel Orientation="Horizontal"
                             MinWidth="690"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center">
