@@ -47,6 +47,7 @@
         <Grid Grid.Row="1"
               Background="#FF1F1F1F">
             <StackPanel HorizontalAlignment="Center"
+                        x:Name="NormalView"
                         Margin="40"
                        >
                 <TextBlock Text="OnePomodoro"
@@ -163,7 +164,7 @@
             </StackPanel>
 
             <Viewbox x:Name="CompactView"
-                     StretchDirection="DownOnly"
+                   
                      IsHitTestVisible="False"
                      Opacity="0">
                 <controls:FlipSide Height="150"
