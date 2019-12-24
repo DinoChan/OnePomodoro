@@ -14,22 +14,23 @@ namespace OnePomodoro.Helpers
 {
     public class IsCompactOverlayModeTrigger : StateTriggerBase
     {
-        public IsCompactOverlayModeTrigger()
-        {
-            var view = ApplicationView.GetForCurrentView();
-            SetActive(view.IsFullScreenMode);
+        private FrameworkElement _targetElement;
 
-            var content = Window.Current.Content as FrameworkElement;
-            if (content == null)
-                Window.Current.SizeChanged += OnWindowSIzeChanged;
-            else
-                content.SizeChanged += OnSizeChanged;
-        }
-
-        private void OnWindowSIzeChanged(object sender, Windows.UI.Core.WindowSizeChangedEventArgs e)
+        public FrameworkElement TargetElement
         {
-            var content = Window.Current.Content as FrameworkElement;
-            content.SizeChanged += OnSizeChanged;
+            get
+            {
+                return _targetElement;
+            }
+            set
+            {
+                if (_targetElement != null)
+                {
+                    _targetElement.SizeChanged -= OnSizeChanged;
+                }
+                _targetElement = value;
+                _targetElement.SizeChanged += OnSizeChanged;
+            }
         }
 
         private void OnSizeChanged(object sender, SizeChangedEventArgs e)
