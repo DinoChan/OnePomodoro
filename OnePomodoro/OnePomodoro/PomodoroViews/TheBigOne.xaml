@@ -111,7 +111,7 @@
                                FontFamily="{StaticResource TimeFont}"
                                Foreground="White" />
                 </Grid>
-                    <controls:PomodoroStateButton  Margin="45,0,35,-80"
+                    <controls:PomodoroStateButton  Margin="45,-00,35,0"
                                                    HorizontalAlignment="Center"
                                                    VerticalAlignment="Bottom" 
                                                    StartCommand="{Binding StartTimerCommand}"
