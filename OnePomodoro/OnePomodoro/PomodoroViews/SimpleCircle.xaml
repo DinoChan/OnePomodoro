@@ -105,7 +105,7 @@
                         </StackPanel>
                     </Grid>
 
-                    <controls:PomodoroStateButton Margin="0,270,0,0"
+                    <controls:PomodoroStateButton Margin="0,370,0,0"
                                                   HorizontalAlignment="Center"
                                                   VerticalAlignment="Center"
                                                   Height="120"

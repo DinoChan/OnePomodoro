@@ -1,0 +1,157 @@
+﻿<local:PomodoroView x:Class="OnePomodoro.PomodoroViews.AudioCall"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="using:OnePomodoro.PomodoroViews"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    mc:Ignorable="d"
+                    xmlns:converters="using:Microsoft.Toolkit.Uwp.UI.Converters"
+                    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
+                    xmlns:viewModels="using:OnePomodoro.ViewModels"
+                    xmlns:helpers="using:OnePomodoro.Helpers"
+                    xmlns:controls="using:OnePomodoro.Controls"
+                    xmlns:controls1="using:Microsoft.Toolkit.Uwp.UI.Controls"
+                    x:DefaultBindMode="OneWay"
+                    d:DataContext="{d:DesignInstance Type=viewModels:PomodoroViewModel}"
+                    RequestedTheme="Dark"
+                    d:DesignHeight="1200"
+                    d:DesignWidth="1920">
+    <UserControl.Resources>
+
+        <SolidColorBrush x:Name="Background"
+                         Color="#35343b" />
+        <converters:BoolToObjectConverter TrueValue="Top"
+                                          FalseValue="Bottom"
+                                          x:Key="BoolToVerticalAlignmentConverter" />
+        <converters:BoolToObjectConverter TrueValue="Left"
+                                          FalseValue="Right"
+                                          x:Key="BoolToVerticalHorizontalAlignment" />
+        <Storyboard x:Name="Storyboard1"
+                    RepeatBehavior="Forever">
+            <DoubleAnimation Duration="00:00:00.7000000"
+                             Storyboard.TargetName="BackgroundFill"
+                             Storyboard.TargetProperty="(UIElement.Opacity)"
+                             To="0" />
+            <DoubleAnimation Duration="00:00:00.5000000"
+                             Storyboard.TargetName="FrontShadow"
+                             Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)"
+                             To="-20" />
+            <DoubleAnimation Duration="00:00:00.5000000"
+                             Storyboard.TargetName="FrontShadow"
+                             Storyboard.TargetProperty="(UIElement.Opacity)"
+                             To="0" />
+
+
+            <DoubleAnimation Duration="00:00:00.8000000"
+                             Storyboard.TargetName="ShadowSource"
+                             Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)"
+                             To="0.92">
+                <DoubleAnimation.EasingFunction>
+                    <QuarticEase EasingMode="EaseInOut" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Duration="00:00:00.8000000"
+                             Storyboard.TargetName="ShadowSource"
+                             Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)"
+                             To="0.92">
+                <DoubleAnimation.EasingFunction>
+                    <QuadraticEase EasingMode="EaseInOut" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Duration="00:00:00.8000000"
+                             Storyboard.TargetName="dropShadowPanel"
+                             Storyboard.TargetProperty="(UIElement.Opacity)"
+                             To="0" />
+            <DoubleAnimationUsingKeyFrames EnableDependentAnimation="True"
+                                           Storyboard.TargetName="dropShadowPanel2"
+                                           Storyboard.TargetProperty="(DropShadowPanel.BlurRadius)">
+                <EasingDoubleKeyFrame KeyTime="00:00:2"
+                                      Value="0" />
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimation Duration="00:00:2"
+                             Storyboard.TargetName="dropShadowPanel2"
+                             Storyboard.TargetProperty="(UIElement.Opacity)"
+                             To="0.3" />
+
+
+        </Storyboard>
+
+    </UserControl.Resources>
+    <Grid x:Name="ContentArea">
+
+        <Grid Grid.Row="1"
+              Background="{StaticResource Background}">
+            <Rectangle Fill="#373644"
+                       x:Name="BackgroundFill" />
+            <Viewbox MaxHeight="1000"
+                     MaxWidth="1000"
+                     StretchDirection="DownOnly">
+                <Grid Height="280"
+                      Width="280">
+                    <Grid Height="208"
+                          Width="208"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center">
+
+
+
+
+                        <Grid>
+
+                            <controls:DropShadowPanel x:Name="dropShadowPanel"
+                                                      RelativeElement="{Binding ElementName=BackgroundEllipse}"
+                                                      controls:DropShadowPanel.BlurRadius="400"
+                                                      controls:DropShadowPanel.Color="#9ea2ff" />
+
+                            <controls:DropShadowPanel RelativeElement="{Binding ElementName=BackgroundEllipse}"
+                                                      controls:DropShadowPanel.BlurRadius="64"
+                                                      x:Name="FrontShadow"
+                                                      controls:DropShadowPanel.ShadowOpacity="0.8"
+                                                      controls:DropShadowPanel.OffsetY="20"
+                                                      controls:DropShadowPanel.Color="Black"
+                                                      RenderTransformOrigin="0.5,0.5">
+                                <controls:DropShadowPanel.RenderTransform>
+                                    <CompositeTransform />
+                                </controls:DropShadowPanel.RenderTransform>
+                            </controls:DropShadowPanel>
+
+
+                            <Grid x:Name="ShadowSource"
+                                  RenderTransformOrigin="0.5,0.5">
+                                <Grid.RenderTransform>
+                                    <CompositeTransform />
+                                </Grid.RenderTransform>
+                                <controls1:DropShadowPanel x:Name="dropShadowPanel2"
+                                                           Color="#9ea2ff"
+                                                           BlurRadius="800">
+                                    <Ellipse Margin="1"
+                                             x:Name="BackgroundEllipse"
+                                             Fill="{StaticResource Background}" />
+                                </controls1:DropShadowPanel>
+                                <controls1:RadialProgressBar Foreground="#9ea2ff"
+                                                             Value="100"
+                                                             Thickness="4" />
+                            </Grid>
+
+                            <Ellipse Margin="7"
+                                     Fill="#e6eddd" />
+                        </Grid>
+                        <controls:TimeAndButtonSwitcher Foreground="#4c6135" />
+                        <controls:PomodoroStateButton Margin="0,370,0,0"
+                                                      HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"
+                                                      Height="120"
+                                                      Width="120"
+                                                      PomodoroColor="{StaticResource InworkColor}"
+                                                      BreakColor="{StaticResource BreakColor}"
+                                                      StartCommand="{Binding StartTimerCommand}"
+                                                      StopCommand="{Binding StopTimerCommand}"
+                                                      IsInPomodoro="{x:Bind ViewModel.IsInPomodoro}"
+                                                      IsTimerInProgress="{x:Bind ViewModel.IsTimerInProgress}" />
+                    </Grid>
+                </Grid>
+            </Viewbox>
+
+        </Grid>
+    </Grid>
+</local:PomodoroView>

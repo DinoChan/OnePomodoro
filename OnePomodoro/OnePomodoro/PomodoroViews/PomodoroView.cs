@@ -24,6 +24,7 @@ namespace OnePomodoro.PomodoroViews
 
         public static IEnumerable<Type> Views { get; } = new List<Type>
         {
+            typeof(AudioCall),
             typeof(TheFirst),
             typeof(TheBigOne),
             typeof(SimpleCircle),
@@ -39,7 +40,6 @@ namespace OnePomodoro.PomodoroViews
             typeof(SplitTo5View),
             typeof(EllipseClipView),
             typeof(DoNotDisturbView),
-            
         };
 
     }

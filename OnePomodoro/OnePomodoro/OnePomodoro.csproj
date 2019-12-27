@@ -189,6 +189,9 @@
     <Compile Include="PomodoroViews\ShadowTextView.xaml.cs">
       <DependentUpon>ShadowTextView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PomodoroViews\AudioCall.xaml.cs">
+      <DependentUpon>AudioCall.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PomodoroViews\SplitTo5View.xaml.cs">
       <DependentUpon>SplitTo5View.xaml</DependentUpon>
     </Compile>
@@ -300,6 +303,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="PomodoroViews\ShadowTextView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PomodoroViews\AudioCall.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
