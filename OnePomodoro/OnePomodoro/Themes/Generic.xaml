@@ -813,8 +813,12 @@
                 Value="White" />
         <Setter Property="Background"
                 Value="Transparent" />
+        <Setter Property="FontSize"
+                Value="68" />
         <Setter Property="FontFamily"
                 Value="/Font/DINPro-Regular.otf#DINPro" />
+        <Setter Property="StateButtonLength"
+                Value="96" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:TimeAndButtonSwitcher">
@@ -871,24 +875,28 @@
 
                                 <TextBlock Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
                                            Visibility="{Binding IsInPomodoro,Converter={StaticResource BoolToVisibilityConverter}}"
-                                           FontSize="68"
                                            HorizontalAlignment="Center"
                                            x:Name="FocusCountdown" />
                                 <TextBlock Text="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
-                                           FontSize="68"
                                            HorizontalAlignment="Center"
                                            Visibility="{Binding IsInPomodoro,Converter={StaticResource NegationBoolToVisibilityConverter}}"
                                            x:Name="RelaxCountdown" />
                             </Grid>
                             <controls:PomodoroStateButton HorizontalAlignment="Center"
                                                           Style="{StaticResource LargeButton}"
+                                                          Height="{TemplateBinding StateButtonLength}"
+                                                          Width="{TemplateBinding StateButtonLength}"
+                                                          BreakColor="{TemplateBinding BreakColor}"
+                                                          PomodoroColor="{TemplateBinding PomodoroColor}"
+                                                          OutlineColor="{TemplateBinding OutlineColor}"
                                                           StartCommand="{Binding StartTimerCommand}"
                                                           StopCommand="{Binding StopTimerCommand}"
                                                           IsInPomodoro="{Binding IsInPomodoro}"
+                                                          Visibility="Collapsed"
                                                           IsTimerInProgress="{Binding IsTimerInProgress}"
                                                           VerticalAlignment="Center"
                                                           x:Name="StateButton"
-                                                          Visibility="Collapsed">
+                                                         >
                                 <animations:Implicit.HideAnimations>
                                     <animations:TranslationAnimation SetInitialValueBeforeDelay="True"
                                                                      From="0,0,0"

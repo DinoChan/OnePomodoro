@@ -26,36 +26,40 @@
         <converters:BoolToObjectConverter TrueValue="Left"
                                           FalseValue="Right"
                                           x:Key="BoolToVerticalHorizontalAlignment" />
-        <Storyboard x:Name="Storyboard1"
-                    RepeatBehavior="Forever">
-            <DoubleAnimation Duration="00:00:00.7000000"
+        <Storyboard x:Name="Storyboard1" AutoReverse="True"  BeginTime="0:0:20" Duration="0:0:3" 
+                    Completed="OnStoryboardCompleted">
+            <DoubleAnimation Duration="00:00:1"
                              Storyboard.TargetName="BackgroundFill"
                              Storyboard.TargetProperty="(UIElement.Opacity)"
-                             To="0" />
-            <DoubleAnimation Duration="00:00:00.5000000"
+                             To="0">
+                <DoubleAnimation.EasingFunction>
+                    <QuinticEase EasingMode="EaseIn" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Duration="00:00:0.5"
                              Storyboard.TargetName="FrontShadow"
                              Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)"
                              To="-20" />
-            <DoubleAnimation Duration="00:00:00.5000000"
+            <DoubleAnimation Duration="00:00:0.5"
                              Storyboard.TargetName="FrontShadow"
                              Storyboard.TargetProperty="(UIElement.Opacity)"
                              To="0" />
 
 
-            <DoubleAnimation Duration="00:00:00.8000000"
+            <DoubleAnimation Duration="00:00:1"
                              Storyboard.TargetName="ShadowSource"
                              Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)"
                              To="0.92">
                 <DoubleAnimation.EasingFunction>
-                    <QuarticEase EasingMode="EaseInOut" />
+                    <QuinticEase EasingMode="EaseIn" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
-            <DoubleAnimation Duration="00:00:00.8000000"
+            <DoubleAnimation Duration="00:00:1"
                              Storyboard.TargetName="ShadowSource"
                              Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)"
                              To="0.92">
                 <DoubleAnimation.EasingFunction>
-                    <QuadraticEase EasingMode="EaseInOut" />
+                    <QuarticEase EasingMode="EaseIn" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
             <DoubleAnimation Duration="00:00:00.8000000"
@@ -65,14 +69,13 @@
             <DoubleAnimationUsingKeyFrames EnableDependentAnimation="True"
                                            Storyboard.TargetName="dropShadowPanel2"
                                            Storyboard.TargetProperty="(DropShadowPanel.BlurRadius)">
-                <EasingDoubleKeyFrame KeyTime="00:00:2"
+                <EasingDoubleKeyFrame KeyTime="00:00:1.5"
                                       Value="0" />
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimation Duration="00:00:2"
                              Storyboard.TargetName="dropShadowPanel2"
                              Storyboard.TargetProperty="(UIElement.Opacity)"
                              To="0.3" />
-
 
         </Storyboard>
 
@@ -101,12 +104,13 @@
                             <controls:DropShadowPanel x:Name="dropShadowPanel"
                                                       RelativeElement="{Binding ElementName=BackgroundEllipse}"
                                                       controls:DropShadowPanel.BlurRadius="400"
-                                                      controls:DropShadowPanel.Color="#9ea2ff" />
+                                                      controls:DropShadowPanel.Color="#9ea2ff"
+                                                      d:IsHidden="True" />
 
                             <controls:DropShadowPanel RelativeElement="{Binding ElementName=BackgroundEllipse}"
-                                                      controls:DropShadowPanel.BlurRadius="64"
+                                                      controls:DropShadowPanel.BlurRadius="32"
                                                       x:Name="FrontShadow"
-                                                      controls:DropShadowPanel.ShadowOpacity="0.8"
+                                                      controls:DropShadowPanel.ShadowOpacity="0.7"
                                                       controls:DropShadowPanel.OffsetY="20"
                                                       controls:DropShadowPanel.Color="Black"
                                                       RenderTransformOrigin="0.5,0.5">
@@ -122,7 +126,7 @@
                                     <CompositeTransform />
                                 </Grid.RenderTransform>
                                 <controls1:DropShadowPanel x:Name="dropShadowPanel2"
-                                                           Color="#9ea2ff"
+                                                           Color="#9ea2ff" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                                                            BlurRadius="800">
                                     <Ellipse Margin="1"
                                              x:Name="BackgroundEllipse"
@@ -136,7 +140,9 @@
                             <Ellipse Margin="7"
                                      Fill="#e6eddd" />
                         </Grid>
-                        <controls:TimeAndButtonSwitcher Foreground="#4c6135" />
+                        <controls:TimeAndButtonSwitcher Foreground="#4c6135"
+                                                        PomodoroColor="#9ea2ff"
+                                                        BreakColor="#9ea2ff" />
                         <controls:PomodoroStateButton Margin="0,370,0,0"
                                                       HorizontalAlignment="Center"
                                                       VerticalAlignment="Center"

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -33,6 +34,12 @@ namespace OnePomodoro.PomodoroViews
 
         private void AudioCall_Loaded(object sender, RoutedEventArgs e)
         {
+            Storyboard1.Begin();
+        }
+
+        private  void OnStoryboardCompleted(object sender, object e)
+        {
+            //await Task.Delay(TimeSpan.FromSeconds(5));
             Storyboard1.Begin();
         }
 
