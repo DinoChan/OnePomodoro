@@ -7,6 +7,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Graphics.Printing;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -20,40 +21,85 @@ using Windows.UI.Xaml.Navigation;
 namespace OnePomodoro.PomodoroViews
 {
     [Title("Audio Call")]
-    [Screenshot("/Assets/Screenshots/SimpleCircle.png")]
+    [Screenshot("/Assets/Screenshots/AudioCall.png")]
     [CompactOverlay]
     [SourceCode("https://github.com/DinoChan/OnePomodoro/blob/master/OnePomodoro/OnePomodoro/PomodoroViews/AudioCall.xaml.cs")]
     public sealed partial class AudioCall : PomodoroView
     {
+
+        private bool _stopUpdateProgress;
+        private bool _hasLoaded;
+
         public AudioCall() : base()
         {
             InitializeComponent();
-           
+
             Loaded += AudioCall_Loaded;
+            ViewModel.IsInPomodoroChanged += OnIsInPomodoroChanged;
+            ViewModel.RemainingPomodoroTimeChanged += OnRemainingPomodoroTimeChanged;
+            ViewModel.RemainingBreakTimeChanged += OnRemainingBreakTimeChanged;
+            UpdateProgress();
+            UpdateVisualState();
         }
 
         private void AudioCall_Loaded(object sender, RoutedEventArgs e)
         {
-            Storyboard1.Begin();
+            Loaded -= AudioCall_Loaded;
+            _hasLoaded = true;
+            BreathingLightsStoryboard.Begin();
         }
 
-        private  void OnStoryboardCompleted(object sender, object e)
+        private async void OnIsInPomodoroChanged(object sender, EventArgs e)
+        {
+            ProgressBar.Value = 0;
+            _stopUpdateProgress = true;
+            try
+            {
+                UpdateVisualState();
+                await Task.Delay(TimeSpan.FromSeconds(1));
+            }
+            finally
+            {
+                _stopUpdateProgress = false;
+            }
+            UpdateProgress();
+        }
+
+        private void UpdateVisualState()
+        {
+            VisualStateManager.GoToState(this, ViewModel.IsInPomodoro ? "InPomodoro" : "InBreak", _hasLoaded);
+        }
+
+        private void OnStoryboardCompleted(object sender, object e)
         {
             //await Task.Delay(TimeSpan.FromSeconds(5));
-            Storyboard1.Begin();
+            BreathingLightsStoryboard.Begin();
         }
 
-        //private void OnRemainingPomodoroTimeChanged(object sender, EventArgs e)
-        //{
-        //    InworkEllipseTransform.Angle = 360 * (ViewModel.TotalPomodoroTime - ViewModel.RemainingPomodoroTime).TotalMilliseconds / ViewModel.TotalPomodoroTime.TotalMilliseconds;
-        //}
+        private void OnRemainingPomodoroTimeChanged(object sender, EventArgs e)
+        {
+            UpdateProgress();
+        }
 
-        //private void OnRemainingBreakTimeChanged(object sender, EventArgs e)
-        //{
-        //    if (ViewModel.TotalBreakTime.TotalMilliseconds == 0)
-        //        BreakEllipseTransform.Angle = 0;
-        //    else
-        //        BreakEllipseTransform.Angle = 360 * (ViewModel.TotalBreakTime - ViewModel.RemainingBreakTime).TotalMilliseconds / ViewModel.TotalBreakTime.TotalMilliseconds;
-        //}
+        private void OnRemainingBreakTimeChanged(object sender, EventArgs e)
+        {
+            UpdateProgress();
+
+            //if (ViewModel.TotalBreakTime.TotalMilliseconds == 0)
+            //    ProgressBar.Value = 0;
+            //else
+
+        }
+
+        private void UpdateProgress()
+        {
+            if (_stopUpdateProgress)
+                return;
+
+            if (ViewModel.IsInPomodoro)
+                ProgressBar.Value = Math.Round(ViewModel.RemainingPomodoroTime.TotalSeconds) / ViewModel.TotalPomodoroTime.TotalSeconds;
+            else
+                ProgressBar.Value = Math.Round(ViewModel.RemainingBreakTime.TotalSeconds) / ViewModel.TotalBreakTime.TotalSeconds;
+        }
     }
 }
