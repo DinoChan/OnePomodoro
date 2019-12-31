@@ -17,7 +17,11 @@
                     d:DesignHeight="1200"
                     d:DesignWidth="1920">
     <UserControl.Resources>
-
+        <Color x:Key="RedBackground">#422D3E</Color>
+        <Color x:Key="RedForeground">#CC6AC4</Color>
+        
+        <Color x:Key="BlueBackground">#373644</Color>
+        <Color x:Key="BlueForeground">#9ea2ff</Color>
         <SolidColorBrush x:Name="Background"
                          Color="#35343b" />
         <converters:BoolToObjectConverter TrueValue="Top"
@@ -111,17 +115,17 @@
                                             Storyboard.TargetName="BrushBridge"
                                             Storyboard.TargetProperty="Color"
                                             Duration="0:0:1"
-                                            To="#FFD91153" />
+                                            To="{StaticResource RedForeground}" />
                             <ColorAnimation EnableDependentAnimation="True"
                                             Storyboard.TargetName="BackgroundFill"
                                             Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
                                             Duration="0:0:2"
-                                            To="#47363b" />
+                                            To="{StaticResource RedBackground}" />
                             <ColorAnimation EnableDependentAnimation="True"
                                             Storyboard.TargetName="LayoutRoot"
                                             Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)"
                                             Duration="0:0:2"
-                                            To="#47363b" />
+                                            To="{StaticResource RedBackground}" />
                         </Storyboard>
                     </VisualTransition>
                     <VisualTransition To="InBreak">
@@ -166,21 +170,21 @@
                 <VisualState x:Name="InPomodoro">
                     <VisualState.Setters>
                         <Setter Target="BrushBridge.Color"
-                                Value="#FFD91153" />
+                                Value="{StaticResource RedForeground}" />
                         <Setter Target="BackgroundFill.Fill"
-                                Value="#47363b" />
+                                Value="{StaticResource RedBackground}" />
                         <Setter Target="LayoutRoot.Background"
-                                Value="#47363b" />
+                                Value="{StaticResource RedBackground}" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="InBreak">
                     <VisualState.Setters>
                         <Setter Target="BrushBridge.Color"
-                                Value="#9ea2ff" />
+                                Value="{StaticResource BlueForeground}" />
                         <Setter Target="BackgroundFill.Fill"
-                                Value="#373644" />
+                                Value="{StaticResource BlueBackground}" />
                         <Setter Target="LayoutRoot.Background"
-                                Value="#373644" />
+                                Value="{StaticResource BlueBackground}" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -198,12 +202,12 @@
             
         </VisualStateManager.VisualStateGroups>
         <helpers:SolidColorBrushBridge x:Name="BrushBridge"
-                                       Color="#FFD91153" />
+                                       Color="{StaticResource RedForeground}" />
         <Grid Grid.Row="1" 
               x:Name="LayoutRoot"
-              Background="#47363b">
+              Background="{StaticResource RedBackground}">
 
-            <Rectangle Fill="#47363b"
+            <Rectangle Fill="{StaticResource RedBackground}"
                        x:Name="BackgroundFill" />
             <Viewbox MaxHeight="1000"
                      MaxWidth="1000"
@@ -214,8 +218,6 @@
                           Width="208"
                           HorizontalAlignment="Center"
                           VerticalAlignment="Center">
-
-
 
 
                         <Grid>
@@ -268,8 +270,8 @@
                                      Fill="#e6eddd" />
                         </Grid>
                         <controls:TimeAndButtonSwitcher Foreground="#4c6135"
-                                                        PomodoroColor="#FFD91153"
-                                                        BreakColor="#9ea2ff" />
+                                                        PomodoroColor="{StaticResource RedForeground}"
+                                                        BreakColor="{StaticResource BlueForeground}" />
                         <Grid Margin="0,0,0,-350" x:Name="TitlePanel">
                             <controls1:DropShadowPanel HorizontalAlignment="Center"
                                                        VerticalAlignment="Center"
