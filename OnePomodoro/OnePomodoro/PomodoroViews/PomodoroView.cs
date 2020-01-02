@@ -24,13 +24,13 @@ namespace OnePomodoro.PomodoroViews
 
         public static IEnumerable<Type> Views { get; } = new List<Type>
         {
+            typeof(LongShadow),
             typeof(AudioCall),
             typeof(TheFirst),
             typeof(TheBigOne),
             typeof(SimpleCircle),
             typeof(Gradients),
             typeof(GradientsWithBlend),
-            typeof(LongShadow),
             typeof(SpringTextView),
             typeof(KonosubaView),
             typeof(HiddenTextView),

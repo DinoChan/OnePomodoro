@@ -81,8 +81,10 @@ namespace OnePomodoro
             };
             NotificationManager.Current.RemoveBreakFinishedToastNotificationSchedule();
             NotificationManager.Current.RemovePomodoroFinishedToastNotificationSchedule();
+            //var dialog = new Views.FirstRunDialog();
+            //await dialog.ShowAsync();
             //await Container.Resolve<IWhatsNewDisplayService>().ShowIfAppropriateAsync();
-            //await Container.Resolve<IFirstRunDisplayService>().ShowIfAppropriateAsync();
+            await Container.Resolve<IFirstRunDisplayService>().ShowIfAppropriateAsync();
             //Container.Resolve<ILiveTileService>().SampleUpdate();
             //Container.Resolve<IToastNotificationsService>().ShowToastNotificationSample();
         }

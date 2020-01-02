@@ -46,3 +46,8 @@ Can auto start next timer.
 **2019-12-23 v1.14:**
 
 Mak most pomodoros pinable.
+
+**2020-01-04 v1.15:**
+
+Add One Pomodoro.
+Add teachtips.
