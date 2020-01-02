@@ -32,7 +32,7 @@ If you have any questions or suggestions, please leave your feedback in the Stor
 
 ![](https://raw.githubusercontent.com/DinoChan/OnePomodoro/master/longshadow.gif)
 
-![](https://raw.githubusercontent.com/DinoChan/OnePomodoro/master/outline_and_light.gif)
+![](https://raw.githubusercontent.com/DinoChan/OnePomodoro/master/do_not_disturb.gif)
 
 ![](https://raw.githubusercontent.com/DinoChan/OnePomodoro/master/clip.gif)
 
