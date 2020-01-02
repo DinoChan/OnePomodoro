@@ -26,11 +26,16 @@ If you have any questions or suggestions, please leave your feedback in the Stor
 
 ## Preview
 
-![](https://raw.githubusercontent.com/DinoChan/OnePomodoro/master/TheFirst.png?_sm_au_=iVVWJ65DN15Rbq16)
+![](https://raw.githubusercontent.com/DinoChan/OnePomodoro/develop/overview.png)
 
-![](https://raw.githubusercontent.com/DinoChan/OnePomodoro/master/Gradients.png?_sm_au_=iVVWJ65DN15Rbq16)
+![](https://raw.githubusercontent.com/DinoChan/OnePomodoro/develop/pomodoros.png)
 
-![](https://raw.githubusercontent.com/DinoChan/OnePomodoro/master/GradientsWithBlend.gif?_sm_au_=iVVsWSPq4vSjMZq6)
+![](https://raw.githubusercontent.com/DinoChan/OnePomodoro/develop/longshadow.gif)
+
+![](https://raw.githubusercontent.com/DinoChan/OnePomodoro/develop/outline_and_light.gif)
+
+![](https://raw.githubusercontent.com/DinoChan/OnePomodoro/develop/clip.gif)
+
 
 ## License
 
