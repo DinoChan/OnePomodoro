@@ -28,7 +28,7 @@ If you have any questions or suggestions, please leave your feedback in the Stor
 
 ![](https://raw.githubusercontent.com/DinoChan/OnePomodoro/master/overview.png)
 
-![](https://raw.githubusercontent.com/DinoChan/OnePomodoro/master/pomodoros.png)
+![](https://raw.githubusercontent.com/DinoChan/OnePomodoro/master/pomodoros2.png)
 
 ![](https://raw.githubusercontent.com/DinoChan/OnePomodoro/master/longshadow.gif)
 
