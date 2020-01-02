@@ -235,4 +235,43 @@ Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Ma
   <data name="OptionsPageTitleTextBlock.Text" xml:space="preserve">
     <value>OnePomodoro</value>
   </data>
+  <data name="Teach1Description" xml:space="preserve">
+    <value>OnePomodoro is a timer for Pomodoro Technique that lets you focus on work for 25 minutes.</value>
+  </data>
+  <data name="Teach1Title" xml:space="preserve">
+    <value>Focus on work</value>
+  </data>
+  <data name="Teach2Description" xml:space="preserve">
+    <value>After 25 minutes of focusing (a Pomodoro), don't forget to take a 5-minute break and take a long break (15 minutes) after working 4 Pomodoros.</value>
+  </data>
+  <data name="Teach2Title" xml:space="preserve">
+    <value>Take a break</value>
+  </data>
+  <data name="Teach3Description" xml:space="preserve">
+    <value>You can change work and rest times through settings, and you can change notification settings.</value>
+  </data>
+  <data name="Teach3Title" xml:space="preserve">
+    <value>Time and notification settings</value>
+  </data>
+  <data name="Teach4Description" xml:space="preserve">
+    <value>OnePomodoro offers a variety of pomodoros to make your job less boring.</value>
+  </data>
+  <data name="Teach4Title" xml:space="preserve">
+    <value>Pomodoros setting</value>
+  </data>
+  <data name="Teach5Description" xml:space="preserve">
+    <value>Most pomodoros offer Pinable mode, which means they can always on top.</value>
+  </data>
+  <data name="Teach5Title" xml:space="preserve">
+    <value>Pinable mode</value>
+  </data>
+  <data name="Teach6Description" xml:space="preserve">
+    <value>More tips on the Pomodoro Technique are available on the `About` page.</value>
+  </data>
+  <data name="Teach6Title" xml:space="preserve">
+    <value>More tips</value>
+  </data>
+  <data name="TryThisAppButton.Content" xml:space="preserve">
+    <value>Try This App</value>
+  </data>
 </root>

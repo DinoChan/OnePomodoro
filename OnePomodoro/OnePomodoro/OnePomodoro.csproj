@@ -129,6 +129,7 @@
   </ItemGroup>
   <ItemGroup>
     <PRIResource Include="Strings\en-us\Resources.resw" />
+    <PRIResource Include="Strings\zh-cn\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -139,6 +140,7 @@
     <Compile Include="Controls\DropShadowPanel.cs" />
     <Compile Include="Controls\DropShadowPanel.Properties.cs" />
     <Compile Include="Controls\ElementDecorator.cs" />
+    <Compile Include="Controls\FirstRunFlipView.cs" />
     <Compile Include="Controls\FlipSide.cs" />
     <Compile Include="Controls\InnerContentControl.cs" />
     <Compile Include="Controls\OutlinePanel.cs" />
@@ -155,6 +157,7 @@
     <Compile Include="Helpers\FunctionTagsAttribute.cs" />
     <Compile Include="Helpers\IsCompactOverlayModeTrigger.cs" />
     <Compile Include="Helpers\NotificationManager.cs" />
+    <Compile Include="Helpers\SolidColorBrushBridge.cs" />
     <Compile Include="Helpers\SourceCodeAttribute.cs" />
     <Compile Include="Media\TiledImageBrush.cs" />
     <Compile Include="Controls\TitleBar.xaml.cs">
@@ -188,6 +191,9 @@
     </Compile>
     <Compile Include="PomodoroViews\ShadowTextView.xaml.cs">
       <DependentUpon>ShadowTextView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PomodoroViews\AudioCall.xaml.cs">
+      <DependentUpon>AudioCall.xaml</DependentUpon>
     </Compile>
     <Compile Include="PomodoroViews\SplitTo5View.xaml.cs">
       <DependentUpon>SplitTo5View.xaml</DependentUpon>
@@ -300,6 +306,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="PomodoroViews\ShadowTextView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PomodoroViews\AudioCall.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -440,6 +450,7 @@
     <Content Include="Assets\LargeTile.scale-150.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />
     <Content Include="Assets\LargeTile.scale-400.png" />
+    <Content Include="Assets\Screenshots\AudioCall.png" />
     <Content Include="Assets\Screenshots\DoNotDisturb.png" />
     <Content Include="Assets\Screenshots\EllipseClip.png" />
     <Content Include="Assets\Screenshots\Gradients.png" />
@@ -486,6 +497,13 @@
     <Content Include="Assets\StoreLogo.scale-150.png" />
     <Content Include="Assets\StoreLogo.scale-200.png" />
     <Content Include="Assets\StoreLogo.scale-400.png" />
+    <Content Include="Assets\Teach\teach1.png" />
+    <Content Include="Assets\Teach\teach2.png" />
+    <Content Include="Assets\Teach\teach3.png" />
+    <Content Include="Assets\Teach\teach4.png" />
+    <Content Include="Assets\Teach\teach5.png" />
+    <Content Include="Assets\Teach\teach6.png" />
+    <Content Include="Assets\Teach\TeachBackground.jpg" />
     <Content Include="Assets\Wide310x150Logo.scale-100.png" />
     <Content Include="Assets\Wide310x150Logo.scale-125.png" />
     <Content Include="Assets\Wide310x150Logo.scale-150.png" />
@@ -510,7 +528,6 @@
   <ItemGroup>
     <None Include=".editorconfig" />
     <None Include="OnePomodoro_TemporaryKey.pfx" />
-    <PRIResource Include="Strings\zh-cn\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -532,6 +549,7 @@
       <Name>OnePomodoro.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

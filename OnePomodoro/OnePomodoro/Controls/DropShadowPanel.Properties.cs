@@ -2,6 +2,7 @@
 using Windows.UI;
 using Windows.UI.Composition;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace OnePomodoro.Controls
 {
@@ -17,7 +18,7 @@ namespace OnePomodoro.Controls
         /// Identifies the <see cref="Color"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty ColorProperty =
-            DependencyProperty.RegisterAttached("Color", typeof(Color), typeof(DropShadowPanel), new PropertyMetadata(Colors.Black, OnColorChanged));
+            DependencyProperty.Register("Color", typeof(Color), typeof(DropShadowPanel), new PropertyMetadata(Colors.Black, OnColorChanged));
 
         /// <summary>
         /// Identifies the <see cref="OffsetX"/> dependency property.

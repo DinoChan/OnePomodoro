@@ -38,9 +38,5 @@ namespace OnePomodoro.Helpers
             var view = ApplicationView.GetForCurrentView();
             SetActive(view.ViewMode == ApplicationViewMode.CompactOverlay);
         }
-
-
-
-
     }
 }

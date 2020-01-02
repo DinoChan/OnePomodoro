@@ -10,6 +10,9 @@ using System.Linq;
 using Windows.UI.ViewManagement;
 using OnePomodoro.Helpers;
 using Windows.UI.Xaml.Media.Animation;
+using Microsoft.Toolkit.Uwp.Helpers;
+using Microsoft.Toolkit.Uwp.UI.Controls.TextToolbarSymbols;
+using System.Collections.Generic;
 
 namespace OnePomodoro.Views
 {
@@ -25,6 +28,11 @@ namespace OnePomodoro.Views
 
         private CompactOverlayAttribute _currentCompactOverlayAttribute;
 
+#warning need 1903
+        //private List<TeachingTip> _teachingTip;
+
+        private static bool _isShown = false;
+
         public MainPage()
         {
             InitializeComponent();
@@ -32,6 +40,11 @@ namespace OnePomodoro.Views
             Window.Current.SizeChanged += OnWindowCurrentSizeChanged;
             //ChangePomodoroContent(typeof(TheFirst));
             Loaded += OnLoaded;
+        }
+
+        private bool DetectIfFirstRun()
+        {
+            return SystemInformation.IsFirstRun && !_isShown;
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
