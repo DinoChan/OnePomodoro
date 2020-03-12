@@ -841,7 +841,12 @@
                                 </VisualState>
 
                                 <VisualState x:Name="Pressed">
-
+                                    <VisualState.Setters>
+                                        <Setter Target="CountdownElement.Visibility"
+                                                Value="Collapsed" />
+                                        <Setter Target="StateButton.Visibility"
+                                                Value="Visible" />
+                                    </VisualState.Setters>
                                 </VisualState>
 
                                 <VisualState x:Name="Disabled">
