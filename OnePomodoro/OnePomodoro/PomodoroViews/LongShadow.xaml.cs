@@ -33,17 +33,17 @@ namespace OnePomodoro.PomodoroViews
         public LongShadow()
         {
             InitializeComponent();
-            MackLongShadow(108, 0.3f, InWorkCountDown, InworkBackground, Color.FromArgb(255, 232, 122, 105));
-            MackLongShadow(108, 0.3f, InWorkCountDownSecond, InworkSecondBackground, Color.FromArgb(255, 232, 122, 105));
+            MackLongShadow(188, 0.3f, InWorkCountDown, InworkBackground, Color.FromArgb(255, 250, 110, 93));
+            MackLongShadow(188, 0.3f, InWorkCountDownSecond, InworkSecondBackground, Color.FromArgb(255, 250, 110, 93));
 
-            MackLongShadow(108, 0.3f, BreakCountDown, BreakBackground, Color.FromArgb(255, 82, 113, 194));
-            MackLongShadow(108, 0.3f, BreakCountDownSecond, BreakSecondBackground, Color.FromArgb(255, 82, 113, 194));
+            MackLongShadow(188, 0.3f, BreakCountDown, BreakBackground, Color.FromArgb(255, 82, 113, 194));
+            MackLongShadow(188, 0.3f, BreakCountDownSecond, BreakSecondBackground, Color.FromArgb(255, 82, 113, 194));
 
-            MackLongShadow(108, 0.3f, CompactInWorkCountDown, CompactInworkBackground, Color.FromArgb(255, 232, 122, 105));
-            MackLongShadow(108, 0.3f, CompactInWorkCountDownSecond, CompactInworkSecondBackground, Color.FromArgb(255, 232, 122, 105));
+            MackLongShadow(188, 0.3f, CompactInWorkCountDown, CompactInworkBackground, Color.FromArgb(255, 250, 110, 93));
+            MackLongShadow(188, 0.3f, CompactInWorkCountDownSecond, CompactInworkSecondBackground, Color.FromArgb(255, 255, 110, 93));
 
-            MackLongShadow(108, 0.3f, CompactBreakCountDown, CompactBreakBackground, Color.FromArgb(255, 82, 113, 194));
-            MackLongShadow(108, 0.3f, CompactBreakCountDownSecond, CompactBreakSecondBackground, Color.FromArgb(255, 82, 113, 194));
+            MackLongShadow(188, 0.3f, CompactBreakCountDown, CompactBreakBackground, Color.FromArgb(255, 82, 113, 194));
+            MackLongShadow(188, 0.3f, CompactBreakCountDownSecond, CompactBreakSecondBackground, Color.FromArgb(255, 82, 113, 194));
 
             ViewModel.IsInPomodoroChanged += (s, e) =>
               {

@@ -20,8 +20,8 @@ namespace OnePomodoro.ViewModels
     /// </summary>
     public class PomodoroViewModel : ViewModelBase
     {
-        private TimeSpan PomodoroLength => TimeSpan.FromMinutes(SettingsService.Current == null ? 25 : SettingsService.Current.PomodoroLength);
-        private TimeSpan ShortBreakLength => TimeSpan.FromMinutes(SettingsService.Current == null ? 5 : SettingsService.Current.ShortBreakLength);
+        private TimeSpan PomodoroLength =>  TimeSpan.FromMinutes(SettingsService.Current == null ? 25 : SettingsService.Current.PomodoroLength);
+        private TimeSpan ShortBreakLength =>  TimeSpan.FromMinutes(SettingsService.Current == null ? 5 : SettingsService.Current.ShortBreakLength);
         private TimeSpan LongBreakLength => TimeSpan.FromMinutes(SettingsService.Current == null ? 15 : SettingsService.Current.LongBreakLength);
         private int LongBreakAfter => SettingsService.Current == null ? 4 : SettingsService.Current.LongBreakAfter;
 
@@ -60,7 +60,7 @@ namespace OnePomodoro.ViewModels
 
         private void OnLeavingBackground(object sender, LeavingBackgroundEventArgs e)
         {
-            if (CurrentTimer != null)
+            if (CurrentTimer != null && IsTimerInProgress)
                 CurrentTimer.CheckTime();
 
             if (IsTimerInProgress)
