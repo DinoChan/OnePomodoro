@@ -62,7 +62,7 @@
                                    Margin="0,24,0,0"
                                    x:Name="FlipSide">
                     <controls:FlipSide.Side1>
-                        <Grid   Background="#FFE87A69"
+                        <Grid   Background="#fd6e5d"
                                 x:Name="InworkElement"
                                 CornerRadius="1">
                             <Grid.RowDefinitions>
@@ -70,11 +70,12 @@
                                 <RowDefinition />
                                 <RowDefinition />
                             </Grid.RowDefinitions>
+
                             <TextBlock Text="Focus"
-                                       FontSize="48"
+                                       FontSize="56"
                                        HorizontalAlignment="Center"
                                        VerticalAlignment="Center"
-                                       FontWeight="Bold" />
+                                      />
 
 
                             <StackPanel Orientation="Horizontal"
@@ -120,10 +121,10 @@
                                 <RowDefinition />
                             </Grid.RowDefinitions>
                             <TextBlock Text="Relax"
-                                       FontSize="48"
+                                       FontSize="56"
                                        HorizontalAlignment="Center"
                                        VerticalAlignment="Center"
-                                       FontWeight="Bold" />
+                                      />
 
 
                             <StackPanel HorizontalAlignment="Center"
@@ -167,11 +168,11 @@
                    
                      IsHitTestVisible="False"
                      Opacity="0">
-                <controls:FlipSide Height="150"
+                <controls:FlipSide Height="130"
                                    Width="150"
                                    x:Name="CompactFlipSide">
                     <controls:FlipSide.Side1>
-                        <Grid   Background="#FFE87A69"
+                        <Grid   Background="#fd6e5d"
                                 x:Name="CompactInworkElement"
                                 CornerRadius="1">
                             <Grid.RowDefinitions>
@@ -180,7 +181,7 @@
                                 <RowDefinition />
                             </Grid.RowDefinitions>
                             <TextBlock Text="Focus"
-                                       FontSize="36"
+                                       FontSize="32"
                                        FontFamily="{StaticResource TimeFont}"
                                        HorizontalAlignment="Center"
                                        VerticalAlignment="Center" />
@@ -197,7 +198,7 @@
                                     <TextBlock Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm}"
                                                x:Name="CompactInWorkCountDown"
                                                FontFamily="{StaticResource TimeFont}"
-                                               FontSize="64"
+                                               FontSize="56"
                                                FontWeight="Bold" />
                                 </Grid>
                                 <Grid  VerticalAlignment="Bottom"
@@ -206,7 +207,7 @@
                                     <TextBlock Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=ss}"
                                                x:Name="CompactInWorkCountDownSecond"
                                                FontFamily="{StaticResource TimeFont}"
-                                               FontSize="64"
+                                               FontSize="56"
                                                Opacity="0.85"
                                                FontWeight="Bold" />
                                 </Grid>
@@ -232,7 +233,7 @@
                                 <RowDefinition />
                             </Grid.RowDefinitions>
                             <TextBlock Text="Relax"
-                                       FontSize="36"
+                                       FontSize="32"
                                        HorizontalAlignment="Center"
                                        VerticalAlignment="Center"
                                        FontFamily="{StaticResource TimeFont}" />
@@ -248,7 +249,7 @@
                                     <TextBlock Text="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm}"
                                                x:Name="CompactBreakCountDown"
                                                FontFamily="{StaticResource TimeFont}"
-                                               FontSize="64"
+                                               FontSize="56"
                                                FontWeight="Bold" />
                                 </Grid>
                                 <Grid Margin="6,0,0,0"
@@ -257,7 +258,7 @@
                                     <TextBlock Text="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=ss}"
                                                x:Name="CompactBreakCountDownSecond"
                                                FontFamily="{StaticResource TimeFont}"
-                                               FontSize="64"
+                                               FontSize="56"
                                                Opacity="0.85"
                                                FontWeight="Bold" />
                                 </Grid>

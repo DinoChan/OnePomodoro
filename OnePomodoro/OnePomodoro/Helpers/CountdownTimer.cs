@@ -17,7 +17,7 @@ namespace OnePomodoro.Helpers
         private TimeSpan _totalTime;
         private TimeSpan _remainingTime;
 
-        public CountdownTimer(DateTime startTime ,TimeSpan totalTime)
+        public CountdownTimer(DateTime startTime, TimeSpan totalTime)
         {
             StartTime = startTime;
             _totalTime = totalTime;
@@ -72,7 +72,7 @@ namespace OnePomodoro.Helpers
             CheckTime();
         }
 
-        public void CheckTime()
+        public void CheckTime(bool updateRemainingTime = true)
         {
             var remainingTime = _totalTime - (DateTime.Now - StartTime);
             if (Math.Abs((remainingTime - RemainingTime).TotalSeconds) < 1)
@@ -81,8 +81,10 @@ namespace OnePomodoro.Helpers
             if (remainingTime < TimeSpan.Zero)
                 remainingTime = TimeSpan.Zero;
 
-            RemainingTime = remainingTime;
-            if (RemainingTime == TimeSpan.Zero)
+            if (updateRemainingTime)
+                RemainingTime = remainingTime;
+
+            if (remainingTime == TimeSpan.Zero)
                 Stop();
         }
     }

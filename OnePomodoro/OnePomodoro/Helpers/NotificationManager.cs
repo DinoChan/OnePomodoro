@@ -27,6 +27,9 @@ namespace OnePomodoro.Helpers
             if (IsEnabled == false)
                 return;
 
+            if (SettingsService.Current.IsNotifyWhenPomodoroFinished == false)
+                return;
+
             var notification = _toastNotificationsService.AddPomodoroFinishedToastNotificationSchedule(time, isRemoveOthers);
             _notifications.Add(notification);
         }
@@ -34,6 +37,9 @@ namespace OnePomodoro.Helpers
         public void AddBreakFinishedToastNotificationSchedule(DateTime time, bool isRemoveOthers = true)
         {
             if (IsEnabled == false)
+                return;
+
+            if (SettingsService.Current.IsNotifyWhenBreakFinished == false)
                 return;
 
             var notification = _toastNotificationsService.AddBreakFinishedToastNotificationSchedule(time, isRemoveOthers);
