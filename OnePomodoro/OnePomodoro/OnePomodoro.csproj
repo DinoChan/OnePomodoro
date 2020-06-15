@@ -22,7 +22,7 @@
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>5DF237397A4CFDA350E93B526439795289DD124E</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>A365F84D7284E47413FF93C912D840A06D5AA1D7</PackageCertificateThumbprint>
     <AppInstallerUpdateFrequency>1</AppInstallerUpdateFrequency>
     <AppInstallerCheckForUpdateFrequency>OnApplicationRun</AppInstallerCheckForUpdateFrequency>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
@@ -519,6 +519,7 @@
     <Content Include="Font\DINPro-Bold.otf" />
     <Content Include="Font\DINPro-Light.otf" />
     <Content Include="Font\DINPro-Medium.otf" />
+    <None Include="OnePomodoro_TemporaryKey.pfx" />
     <None Include="Package.StoreAssociation.xml" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
