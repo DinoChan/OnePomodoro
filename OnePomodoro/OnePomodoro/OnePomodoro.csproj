@@ -519,7 +519,6 @@
     <Content Include="Font\DINPro-Bold.otf" />
     <Content Include="Font\DINPro-Light.otf" />
     <Content Include="Font\DINPro-Medium.otf" />
-    <None Include="OnePomodoro_StoreKey.pfx" />
     <None Include="Package.StoreAssociation.xml" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
@@ -531,7 +530,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
-    <None Include="OnePomodoro_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
