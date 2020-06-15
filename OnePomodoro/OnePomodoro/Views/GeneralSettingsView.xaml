@@ -422,7 +422,7 @@
                         Value="{Binding Settings.PomodoroLength,Mode=TwoWay}"
                         Margin="0,48,0,0"
                         Minimum="15"
-                        Maximum="45"
+                        Maximum="90"
                         StepFrequency="1">
                     <Slider.Tag>
                         <StackPanel Orientation="Horizontal">
@@ -441,7 +441,7 @@
                         Value="{Binding Settings.ShortBreakLength,Mode=TwoWay}"
                         Margin="0,16,0,0"
                         Minimum="3"
-                        Maximum="15"
+                        Maximum="25"
                         StepFrequency="1">
                     <Slider.Tag>
                         <StackPanel Orientation="Horizontal">
@@ -459,8 +459,8 @@
                 <Slider Header="Long Break Length"
                         Value="{Binding Settings.LongBreakLength,Mode=TwoWay}"
                         Margin="0,16,0,0"
-                        Minimum="5"
-                        Maximum="25"
+                        Minimum="3"
+                        Maximum="40"
                         StepFrequency="1">
                     <Slider.Tag>
                         <StackPanel Orientation="Horizontal">
