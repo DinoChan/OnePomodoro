@@ -33,7 +33,7 @@
             <VisualStateGroup>
                 <VisualState>
                     <VisualState.StateTriggers>
-                        <helpers:IsCompactOverlayModeTrigger TargetElement="{x:Bind}" />
+                        <helpers:CompactOverlayModeTrigger IsCompactOverlayMode="True" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="CompactView.Opacity"
