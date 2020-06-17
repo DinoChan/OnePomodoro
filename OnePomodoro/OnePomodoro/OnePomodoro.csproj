@@ -163,6 +163,7 @@
     <Compile Include="Helpers\NotificationManager.cs" />
     <Compile Include="Helpers\SolidColorBrushBridge.cs" />
     <Compile Include="Helpers\SourceCodeAttribute.cs" />
+    <Compile Include="Infrastructure\AudioDefinition.cs" />
     <Compile Include="Media\TiledImageBrush.cs" />
     <Compile Include="Controls\TitleBar.xaml.cs">
       <DependentUpon>TitleBar.xaml</DependentUpon>

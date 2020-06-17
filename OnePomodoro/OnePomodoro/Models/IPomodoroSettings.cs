@@ -27,5 +27,9 @@ namespace OnePomodoro.Models
         string ViewType { get; set; }
 
         event EventHandler ViewTypeChanged;
+
+        string PomodoroAudioUri { get; set; }
+
+        string BreakAudioUri { get; set; }
     }
 }

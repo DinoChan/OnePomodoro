@@ -52,9 +52,19 @@ namespace OnePomodoro.ViewModels
                 NotificationManager.Current.RemoveBreakFinishedToastNotificationSchedule();
 
             }
+
+            if (e.PropertyName == nameof(IPomodoroSettings.PomodoroAudioUri))
+            {
+                if (Settings.IsNotifyWhenPomodoroFinished && PomodoroViewModel.Current.IsInPomodoro && PomodoroViewModel.Current.IsTimerInProgress)
+                    NotificationManager.Current.AddPomodoroFinishedToastNotificationSchedule(DateTime.Now + PomodoroViewModel.Current.RemainingPomodoroTime);
+            }
+            else if (e.PropertyName == nameof(IPomodoroSettings.BreakAudioUri))
+            {
+                if (PomodoroViewModel.Current.IsInPomodoro == false && PomodoroViewModel.Current.IsTimerInProgress)
+                    NotificationManager.Current.AddBreakFinishedToastNotificationSchedule(DateTime.Now + PomodoroViewModel.Current.RemainingBreakTime);
+            }
         }
 
         public IPomodoroSettings Settings { get; }
-
     }
 }

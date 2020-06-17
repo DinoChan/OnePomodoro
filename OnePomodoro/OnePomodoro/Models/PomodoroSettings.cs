@@ -22,6 +22,8 @@ namespace OnePomodoro.Models
         private int _shortBreakLength;
         private int _longBreakLength;
         private int _longBreakAfter;
+        private string _pomodoroAudioUri;
+        private string _breakAudioUri;
 
         public PomodoroSettings()
         {
@@ -123,6 +125,30 @@ namespace OnePomodoro.Models
             }
         }
 
+        public string PomodoroAudioUri
+        {
+            get
+            {
+                return _pomodoroAudioUri;
+            }
+            set
+            {
+                _pomodoroAudioUri = value;
+                RaisePropertyChanged();
+            }
+        }
 
+        public string BreakAudioUri
+        {
+            get
+            {
+                return _breakAudioUri;
+            }
+            set
+            {
+                _breakAudioUri = value;
+                RaisePropertyChanged();
+            }
+        }
     }
 }

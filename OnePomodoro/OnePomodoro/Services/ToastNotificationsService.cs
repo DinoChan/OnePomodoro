@@ -16,9 +16,9 @@ namespace OnePomodoro.Services
         private const string PomodoroTag = "Pomodoro";
         private const string BreakTag = "Break";
 
-        private readonly XmlDocument PomodoroToastContent = GetPomodoroToastContent();
+        private readonly XmlDocument PomodoroToastContent = GetPomodoroToastContent().GetXml();
 
-        private readonly XmlDocument BreakToastContent = GetBreakToastContent();
+        private readonly XmlDocument BreakToastContent = GetBreakToastContent().GetXml();
 
         private int _id;
 
@@ -27,7 +27,7 @@ namespace OnePomodoro.Services
             _id = 0;
         }
 
-        private static XmlDocument GetPomodoroToastContent()
+        private static ToastContent GetPomodoroToastContent()
         {
             var content = new ToastContent()
             {
@@ -52,11 +52,11 @@ namespace OnePomodoro.Services
                 },
             };
 
-            return content.GetXml();
+            return content;
         }
 
 
-        private static XmlDocument GetBreakToastContent()
+        private static ToastContent GetBreakToastContent()
         {
             var content = new ToastContent()
             {
@@ -81,7 +81,7 @@ namespace OnePomodoro.Services
                 },
             };
 
-            return content.GetXml();
+            return content;
         }
 
         public void ShowToastNotification(ToastNotification toastNotification)
@@ -116,14 +116,26 @@ namespace OnePomodoro.Services
             ShowToastNotification(toast);
         }
 
-        public ScheduledToastNotification AddPomodoroFinishedToastNotificationSchedule(DateTime time, bool isRemoveOthers = true)
+        public ScheduledToastNotification AddPomodoroFinishedToastNotificationSchedule(DateTime time,string audioUri, bool isRemoveOthers = true)
         {
             if (isRemoveOthers)
                 RemovePomodoroFinishedToastNotificationSchedule();
 
+
+            var toastContent = GetPomodoroToastContent();
+            if (string.IsNullOrWhiteSpace(audioUri) == false)
+            {
+                toastContent.Audio = new ToastAudio()
+                {
+                    Src = new Uri(audioUri)
+                };
+                //("ms-appx:///Assets/Audio/CustomToastAudio.m4a")
+            }
+
+
             var notifier = ToastNotificationManager.CreateToastNotifier();
 
-            var toast = new ScheduledToastNotification(PomodoroToastContent, time)
+            var toast = new ScheduledToastNotification(toastContent.GetXml(), time)
             {
                 Tag = ToastTag,
                 ExpirationTime = time.AddHours(1),
@@ -135,14 +147,24 @@ namespace OnePomodoro.Services
             return toast;
         }
 
-        public ScheduledToastNotification AddBreakFinishedToastNotificationSchedule(DateTime time, bool isRemoveOthers = true)
+        public ScheduledToastNotification AddBreakFinishedToastNotificationSchedule(DateTime time, string audioUri, bool isRemoveOthers = true)
         {
             if (isRemoveOthers)
                 RemoveBreakFinishedToastNotificationSchedule();
 
+            var toastContent = GetBreakToastContent();
+            if (string.IsNullOrWhiteSpace(audioUri) == false)
+            {
+                toastContent.Audio = new ToastAudio()
+                {
+                    Src = new Uri(audioUri)
+                };
+                //("ms-appx:///Assets/Audio/CustomToastAudio.m4a")
+            }
+
             var notifier = ToastNotificationManager.CreateToastNotifier();
 
-            var toast = new ScheduledToastNotification(BreakToastContent, time)
+            var toast = new ScheduledToastNotification(toastContent.GetXml(), time)
             {
                 Tag = ToastTag,
                 ExpirationTime = time.AddHours(1),
