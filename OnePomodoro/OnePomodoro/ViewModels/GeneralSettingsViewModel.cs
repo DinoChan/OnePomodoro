@@ -13,6 +13,7 @@ using Windows.ApplicationModel;
 using OnePomodoro.Helpers;
 using Windows.UI.Core;
 using System.ComponentModel;
+using OnePomodoro.Infrastructure;
 
 namespace OnePomodoro.ViewModels
 {
@@ -26,6 +27,9 @@ namespace OnePomodoro.ViewModels
             (Settings as INotifyPropertyChanged).PropertyChanged += OnPropertyChanged;
             if (DesignMode.DesignMode2Enabled == false && App.Current is PrismUnityApplication)
                 _toastNotificationsService = App.Current.Container.Resolve<ToastNotificationsService>();
+
+            Audios = AudioDefinitions.Definitions;
+
         }
 
         private async void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -64,6 +68,8 @@ namespace OnePomodoro.ViewModels
                     NotificationManager.Current.AddBreakFinishedToastNotificationSchedule(DateTime.Now + PomodoroViewModel.Current.RemainingBreakTime);
             }
         }
+
+        public IEnumerable<AudioDefinition> Audios { get; }
 
         public IPomodoroSettings Settings { get; }
     }

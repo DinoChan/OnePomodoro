@@ -929,4 +929,185 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style TargetType="controls:AudioButton">
+        <Setter Property="Background"
+                Value="{ThemeResource AppBarEllipsisButtonRevealBackground}" />
+        <Setter Property="Foreground"
+                Value="{ThemeResource AppBarEllipsisButtonForeground}" />
+        <Setter Property="BorderBrush"
+                Value="{ThemeResource AppBarEllipsisButtonRevealBorderBrush}" />
+        <Setter Property="BorderThickness"
+                Value="{ThemeResource AppBarEllipsisButtonRevealBorderThemeThickness}" />
+        <Setter Property="FontFamily"
+                Value="Segoe MDL2 Assets" />
+        <Setter Property="FontSize"
+                Value="{ThemeResource ControlContentThemeFontSize}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:AudioButton">
+                    <Grid x:Name="Root"
+                          Background="{TemplateBinding Background}"
+                          BorderBrush="{TemplateBinding BorderBrush}"
+                          BorderThickness="{TemplateBinding BorderThickness}"
+                          CornerRadius="{TemplateBinding CornerRadius}">
+                        <Grid.Resources>
+                            <Storyboard x:Name="PlayStoryboard"
+                                        RepeatBehavior="Forever">
+                                <DoubleAnimationUsingKeyFrames FillBehavior="Stop"
+                                                               Storyboard.TargetName="Volume0Icon"
+                                                               Storyboard.TargetProperty="Opacity">
+                                    <LinearDoubleKeyFrame Value="1"
+                                                          KeyTime="0:0:0" />
+                                    <LinearDoubleKeyFrame Value="1"
+                                                          KeyTime="0:0:0.25" />
+                                    <LinearDoubleKeyFrame Value="0"
+                                                          KeyTime="0:0:0.251" />
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames FillBehavior="Stop"
+                                                               Storyboard.TargetName="Volume1Icon"
+                                                               Storyboard.TargetProperty="Opacity">
+                                    <LinearDoubleKeyFrame Value="0"
+                                                          KeyTime="0:0:0.249" />
+                                    <LinearDoubleKeyFrame Value="1"
+                                                          KeyTime="0:0:0.25" />
+                                    <LinearDoubleKeyFrame Value="1"
+                                                          KeyTime="0:0:0.5" />
+                                    <LinearDoubleKeyFrame Value="0"
+                                                          KeyTime="0:0:0.51" />
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames FillBehavior="Stop"
+                                                               Storyboard.TargetName="Volume2Icon"
+                                                               Storyboard.TargetProperty="Opacity">
+                                    <LinearDoubleKeyFrame Value="0"
+                                                          KeyTime="0:0:0.499" />
+                                    <LinearDoubleKeyFrame Value="1"
+                                                          KeyTime="0:0:0.5" />
+                                    <LinearDoubleKeyFrame Value="1"
+                                                          KeyTime="0:0:0.75" />
+                                    <LinearDoubleKeyFrame Value="0"
+                                                          KeyTime="0:0:0.751" />
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames FillBehavior="Stop"
+                                                               Storyboard.TargetName="Volume3Icon"
+                                                               Storyboard.TargetProperty="Opacity">
+                                    <LinearDoubleKeyFrame Value="0"
+                                                          KeyTime="0:0:0" />
+                                    <LinearDoubleKeyFrame Value="0"
+                                                          KeyTime="0:0:0.749" />
+                                    <LinearDoubleKeyFrame Value="1"
+                                                          KeyTime="0:0:0.75" />
+                                    <LinearDoubleKeyFrame Value="1"
+                                                          KeyTime="0:0:1" />
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </Grid.Resources>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+
+
+
+                                <VisualState x:Name="PointerOver">
+
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Root"
+                                                                       Storyboard.TargetProperty="Background">
+                                            <DiscreteObjectKeyFrame KeyTime="0"
+                                                                    Value="{ThemeResource AppBarEllipsisButtonRevealBackgroundPointerOver}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                                       Storyboard.TargetProperty="Foreground">
+                                            <DiscreteObjectKeyFrame KeyTime="0"
+                                                                    Value="{ThemeResource AppBarEllipsisButtonForegroundPointerOver}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Root"
+                                                                       Storyboard.TargetProperty="BorderBrush">
+                                            <DiscreteObjectKeyFrame KeyTime="0"
+                                                                    Value="{ThemeResource AppBarEllipsisButtonRevealBorderBrushPointerOver}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                    <VisualState.Setters>
+                                        <Setter Target="Root.(RevealBrush.State)"
+                                                Value="PointerOver" />
+                                    </VisualState.Setters>
+                                </VisualState>
+
+                                <VisualState x:Name="Pressed">
+
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Root"
+                                                                       Storyboard.TargetProperty="Background">
+                                            <DiscreteObjectKeyFrame KeyTime="0"
+                                                                    Value="{ThemeResource AppBarEllipsisButtonRevealBackgroundPressed}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                                       Storyboard.TargetProperty="Foreground">
+                                            <DiscreteObjectKeyFrame KeyTime="0"
+                                                                    Value="{ThemeResource AppBarEllipsisButtonForegroundPressed}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Root"
+                                                                       Storyboard.TargetProperty="BorderBrush">
+                                            <DiscreteObjectKeyFrame KeyTime="0"
+                                                                    Value="{ThemeResource AppBarEllipsisButtonRevealBorderBrushPressed}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                    <VisualState.Setters>
+                                        <Setter Target="Root.(RevealBrush.State)"
+                                                Value="Pressed" />
+                                    </VisualState.Setters>
+                                </VisualState>
+
+                                <VisualState x:Name="Disabled">
+
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Root"
+                                                                       Storyboard.TargetProperty="Background">
+                                            <DiscreteObjectKeyFrame KeyTime="0"
+                                                                    Value="{ThemeResource AppBarEllipsisButtonRevealBackgroundDisabled}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                                       Storyboard.TargetProperty="Foreground">
+                                            <DiscreteObjectKeyFrame KeyTime="0"
+                                                                    Value="{ThemeResource AppBarEllipsisButtonForegroundDisabled}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Root"
+                                                                       Storyboard.TargetProperty="BorderBrush">
+                                            <DiscreteObjectKeyFrame KeyTime="0"
+                                                                    Value="{ThemeResource AppBarEllipsisButtonRevealBorderBrushDisabled}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+
+                            </VisualStateGroup>
+
+                        </VisualStateManager.VisualStateGroups>
+                        <ContentPresenter x:Name="ContentPresenter"
+                                          ContentTransitions="{TemplateBinding ContentTransitions}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          Padding="{TemplateBinding Padding}"
+                                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          AutomationProperties.AccessibilityView="Raw" />
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}"
+                                  Glyph="&#xE992;"
+                                  x:Name="Volume0Icon"
+                                  Opacity="0" />
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}"
+                                  Glyph="&#xE993;"
+                                  x:Name="Volume1Icon"
+                                  Opacity="0" />
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}"
+                                  Glyph="&#xE994;"
+                                  x:Name="Volume2Icon"
+                                  Opacity="0" />
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}"
+                                  Glyph="&#xE995;"
+                                  x:Name="Volume3Icon" />
+                    </Grid>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>
