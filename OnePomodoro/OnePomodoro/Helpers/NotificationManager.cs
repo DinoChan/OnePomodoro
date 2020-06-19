@@ -30,7 +30,7 @@ namespace OnePomodoro.Helpers
             if (SettingsService.Current.IsNotifyWhenPomodoroFinished == false)
                 return;
 
-            var notification = _toastNotificationsService.AddPomodoroFinishedToastNotificationSchedule(time, isRemoveOthers);
+            var notification = _toastNotificationsService.AddPomodoroFinishedToastNotificationSchedule(time, SettingsService.Current.PomodoroAudioUri, isRemoveOthers);
             _notifications.Add(notification);
         }
 
@@ -42,7 +42,7 @@ namespace OnePomodoro.Helpers
             if (SettingsService.Current.IsNotifyWhenBreakFinished == false)
                 return;
 
-            var notification = _toastNotificationsService.AddBreakFinishedToastNotificationSchedule(time, isRemoveOthers);
+            var notification = _toastNotificationsService.AddBreakFinishedToastNotificationSchedule(time, SettingsService.Current.BreakAudioUri, isRemoveOthers);
             _notifications.Add(notification);
         }
 
@@ -87,6 +87,10 @@ namespace OnePomodoro.Helpers
         public void AddAllNotifications(bool isInPomodoro, DateTime startTime, bool autoStartOfNextPomodoro, bool autoStartOfBreak,
            int completedPomodoros, int longBreakAfter, TimeSpan pomodoroLength, TimeSpan shortBreakLength, TimeSpan longBreakLength)
         {
+            
+            if (isInPomodoro)
+                completedPomodoros++;
+
             int count = 0;
             while (count < 8)
             {

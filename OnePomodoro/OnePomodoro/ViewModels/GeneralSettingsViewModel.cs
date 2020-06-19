@@ -13,6 +13,7 @@ using Windows.ApplicationModel;
 using OnePomodoro.Helpers;
 using Windows.UI.Core;
 using System.ComponentModel;
+using OnePomodoro.Infrastructure;
 
 namespace OnePomodoro.ViewModels
 {
@@ -26,6 +27,9 @@ namespace OnePomodoro.ViewModels
             (Settings as INotifyPropertyChanged).PropertyChanged += OnPropertyChanged;
             if (DesignMode.DesignMode2Enabled == false && App.Current is PrismUnityApplication)
                 _toastNotificationsService = App.Current.Container.Resolve<ToastNotificationsService>();
+
+            Audios = AudioDefinitions.Definitions;
+
         }
 
         private async void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -52,9 +56,21 @@ namespace OnePomodoro.ViewModels
                 NotificationManager.Current.RemoveBreakFinishedToastNotificationSchedule();
 
             }
+
+            if (e.PropertyName == nameof(IPomodoroSettings.PomodoroAudioUri))
+            {
+                if (Settings.IsNotifyWhenPomodoroFinished && PomodoroViewModel.Current.IsInPomodoro && PomodoroViewModel.Current.IsTimerInProgress)
+                    NotificationManager.Current.AddPomodoroFinishedToastNotificationSchedule(DateTime.Now + PomodoroViewModel.Current.RemainingPomodoroTime);
+            }
+            else if (e.PropertyName == nameof(IPomodoroSettings.BreakAudioUri))
+            {
+                if (PomodoroViewModel.Current.IsInPomodoro == false && PomodoroViewModel.Current.IsTimerInProgress)
+                    NotificationManager.Current.AddBreakFinishedToastNotificationSchedule(DateTime.Now + PomodoroViewModel.Current.RemainingBreakTime);
+            }
         }
 
-        public IPomodoroSettings Settings { get; }
+        public IEnumerable<AudioDefinition> Audios { get; }
 
+        public IPomodoroSettings Settings { get; }
     }
 }
