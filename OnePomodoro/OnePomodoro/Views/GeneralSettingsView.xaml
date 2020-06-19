@@ -421,11 +421,11 @@
                             HorizontalAlignment="Left"
                             Orientation="Horizontal"
                             Margin="0,16,0,0">
-                    <ComboBox x:Name="PomodoroMediaList"
+                    <ComboBox x:Name="PomodoroMediaList" 
                               DisplayMemberPath="Name"
-                              ItemsSource="{x:Bind ViewModel.Audios}"
+                              ItemsSource="{Binding Audios}"
                               SelectedValuePath="Uri"
-                              SelectedValue="{x:Bind ViewModel.Settings.PomodoroAudioUri,Mode=TwoWay}"
+                              SelectedValue="{Binding  Settings.PomodoroAudioUri,Mode=TwoWay}"
                               Width="238" />
                     <controls:AudioButton Width="32"
                                           AudioUri="{Binding ElementName=PomodoroMediaList,Path=SelectedItem.Uri}"
