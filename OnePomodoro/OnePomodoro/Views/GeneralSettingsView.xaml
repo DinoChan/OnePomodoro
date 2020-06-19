@@ -417,7 +417,7 @@
                               Margin="0,16,0,0" />
 
 
-                <StackPanel 
+                <StackPanel Visibility="{Binding Settings.IsNotifyWhenPomodoroFinished}"
                             HorizontalAlignment="Left"
                             Orientation="Horizontal"
                             Margin="0,16,0,0">
@@ -434,11 +434,24 @@
                 <ToggleSwitch Header="Notify When Break Finished"
                               IsOn="{x:Bind ViewModel.Settings.IsNotifyWhenBreakFinished,Mode=TwoWay}"
                               Margin="0,16,0,0" />
-
+                <StackPanel Visibility="{Binding Settings.IsNotifyWhenBreakFinished}"
+                            HorizontalAlignment="Left"
+                            Orientation="Horizontal"
+                            Margin="0,16,0,0">
+                    <ComboBox x:Name="BreakMediaList"
+                              DisplayMemberPath="Name"
+                              ItemsSource="{Binding Audios}"
+                              SelectedValuePath="Uri"
+                              SelectedValue="{Binding  Settings.BreakAudioUri,Mode=TwoWay}"
+                              Width="238" />
+                    <controls:AudioButton Width="32"
+                                          AudioUri="{Binding ElementName=BreakMediaList,Path=SelectedItem.Uri}"
+                                          Margin="8,0,0,0" />
+                </StackPanel>
                 <Slider Header="Pomodoro Length"
                         Value="{Binding Settings.PomodoroLength,Mode=TwoWay}"
                         Margin="0,48,0,0"
-                        Minimum="15"
+                        Minimum="3"
                         Maximum="90"
                         StepFrequency="1">
                     <Slider.Tag>
