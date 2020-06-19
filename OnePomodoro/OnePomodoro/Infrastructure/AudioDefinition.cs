@@ -22,7 +22,7 @@ namespace OnePomodoro.Infrastructure
     public class AudioDefinitions
     {
         public static AudioDefinition[] Definitions { get; } = {
-         new AudioDefinition("None",string.Empty),
+         new AudioDefinition("Default",string.Empty),
           new AudioDefinition("Alarm01", "ms-appx:///Assets/Media/Alarm01.wav"),
           new AudioDefinition("Alarm02", "ms-appx:///Assets/Media/Alarm02.wav"),
           new AudioDefinition("Alarm03", "ms-appx:///Assets/Media/Alarm03.wav"),

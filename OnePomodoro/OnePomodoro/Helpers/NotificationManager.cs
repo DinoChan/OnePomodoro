@@ -87,6 +87,10 @@ namespace OnePomodoro.Helpers
         public void AddAllNotifications(bool isInPomodoro, DateTime startTime, bool autoStartOfNextPomodoro, bool autoStartOfBreak,
            int completedPomodoros, int longBreakAfter, TimeSpan pomodoroLength, TimeSpan shortBreakLength, TimeSpan longBreakLength)
         {
+            
+            if (isInPomodoro)
+                completedPomodoros++;
+
             int count = 0;
             while (count < 8)
             {
