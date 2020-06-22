@@ -20,7 +20,7 @@ namespace OnePomodoro.Services
             Current = await ApplicationData.Current.LocalSettings.ReadAsync<PomodoroSettings>(SettingsKey);
             if (Current == null)
             {
-                Current = new PomodoroSettings();
+                Current = new PomodoroSettings { IsNotifyWhenBreakFinished = true, IsNotifyWhenPomodoroFinished = true, BreakAudioUri = string.Empty, PomodoroAudioUri = string.Empty };
                 await SaveAsync();
             }
 
