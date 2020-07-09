@@ -45,7 +45,7 @@ namespace OnePomodoro.Services
 
                             new AdaptiveText()
                             {
-                                 Text = @"Pomodoro has finished,let's take a break."
+                                 Text = @"Pomodoro has finished, let's take a break."
                             }
                         }
                     }
@@ -74,7 +74,7 @@ namespace OnePomodoro.Services
 
                             new AdaptiveText()
                             {
-                                 Text = @"Break has ended,it's time to work."
+                                 Text = @"Break has ended, it's time to work."
                             }
                         }
                     }
