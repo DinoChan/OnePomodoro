@@ -482,6 +482,49 @@
             </Setter>
         </Style>
 
+        <ControlTemplate x:Key="CloseDialogButtonTemplate"
+                         TargetType="Button">
+            <Border x:Name="Root"
+                    BorderThickness="{ThemeResource FlipViewButtonBorderThemeThickness}"
+                    BorderBrush="{ThemeResource FlipViewNextPreviousButtonBorderBrush}">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="PointerOver">
+                            <Storyboard>
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Arrow"
+                                                               Storyboard.TargetProperty="Foreground">
+                                    <DiscreteObjectKeyFrame KeyTime="0"
+                                                            Value="{StaticResource Background}" />
+                                </ObjectAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </VisualState>
+                        <VisualState x:Name="Pressed">
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetName="Arrow"
+                                                 Storyboard.TargetProperty="Opacity"
+                                                 To="0.7" />
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Arrow"
+                                                               Storyboard.TargetProperty="Foreground">
+                                    <DiscreteObjectKeyFrame KeyTime="0"
+                                                            Value="{StaticResource Background}" />
+                                </ObjectAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+                <FontIcon x:Name="Arrow"
+                          FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                          Foreground="{StaticResource Accent}"
+                          FontSize="36"
+                          Glyph="&#xE8BB;"
+                          HorizontalAlignment="Center"
+                          MirroredWhenRightToLeft="True"
+                          UseLayoutRounding="False"
+                          VerticalAlignment="Center" />
+            </Border>
+        </ControlTemplate>
+
         <Style x:Key="FlipViewStyle1"
                TargetType="controls:FirstRunFlipView">
             <Setter Property="Background"
@@ -654,69 +697,75 @@
                                                 Content="Try This App"
                                                 VerticalAlignment="Top"
                                                 HorizontalAlignment="Right"
-                                                Click="OnClose"/>
+                                                Click="OnClose" />
                                     </Grid>
 
                                 </Grid>
 
-                                <StackPanel>
-                                    <StackPanel.Background>
-                                        <ImageBrush ImageSource="/Assets/Teach/TeachBackground.jpg"
-                                                    Stretch="UniformToFill" />
-                                    </StackPanel.Background>
-                                    <Grid Width="968"
-                                          Background="{StaticResource Background}"
-                                          VerticalAlignment="Top">
-                                        <Rectangle Width="20"
-                                                   Fill="{StaticResource Accent}"
-                                                   HorizontalAlignment="Left" />
-                                        <Rectangle Width="20"
-                                                   Fill="{StaticResource Accent}"
-                                                   HorizontalAlignment="Right" />
-                                        <FontIcon FontFamily="Segoe MDL2 Assets"
-                                                  Glyph="&#xEA80;"
-                                                  HorizontalAlignment="Left"
-                                                  Margin="30,0,0,0"
-                                                  VerticalAlignment="Center"
-                                                  FontSize="24" />
-                                        <TextBlock FontSize="24"
-                                                   Foreground="White"
-                                                   Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=SelectedItem.Title}"
-                                                   HorizontalAlignment="Center"
-                                                   Margin="8" />
-                                    </Grid>
+                                <Grid>
+                                    <StackPanel>
+                                        <StackPanel.Background>
+                                            <ImageBrush ImageSource="/Assets/Teach/TeachBackground.jpg"
+                                                        Stretch="UniformToFill" />
+                                        </StackPanel.Background>
+                                        <Grid Width="968"
+                                              Background="{StaticResource Background}"
+                                              VerticalAlignment="Top">
+                                            <Rectangle Width="20"
+                                                       Fill="{StaticResource Accent}"
+                                                       HorizontalAlignment="Left" />
+                                            <Rectangle Width="20"
+                                                       Fill="{StaticResource Accent}"
+                                                       HorizontalAlignment="Right" />
+                                            <FontIcon FontFamily="Segoe MDL2 Assets"
+                                                      Glyph="&#xEA80;"
+                                                      HorizontalAlignment="Left"
+                                                      Margin="30,0,0,0"
+                                                      VerticalAlignment="Center"
+                                                      FontSize="24" />
+                                            <TextBlock FontSize="24"
+                                                       Foreground="White"
+                                                       Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=SelectedItem.Title}"
+                                                       HorizontalAlignment="Center"
+                                                       Margin="8" />
+                                        </Grid>
 
-                                    <ScrollViewer Width="968"
-                                                  Height="533"
-                                                  Margin="0,10,0,-15"
-                                                  BorderThickness="4"
-                                                  BorderBrush="{StaticResource Accent}"
-                                                  x:Name="ScrollingHost"
-                                                  AutomationProperties.AccessibilityView="Raw"
-                                                  BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}"
-                                                  HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
-                                                  HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
-                                                  HorizontalSnapPointsType="MandatorySingle"
-                                                  IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
-                                                  IsVerticalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsVerticalScrollChainingEnabled}"
-                                                  IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}"
-                                                  IsTabStop="False"
-                                                  IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}"
-                                                  IsHorizontalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsHorizontalScrollChainingEnabled}"
-                                                  Padding="{TemplateBinding Padding}"
-                                                  TabNavigation="{TemplateBinding TabNavigation}"
-                                                  VerticalSnapPointsType="MandatorySingle"
-                                                  VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
-                                                  VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
-                                                  ZoomMode="Disabled">
-                                        <ItemsPresenter />
-                                    </ScrollViewer>
-                                    <Grid>
+                                        <ScrollViewer Width="968"
+                                                      Height="533"
+                                                      Margin="0,10,0,-15"
+                                                      BorderThickness="4"
+                                                      BorderBrush="{StaticResource Accent}"
+                                                      x:Name="ScrollingHost"
+                                                      AutomationProperties.AccessibilityView="Raw"
+                                                      BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}"
+                                                      HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                                      HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
+                                                      HorizontalSnapPointsType="MandatorySingle"
+                                                      IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
+                                                      IsVerticalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsVerticalScrollChainingEnabled}"
+                                                      IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}"
+                                                      IsTabStop="False"
+                                                      IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}"
+                                                      IsHorizontalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsHorizontalScrollChainingEnabled}"
+                                                      Padding="{TemplateBinding Padding}"
+                                                      TabNavigation="{TemplateBinding TabNavigation}"
+                                                      VerticalSnapPointsType="MandatorySingle"
+                                                      VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
+                                                      VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
+                                                      ZoomMode="Disabled">
+                                            <ItemsPresenter />
+                                        </ScrollViewer>
+                                        <Grid>
 
-                                    </Grid>
+                                        </Grid>
 
-                                </StackPanel>
-
+                                    </StackPanel>
+                                    <Button Template="{StaticResource CloseDialogButtonTemplate}"
+                                            Click="OnClose"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Top"
+                                            Margin="12"/>
+                                </Grid>
                             </Grid>
                         </Grid>
                     </ControlTemplate>
@@ -727,7 +776,8 @@
             <Image Source="{Binding Screenshot}" />
         </DataTemplate>
     </ContentDialog.Resources>
-    <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
+    <Viewbox StretchDirection="DownOnly"
+             Stretch="Uniform">
         <Grid Width="1440"
               Height="810">
 
