@@ -41,7 +41,7 @@ namespace OnePomodoro.Services
             }
         }
 
-        public async Task AddPeriodsAsync(IEnumerable<Period> periods)
+        public static async Task AddPeriodsAsync(IEnumerable<Period> periods)
         {
             using (var context = new PeriodContext())
             {
@@ -60,7 +60,7 @@ namespace OnePomodoro.Services
         }
 
 
-        public async Task AddAllPeriodsAsync(bool isInPomodoro, DateTime startTime, bool autoStartOfNextPomodoro, bool autoStartOfBreak,
+        public static async Task AddFuturePeriodsAsync(bool isInPomodoro, DateTime startTime, bool autoStartOfNextPomodoro, bool autoStartOfBreak,
           int completedPomodoros, int longBreakAfter, TimeSpan pomodoroLength, TimeSpan shortBreakLength, TimeSpan longBreakLength)
         {
             var periods = new List<Period>();
@@ -94,6 +94,16 @@ namespace OnePomodoro.Services
             }
 
             await AddPeriodsAsync(periods);
+        }
+
+
+        public static async Task AddPeriodAsync(bool isInPomodoro, bool hasFinished, DateTime startTime, DateTime endTime)
+        {
+            using (var context = new PeriodContext())
+            {
+                context.Periods.Add(new Period { From = startTime, HasFinished = hasFinished, To = endTime, IsFocus = isInPomodoro });
+                await context.SaveChangesAsync();
+            }
         }
     }
 }

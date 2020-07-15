@@ -25,6 +25,8 @@ namespace OnePomodoro
     [Windows.UI.Xaml.Data.Bindable]
     public sealed partial class App : PrismUnityApplication
     {
+        public bool HasExited { get; private set; }
+
         public App()
         {
             InitializeComponent();
@@ -75,7 +77,8 @@ namespace OnePomodoro
 
             SystemNavigationManagerPreview.GetForCurrentView().CloseRequested +=async (s, e) =>
             {
-                var deferral = e.GetDeferral();
+                HasExited = true;
+                   var deferral = e.GetDeferral();
                 await DataService.RemoveFuturePeriodsAsync();
                 NotificationManager.Current.IsEnabled = false;
                 NotificationManager.Current.RemoveBreakFinishedToastNotificationSchedule();
