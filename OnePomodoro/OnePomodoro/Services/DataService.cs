@@ -12,7 +12,7 @@ namespace OnePomodoro.Services
 {
     public class DataService
     {
-        public readonly static string DbName= "pomodoro.db";
+        public readonly static string DbName = "pomodoro.db";
 
         public static async Task<bool> IsFilePresent()
         {
@@ -57,6 +57,43 @@ namespace OnePomodoro.Services
                 var result = await context.Periods.ToListAsync();
                 return result;
             }
+        }
+
+
+        public async Task AddAllPeriodsAsync(bool isInPomodoro, DateTime startTime, bool autoStartOfNextPomodoro, bool autoStartOfBreak,
+          int completedPomodoros, int longBreakAfter, TimeSpan pomodoroLength, TimeSpan shortBreakLength, TimeSpan longBreakLength)
+        {
+            var periods = new List<Period>();
+            if (isInPomodoro)
+                completedPomodoros++;
+
+            int count = 0;
+            while (count < 8)
+            {
+                isInPomodoro = isInPomodoro == false;
+                if (isInPomodoro)
+                {
+                    if (autoStartOfNextPomodoro == false)
+                        break;
+
+                    startTime += pomodoroLength;
+                    periods.Add(new Period { From = startTime - pomodoroLength, HasFinished = true, To = startTime, IsFocus = true });
+                    completedPomodoros++;
+                }
+                else
+                {
+                    if (autoStartOfBreak == false)
+                        break;
+
+                    var breakLength = (completedPomodoros % longBreakAfter == 0) ? longBreakLength : shortBreakLength;
+                    startTime += breakLength;
+                    periods.Add(new Period { From = startTime - breakLength, HasFinished = true, To = startTime, IsFocus = false });
+                }
+
+                count++;
+            }
+
+            await AddPeriodsAsync(periods);
         }
     }
 }
