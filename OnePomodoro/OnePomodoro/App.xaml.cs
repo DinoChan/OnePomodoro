@@ -43,10 +43,10 @@ namespace OnePomodoro
 
             CoreApplication.Exiting += (s, e) =>
             {
-               
+
             };
 
-           
+
         }
 
         protected override void ConfigureContainer()
@@ -72,15 +72,22 @@ namespace OnePomodoro
             await ThemeSelectorService.SetRequestedThemeAsync();
             NavigationService.Navigate(page, launchParam);
             Window.Current.Activate();
-            
-            SystemNavigationManagerPreview.GetForCurrentView().CloseRequested += (s, e) =>
+
+            SystemNavigationManagerPreview.GetForCurrentView().CloseRequested +=async (s, e) =>
             {
+                var deferral = e.GetDeferral();
+                await DataService.RemoveFuturePeriodsAsync();
                 NotificationManager.Current.IsEnabled = false;
                 NotificationManager.Current.RemoveBreakFinishedToastNotificationSchedule();
                 NotificationManager.Current.RemovePomodoroFinishedToastNotificationSchedule();
+
+                deferral.Complete();
             };
             NotificationManager.Current.RemoveBreakFinishedToastNotificationSchedule();
             NotificationManager.Current.RemovePomodoroFinishedToastNotificationSchedule();
+
+            await DataService.CreateTheDatabaseAsync();
+            await DataService.RemoveFuturePeriodsAsync();
             //var dialog = new Views.FirstRunDialog();
             //await dialog.ShowAsync();
             //await Container.Resolve<IWhatsNewDisplayService>().ShowIfAppropriateAsync();
