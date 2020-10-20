@@ -14,5 +14,7 @@ namespace DataAccessLibrary
         public bool IsFocus { get; set; }
 
         public bool HasFinished { get; set; }
+
+        public string ViewType { get; set; }
     }
 }

@@ -19,6 +19,9 @@ using Windows.UI.Core.Preview;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 
 namespace OnePomodoro
 {
@@ -33,22 +36,31 @@ namespace OnePomodoro
             UnhandledException += (sender, e) =>
             {
                 e.Handled = true;
-                var errorMessage = e.Message + Environment.NewLine + e.Exception.StackTrace;
-                ContentDialog dialog = new ContentDialog
-                {
-                    CloseButtonText = "Ok",
-                    Content = errorMessage
-                };
+                //var errorMessage = e.Message + Environment.NewLine + e.Exception.StackTrace;
+                //ContentDialog dialog = new ContentDialog
+                //{
+                //    CloseButtonText = "Ok",
+                //    Content = errorMessage
+                //};
 
-                _ = dialog.ShowAsync();
+                //_ = dialog.ShowAsync();
+                Crashes.TrackError(e.Exception);
             };
 
             CoreApplication.Exiting += (s, e) =>
             {
 
             };
-
-
+            Crashes.SendingErrorReport += (sender, e) =>
+            {
+                // Your code, e.g. to present a custom UI.
+            };
+            Crashes.SentErrorReport += (sender, e) =>
+            {
+                // Your code, e.g. to hide the custom UI.
+            };
+            AppCenter.Start("ba644924-74c7-432e-a7fa-e86442a1c601",
+                typeof(Analytics), typeof(Crashes));
         }
 
         protected override void ConfigureContainer()
