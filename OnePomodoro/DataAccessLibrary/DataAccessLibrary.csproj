@@ -5,8 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Period.cs" />
+    <Compile Remove="PeriodContext.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.9" />
-    <PackageReference Include="SQLitePCLRaw.bundle_winsqlite3" Version="2.0.4" />
   </ItemGroup>
 
 </Project>
