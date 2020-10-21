@@ -616,10 +616,6 @@
     </SDKReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataAccessLibrary\DataAccessLibrary.csproj">
-      <Project>{EFE6194F-C454-4A7D-B305-74BA9EA96806}</Project>
-      <Name>DataAccessLibrary</Name>
-    </ProjectReference>
     <ProjectReference Include="..\OnePomodoro.Core\OnePomodoro.Core.csproj">
       <Project>{458310B1-56FE-4876-89EE-52B743E1D1DB}</Project>
       <Name>OnePomodoro.Core</Name>

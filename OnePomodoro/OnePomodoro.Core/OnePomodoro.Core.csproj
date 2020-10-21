@@ -11,6 +11,5 @@
 
    <ItemGroup>
      <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-     <PackageReference Include="Win2D.uwp" Version="1.25.0" />
    </ItemGroup>
 </Project>
