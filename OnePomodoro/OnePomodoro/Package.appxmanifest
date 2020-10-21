@@ -11,7 +11,7 @@
   <Identity
     Name="24329C-Soft.OnePomodoro"
     Publisher="CN=6D7AEB3B-3956-49A6-AD32-C4737FDDCD52"
-    Version="1.18.30.0" />
+    Version="1.19.30.0" />
 
   <mp:PhoneIdentity PhoneProductId="8c07a943-aae1-4c26-984e-712d584b3144" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 

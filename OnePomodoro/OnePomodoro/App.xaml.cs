@@ -19,12 +19,17 @@ using Windows.UI.Core.Preview;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 
 namespace OnePomodoro
 {
     [Windows.UI.Xaml.Data.Bindable]
     public sealed partial class App : PrismUnityApplication
     {
+        public bool HasExited { get; private set; }
+
         public App()
         {
             InitializeComponent();
@@ -43,11 +48,13 @@ namespace OnePomodoro
 
             CoreApplication.Exiting += (s, e) =>
             {
-               
+
             };
 
-           
+            AppCenter.Start("ba644924-74c7-432e-a7fa-e86442a1c601",
+                typeof(Analytics), typeof(Crashes));
         }
+        
 
         protected override void ConfigureContainer()
         {
@@ -61,6 +68,7 @@ namespace OnePomodoro
 
         protected override async Task OnLaunchApplicationAsync(LaunchActivatedEventArgs args)
         {
+           
             await LaunchApplicationAsync(PageTokens.MainPage, null);
         }
 
@@ -72,15 +80,23 @@ namespace OnePomodoro
             await ThemeSelectorService.SetRequestedThemeAsync();
             NavigationService.Navigate(page, launchParam);
             Window.Current.Activate();
-            
-            SystemNavigationManagerPreview.GetForCurrentView().CloseRequested += (s, e) =>
+
+            SystemNavigationManagerPreview.GetForCurrentView().CloseRequested +=async (s, e) =>
             {
+                HasExited = true;
+                   var deferral = e.GetDeferral();
+                await DataService.RemoveFuturePeriodsAsync();
                 NotificationManager.Current.IsEnabled = false;
                 NotificationManager.Current.RemoveBreakFinishedToastNotificationSchedule();
                 NotificationManager.Current.RemovePomodoroFinishedToastNotificationSchedule();
+
+                deferral.Complete();
             };
             NotificationManager.Current.RemoveBreakFinishedToastNotificationSchedule();
             NotificationManager.Current.RemovePomodoroFinishedToastNotificationSchedule();
+
+            await DataService.CreateTheDatabaseAsync();
+            await DataService.RemoveFuturePeriodsAsync();
             //var dialog = new Views.FirstRunDialog();
             //await dialog.ShowAsync();
             //await Container.Resolve<IWhatsNewDisplayService>().ShowIfAppropriateAsync();
