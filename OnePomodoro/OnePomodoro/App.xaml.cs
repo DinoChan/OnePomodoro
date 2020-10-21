@@ -36,21 +36,23 @@ namespace OnePomodoro
             UnhandledException += (sender, e) =>
             {
                 e.Handled = true;
-                //var errorMessage = e.Message + Environment.NewLine + e.Exception.StackTrace;
-                //ContentDialog dialog = new ContentDialog
-                //{
-                //    CloseButtonText = "Ok",
-                //    Content = errorMessage
-                //};
-
-                //_ = dialog.ShowAsync();
                 Crashes.TrackError(e.Exception);
+                var errorMessage = e.Message + Environment.NewLine + e.Exception.StackTrace;
+                ContentDialog dialog = new ContentDialog
+                {
+                    CloseButtonText = "Ok",
+                    Content = errorMessage
+                };
+
+                _ = dialog.ShowAsync();
             };
 
             CoreApplication.Exiting += (s, e) =>
             {
 
             };
+            AppCenter.Start("ba644924-74c7-432e-a7fa-e86442a1c601",
+                typeof(Analytics), typeof(Crashes));
             Crashes.SendingErrorReport += (sender, e) =>
             {
                 // Your code, e.g. to present a custom UI.
@@ -59,9 +61,14 @@ namespace OnePomodoro
             {
                 // Your code, e.g. to hide the custom UI.
             };
-            AppCenter.Start("ba644924-74c7-432e-a7fa-e86442a1c601",
-                typeof(Analytics), typeof(Crashes));
+
+            Crashes.FailedToSendErrorReport += (sender, e) =>
+            {
+                // Your code, e.g. to hide the custom UI.
+            };
+           
         }
+        
 
         protected override void ConfigureContainer()
         {
@@ -75,6 +82,7 @@ namespace OnePomodoro
 
         protected override async Task OnLaunchApplicationAsync(LaunchActivatedEventArgs args)
         {
+           
             await LaunchApplicationAsync(PageTokens.MainPage, null);
         }
 
