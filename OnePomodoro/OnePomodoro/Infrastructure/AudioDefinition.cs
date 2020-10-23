@@ -22,6 +22,33 @@ namespace OnePomodoro.Infrastructure
     public class AudioDefinitions
     {
         public static AudioDefinition[] Definitions { get; } = {
+            //new AudioDefinition("Default", @"ms-winsoundevent:Notification.Default"),
+            //new AudioDefinition("IM", @"ms-winsoundevent:Notification.IM"),
+            //new AudioDefinition("Mail", @"ms-winsoundevent:Notification.Mail"),
+            //new AudioDefinition("Reminder", @"ms-winsoundevent:Notification.Reminder"),
+            //new AudioDefinition("SMS", @"ms-winsoundevent:Notification.SMS"),
+            //new AudioDefinition("Alarm", @"ms-winsoundevent:Notification.Looping.Alarm"),
+            //new AudioDefinition("Alarm2", @"ms-winsoundevent:Notification.Looping.Alarm2"),
+            //new AudioDefinition("Alarm3", @"ms-winsoundevent:Notification.Looping.Alarm3"),
+            //new AudioDefinition("Alarm4", @"ms-winsoundevent:Notification.Looping.Alarm4"),
+            //new AudioDefinition("Alarm5", @"ms-winsoundevent:Notification.Looping.Alarm5"),
+            //new AudioDefinition("Alarm6", @"ms-winsoundevent:Notification.Looping.Alarm6"),
+            //new AudioDefinition("Alarm7", @"ms-winsoundevent:Notification.Looping.Alarm7"),
+            //new AudioDefinition("Alarm8", @"ms-winsoundevent:Notification.Looping.Alarm8"),
+            //new AudioDefinition("Alarm9", @"ms-winsoundevent:Notification.Looping.Alarm9"),
+            //new AudioDefinition("Alarm10", @"ms-winsoundevent:Notification.Looping.Alarm10"),
+            //new AudioDefinition("Call", @"ms-winsoundevent:Notification.Looping.Call"),
+            //new AudioDefinition("Call2", @"ms-winsoundevent:Notification.Looping.Call2"),
+            //new AudioDefinition("Call3", @"ms-winsoundevent:Notification.Looping.Call3"),
+            //new AudioDefinition("Call4", @"ms-winsoundevent:Notification.Looping.Call4"),
+            //new AudioDefinition("Call5", @"ms-winsoundevent:Notification.Looping.Call5"),
+            //new AudioDefinition("Call6", @"ms-winsoundevent:Notification.Looping.Call6"),
+            //new AudioDefinition("Call7", @"ms-winsoundevent:Notification.Looping.Call7"),
+            //new AudioDefinition("Call8", @"ms-winsoundevent:Notification.Looping.Call8"),
+            //new AudioDefinition("Call9", @"ms-winsoundevent:Notification.Looping.Call9"),
+            //new AudioDefinition("Call10", @"ms-winsoundevent:Notification.Looping.Call10"),
+
+
          new AudioDefinition("Default",string.Empty),
           new AudioDefinition("Alarm01", "ms-appx:///Assets/Media/Alarm01.mp3"),
           new AudioDefinition("Alarm02", "ms-appx:///Assets/Media/Alarm02.mp3"),
