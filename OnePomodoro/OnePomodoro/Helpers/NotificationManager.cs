@@ -48,14 +48,22 @@ namespace OnePomodoro.Helpers
 
         public void RemovePomodoroFinishedToastNotificationSchedule(string id = null)
         {
-            _toastNotificationsService.RemovePomodoroFinishedToastNotificationSchedule(id);
+            var removedIds = _toastNotificationsService.RemovePomodoroFinishedToastNotificationSchedule(id);
+            foreach (var removedId in removedIds)
+            {
+                RemoveFromNotifications(removedId);
+            }
             RemoveFromNotifications(id);
 
         }
 
         public void RemoveBreakFinishedToastNotificationSchedule(string id = null)
         {
-            _toastNotificationsService.RemoveBreakFinishedToastNotificationSchedule(id);
+            var removedIds = _toastNotificationsService.RemoveBreakFinishedToastNotificationSchedule(id);
+            foreach (var removedId in removedIds)
+            {
+                RemoveFromNotifications(removedId);
+            }
             RemoveFromNotifications(id);
         }
 
@@ -87,12 +95,12 @@ namespace OnePomodoro.Helpers
         public void AddAllNotifications(bool isInPomodoro, DateTime startTime, bool autoStartOfNextPomodoro, bool autoStartOfBreak,
            int completedPomodoros, int longBreakAfter, TimeSpan pomodoroLength, TimeSpan shortBreakLength, TimeSpan longBreakLength)
         {
-            
+
             if (isInPomodoro)
                 completedPomodoros++;
 
             int count = 0;
-            while (count < 8)
+            while (count < 16)
             {
                 isInPomodoro = isInPomodoro == false;
                 if (isInPomodoro)
@@ -121,11 +129,14 @@ namespace OnePomodoro.Helpers
 
         private void RemoveFromNotifications(string id = null)
         {
-            if (string.IsNullOrWhiteSpace(id) == false)
+            lock (_notifications)
             {
-                var notification = _notifications.FirstOrDefault(n => n.Id == id);
-                if (notification != null)
-                    _notifications.Remove(notification);
+                if (string.IsNullOrWhiteSpace(id) == false)
+                {
+                    var notification = _notifications.FirstOrDefault(n => n.Id == id);
+                    if (notification != null)
+                        _notifications.Remove(notification);
+                }
             }
         }
     }
