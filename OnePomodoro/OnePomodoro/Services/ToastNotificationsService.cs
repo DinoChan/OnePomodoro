@@ -4,6 +4,7 @@ using Windows.Data.Xml.Dom;
 using Windows.UI.Notifications;
 using System.Linq;
 using System.Diagnostics;
+using System.Collections.Generic;
 
 namespace OnePomodoro.Services
 {
@@ -176,7 +177,7 @@ namespace OnePomodoro.Services
             return toast;
         }
 
-        public void RemovePomodoroFinishedToastNotificationSchedule(string id = null)
+        public IEnumerable<string> RemovePomodoroFinishedToastNotificationSchedule(string id = null)
         {
             var notifier = ToastNotificationManager.CreateToastNotifier();
             foreach (var scheduledToast in notifier.GetScheduledToastNotifications())
@@ -184,12 +185,13 @@ namespace OnePomodoro.Services
                 if (scheduledToast.Content.InnerText == PomodoroToastContent.InnerText && (string.IsNullOrWhiteSpace(id) || scheduledToast.Id == id))
                 {
                     notifier.RemoveFromSchedule(scheduledToast);
+                    yield return scheduledToast.Id;
                     Debug.WriteLine("remove pomodoro:" + scheduledToast.Id);
                 }
             }
         }
 
-        public void RemoveBreakFinishedToastNotificationSchedule(string id = null)
+        public IEnumerable<string> RemoveBreakFinishedToastNotificationSchedule(string id = null)
         {
             var notifier = ToastNotificationManager.CreateToastNotifier();
             foreach (var scheduledToast in notifier.GetScheduledToastNotifications())
@@ -197,6 +199,7 @@ namespace OnePomodoro.Services
                 if (scheduledToast.Content.InnerText == BreakToastContent.InnerText && (string.IsNullOrWhiteSpace(id) || scheduledToast.Id == id))
                 {
                     notifier.RemoveFromSchedule(scheduledToast);
+                    yield return scheduledToast.Id;
                     Debug.WriteLine("remove break:" + scheduledToast.Id);
                 }
             }
