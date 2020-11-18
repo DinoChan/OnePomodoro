@@ -32,6 +32,7 @@ namespace OnePomodoro.Services
 
         public static async Task RemoveFuturePeriodsAsync()
         {
+            await CreateTheDatabaseAsync();
             using (var context = new PeriodContext())
             {
                 var time = DateTime.Now;
@@ -43,6 +44,7 @@ namespace OnePomodoro.Services
 
         public static async Task AddPeriodsAsync(IEnumerable<Period> periods)
         {
+            await CreateTheDatabaseAsync();
             using (var context = new PeriodContext())
             {
                 context.Periods.AddRange(periods);
@@ -52,6 +54,7 @@ namespace OnePomodoro.Services
 
         public async Task<IEnumerable<Period>> QueryAllPeriodsAsync()
         {
+            await CreateTheDatabaseAsync();
             using (var context = new PeriodContext())
             {
                 var result = await context.Periods.ToListAsync();
@@ -99,6 +102,7 @@ namespace OnePomodoro.Services
 
         public static async Task AddPeriodAsync(bool isInPomodoro, bool hasFinished, DateTime startTime, DateTime endTime)
         {
+            await CreateTheDatabaseAsync();
             using (var context = new PeriodContext())
             {
                 context.Periods.Add(new Period { From = startTime, HasFinished = hasFinished, To = endTime, IsFocus = isInPomodoro });

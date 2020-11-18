@@ -76,7 +76,8 @@ namespace OnePomodoro
         {
             CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
             coreTitleBar.ExtendViewIntoTitleBar = true;
-
+            await DataService.CreateTheDatabaseAsync();
+            await DataService.RemoveFuturePeriodsAsync();
             await ThemeSelectorService.SetRequestedThemeAsync();
             NavigationService.Navigate(page, launchParam);
             Window.Current.Activate();
@@ -95,8 +96,7 @@ namespace OnePomodoro
             NotificationManager.Current.RemoveBreakFinishedToastNotificationSchedule();
             NotificationManager.Current.RemovePomodoroFinishedToastNotificationSchedule();
 
-            await DataService.CreateTheDatabaseAsync();
-            await DataService.RemoveFuturePeriodsAsync();
+          
             //var dialog = new Views.FirstRunDialog();
             //await dialog.ShowAsync();
             //await Container.Resolve<IWhatsNewDisplayService>().ShowIfAppropriateAsync();
