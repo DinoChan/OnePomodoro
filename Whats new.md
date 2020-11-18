@@ -11,7 +11,7 @@ Can custom alarm.
 
 Add close button to FirstRunDialog.
 
-**2020-10-21 v1.1:9**
+**2020-10-21 v1.19:**
 
 Add AppCenter API.
 
