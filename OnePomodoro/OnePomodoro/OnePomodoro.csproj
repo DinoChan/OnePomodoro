@@ -173,7 +173,9 @@
     <Compile Include="Helpers\CompactOverlayAttribute.cs" />
     <Compile Include="Helpers\CompactOverlayModeTrigger.cs" />
     <Compile Include="Helpers\FunctionTagsAttribute.cs" />
+    <Compile Include="Helpers\Json.cs" />
     <Compile Include="Helpers\NotificationManager.cs" />
+    <Compile Include="Helpers\Singleton.cs" />
     <Compile Include="Helpers\SolidColorBrushBridge.cs" />
     <Compile Include="Helpers\SourceCodeAttribute.cs" />
     <Compile Include="Infrastructure\AudioDefinition.cs" />
@@ -612,12 +614,6 @@
     <SDKReference Include="Microsoft.VCLibs, version=14.0">
       <Name>Visual C++ 2015 Runtime for Universal Windows Platform Apps</Name>
     </SDKReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\OnePomodoro.Core\OnePomodoro.Core.csproj">
-      <Project>{458310B1-56FE-4876-89EE-52B743E1D1DB}</Project>
-      <Name>OnePomodoro.Core</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
