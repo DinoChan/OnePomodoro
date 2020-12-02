@@ -18,3 +18,7 @@ Add AppCenter API.
 **2020-10-27 v1.20:**
 
 Fix a alarm bug.
+
+**2020-12-02 v1.22:**
+
+Change os version to 1903.
