@@ -103,6 +103,7 @@ namespace OnePomodoro
             await Container.Resolve<IFirstRunDisplayService>().ShowIfAppropriateAsync();
             //Container.Resolve<ILiveTileService>().SampleUpdate();
             //Container.Resolve<IToastNotificationsService>().ShowToastNotificationSample();
+            Analytics.TrackEvent(Windows.System.UserProfile.GlobalizationPreferences.HomeGeographicRegion);
         }
 
         protected override async Task OnActivateApplicationAsync(IActivatedEventArgs args)
