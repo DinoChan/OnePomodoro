@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Media.Animation;
 using Microsoft.Toolkit.Uwp.Helpers;
 using Microsoft.Toolkit.Uwp.UI.Controls.TextToolbarSymbols;
 using System.Collections.Generic;
+using Microsoft.AppCenter.Analytics;
 
 namespace OnePomodoro.Views
 {
@@ -89,6 +90,7 @@ namespace OnePomodoro.Views
 
         private void ChangePomodoroContent(Type type)
         {
+            Analytics.TrackEvent(SettingsService.Current.ViewType);
             var view = Activator.CreateInstance(type) as PomodoroView;
             PomodoroContent.Content = view;
             RequestedTheme = (view as FrameworkElement).RequestedTheme;
