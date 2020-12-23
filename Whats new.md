@@ -23,6 +23,6 @@ Fix a alarm bug.
 
 Change os version to 1903.
 
-**202012=18 v1.23**
+**2020-12-18 v1.23**
 
 Add Analytics.TrackEvent.
