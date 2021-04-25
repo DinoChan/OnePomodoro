@@ -1,29 +1,26 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="using:OnePomodoro"
-                    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
-                    xmlns:behaviors="using:Microsoft.Toolkit.Uwp.UI.Animations.Behaviors"
-                    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
-                    xmlns:controls="using:OnePomodoro.Controls">
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
+    xmlns:behaviors="using:Microsoft.Toolkit.Uwp.UI.Animations.Behaviors"
+    xmlns:controls="using:OnePomodoro.Controls"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:local="using:OnePomodoro">
 
     <Style TargetType="controls:OutlinePanel">
-        <Setter Property="IsTabStop"
-                Value="False" />
-        <Setter Property="HorizontalAlignment"
-                Value="Stretch" />
-        <Setter Property="VerticalAlignment"
-                Value="Stretch" />
-        <Setter Property="IsHitTestVisible"
-                Value="False" />
-        <Setter Property="Color"
-                Value="White" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="IsHitTestVisible" Value="False" />
+        <Setter Property="Color" Value="White" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:OutlinePanel">
                     <Grid>
-                        <Border x:Name="OutlineBorder"
-                                HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                                VerticalAlignment="{TemplateBinding HorizontalAlignment}" />
+                        <Border
+                            x:Name="OutlineBorder"
+                            HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                            VerticalAlignment="{TemplateBinding HorizontalAlignment}" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -31,119 +28,100 @@
     </Style>
 
 
-    <Style TargetType="controls:ButtonDecorator"
-           x:Key="Outline">
-        <Setter Property="IsTabStop"
-                Value="False" />
-        <Setter Property="HorizontalAlignment"
-                Value="Stretch" />
-        <Setter Property="HorizontalContentAlignment"
-                Value="Left" />
-        <Setter Property="VerticalAlignment"
-                Value="Stretch" />
-        <Setter Property="VerticalContentAlignment"
-                Value="Stretch" />
-        <Setter Property="IsHitTestVisible"
-                Value="False" />
+    <Style x:Key="Outline" TargetType="controls:ButtonDecorator">
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="IsHitTestVisible" Value="False" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:ButtonDecorator">
-                    <Grid Background="{TemplateBinding Background}"
-                          BorderBrush="{TemplateBinding BorderBrush}"
-                          BorderThickness="{TemplateBinding BorderThickness}"
-                          HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                          VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                    <Grid
+                        HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                        VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <controls:OutlinePanel
+                            x:Name="Outline"
+                            Opacity="0.5"
+                            RelativeElement="{TemplateBinding RelativeElement}"
+                            Visibility="Collapsed"
+                            Color="{TemplateBinding controls:DropShadowPanel.Color}">
+                            <interactivity:Interaction.Behaviors>
+                                <behaviors:Scale
+                                    x:Name="Scale"
+                                    AutomaticallyStart="True"
+                                    CenterX="24"
+                                    CenterY="24"
+                                    Delay="0"
+                                    EasingMode="EaseOut"
+                                    EasingType="Cubic"
+                                    ScaleX="1"
+                                    ScaleY="1"
+                                    Duration="500" />
+                            </interactivity:Interaction.Behaviors>
+                        </controls:OutlinePanel>
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualStateGroup.Transitions>
-                                    <VisualTransition From="Normal"
-                                                      To="PointerOver">
+                                    <VisualTransition From="Normal" To="PointerOver">
                                         <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="Outline"
-                                                             Storyboard.TargetProperty="Opacity"
-                                                             To="0"
-                                                             Duration="0:0:0.5">
+                                            <DoubleAnimation
+                                                Storyboard.TargetName="Outline"
+                                                Storyboard.TargetProperty="Opacity"
+                                                To="0"
+                                                Duration="0:0:0.5">
                                                 <DoubleAnimation.EasingFunction>
                                                     <CubicEase EasingMode="EaseOut" />
                                                 </DoubleAnimation.EasingFunction>
                                             </DoubleAnimation>
 
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Outline"
-                                                                           Storyboard.TargetProperty="(UIElement.Visibility)">
-                                                <DiscreteObjectKeyFrame KeyTime="00:00:00"
-                                                                        Value="Visible" />
-                                                <DiscreteObjectKeyFrame KeyTime="00:00:0.5"
-                                                                        Value="Collapsed" />
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Outline" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="Visible" />
+                                                <DiscreteObjectKeyFrame KeyTime="00:00:0.5" Value="Collapsed" />
                                             </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualTransition>
                                     <VisualTransition To="Normal">
                                         <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="Outline"
-                                                             Storyboard.TargetProperty="Opacity"
-                                                             To="0.2"
-                                                             Duration="0:0:1">
+                                            <DoubleAnimation
+                                                Storyboard.TargetName="Outline"
+                                                Storyboard.TargetProperty="Opacity"
+                                                To="0.2"
+                                                Duration="0:0:1">
                                                 <DoubleAnimation.EasingFunction>
                                                     <CubicEase EasingMode="EaseOut" />
                                                 </DoubleAnimation.EasingFunction>
                                             </DoubleAnimation>
 
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Outline"
-                                                                           Storyboard.TargetProperty="(UIElement.Visibility)">
-                                                <DiscreteObjectKeyFrame KeyTime="00:00:00"
-                                                                        Value="Visible" />
-                                                <DiscreteObjectKeyFrame KeyTime="00:00:0.5"
-                                                                        Value="Collapsed" />
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Outline" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="Visible" />
+                                                <DiscreteObjectKeyFrame KeyTime="00:00:0.5" Value="Collapsed" />
                                             </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualTransition>
                                 </VisualStateGroup.Transitions>
                                 <VisualState x:Name="Normal">
                                     <VisualState.Setters>
-                                        <Setter Target="Scale.ScaleX"
-                                                Value="1" />
-                                        <Setter Target="Scale.ScaleY"
-                                                Value="1" />
-                                        <Setter Target="Outline.Opacity"
-                                                Value="0.2" />
-                                        <Setter Target="Outline.Visibility"
-                                                Value="Collapsed" />
+                                        <Setter Target="Scale.ScaleX" Value="1" />
+                                        <Setter Target="Scale.ScaleY" Value="1" />
+                                        <Setter Target="Outline.Opacity" Value="0.2" />
+                                        <Setter Target="Outline.Visibility" Value="Collapsed" />
                                     </VisualState.Setters>
                                 </VisualState>
                                 <VisualState x:Name="PointerOver">
                                     <VisualState.Setters>
-                                        <Setter Target="Scale.ScaleX"
-                                                Value="2.6" />
-                                        <Setter Target="Scale.ScaleY"
-                                                Value="2.6" />
-                                        <Setter Target="Outline.Opacity"
-                                                Value="0" />
-                                        <Setter Target="Outline.Visibility"
-                                                Value="Visible" />
+                                        <Setter Target="Scale.ScaleX" Value="2.6" />
+                                        <Setter Target="Scale.ScaleY" Value="2.6" />
+                                        <Setter Target="Outline.Opacity" Value="0" />
+                                        <Setter Target="Outline.Visibility" Value="Visible" />
                                     </VisualState.Setters>
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-
-
-                        <controls:OutlinePanel x:Name="Outline"
-                                               Visibility="Collapsed"
-                                               Opacity="0.5"
-                                               Color="{TemplateBinding controls:DropShadowPanel.Color}"
-                                               RelativeElement="{TemplateBinding RelativeElement}">
-                            <interactivity:Interaction.Behaviors>
-                                <behaviors:Scale x:Name="Scale"
-                                                 ScaleX="1"
-                                                 ScaleY="1"
-                                                 CenterX="24"
-                                                 CenterY="24"
-                                                 Duration="500"
-                                                 Delay="0"
-                                                 EasingType="Cubic"
-                                                 EasingMode="EaseOut"
-                                                 AutomaticallyStart="True" />
-                            </interactivity:Interaction.Behaviors>
-                        </controls:OutlinePanel>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -151,227 +129,215 @@
     </Style>
 
     <Style TargetType="controls:DropShadowPanel">
-        <Setter Property="IsTabStop"
-                Value="False" />
-        <Setter Property="HorizontalAlignment"
-                Value="Stretch" />
-        <Setter Property="HorizontalContentAlignment"
-                Value="Left" />
-        <Setter Property="VerticalAlignment"
-                Value="Stretch" />
-        <Setter Property="VerticalContentAlignment"
-                Value="Stretch" />
-        <Setter Property="IsHitTestVisible"
-                Value="False" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="IsHitTestVisible" Value="False" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:DropShadowPanel">
-                    <Grid Background="{TemplateBinding Background}"
-                          BorderBrush="{TemplateBinding BorderBrush}"
-                          BorderThickness="{TemplateBinding BorderThickness}"
-                          HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                          VerticalAlignment="{TemplateBinding VerticalAlignment}">
-                        <Border x:Name="OutlineBorder"
-                                HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                                VerticalAlignment="{TemplateBinding HorizontalAlignment}" />
+                    <Grid
+                        HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                        VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <Border
+                            x:Name="OutlineBorder"
+                            HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                            VerticalAlignment="{TemplateBinding HorizontalAlignment}" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
-    <Style TargetType="controls:ButtonDecorator"
-           x:Key="Shadow">
-        <Setter Property="IsTabStop"
-                Value="False" />
-        <Setter Property="HorizontalAlignment"
-                Value="Stretch" />
-        <Setter Property="HorizontalContentAlignment"
-                Value="Left" />
-        <Setter Property="VerticalAlignment"
-                Value="Stretch" />
-        <Setter Property="VerticalContentAlignment"
-                Value="Stretch" />
-        <Setter Property="IsHitTestVisible"
-                Value="False" />
-        <Setter Property="controls:DropShadowPanel.BlurRadius"
-                Value="3" />
+    <Style x:Key="Shadow" TargetType="controls:ButtonDecorator">
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="IsHitTestVisible" Value="False" />
+        <Setter Property="controls:DropShadowPanel.BlurRadius" Value="3" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:ButtonDecorator">
-                    <Grid Background="{TemplateBinding Background}"
-                          BorderBrush="{TemplateBinding BorderBrush}"
-                          BorderThickness="{TemplateBinding BorderThickness}"
-                          HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                          VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                    <Grid
+                        HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                        VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <controls:DropShadowPanel
+                            x:Name="Shadow"
+                            BlurRadius="{TemplateBinding controls:DropShadowPanel.BlurRadius}"
+                            IsMasked="{TemplateBinding controls:DropShadowPanel.IsMasked}"
+                            OffsetX="{TemplateBinding controls:DropShadowPanel.OffsetX}"
+                            OffsetY="{TemplateBinding controls:DropShadowPanel.OffsetY}"
+                            OffsetZ="{TemplateBinding controls:DropShadowPanel.OffsetZ}"
+                            RelativeElement="{TemplateBinding RelativeElement}"
+                            ShadowOpacity="{TemplateBinding controls:DropShadowPanel.ShadowOpacity}"
+                            Color="{TemplateBinding controls:DropShadowPanel.Color}" />
+
+                        <controls:DropShadowPanel
+                            x:Name="GlowShadow"
+                            BlurRadius="44"
+                            OffsetX="0"
+                            OffsetY="0"
+                            OffsetZ="0"
+                            Opacity="0"
+                            RelativeElement="{TemplateBinding RelativeElement}"
+                            RenderTransformOrigin="0.5,0.5"
+                            ShadowOpacity="0.6"
+                            Color="White" />
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualStateGroup.Transitions>
-                                    <VisualTransition From="Normal"
-                                                      To="PointerOver">
+                                    <VisualTransition From="Normal" To="PointerOver">
                                         <VisualTransition.GeneratedEasingFunction>
                                             <CubicEase EasingMode="EaseOut" />
                                         </VisualTransition.GeneratedEasingFunction>
                                     </VisualTransition>
-                                    <VisualTransition  To="Normal"
-                                                       GeneratedDuration="0:0:0.3">
+                                    <VisualTransition GeneratedDuration="0:0:0.3" To="Normal">
                                         <VisualTransition.GeneratedEasingFunction>
                                             <CubicEase EasingMode="EaseIn" />
                                         </VisualTransition.GeneratedEasingFunction>
                                     </VisualTransition>
                                 </VisualStateGroup.Transitions>
                                 <VisualState x:Name="Normal">
-                                    <VisualState.Setters>
-                                    </VisualState.Setters>
+                                    <VisualState.Setters />
                                 </VisualState>
                                 <VisualState x:Name="PointerOver">
                                     <VisualState.Setters>
-                                        <Setter Target="Shadow.Opacity"
-                                                Value="0" />
-                                        <Setter Target="GlowShadow.Opacity"
-                                                Value="1" />
+                                        <Setter Target="Shadow.Opacity" Value="0" />
+                                        <Setter Target="GlowShadow.Opacity" Value="1" />
                                     </VisualState.Setters>
                                 </VisualState>
                                 <VisualState x:Name="Pressed">
                                     <VisualState.Setters>
-                                        <Setter Target="Shadow.Opacity"
-                                                Value="0" />
-                                        <Setter Target="GlowShadow.Opacity"
-                                                Value="1" />
+                                        <Setter Target="Shadow.Opacity" Value="0" />
+                                        <Setter Target="GlowShadow.Opacity" Value="1" />
                                     </VisualState.Setters>
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-
-                        <controls:DropShadowPanel x:Name="Shadow"
-                                                  ShadowOpacity="{TemplateBinding controls:DropShadowPanel.ShadowOpacity}"
-                                                  BlurRadius="{TemplateBinding controls:DropShadowPanel.BlurRadius}"
-                                                  Color="{TemplateBinding controls:DropShadowPanel.Color}"
-                                                  OffsetX="{TemplateBinding controls:DropShadowPanel.OffsetX}"
-                                                  OffsetY="{TemplateBinding controls:DropShadowPanel.OffsetY}"
-                                                  OffsetZ="{TemplateBinding controls:DropShadowPanel.OffsetZ}"
-                                                  IsMasked="{TemplateBinding controls:DropShadowPanel.IsMasked}"
-                                                  RelativeElement="{TemplateBinding RelativeElement}" />
-
-                        <controls:DropShadowPanel x:Name="GlowShadow"
-                                                  Opacity="0"
-                                                  ShadowOpacity="0.6"
-                                                  BlurRadius="44"
-                                                  Color="White"
-                                                  OffsetX="0"
-                                                  OffsetY="0"
-                                                  OffsetZ="0"
-                                                  RelativeElement="{TemplateBinding RelativeElement}"
-                                                  RenderTransformOrigin="0.5,0.5" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
-    <Style TargetType="controls:ButtonDecorator"
-           x:Key="Glow">
-        <Setter Property="IsTabStop"
-                Value="False" />
-        <Setter Property="HorizontalAlignment"
-                Value="Stretch" />
-        <Setter Property="HorizontalContentAlignment"
-                Value="Left" />
-        <Setter Property="VerticalAlignment"
-                Value="Stretch" />
-        <Setter Property="VerticalContentAlignment"
-                Value="Stretch" />
-        <Setter Property="IsHitTestVisible"
-                Value="False" />
+    <Style x:Key="Glow" TargetType="controls:ButtonDecorator">
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="IsHitTestVisible" Value="False" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:ButtonDecorator">
-                    <Grid Background="{TemplateBinding Background}"
-                          BorderBrush="{TemplateBinding BorderBrush}"
-                          BorderThickness="{TemplateBinding BorderThickness}"
-                          HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                          VerticalAlignment="{TemplateBinding VerticalAlignment}"
-                          x:Name="Root">
+                    <Grid
+                        x:Name="Root"
+                        HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                        VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <controls:DropShadowPanel
+                            x:Name="Red"
+                            BlurRadius="48"
+                            OffsetX="0"
+                            OffsetY="0"
+                            RelativeElement="{TemplateBinding RelativeElement}"
+                            ShadowOpacity="1"
+                            Color="#FFFF35BF" />
+
+
+                        <controls:DropShadowPanel
+                            x:Name="Blue"
+                            BlurRadius="48"
+                            OffsetX="0"
+                            OffsetY="0"
+                            RelativeElement="{TemplateBinding RelativeElement}"
+                            Color="#FF47E6FF" />
+
+                        <controls:DropShadowPanel
+                            BlurRadius="18"
+                            OffsetX="0"
+                            OffsetY="0"
+                            RelativeElement="{TemplateBinding RelativeElement}"
+                            ShadowOpacity="1"
+                            Color="White" />
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="PromodoroStates">
 
                                 <VisualStateGroup.Transitions>
-                                    <VisualTransition From="Inwork"
-                                                      To="Break">
+                                    <VisualTransition From="Inwork" To="Break">
                                         <Storyboard BeginTime="0:0:2">
-                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Root"
-                                                                           Storyboard.TargetProperty="Opacity">
-                                                <LinearDoubleKeyFrame KeyTime="0:0:0"
-                                                                      Value="0" />
-                                                <LinearDoubleKeyFrame KeyTime="0:0:1"
-                                                                      Value="1" />
-                                                <LinearDoubleKeyFrame KeyTime="0:0:6"
-                                                                      Value="1" />
-                                                <LinearDoubleKeyFrame KeyTime="0:0:8"
-                                                                      Value="0" />
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Root" Storyboard.TargetProperty="Opacity">
+                                                <LinearDoubleKeyFrame KeyTime="0:0:0" Value="0" />
+                                                <LinearDoubleKeyFrame KeyTime="0:0:1" Value="1" />
+                                                <LinearDoubleKeyFrame KeyTime="0:0:6" Value="1" />
+                                                <LinearDoubleKeyFrame KeyTime="0:0:8" Value="0" />
                                             </DoubleAnimationUsingKeyFrames>
-                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Red"
-                                                                           Storyboard.TargetProperty="OffsetX"
-                                                                           EnableDependentAnimation="True">
-                                                <LinearDoubleKeyFrame KeyTime="0:0:2"
-                                                                      Value="-10" />
-                                                <EasingDoubleKeyFrame KeyTime="0:0:4"
-                                                                      Value="10">
+                                            <DoubleAnimationUsingKeyFrames
+                                                EnableDependentAnimation="True"
+                                                Storyboard.TargetName="Red"
+                                                Storyboard.TargetProperty="OffsetX">
+                                                <LinearDoubleKeyFrame KeyTime="0:0:2" Value="-10" />
+                                                <EasingDoubleKeyFrame KeyTime="0:0:4" Value="10">
                                                     <EasingDoubleKeyFrame.EasingFunction>
                                                         <CircleEase EasingMode="EaseInOut" />
                                                     </EasingDoubleKeyFrame.EasingFunction>
                                                 </EasingDoubleKeyFrame>
-                                                <LinearDoubleKeyFrame KeyTime="0:0:5"
-                                                                      Value="0" />
+                                                <LinearDoubleKeyFrame KeyTime="0:0:5" Value="0" />
                                             </DoubleAnimationUsingKeyFrames>
 
-                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Red"
-                                                                           Storyboard.TargetProperty="OffsetY"
-                                                                           EnableDependentAnimation="True">
-                                                <LinearDoubleKeyFrame KeyTime="0:0:2"
-                                                                      Value="0" />
-                                                <EasingDoubleKeyFrame KeyTime="0:0:3"
-                                                                      Value="10">
+                                            <DoubleAnimationUsingKeyFrames
+                                                EnableDependentAnimation="True"
+                                                Storyboard.TargetName="Red"
+                                                Storyboard.TargetProperty="OffsetY">
+                                                <LinearDoubleKeyFrame KeyTime="0:0:2" Value="0" />
+                                                <EasingDoubleKeyFrame KeyTime="0:0:3" Value="10">
                                                     <EasingDoubleKeyFrame.EasingFunction>
                                                         <CircleEase EasingMode="EaseIn" />
                                                     </EasingDoubleKeyFrame.EasingFunction>
                                                 </EasingDoubleKeyFrame>
-                                                <EasingDoubleKeyFrame KeyTime="0:0:4"
-                                                                      Value="0">
+                                                <EasingDoubleKeyFrame KeyTime="0:0:4" Value="0">
                                                     <EasingDoubleKeyFrame.EasingFunction>
                                                         <CircleEase EasingMode="EaseOut" />
                                                     </EasingDoubleKeyFrame.EasingFunction>
                                                 </EasingDoubleKeyFrame>
                                             </DoubleAnimationUsingKeyFrames>
 
-                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Blue"
-                                                                           Storyboard.TargetProperty="OffsetX"
-                                                                           EnableDependentAnimation="True">
-                                                <LinearDoubleKeyFrame KeyTime="0:0:2"
-                                                                      Value="10" />
-                                                <EasingDoubleKeyFrame KeyTime="0:0:4"
-                                                                      Value="-10">
+                                            <DoubleAnimationUsingKeyFrames
+                                                EnableDependentAnimation="True"
+                                                Storyboard.TargetName="Blue"
+                                                Storyboard.TargetProperty="OffsetX">
+                                                <LinearDoubleKeyFrame KeyTime="0:0:2" Value="10" />
+                                                <EasingDoubleKeyFrame KeyTime="0:0:4" Value="-10">
                                                     <EasingDoubleKeyFrame.EasingFunction>
                                                         <CircleEase EasingMode="EaseInOut" />
                                                     </EasingDoubleKeyFrame.EasingFunction>
                                                 </EasingDoubleKeyFrame>
-                                                <LinearDoubleKeyFrame KeyTime="0:0:5"
-                                                                      Value="0" />
+                                                <LinearDoubleKeyFrame KeyTime="0:0:5" Value="0" />
                                             </DoubleAnimationUsingKeyFrames>
 
-                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Blue"
-                                                                           Storyboard.TargetProperty="OffsetY"
-                                                                           EnableDependentAnimation="True">
-                                                <LinearDoubleKeyFrame KeyTime="0:0:2"
-                                                                      Value="0" />
-                                                <EasingDoubleKeyFrame KeyTime="0:0:3"
-                                                                      Value="-10">
+                                            <DoubleAnimationUsingKeyFrames
+                                                EnableDependentAnimation="True"
+                                                Storyboard.TargetName="Blue"
+                                                Storyboard.TargetProperty="OffsetY">
+                                                <LinearDoubleKeyFrame KeyTime="0:0:2" Value="0" />
+                                                <EasingDoubleKeyFrame KeyTime="0:0:3" Value="-10">
                                                     <EasingDoubleKeyFrame.EasingFunction>
                                                         <CircleEase EasingMode="EaseIn" />
                                                     </EasingDoubleKeyFrame.EasingFunction>
                                                 </EasingDoubleKeyFrame>
-                                                <EasingDoubleKeyFrame KeyTime="0:0:4"
-                                                                      Value="0">
+                                                <EasingDoubleKeyFrame KeyTime="0:0:4" Value="0">
                                                     <EasingDoubleKeyFrame.EasingFunction>
                                                         <CircleEase EasingMode="EaseOut" />
                                                     </EasingDoubleKeyFrame.EasingFunction>
@@ -380,82 +346,68 @@
                                         </Storyboard>
                                     </VisualTransition>
 
-                                    <VisualTransition From="Break"
-                                                      To="Work">
+                                    <VisualTransition From="Break" To="Work">
                                         <Storyboard BeginTime="0:0:2">
-                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Root"
-                                                                           Storyboard.TargetProperty="Opacity">
-                                                <LinearDoubleKeyFrame KeyTime="0:0:0"
-                                                                      Value="0" />
-                                                <LinearDoubleKeyFrame KeyTime="0:0:1"
-                                                                      Value="1" />
-                                                <LinearDoubleKeyFrame KeyTime="0:0:6"
-                                                                      Value="1" />
-                                                <LinearDoubleKeyFrame KeyTime="0:0:8"
-                                                                      Value="0" />
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Root" Storyboard.TargetProperty="Opacity">
+                                                <LinearDoubleKeyFrame KeyTime="0:0:0" Value="0" />
+                                                <LinearDoubleKeyFrame KeyTime="0:0:1" Value="1" />
+                                                <LinearDoubleKeyFrame KeyTime="0:0:6" Value="1" />
+                                                <LinearDoubleKeyFrame KeyTime="0:0:8" Value="0" />
                                             </DoubleAnimationUsingKeyFrames>
-                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Red"
-                                                                           Storyboard.TargetProperty="OffsetX"
-                                                                           EnableDependentAnimation="True">
-                                                <LinearDoubleKeyFrame KeyTime="0:0:2"
-                                                                      Value="10" />
-                                                <EasingDoubleKeyFrame KeyTime="0:0:4"
-                                                                      Value="-10">
+                                            <DoubleAnimationUsingKeyFrames
+                                                EnableDependentAnimation="True"
+                                                Storyboard.TargetName="Red"
+                                                Storyboard.TargetProperty="OffsetX">
+                                                <LinearDoubleKeyFrame KeyTime="0:0:2" Value="10" />
+                                                <EasingDoubleKeyFrame KeyTime="0:0:4" Value="-10">
                                                     <EasingDoubleKeyFrame.EasingFunction>
                                                         <CircleEase EasingMode="EaseInOut" />
                                                     </EasingDoubleKeyFrame.EasingFunction>
                                                 </EasingDoubleKeyFrame>
-                                                <LinearDoubleKeyFrame KeyTime="0:0:5"
-                                                                      Value="0" />
+                                                <LinearDoubleKeyFrame KeyTime="0:0:5" Value="0" />
                                             </DoubleAnimationUsingKeyFrames>
 
-                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Red"
-                                                                           Storyboard.TargetProperty="OffsetY"
-                                                                           EnableDependentAnimation="True">
-                                                <LinearDoubleKeyFrame KeyTime="0:0:2"
-                                                                      Value="0" />
-                                                <EasingDoubleKeyFrame KeyTime="0:0:3"
-                                                                      Value="-10">
+                                            <DoubleAnimationUsingKeyFrames
+                                                EnableDependentAnimation="True"
+                                                Storyboard.TargetName="Red"
+                                                Storyboard.TargetProperty="OffsetY">
+                                                <LinearDoubleKeyFrame KeyTime="0:0:2" Value="0" />
+                                                <EasingDoubleKeyFrame KeyTime="0:0:3" Value="-10">
                                                     <EasingDoubleKeyFrame.EasingFunction>
                                                         <CircleEase EasingMode="EaseIn" />
                                                     </EasingDoubleKeyFrame.EasingFunction>
                                                 </EasingDoubleKeyFrame>
-                                                <EasingDoubleKeyFrame KeyTime="0:0:4"
-                                                                      Value="0">
+                                                <EasingDoubleKeyFrame KeyTime="0:0:4" Value="0">
                                                     <EasingDoubleKeyFrame.EasingFunction>
                                                         <CircleEase EasingMode="EaseOut" />
                                                     </EasingDoubleKeyFrame.EasingFunction>
                                                 </EasingDoubleKeyFrame>
                                             </DoubleAnimationUsingKeyFrames>
 
-                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Blue"
-                                                                           Storyboard.TargetProperty="OffsetX"
-                                                                           EnableDependentAnimation="True">
-                                                <LinearDoubleKeyFrame KeyTime="0:0:2"
-                                                                      Value="-10" />
-                                                <EasingDoubleKeyFrame KeyTime="0:0:4"
-                                                                      Value="10">
+                                            <DoubleAnimationUsingKeyFrames
+                                                EnableDependentAnimation="True"
+                                                Storyboard.TargetName="Blue"
+                                                Storyboard.TargetProperty="OffsetX">
+                                                <LinearDoubleKeyFrame KeyTime="0:0:2" Value="-10" />
+                                                <EasingDoubleKeyFrame KeyTime="0:0:4" Value="10">
                                                     <EasingDoubleKeyFrame.EasingFunction>
                                                         <CircleEase EasingMode="EaseInOut" />
                                                     </EasingDoubleKeyFrame.EasingFunction>
                                                 </EasingDoubleKeyFrame>
-                                                <LinearDoubleKeyFrame KeyTime="0:0:5"
-                                                                      Value="0" />
+                                                <LinearDoubleKeyFrame KeyTime="0:0:5" Value="0" />
                                             </DoubleAnimationUsingKeyFrames>
 
-                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Blue"
-                                                                           Storyboard.TargetProperty="OffsetY"
-                                                                           EnableDependentAnimation="True">
-                                                <LinearDoubleKeyFrame KeyTime="0:0:2"
-                                                                      Value="0" />
-                                                <EasingDoubleKeyFrame KeyTime="0:0:3"
-                                                                      Value="10">
+                                            <DoubleAnimationUsingKeyFrames
+                                                EnableDependentAnimation="True"
+                                                Storyboard.TargetName="Blue"
+                                                Storyboard.TargetProperty="OffsetY">
+                                                <LinearDoubleKeyFrame KeyTime="0:0:2" Value="0" />
+                                                <EasingDoubleKeyFrame KeyTime="0:0:3" Value="10">
                                                     <EasingDoubleKeyFrame.EasingFunction>
                                                         <CircleEase EasingMode="EaseIn" />
                                                     </EasingDoubleKeyFrame.EasingFunction>
                                                 </EasingDoubleKeyFrame>
-                                                <EasingDoubleKeyFrame KeyTime="0:0:4"
-                                                                      Value="0">
+                                                <EasingDoubleKeyFrame KeyTime="0:0:4" Value="0">
                                                     <EasingDoubleKeyFrame.EasingFunction>
                                                         <CircleEase EasingMode="EaseOut" />
                                                     </EasingDoubleKeyFrame.EasingFunction>
@@ -466,49 +418,20 @@
                                 </VisualStateGroup.Transitions>
                                 <VisualState x:Name="Inwork">
                                     <VisualState.Setters>
-                                        <Setter Target="Root.Opacity"
-                                                Value="0" />
-                                        <Setter Target="Red.OffsetX"
-                                                Value="-10" />
-                                        <Setter Target="Blue.OffsetX"
-                                                Value="10" />
+                                        <Setter Target="Root.Opacity" Value="0" />
+                                        <Setter Target="Red.OffsetX" Value="-10" />
+                                        <Setter Target="Blue.OffsetX" Value="10" />
                                     </VisualState.Setters>
                                 </VisualState>
                                 <VisualState x:Name="Break">
                                     <VisualState.Setters>
-                                        <Setter Target="Root.Opacity"
-                                                Value="0" />
-                                        <Setter Target="Red.OffsetX"
-                                                Value="10" />
-                                        <Setter Target="Blue.OffsetX"
-                                                Value="-10" />
+                                        <Setter Target="Root.Opacity" Value="0" />
+                                        <Setter Target="Red.OffsetX" Value="10" />
+                                        <Setter Target="Blue.OffsetX" Value="-10" />
                                     </VisualState.Setters>
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-
-                        <controls:DropShadowPanel ShadowOpacity="1"
-                                                  BlurRadius="48"
-                                                  Color="#FFFF35BF"
-                                                  OffsetX="0"
-                                                  OffsetY="0"
-                                                  RelativeElement="{TemplateBinding RelativeElement}"
-                                                  x:Name="Red" />
-
-
-                        <controls:DropShadowPanel BlurRadius="48"
-                                                  Color="#FF47E6FF"
-                                                  OffsetX="0"
-                                                  OffsetY="0"
-                                                  RelativeElement="{TemplateBinding RelativeElement}"
-                                                  x:Name="Blue" />
-
-                        <controls:DropShadowPanel ShadowOpacity="1"
-                                                  BlurRadius="18"
-                                                  Color="White"
-                                                  OffsetX="0"
-                                                  OffsetY="0"
-                                                  RelativeElement="{TemplateBinding RelativeElement}" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -516,95 +439,131 @@
     </Style>
 
     <Style TargetType="controls:PomodoroStateButton">
-        <Setter Property="Background"
-                Value="Transparent" />
-        <Setter Property="Foreground"
-                Value="{ThemeResource SystemBaseHighColor}" />
-        <Setter Property="BorderBrush"
-                Value="Transparent" />
-        <Setter Property="BorderThickness"
-                Value="0" />
-        <Setter Property="PomodoroColor"
-                Value="White" />
-        <Setter Property="BreakColor"
-                Value="White" />
-        <Setter Property="controls:DropShadowPanel.Color"
-                Value="Black" />
-        <Setter Property="controls:DropShadowPanel.ShadowOpacity"
-                Value="0" />
-        <Setter Property="Height"
-                Value="48" />
-        <Setter Property="Width"
-                Value="48" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{ThemeResource SystemBaseHighColor}" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="PomodoroColor" Value="White" />
+        <Setter Property="BreakColor" Value="White" />
+        <Setter Property="controls:DropShadowPanel.Color" Value="Black" />
+        <Setter Property="controls:DropShadowPanel.ShadowOpacity" Value="0" />
+        <Setter Property="Height" Value="48" />
+        <Setter Property="Width" Value="48" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:PomodoroStateButton">
-                    <Border Background="Transparent"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            Padding="{TemplateBinding Padding}"
-                            x:Name="RootGrid">
+                    <Border
+                        x:Name="RootGrid"
+                        Padding="{TemplateBinding Padding}"
+                        Background="Transparent"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <Border.Resources>
+                            <controls:ProgressToPointCollectionBridge x:Name="ProgressToPointCollectionBridge" Progress="0">
+                                <PointCollection>42.00,24.00 41.09,24.61 40.18,25.21 39.27,25.82 38.36,26.42 37.45,27.03 36.55,27.64 35.64,28.24 34.73,28.85 33.82,29.45 32.91,30.06 32.00,30.67 31.09,31.27 30.18,31.88 29.27,32.48 28.36,33.09 27.45,33.70 26.55,34.30 25.64,34.91 24.73,35.52 23.82,36.12 22.91,36.73 22.00,37.33 21.09,37.94 20.18,38.55 19.27,39.15 18.36,39.76 17.45,40.36 16.55,40.97 15.64,41.58 14.73,42.18 13.82,42.79 12.91,43.39 12.00,44.00 12.00,42.79 12.00,41.58 12.00,40.36 12.00,39.15 12.00,37.94 12.00,36.73 12.00,35.52 12.00,34.30 12.00,33.09 12.00,31.88 12.00,30.67 12.00,29.45 12.00,28.24 12.00,27.03 12.00,25.82 12.00,24.61 12.00,23.39 12.00,22.18 12.00,20.97 12.00,19.76 12.00,18.55 12.00,17.33 12.00,16.12 12.00,14.91 12.00,13.70 12.00,12.48 12.00,11.27 12.00,10.06 12.00,8.85 12.00,7.64 12.00,6.42 12.00,5.21 12.00,4.00 12.88,4.59 13.76,5.18 14.65,5.76 15.53,6.35 16.41,6.94 17.29,7.53 18.18,8.12 19.06,8.71 19.94,9.29 20.82,9.88 21.71,10.47 22.59,11.06 23.47,11.65 24.35,12.24 25.24,12.82 26.12,13.41 27.00,14.00 27.88,14.59 28.76,15.18 29.65,15.76 30.53,16.35 31.41,16.94 32.29,17.53 33.18,18.12 34.06,18.71 34.94,19.29 35.82,19.88 36.71,20.47 37.59,21.06 38.47,21.65 39.35,22.24 40.24,22.82 41.12,23.41</PointCollection>
+                                <PointCollection>40.00,24.00 39.97,25.00 39.87,26.01 39.72,27.00 39.50,27.98 39.22,28.94 38.88,29.89 38.48,30.81 38.02,31.71 37.51,32.57 36.94,33.40 36.33,34.20 35.66,34.95 34.95,35.66 34.20,36.33 33.40,36.94 32.57,37.51 31.71,38.02 30.81,38.48 29.89,38.88 28.94,39.22 27.98,39.50 27.00,39.72 26.01,39.87 25.00,39.97 24.00,40.00 23.00,39.97 21.99,39.87 21.00,39.72 20.02,39.50 19.06,39.22 18.11,38.88 17.19,38.48 16.29,38.02 15.43,37.51 14.60,36.94 13.80,36.33 13.05,35.66 12.34,34.95 11.67,34.20 11.06,33.40 10.49,32.57 9.98,31.71 9.52,30.81 9.12,29.89 8.78,28.94 8.50,27.98 8.28,27.00 8.13,26.01 8.03,25.00 8.00,24.00 8.03,23.00 8.13,21.99 8.28,21.00 8.50,20.02 8.78,19.06 9.12,18.11 9.52,17.19 9.98,16.29 10.49,15.43 11.06,14.60 11.67,13.80 12.34,13.05 13.05,12.34 13.80,11.67 14.60,11.06 15.43,10.49 16.29,9.98 17.19,9.52 18.11,9.12 19.06,8.78 20.02,8.50 21.00,8.28 21.99,8.13 23.00,8.03 24.00,8.00 25.00,8.03 26.01,8.13 27.00,8.28 27.98,8.50 28.94,8.78 29.89,9.12 30.81,9.52 31.71,9.98 32.57,10.49 33.40,11.06 34.20,11.67 34.95,12.34 35.66,13.05 36.33,13.80 36.94,14.60 37.51,15.43 38.02,16.29 38.48,17.19 38.88,18.11 39.22,19.06 39.50,20.02 39.72,21.00 39.87,21.99 39.97,23.00</PointCollection>
+                                <PointCollection>38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10</PointCollection>
+                            </controls:ProgressToPointCollectionBridge>
+
+                        </Border.Resources>
+                        <Grid>
+
+                            <Viewbox Stretch="Uniform">
+                                <Grid
+                                    Width="48"
+                                    Height="48"
+                                    RenderTransformOrigin=".5,.5">
+                                    <Grid.RenderTransform>
+                                        <CompositeTransform x:Name="ShapeCompositeTransform" />
+                                    </Grid.RenderTransform>
+                                    <controls:ButtonDecorator
+                                        x:Name="Shadow"
+                                        controls:DropShadowPanel.BlurRadius="{TemplateBinding controls:DropShadowPanel.BlurRadius}"
+                                        controls:DropShadowPanel.Color="{TemplateBinding controls:DropShadowPanel.Color}"
+                                        controls:DropShadowPanel.IsMasked="{TemplateBinding controls:DropShadowPanel.IsMasked}"
+                                        controls:DropShadowPanel.OffsetX="{TemplateBinding controls:DropShadowPanel.OffsetX}"
+                                        controls:DropShadowPanel.OffsetY="{TemplateBinding controls:DropShadowPanel.OffsetY}"
+                                        controls:DropShadowPanel.OffsetZ="{TemplateBinding controls:DropShadowPanel.OffsetZ}"
+                                        controls:DropShadowPanel.ShadowOpacity="{TemplateBinding controls:DropShadowPanel.ShadowOpacity}"
+                                        RelativeElement="{Binding ElementName=Shape}"
+                                        Style="{StaticResource Shadow}" />
+                                    <controls:ButtonDecorator
+                                        x:Name="Outline"
+                                        controls:DropShadowPanel.Color="{TemplateBinding OutlineColor}"
+                                        RelativeElement="{Binding ElementName=Shape}"
+                                        Style="{StaticResource Outline}" />
+                                    <controls:ButtonDecorator
+                                        IsInPomodoro="{TemplateBinding IsInPomodoro}"
+                                        RelativeElement="{Binding ElementName=Shape}"
+                                        Style="{StaticResource Glow}" />
+                                    <Polygon
+                                        x:Name="Shape"
+                                        Points="{Binding Source={StaticResource ProgressToPointCollectionBridge}, Path=Points}"
+                                        Stretch="None"
+                                        StrokeEndLineCap="Round"
+                                        StrokeThickness="4">
+                                        <Polygon.Fill>
+                                            <SolidColorBrush x:Name="Fill" Color="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=PomodoroColor}" />
+                                        </Polygon.Fill>
+                                        <!--<Polygon.Stroke>
+                                            <SolidColorBrush x:Name="Stroke" Color="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=PomodoroColor}"/>
+                                        </Polygon.Stroke>-->
+                                    </Polygon>
+                                </Grid>
+                            </Viewbox>
+                        </Grid>
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualState x:Name="Normal">
                                     <VisualState.Setters>
-                                        <Setter Target="Outline.State"
-                                                Value="Normal" />
-                                        <Setter Target="Shadow.State"
-                                                Value="Normal" />
+                                        <Setter Target="Outline.State" Value="Normal" />
+                                        <Setter Target="Shadow.State" Value="Normal" />
                                     </VisualState.Setters>
                                 </VisualState>
                                 <VisualState x:Name="PointerOver">
                                     <VisualState.Setters>
-                                        <Setter Target="Outline.State"
-                                                Value="PointerOver" />
-                                        <Setter Target="Shadow.State"
-                                                Value="PointerOver" />
+                                        <Setter Target="Outline.State" Value="PointerOver" />
+                                        <Setter Target="Shadow.State" Value="PointerOver" />
                                     </VisualState.Setters>
                                 </VisualState>
 
                                 <VisualState x:Name="Pressed">
                                     <VisualState.Setters>
-                                        <Setter Target="Outline.State"
-                                                Value="Pressed" />
-                                        <Setter Target="Shadow.State"
-                                                Value="Pressed" />
-                                        <Setter Target="Shape.Opacity"
-                                                Value="0.7" />
+                                        <Setter Target="Outline.State" Value="Pressed" />
+                                        <Setter Target="Shadow.State" Value="Pressed" />
+                                        <Setter Target="Shape.Opacity" Value="0.7" />
                                     </VisualState.Setters>
                                 </VisualState>
 
                                 <VisualState x:Name="Disabled">
                                     <VisualState.Setters>
-                                        <Setter Target="RootGrid.Background"
-                                                Value="{ThemeResource ButtonRevealBackgroundDisabled}" />
-                                        <Setter Target="RootGrid.BorderBrush"
-                                                Value="{ThemeResource ButtonRevealBorderBrushDisabled}" />
-                                        <Setter Target="RootGrid.Foreground"
-                                                Value="{ThemeResource ButtonForegroundDisabled}" />
+                                        <Setter Target="RootGrid.Background" Value="{ThemeResource ButtonRevealBackgroundDisabled}" />
+                                        <Setter Target="RootGrid.BorderBrush" Value="{ThemeResource ButtonRevealBorderBrushDisabled}" />
+                                        <Setter Target="RootGrid.Foreground" Value="{ThemeResource ButtonForegroundDisabled}" />
                                     </VisualState.Setters>
                                 </VisualState>
                             </VisualStateGroup>
 
                             <VisualStateGroup x:Name="ProgressStates">
                                 <VisualStateGroup.Transitions>
-                                    <VisualTransition From="Idle"
-                                                      To="Busy">
+                                    <VisualTransition From="Idle" To="Busy">
                                         <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="ProgressToPointCollectionBridge"
-                                                             Storyboard.TargetProperty="Progress"
-                                                             To="1"
-                                                             EnableDependentAnimation="True"
-                                                             Duration="0:0:0.3">
+                                            <DoubleAnimation
+                                                EnableDependentAnimation="True"
+                                                Storyboard.TargetName="ProgressToPointCollectionBridge"
+                                                Storyboard.TargetProperty="Progress"
+                                                To="1"
+                                                Duration="0:0:0.3">
                                                 <DoubleAnimation.EasingFunction>
                                                     <CubicEase EasingMode="EaseOut" />
                                                 </DoubleAnimation.EasingFunction>
                                             </DoubleAnimation>
-                                            <DoubleAnimation Storyboard.TargetName="ShapeCompositeTransform"
-                                                             Storyboard.TargetProperty="Rotation"
-                                                             To="180"
-                                                             EnableDependentAnimation="True"
-                                                             Duration="0:0:0.3">
+                                            <DoubleAnimation
+                                                EnableDependentAnimation="True"
+                                                Storyboard.TargetName="ShapeCompositeTransform"
+                                                Storyboard.TargetProperty="Rotation"
+                                                To="180"
+                                                Duration="0:0:0.3">
                                                 <DoubleAnimation.EasingFunction>
                                                     <CubicEase EasingMode="EaseOut" />
                                                 </DoubleAnimation.EasingFunction>
@@ -612,25 +571,24 @@
 
                                         </Storyboard>
                                     </VisualTransition>
-                                    <VisualTransition From="Busy"
-                                                      To="Idle">
+                                    <VisualTransition From="Busy" To="Idle">
                                         <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="ProgressToPointCollectionBridge"
-                                                             Storyboard.TargetProperty="Progress"
-                                                             To="0"
-                                                             EnableDependentAnimation="True"
-                                                             Duration="0:0:0.3">
+                                            <DoubleAnimation
+                                                EnableDependentAnimation="True"
+                                                Storyboard.TargetName="ProgressToPointCollectionBridge"
+                                                Storyboard.TargetProperty="Progress"
+                                                To="0"
+                                                Duration="0:0:0.3">
                                                 <DoubleAnimation.EasingFunction>
                                                     <CubicEase EasingMode="EaseOut" />
                                                 </DoubleAnimation.EasingFunction>
                                             </DoubleAnimation>
-                                            <DoubleAnimationUsingKeyFrames  Storyboard.TargetName="ShapeCompositeTransform"
-                                                                            Storyboard.TargetProperty="Rotation"
-                                                                            EnableDependentAnimation="True">
-                                                <LinearDoubleKeyFrame Value="180"
-                                                                      KeyTime="0:0:0" />
-                                                <EasingDoubleKeyFrame Value="0"
-                                                                      KeyTime="0:0:0.3">
+                                            <DoubleAnimationUsingKeyFrames
+                                                EnableDependentAnimation="True"
+                                                Storyboard.TargetName="ShapeCompositeTransform"
+                                                Storyboard.TargetProperty="Rotation">
+                                                <LinearDoubleKeyFrame KeyTime="0:0:0" Value="180" />
+                                                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0">
                                                     <EasingDoubleKeyFrame.EasingFunction>
                                                         <CubicEase EasingMode="EaseOut" />
                                                     </EasingDoubleKeyFrame.EasingFunction>
@@ -642,8 +600,7 @@
                                 <VisualState x:Name="Idle" />
                                 <VisualState x:Name="Busy">
                                     <VisualState.Setters>
-                                        <Setter Target="ProgressToPointCollectionBridge.Progress"
-                                                Value="1" />
+                                        <Setter Target="ProgressToPointCollectionBridge.Progress" Value="1" />
                                     </VisualState.Setters>
                                 </VisualState>
                             </VisualStateGroup>
@@ -658,76 +615,27 @@
                                 </VisualStateGroup.Transitions>-->
                                 <VisualState x:Name="Inwork">
                                     <Storyboard>
-                                        <ColorAnimation Duration="0:0:0.3"
-                                                        Storyboard.TargetName="Fill"
-                                                        Storyboard.TargetProperty="Color"
-                                                        To="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=PomodoroColor}" />
+                                        <ColorAnimation
+                                            Storyboard.TargetName="Fill"
+                                            Storyboard.TargetProperty="Color"
+                                            To="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=PomodoroColor}"
+                                            Duration="0:0:0.3" />
                                         <!--<ColorAnimation Duration="0:0:0.3" Storyboard.TargetName="Stroke" Storyboard.TargetProperty="Color" To="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=PomodoroColor}" />-->
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="Break">
                                     <Storyboard>
-                                        <ColorAnimation Duration="0:0:0.3"
-                                                        Storyboard.TargetName="Fill"
-                                                        Storyboard.TargetProperty="Color"
-                                                        To="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=BreakColor}" />
+                                        <ColorAnimation
+                                            Storyboard.TargetName="Fill"
+                                            Storyboard.TargetProperty="Color"
+                                            To="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=BreakColor}"
+                                            Duration="0:0:0.3" />
                                         <!--<ColorAnimation Duration="0:0:0.3" Storyboard.TargetName="Stroke" Storyboard.TargetProperty="Color" To="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=BreakColor}" />-->
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>
 
                         </VisualStateManager.VisualStateGroups>
-                        <Border.Resources>
-                            <controls:ProgressToPointCollectionBridge x:Name="ProgressToPointCollectionBridge"
-                                                                      Progress="0">
-                                <PointCollection>42.00,24.00 41.09,24.61 40.18,25.21 39.27,25.82 38.36,26.42 37.45,27.03 36.55,27.64 35.64,28.24 34.73,28.85 33.82,29.45 32.91,30.06 32.00,30.67 31.09,31.27 30.18,31.88 29.27,32.48 28.36,33.09 27.45,33.70 26.55,34.30 25.64,34.91 24.73,35.52 23.82,36.12 22.91,36.73 22.00,37.33 21.09,37.94 20.18,38.55 19.27,39.15 18.36,39.76 17.45,40.36 16.55,40.97 15.64,41.58 14.73,42.18 13.82,42.79 12.91,43.39 12.00,44.00 12.00,42.79 12.00,41.58 12.00,40.36 12.00,39.15 12.00,37.94 12.00,36.73 12.00,35.52 12.00,34.30 12.00,33.09 12.00,31.88 12.00,30.67 12.00,29.45 12.00,28.24 12.00,27.03 12.00,25.82 12.00,24.61 12.00,23.39 12.00,22.18 12.00,20.97 12.00,19.76 12.00,18.55 12.00,17.33 12.00,16.12 12.00,14.91 12.00,13.70 12.00,12.48 12.00,11.27 12.00,10.06 12.00,8.85 12.00,7.64 12.00,6.42 12.00,5.21 12.00,4.00 12.88,4.59 13.76,5.18 14.65,5.76 15.53,6.35 16.41,6.94 17.29,7.53 18.18,8.12 19.06,8.71 19.94,9.29 20.82,9.88 21.71,10.47 22.59,11.06 23.47,11.65 24.35,12.24 25.24,12.82 26.12,13.41 27.00,14.00 27.88,14.59 28.76,15.18 29.65,15.76 30.53,16.35 31.41,16.94 32.29,17.53 33.18,18.12 34.06,18.71 34.94,19.29 35.82,19.88 36.71,20.47 37.59,21.06 38.47,21.65 39.35,22.24 40.24,22.82 41.12,23.41</PointCollection>
-                                <PointCollection>40.00,24.00 39.97,25.00 39.87,26.01 39.72,27.00 39.50,27.98 39.22,28.94 38.88,29.89 38.48,30.81 38.02,31.71 37.51,32.57 36.94,33.40 36.33,34.20 35.66,34.95 34.95,35.66 34.20,36.33 33.40,36.94 32.57,37.51 31.71,38.02 30.81,38.48 29.89,38.88 28.94,39.22 27.98,39.50 27.00,39.72 26.01,39.87 25.00,39.97 24.00,40.00 23.00,39.97 21.99,39.87 21.00,39.72 20.02,39.50 19.06,39.22 18.11,38.88 17.19,38.48 16.29,38.02 15.43,37.51 14.60,36.94 13.80,36.33 13.05,35.66 12.34,34.95 11.67,34.20 11.06,33.40 10.49,32.57 9.98,31.71 9.52,30.81 9.12,29.89 8.78,28.94 8.50,27.98 8.28,27.00 8.13,26.01 8.03,25.00 8.00,24.00 8.03,23.00 8.13,21.99 8.28,21.00 8.50,20.02 8.78,19.06 9.12,18.11 9.52,17.19 9.98,16.29 10.49,15.43 11.06,14.60 11.67,13.80 12.34,13.05 13.05,12.34 13.80,11.67 14.60,11.06 15.43,10.49 16.29,9.98 17.19,9.52 18.11,9.12 19.06,8.78 20.02,8.50 21.00,8.28 21.99,8.13 23.00,8.03 24.00,8.00 25.00,8.03 26.01,8.13 27.00,8.28 27.98,8.50 28.94,8.78 29.89,9.12 30.81,9.52 31.71,9.98 32.57,10.49 33.40,11.06 34.20,11.67 34.95,12.34 35.66,13.05 36.33,13.80 36.94,14.60 37.51,15.43 38.02,16.29 38.48,17.19 38.88,18.11 39.22,19.06 39.50,20.02 39.72,21.00 39.87,21.99 39.97,23.00</PointCollection>
-                                <PointCollection>38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10</PointCollection>
-                            </controls:ProgressToPointCollectionBridge>
-
-                        </Border.Resources>
-                        <Grid>
-
-                            <Viewbox Stretch="Uniform">
-                                <Grid Height="48"
-                                      Width="48"
-                                      RenderTransformOrigin=".5,.5">
-                                    <Grid.RenderTransform>
-                                        <CompositeTransform x:Name="ShapeCompositeTransform" />
-                                    </Grid.RenderTransform>
-                                    <controls:ButtonDecorator  x:Name="Shadow"
-                                                               controls:DropShadowPanel.ShadowOpacity="{TemplateBinding controls:DropShadowPanel.ShadowOpacity}"
-                                                               controls:DropShadowPanel.BlurRadius="{TemplateBinding controls:DropShadowPanel.BlurRadius}"
-                                                               controls:DropShadowPanel.Color="{TemplateBinding controls:DropShadowPanel.Color}"
-                                                               controls:DropShadowPanel.OffsetX="{TemplateBinding controls:DropShadowPanel.OffsetX}"
-                                                               controls:DropShadowPanel.OffsetY="{TemplateBinding controls:DropShadowPanel.OffsetY}"
-                                                               controls:DropShadowPanel.OffsetZ="{TemplateBinding controls:DropShadowPanel.OffsetZ}"
-                                                               controls:DropShadowPanel.IsMasked="{TemplateBinding controls:DropShadowPanel.IsMasked}"
-                                                               RelativeElement="{Binding ElementName=Shape}"
-                                                               Style="{StaticResource Shadow}" />
-                                    <controls:ButtonDecorator RelativeElement="{Binding ElementName=Shape}"
-                                                              x:Name="Outline"
-                                                              Style="{StaticResource Outline}"
-                                                              controls:DropShadowPanel.Color="{TemplateBinding OutlineColor}" />
-                                    <controls:ButtonDecorator RelativeElement="{Binding ElementName=Shape}"
-                                                              Style="{StaticResource Glow}"
-                                                              IsInPomodoro="{TemplateBinding IsInPomodoro}" />
-                                    <Polygon Points="{Binding Source={StaticResource ProgressToPointCollectionBridge},Path=Points}"
-                                             StrokeThickness="4"
-                                             Stretch="None"
-                                             StrokeEndLineCap="Round"
-                                             x:Name="Shape">
-                                        <Polygon.Fill>
-                                            <SolidColorBrush x:Name="Fill"
-                                                             Color="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=PomodoroColor}" />
-                                        </Polygon.Fill>
-                                        <!--<Polygon.Stroke>
-                                            <SolidColorBrush x:Name="Stroke" Color="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=PomodoroColor}"/>
-                                        </Polygon.Stroke>-->
-                                    </Polygon>
-                                </Grid>
-                            </Viewbox>
-                        </Grid>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -736,45 +644,43 @@
 
 
     <Style TargetType="controls:FlipSide">
-        <Setter Property="Background"
-                Value="Transparent" />
+        <Setter Property="Background" Value="Transparent" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:FlipSide">
-                    <Grid x:Name="LayoutRoot"
-                          Background="{TemplateBinding Background}"
-                          BorderBrush="{TemplateBinding BorderBrush}"
-                          BorderThickness="{TemplateBinding BorderThickness}">
+                    <Grid
+                        x:Name="LayoutRoot"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter
+                            x:Name="Side1Content"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            Content="{TemplateBinding Side1}"
+                            IsHitTestVisible="True" />
+                        <ContentPresenter
+                            x:Name="Side2Content"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            Content="{TemplateBinding Side2}"
+                            IsHitTestVisible="False" />
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="FlipStates">
                                 <VisualState x:Name="Slide1">
                                     <VisualState.Setters>
-                                        <Setter Target="Side1Content.IsHitTestVisible"
-                                                Value="True" />
-                                        <Setter Target="Side2Content.IsHitTestVisible"
-                                                Value="False" />
+                                        <Setter Target="Side1Content.IsHitTestVisible" Value="True" />
+                                        <Setter Target="Side2Content.IsHitTestVisible" Value="False" />
                                     </VisualState.Setters>
                                 </VisualState>
                                 <VisualState x:Name="Slide2">
                                     <VisualState.Setters>
-                                        <Setter Target="Side1Content.IsHitTestVisible"
-                                                Value="False" />
-                                        <Setter Target="Side2Content.IsHitTestVisible"
-                                                Value="True" />
+                                        <Setter Target="Side1Content.IsHitTestVisible" Value="False" />
+                                        <Setter Target="Side2Content.IsHitTestVisible" Value="True" />
                                     </VisualState.Setters>
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <ContentPresenter x:Name="Side1Content"
-                                          IsHitTestVisible="True"
-                                          HorizontalAlignment="Stretch"
-                                          VerticalAlignment="Stretch"
-                                          Content="{TemplateBinding Side1}" />
-                        <ContentPresenter x:Name="Side2Content"
-                                          IsHitTestVisible="False"
-                                          HorizontalAlignment="Stretch"
-                                          VerticalAlignment="Stretch"
-                                          Content="{TemplateBinding Side2}" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -785,10 +691,10 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:TimeAndTitleControl">
-                    <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
-                    </Border>
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -798,132 +704,129 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:RippleControl">
-                    <Border CornerRadius="{TemplateBinding CornerRadius}"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
-                    </Border>
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
     <Style TargetType="controls:TimeAndButtonSwitcher">
-        <Setter Property="Foreground"
-                Value="White" />
-        <Setter Property="Background"
-                Value="Transparent" />
-        <Setter Property="FontSize"
-                Value="68" />
-        <Setter Property="FontFamily"
-                Value="/Font/DINPro-Regular.otf#DINPro" />
-        <Setter Property="StateButtonLength"
-                Value="96" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="FontSize" Value="68" />
+        <Setter Property="FontFamily" Value="/Font/DINPro-Regular.otf#DINPro" />
+        <Setter Property="StateButtonLength" Value="96" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:TimeAndButtonSwitcher">
-                    <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            DataContext="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=PomodoroViewModel}">
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        DataContext="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=PomodoroViewModel}">
+                        <Grid>
+                            <Grid x:Name="CountdownElement" VerticalAlignment="Center">
+                                <animations:Implicit.HideAnimations>
+                                    <animations:TranslationAnimation
+                                        DelayBehavior="SetInitialValueBeforeDelay"
+                                        From="0,0,0"
+                                        To="0,-80,0"
+                                        Duration="0:0:0.6" />
+                                    <animations:OpacityAnimation
+                                        DelayBehavior="SetInitialValueBeforeDelay"
+                                        From="1"
+                                        To="0"
+                                        Duration="0:0:0.6" />
+                                </animations:Implicit.HideAnimations>
+                                <animations:Implicit.ShowAnimations>
+                                    <animations:TranslationAnimation
+                                        DelayBehavior="SetInitialValueBeforeDelay"
+                                        From="0,-80,0"
+                                        To="0,0,0"
+                                        Duration="0:0:0.6" />
+                                    <animations:OpacityAnimation
+                                        DelayBehavior="SetInitialValueBeforeDelay"
+                                        From="0"
+                                        To="1"
+                                        Duration="0:0:0.6" />
+                                </animations:Implicit.ShowAnimations>
+
+                                <TextBlock
+                                    x:Name="FocusCountdown"
+                                    HorizontalAlignment="Center"
+                                    Text="{Binding RemainingPomodoroTime, Converter={StaticResource FormatStringConverter}, ConverterParameter=mm\\:ss}"
+                                    Visibility="{Binding IsInPomodoro, Converter={StaticResource BoolToVisibilityConverter}}" />
+                                <TextBlock
+                                    x:Name="RelaxCountdown"
+                                    HorizontalAlignment="Center"
+                                    Text="{Binding RemainingBreakTime, Converter={StaticResource FormatStringConverter}, ConverterParameter=mm\\:ss}"
+                                    Visibility="{Binding IsInPomodoro, Converter={StaticResource NegationBoolToVisibilityConverter}}" />
+                            </Grid>
+                            <controls:PomodoroStateButton
+                                x:Name="StateButton"
+                                Width="{TemplateBinding StateButtonLength}"
+                                Height="{TemplateBinding StateButtonLength}"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                BreakColor="{TemplateBinding BreakColor}"
+                                IsInPomodoro="{Binding IsInPomodoro}"
+                                IsTimerInProgress="{Binding IsTimerInProgress}"
+                                OutlineColor="{TemplateBinding OutlineColor}"
+                                PomodoroColor="{TemplateBinding PomodoroColor}"
+                                StartCommand="{Binding StartTimerCommand}"
+                                StopCommand="{Binding StopTimerCommand}"
+                                Style="{StaticResource LargeButton}"
+                                Visibility="Collapsed">
+                                <animations:Implicit.HideAnimations>
+                                    <animations:TranslationAnimation
+                                        DelayBehavior="SetInitialValueBeforeDelay"
+                                        From="0,0,0"
+                                        To="0,80,0"
+                                        Duration="0:0:0.6" />
+                                    <animations:OpacityAnimation
+                                        DelayBehavior="SetInitialValueBeforeDelay"
+                                        From="1"
+                                        To="0"
+                                        Duration="0:0:0.6" />
+                                </animations:Implicit.HideAnimations>
+                                <animations:Implicit.ShowAnimations>
+                                    <animations:TranslationAnimation
+                                        DelayBehavior="SetInitialValueBeforeDelay"
+                                        From="0,80,0"
+                                        To="0,0,0"
+                                        Duration="0:0:0.6" />
+                                    <animations:OpacityAnimation
+                                        DelayBehavior="SetInitialValueBeforeDelay"
+                                        From="0"
+                                        To="1"
+                                        Duration="0:0:0.6" />
+                                </animations:Implicit.ShowAnimations>
+                            </controls:PomodoroStateButton>
+                        </Grid>
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="Normal">
-                                    
-                                </VisualState>
+                                <VisualState x:Name="Normal" />
                                 <VisualState x:Name="PointerOver">
                                     <VisualState.Setters>
-                                        <Setter Target="CountdownElement.Visibility"
-                                                Value="Collapsed" />
-                                        <Setter Target="StateButton.Visibility"
-                                                Value="Visible" />
+                                        <Setter Target="CountdownElement.Visibility" Value="Collapsed" />
+                                        <Setter Target="StateButton.Visibility" Value="Visible" />
                                     </VisualState.Setters>
                                 </VisualState>
 
                                 <VisualState x:Name="Pressed">
                                     <VisualState.Setters>
-                                        <Setter Target="CountdownElement.Visibility"
-                                                Value="Collapsed" />
-                                        <Setter Target="StateButton.Visibility"
-                                                Value="Visible" />
+                                        <Setter Target="CountdownElement.Visibility" Value="Collapsed" />
+                                        <Setter Target="StateButton.Visibility" Value="Visible" />
                                     </VisualState.Setters>
                                 </VisualState>
 
-                                <VisualState x:Name="Disabled">
-
-                                </VisualState>
+                                <VisualState x:Name="Disabled" />
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <Grid>
-                            <Grid x:Name="CountdownElement"
-                                  VerticalAlignment="Center">
-                                <animations:Implicit.HideAnimations>
-                                    <animations:TranslationAnimation SetInitialValueBeforeDelay="True"
-                                                                     From="0,0,0"
-                                                                     To="0,-80,0"
-                                                                     Duration="0:0:0.6" />
-                                    <animations:OpacityAnimation SetInitialValueBeforeDelay="True"
-                                                                 From="1"
-                                                                 To="0"
-                                                                 Duration="0:0:0.6" />
-                                </animations:Implicit.HideAnimations>
-                                <animations:Implicit.ShowAnimations>
-                                    <animations:TranslationAnimation SetInitialValueBeforeDelay="True"
-                                                                     From="0,-80,0"
-                                                                     To="0,0,0"
-                                                                     Duration="0:0:0.6" />
-                                    <animations:OpacityAnimation SetInitialValueBeforeDelay="True"
-                                                                 From="0"
-                                                                 To="1"
-                                                                 Duration="0:0:0.6" />
-                                </animations:Implicit.ShowAnimations>
-
-                                <TextBlock Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
-                                           Visibility="{Binding IsInPomodoro,Converter={StaticResource BoolToVisibilityConverter}}"
-                                           HorizontalAlignment="Center"
-                                           x:Name="FocusCountdown" />
-                                <TextBlock Text="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
-                                           HorizontalAlignment="Center"
-                                           Visibility="{Binding IsInPomodoro,Converter={StaticResource NegationBoolToVisibilityConverter}}"
-                                           x:Name="RelaxCountdown" />
-                            </Grid>
-                            <controls:PomodoroStateButton HorizontalAlignment="Center"
-                                                          Style="{StaticResource LargeButton}"
-                                                          Height="{TemplateBinding StateButtonLength}"
-                                                          Width="{TemplateBinding StateButtonLength}"
-                                                          BreakColor="{TemplateBinding BreakColor}"
-                                                          PomodoroColor="{TemplateBinding PomodoroColor}"
-                                                          OutlineColor="{TemplateBinding OutlineColor}"
-                                                          StartCommand="{Binding StartTimerCommand}"
-                                                          StopCommand="{Binding StopTimerCommand}"
-                                                          IsInPomodoro="{Binding IsInPomodoro}"
-                                                          Visibility="Collapsed"
-                                                          IsTimerInProgress="{Binding IsTimerInProgress}"
-                                                          VerticalAlignment="Center"
-                                                          x:Name="StateButton"
-                                                         >
-                                <animations:Implicit.HideAnimations>
-                                    <animations:TranslationAnimation SetInitialValueBeforeDelay="True"
-                                                                     From="0,0,0"
-                                                                     To="0,80,0"
-                                                                     Duration="0:0:0.6" />
-                                    <animations:OpacityAnimation SetInitialValueBeforeDelay="True"
-                                                                 From="1"
-                                                                 To="0"
-                                                                 Duration="0:0:0.6" />
-                                </animations:Implicit.HideAnimations>
-                                <animations:Implicit.ShowAnimations>
-                                    <animations:TranslationAnimation SetInitialValueBeforeDelay="True"
-                                                                     From="0,80,0"
-                                                                     To="0,0,0"
-                                                                     Duration="0:0:0.6" />
-                                    <animations:OpacityAnimation SetInitialValueBeforeDelay="True"
-                                                                 From="0"
-                                                                 To="1"
-                                                                 Duration="0:0:0.6" />
-                                </animations:Implicit.ShowAnimations>
-                            </controls:PomodoroStateButton>
-                        </Grid>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -931,77 +834,87 @@
     </Style>
 
     <Style TargetType="controls:AudioButton">
-        <Setter Property="Background"
-                Value="{ThemeResource AppBarEllipsisButtonRevealBackground}" />
-        <Setter Property="Foreground"
-                Value="{ThemeResource AppBarEllipsisButtonForeground}" />
-        <Setter Property="BorderBrush"
-                Value="{ThemeResource AppBarEllipsisButtonRevealBorderBrush}" />
-        <Setter Property="BorderThickness"
-                Value="{ThemeResource AppBarEllipsisButtonRevealBorderThemeThickness}" />
-        <Setter Property="FontFamily"
-                Value="Segoe MDL2 Assets" />
-        <Setter Property="FontSize"
-                Value="{ThemeResource ControlContentThemeFontSize}" />
+        <Setter Property="Background" Value="{ThemeResource AppBarEllipsisButtonRevealBackground}" />
+        <Setter Property="Foreground" Value="{ThemeResource AppBarEllipsisButtonForeground}" />
+        <Setter Property="BorderBrush" Value="{ThemeResource AppBarEllipsisButtonRevealBorderBrush}" />
+        <Setter Property="BorderThickness" Value="{ThemeResource AppBarEllipsisButtonRevealBorderThemeThickness}" />
+        <Setter Property="FontFamily" Value="Segoe MDL2 Assets" />
+        <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:AudioButton">
-                    <Grid x:Name="Root"
-                          Background="{TemplateBinding Background}"
-                          BorderBrush="{TemplateBinding BorderBrush}"
-                          BorderThickness="{TemplateBinding BorderThickness}"
-                          CornerRadius="{TemplateBinding CornerRadius}">
+                    <Grid
+                        x:Name="Root"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}">
                         <Grid.Resources>
-                            <Storyboard x:Name="PlayStoryboard"
-                                        RepeatBehavior="Forever">
-                                <DoubleAnimationUsingKeyFrames FillBehavior="Stop"
-                                                               Storyboard.TargetName="Volume0Icon"
-                                                               Storyboard.TargetProperty="Opacity">
-                                    <LinearDoubleKeyFrame Value="1"
-                                                          KeyTime="0:0:0" />
-                                    <LinearDoubleKeyFrame Value="1"
-                                                          KeyTime="0:0:0.25" />
-                                    <LinearDoubleKeyFrame Value="0"
-                                                          KeyTime="0:0:0.251" />
+                            <Storyboard x:Name="PlayStoryboard" RepeatBehavior="Forever">
+                                <DoubleAnimationUsingKeyFrames
+                                    FillBehavior="Stop"
+                                    Storyboard.TargetName="Volume0Icon"
+                                    Storyboard.TargetProperty="Opacity">
+                                    <LinearDoubleKeyFrame KeyTime="0:0:0" Value="1" />
+                                    <LinearDoubleKeyFrame KeyTime="0:0:0.25" Value="1" />
+                                    <LinearDoubleKeyFrame KeyTime="0:0:0.251" Value="0" />
                                 </DoubleAnimationUsingKeyFrames>
-                                <DoubleAnimationUsingKeyFrames FillBehavior="Stop"
-                                                               Storyboard.TargetName="Volume1Icon"
-                                                               Storyboard.TargetProperty="Opacity">
-                                    <LinearDoubleKeyFrame Value="0"
-                                                          KeyTime="0:0:0.249" />
-                                    <LinearDoubleKeyFrame Value="1"
-                                                          KeyTime="0:0:0.25" />
-                                    <LinearDoubleKeyFrame Value="1"
-                                                          KeyTime="0:0:0.5" />
-                                    <LinearDoubleKeyFrame Value="0"
-                                                          KeyTime="0:0:0.51" />
+                                <DoubleAnimationUsingKeyFrames
+                                    FillBehavior="Stop"
+                                    Storyboard.TargetName="Volume1Icon"
+                                    Storyboard.TargetProperty="Opacity">
+                                    <LinearDoubleKeyFrame KeyTime="0:0:0.249" Value="0" />
+                                    <LinearDoubleKeyFrame KeyTime="0:0:0.25" Value="1" />
+                                    <LinearDoubleKeyFrame KeyTime="0:0:0.5" Value="1" />
+                                    <LinearDoubleKeyFrame KeyTime="0:0:0.51" Value="0" />
                                 </DoubleAnimationUsingKeyFrames>
-                                <DoubleAnimationUsingKeyFrames FillBehavior="Stop"
-                                                               Storyboard.TargetName="Volume2Icon"
-                                                               Storyboard.TargetProperty="Opacity">
-                                    <LinearDoubleKeyFrame Value="0"
-                                                          KeyTime="0:0:0.499" />
-                                    <LinearDoubleKeyFrame Value="1"
-                                                          KeyTime="0:0:0.5" />
-                                    <LinearDoubleKeyFrame Value="1"
-                                                          KeyTime="0:0:0.75" />
-                                    <LinearDoubleKeyFrame Value="0"
-                                                          KeyTime="0:0:0.751" />
+                                <DoubleAnimationUsingKeyFrames
+                                    FillBehavior="Stop"
+                                    Storyboard.TargetName="Volume2Icon"
+                                    Storyboard.TargetProperty="Opacity">
+                                    <LinearDoubleKeyFrame KeyTime="0:0:0.499" Value="0" />
+                                    <LinearDoubleKeyFrame KeyTime="0:0:0.5" Value="1" />
+                                    <LinearDoubleKeyFrame KeyTime="0:0:0.75" Value="1" />
+                                    <LinearDoubleKeyFrame KeyTime="0:0:0.751" Value="0" />
                                 </DoubleAnimationUsingKeyFrames>
-                                <DoubleAnimationUsingKeyFrames FillBehavior="Stop"
-                                                               Storyboard.TargetName="Volume3Icon"
-                                                               Storyboard.TargetProperty="Opacity">
-                                    <LinearDoubleKeyFrame Value="0"
-                                                          KeyTime="0:0:0" />
-                                    <LinearDoubleKeyFrame Value="0"
-                                                          KeyTime="0:0:0.749" />
-                                    <LinearDoubleKeyFrame Value="1"
-                                                          KeyTime="0:0:0.75" />
-                                    <LinearDoubleKeyFrame Value="1"
-                                                          KeyTime="0:0:1" />
+                                <DoubleAnimationUsingKeyFrames
+                                    FillBehavior="Stop"
+                                    Storyboard.TargetName="Volume3Icon"
+                                    Storyboard.TargetProperty="Opacity">
+                                    <LinearDoubleKeyFrame KeyTime="0:0:0" Value="0" />
+                                    <LinearDoubleKeyFrame KeyTime="0:0:0.749" Value="0" />
+                                    <LinearDoubleKeyFrame KeyTime="0:0:0.75" Value="1" />
+                                    <LinearDoubleKeyFrame KeyTime="0:0:1" Value="1" />
                                 </DoubleAnimationUsingKeyFrames>
                             </Storyboard>
                         </Grid.Resources>
+                        <ContentPresenter
+                            x:Name="ContentPresenter"
+                            Padding="{TemplateBinding Padding}"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                            AutomationProperties.AccessibilityView="Raw"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            ContentTransitions="{TemplateBinding ContentTransitions}" />
+                        <FontIcon
+                            x:Name="Volume0Icon"
+                            FontFamily="{StaticResource SymbolThemeFontFamily}"
+                            Glyph="&#xE992;"
+                            Opacity="0" />
+                        <FontIcon
+                            x:Name="Volume1Icon"
+                            FontFamily="{StaticResource SymbolThemeFontFamily}"
+                            Glyph="&#xE993;"
+                            Opacity="0" />
+                        <FontIcon
+                            x:Name="Volume2Icon"
+                            FontFamily="{StaticResource SymbolThemeFontFamily}"
+                            Glyph="&#xE994;"
+                            Opacity="0" />
+                        <FontIcon
+                            x:Name="Volume3Icon"
+                            FontFamily="{StaticResource SymbolThemeFontFamily}"
+                            Glyph="&#xE995;" />
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualState x:Name="Normal" />
@@ -1011,70 +924,50 @@
                                 <VisualState x:Name="PointerOver">
 
                                     <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Root"
-                                                                       Storyboard.TargetProperty="Background">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource AppBarEllipsisButtonRevealBackgroundPointerOver}" />
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Root" Storyboard.TargetProperty="Background">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource AppBarEllipsisButtonRevealBackgroundPointerOver}" />
                                         </ObjectAnimationUsingKeyFrames>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
-                                                                       Storyboard.TargetProperty="Foreground">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource AppBarEllipsisButtonForegroundPointerOver}" />
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource AppBarEllipsisButtonForegroundPointerOver}" />
                                         </ObjectAnimationUsingKeyFrames>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Root"
-                                                                       Storyboard.TargetProperty="BorderBrush">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource AppBarEllipsisButtonRevealBorderBrushPointerOver}" />
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Root" Storyboard.TargetProperty="BorderBrush">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource AppBarEllipsisButtonRevealBorderBrushPointerOver}" />
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                     <VisualState.Setters>
-                                        <Setter Target="Root.(RevealBrush.State)"
-                                                Value="PointerOver" />
+                                        <Setter Target="Root.(RevealBrush.State)" Value="PointerOver" />
                                     </VisualState.Setters>
                                 </VisualState>
 
                                 <VisualState x:Name="Pressed">
 
                                     <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Root"
-                                                                       Storyboard.TargetProperty="Background">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource AppBarEllipsisButtonRevealBackgroundPressed}" />
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Root" Storyboard.TargetProperty="Background">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource AppBarEllipsisButtonRevealBackgroundPressed}" />
                                         </ObjectAnimationUsingKeyFrames>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
-                                                                       Storyboard.TargetProperty="Foreground">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource AppBarEllipsisButtonForegroundPressed}" />
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource AppBarEllipsisButtonForegroundPressed}" />
                                         </ObjectAnimationUsingKeyFrames>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Root"
-                                                                       Storyboard.TargetProperty="BorderBrush">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource AppBarEllipsisButtonRevealBorderBrushPressed}" />
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Root" Storyboard.TargetProperty="BorderBrush">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource AppBarEllipsisButtonRevealBorderBrushPressed}" />
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                     <VisualState.Setters>
-                                        <Setter Target="Root.(RevealBrush.State)"
-                                                Value="Pressed" />
+                                        <Setter Target="Root.(RevealBrush.State)" Value="Pressed" />
                                     </VisualState.Setters>
                                 </VisualState>
 
                                 <VisualState x:Name="Disabled">
 
                                     <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Root"
-                                                                       Storyboard.TargetProperty="Background">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource AppBarEllipsisButtonRevealBackgroundDisabled}" />
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Root" Storyboard.TargetProperty="Background">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource AppBarEllipsisButtonRevealBackgroundDisabled}" />
                                         </ObjectAnimationUsingKeyFrames>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
-                                                                       Storyboard.TargetProperty="Foreground">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource AppBarEllipsisButtonForegroundDisabled}" />
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource AppBarEllipsisButtonForegroundDisabled}" />
                                         </ObjectAnimationUsingKeyFrames>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Root"
-                                                                       Storyboard.TargetProperty="BorderBrush">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource AppBarEllipsisButtonRevealBorderBrushDisabled}" />
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Root" Storyboard.TargetProperty="BorderBrush">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource AppBarEllipsisButtonRevealBorderBrushDisabled}" />
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
@@ -1082,28 +975,6 @@
                             </VisualStateGroup>
 
                         </VisualStateManager.VisualStateGroups>
-                        <ContentPresenter x:Name="ContentPresenter"
-                                          ContentTransitions="{TemplateBinding ContentTransitions}"
-                                          ContentTemplate="{TemplateBinding ContentTemplate}"
-                                          Padding="{TemplateBinding Padding}"
-                                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                          AutomationProperties.AccessibilityView="Raw" />
-                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}"
-                                  Glyph="&#xE992;"
-                                  x:Name="Volume0Icon"
-                                  Opacity="0" />
-                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}"
-                                  Glyph="&#xE993;"
-                                  x:Name="Volume1Icon"
-                                  Opacity="0" />
-                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}"
-                                  Glyph="&#xE994;"
-                                  x:Name="Volume2Icon"
-                                  Opacity="0" />
-                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}"
-                                  Glyph="&#xE995;"
-                                  x:Name="Volume3Icon" />
                     </Grid>
 
                 </ControlTemplate>

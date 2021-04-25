@@ -14,7 +14,7 @@ namespace OnePomodoro.Services
 
         public async Task ShowIfAppropriateAsync()
         {
-            if (SystemInformation.IsAppUpdated && !shown)
+            if (SystemInformation.Instance.IsAppUpdated && !shown)
             {
                 shown = true;
                 var dialog = new WhatsNewDialog();

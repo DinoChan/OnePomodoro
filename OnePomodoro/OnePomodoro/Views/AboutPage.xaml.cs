@@ -17,7 +17,7 @@ namespace OnePomodoro.Views
         public AboutPage()
         {
             this.InitializeComponent();
-            Loaded += OnLoaded;
+            Loaded += OnLoaded; 
         }
 
        

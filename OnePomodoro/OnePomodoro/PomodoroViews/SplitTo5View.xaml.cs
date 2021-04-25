@@ -4,7 +4,7 @@ using Microsoft.Graphics.Canvas.Geometry;
 using Microsoft.Graphics.Canvas.Text;
 using Microsoft.Graphics.Canvas.UI.Composition;
 using Microsoft.Toolkit.Uwp.UI.Controls.TextToolbarSymbols;
-using Microsoft.Toolkit.Uwp.UI.Extensions;
+
 using OnePomodoro.Helpers;
 using System;
 using System.Collections.Generic;

@@ -45,7 +45,7 @@ namespace OnePomodoro.Views
 
         private bool DetectIfFirstRun()
         {
-            return SystemInformation.IsFirstRun && !_isShown;
+            return SystemInformation.Instance.IsFirstRun && !_isShown;
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
