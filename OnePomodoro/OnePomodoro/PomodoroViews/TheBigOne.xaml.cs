@@ -45,8 +45,8 @@ namespace OnePomodoro.PomodoroViews
 
         private async void OnLoaded(object sender, RoutedEventArgs e)
         {
-            await AnimationBuilder.Create().Opacity(to: 0, duration: TimeSpan.FromSeconds(0)).StartAsync(LayoutRoot);
-            await AnimationBuilder.Create().Opacity(to: 1, duration: TimeSpan.FromSeconds(1.5)).StartAsync(LayoutRoot);
+            //await AnimationBuilder.Create().Opacity(to: 0, duration: TimeSpan.FromSeconds(0.001)).StartAsync(LayoutRoot);
+            await AnimationBuilder.Create().Opacity(from :0.01,to: 1, duration: TimeSpan.FromSeconds(1.5)).StartAsync(LayoutRoot);
             ShowTextShimming();
         }
 

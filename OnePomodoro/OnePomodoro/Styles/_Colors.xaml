@@ -1,7 +1,5 @@
-﻿<ResourceDictionary
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <SolidColorBrush x:Key="ThemeControlForegroundBaseHighBrush" Color="{ThemeResource SystemBaseHighColor}"></SolidColorBrush>
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <SolidColorBrush x:Key="ThemeControlForegroundBaseHighBrush" Color="{ThemeResource SystemBaseHighColor}" />
 
     <Color x:Key="InworkColor">#FFD91153</Color>
     <Color x:Key="BreakColor">#FF92CAED</Color>
@@ -11,5 +9,5 @@
                      Color="#FF001BAB" />-->
     <SolidColorBrush x:Key="BreakBrush" Color="{StaticResource BreakColor}" />
 
-  
+
 </ResourceDictionary>
