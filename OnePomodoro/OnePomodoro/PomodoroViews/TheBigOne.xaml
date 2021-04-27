@@ -1,17 +1,17 @@
 ﻿<local:PomodoroView x:Class="OnePomodoro.PomodoroViews.TheBigOne"
                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="using:OnePomodoro.PomodoroViews"
-                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                    mc:Ignorable="d"
-                    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
                     xmlns:behaviors="using:Microsoft.Toolkit.Uwp.UI.Animations.Behaviors"
                     xmlns:controls="using:OnePomodoro.Controls"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:helpers="using:OnePomodoro.Helpers"
-                    x:DefaultBindMode="OneWay"
+                    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+                    xmlns:local="using:OnePomodoro.PomodoroViews"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     d:DesignHeight="1050"
-                    d:DesignWidth="1920">
+                    d:DesignWidth="1920"
+                    x:DefaultBindMode="OneWay"
+                    mc:Ignorable="d">
 
     <Grid x:Name="LayoutRoot">
         <VisualStateManager.VisualStateGroups>
@@ -21,108 +21,99 @@
                         <helpers:CompactOverlayModeTrigger IsCompactOverlayMode="True" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="StateButton.Height"
-                                Value="256" />
-                        <Setter Target="StateButton.Width"
-                                Value="256" />
-                        <Setter Target="StateButton.Margin"
-                                Value="45,0,35,-160" />
-                        <Setter Target="ViewBox.Margin"
-                                Value="0,0,0,12" />
+                        <Setter Target="StateButton.Height" Value="256" />
+                        <Setter Target="StateButton.Width" Value="256" />
+                        <Setter Target="StateButton.Margin" Value="45,0,35,-160" />
+                        <Setter Target="ViewBox.Margin" Value="0,0,0,12" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
         <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1"
-                                 StartPoint="0.5,0">
+            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
                 <GradientStop Color="#FF323232" />
-                <GradientStop Color="Black"
-                              Offset="1" />
+                <GradientStop Offset="1" Color="Black" />
             </LinearGradientBrush>
         </Grid.Background>
-        <ContentControl FontFamily="MS UI Gothic"
-                        FontSize="480"
-                        HorizontalContentAlignment="Stretch"
-                        VerticalContentAlignment="Stretch">
-            <Viewbox StretchDirection="DownOnly" x:Name="ViewBox" >
-            <StackPanel VerticalAlignment="Center"
-                        HorizontalAlignment="Center"
-                        x:Name="PomodoroPanel" Margin="40">
-                <Grid x:Name="InworkPanel"
-                      Visibility="{Binding IsInPomodoro,Converter={StaticResource BoolToVisibilityConverter}}">
-                    <TextBlock Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
-                               FontWeight="Bold"
-                               Foreground="White"
-                               FontFamily="{StaticResource TimeFont}"
-                               RenderTransformOrigin="0.5,0.54"
-                               x:Name="InworkShadow">
-                        <TextBlock.Projection>
-                            <PlaneProjection RotationZ="0"
-                                             RotationX="180" />
-                        </TextBlock.Projection>
-                        <TextBlock.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform ScaleY="-1" />
-                            </TransformGroup>
-                        </TextBlock.RenderTransform>
+        <ContentControl HorizontalContentAlignment="Stretch"
+                        VerticalContentAlignment="Stretch"
+                        FontFamily="MS UI Gothic"
+                        FontSize="480">
+            <Viewbox x:Name="ViewBox" StretchDirection="DownOnly">
+                <StackPanel x:Name="PomodoroPanel"
+                            Margin="40"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                    <Grid x:Name="InworkPanel" Visibility="{Binding IsInPomodoro, Converter={StaticResource BoolToVisibilityConverter}}">
+                        <TextBlock x:Name="InworkShadow"
+                                   FontFamily="{StaticResource TimeFont}"
+                                   FontWeight="Bold"
+                                   Foreground="White"
+                                   RenderTransformOrigin="0.5,0.54"
+                                   Text="{Binding RemainingPomodoroTime, Converter={StaticResource FormatStringConverter}, ConverterParameter=mm\\:ss}">
+                            <TextBlock.Projection>
+                                <PlaneProjection RotationX="180" RotationZ="0" />
+                            </TextBlock.Projection>
+                            <TextBlock.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleY="-1" />
+                                </TransformGroup>
+                            </TextBlock.RenderTransform>
 
-                    <interactivity:Interaction.Behaviors>
-                         <behaviors:Light Distance="400.16"
-                                          AutomaticallyStart="True"
-                                          EasingType="Linear"
-                                          EasingMode="EaseOut"
-                                          Color="#FFD91153" />
-                    </interactivity:Interaction.Behaviors>
-                    </TextBlock>
-                    <TextBlock Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
-                               FontWeight="Bold"
-                               FontFamily="{StaticResource TimeFont}"
-                               Foreground="White" />
-                </Grid>
-                <Grid x:Name="BreakPanel"
-                      Visibility="{Binding IsInPomodoro,Converter={StaticResource NegationBoolToVisibilityConverter}}">
-                    <TextBlock Text="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
-                               FontWeight="Bold"
-                               Foreground="White"
-                               RenderTransformOrigin="0.5,0.46"
-                               FontFamily="{StaticResource TimeFont}"
-                               x:Name="BreakShadow">
-                        <TextBlock.Projection>
-                            <PlaneProjection RotationZ="0"
-                                             RotationX="180" />
-                        </TextBlock.Projection>
-                        <TextBlock.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform ScaleY="-1" />
-                            </TransformGroup>
-                        </TextBlock.RenderTransform>
+                            <interactivity:Interaction.Behaviors>
+                                <behaviors:Light AutomaticallyStart="True"
+                                                 Distance="400.16"
+                                                 EasingMode="EaseOut"
+                                                 EasingType="Linear"
+                                                 Color="#FFD91153" />
+                            </interactivity:Interaction.Behaviors>
+                        </TextBlock>
+                        <TextBlock FontFamily="{StaticResource TimeFont}"
+                                   FontWeight="Bold"
+                                   Foreground="White"
+                                   Text="{Binding RemainingPomodoroTime, Converter={StaticResource FormatStringConverter}, ConverterParameter=mm\\:ss}" />
+                    </Grid>
+                    <Grid x:Name="BreakPanel" Visibility="{Binding IsInPomodoro, Converter={StaticResource NegationBoolToVisibilityConverter}}">
+                        <TextBlock x:Name="BreakShadow"
+                                   FontFamily="{StaticResource TimeFont}"
+                                   FontWeight="Bold"
+                                   Foreground="White"
+                                   RenderTransformOrigin="0.5,0.46"
+                                   Text="{Binding RemainingBreakTime, Converter={StaticResource FormatStringConverter}, ConverterParameter=mm\\:ss}">
+                            <TextBlock.Projection>
+                                <PlaneProjection RotationX="180" RotationZ="0" />
+                            </TextBlock.Projection>
+                            <TextBlock.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleY="-1" />
+                                </TransformGroup>
+                            </TextBlock.RenderTransform>
 
-                    <interactivity:Interaction.Behaviors>
-                         <behaviors:Light Distance="800.16"
-                                          AutomaticallyStart="True"
-                                          EasingType="Linear"
-                                          EasingMode="EaseOut"
-                                          Color="#FF001BAB" />
-                    </interactivity:Interaction.Behaviors>
-                    </TextBlock>
-                    <TextBlock Text="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
-                               FontWeight="Bold"
-                               FontFamily="{StaticResource TimeFont}"
-                               Foreground="White" />
-                </Grid>
-                    <controls:PomodoroStateButton  Margin="45,-00,35,0"
-                                                   HorizontalAlignment="Center"
-                                                   VerticalAlignment="Bottom" 
-                                                   StartCommand="{Binding StartTimerCommand}"
-                                                   StopCommand="{Binding StopTimerCommand}"
-                                                   IsInPomodoro="{x:Bind ViewModel.IsInPomodoro}"
-                                                   IsTimerInProgress="{x:Bind ViewModel.IsTimerInProgress}"
-                                                   x:Name="StateButton" />
+                            <interactivity:Interaction.Behaviors>
+                                <behaviors:Light AutomaticallyStart="True"
+                                                 Distance="800.16"
+                                                 EasingMode="EaseOut"
+                                                 EasingType="Linear"
+                                                 Color="#FF001BAB" />
+                            </interactivity:Interaction.Behaviors>
+                        </TextBlock>
+                        <TextBlock FontFamily="{StaticResource TimeFont}"
+                                   FontWeight="Bold"
+                                   Foreground="White"
+                                   Text="{Binding RemainingBreakTime, Converter={StaticResource FormatStringConverter}, ConverterParameter=mm\\:ss}" />
+                    </Grid>
+                    <controls:PomodoroStateButton x:Name="StateButton"
+                                                  Margin="45,-00,35,0"
+                                                  HorizontalAlignment="Center"
+                                                  VerticalAlignment="Bottom"
+                                                  IsInPomodoro="{x:Bind ViewModel.IsInPomodoro}"
+                                                  IsTimerInProgress="{x:Bind ViewModel.IsTimerInProgress}"
+                                                  StartCommand="{Binding StartTimerCommand}"
+                                                  StopCommand="{Binding StopTimerCommand}" />
 
                 </StackPanel>
             </Viewbox>
         </ContentControl>
-    
+
     </Grid>
 </local:PomodoroView>
