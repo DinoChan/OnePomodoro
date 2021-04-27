@@ -8,6 +8,7 @@
                     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
                     xmlns:local="using:OnePomodoro.PomodoroViews"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:media="using:OnePomodoro.Media"
                     d:DesignHeight="1050"
                     d:DesignWidth="1920"
                     x:DefaultBindMode="OneWay"
@@ -59,14 +60,10 @@
                                     <ScaleTransform ScaleY="-1" />
                                 </TransformGroup>
                             </TextBlock.RenderTransform>
+                            <TextBlock.Lights>
+                                <media:XamlPointLight Distance="400.16" Color="#FFD91153" />
+                            </TextBlock.Lights>
 
-                            <interactivity:Interaction.Behaviors>
-                                <behaviors:Light AutomaticallyStart="True"
-                                                 Distance="400.16"
-                                                 EasingMode="EaseOut"
-                                                 EasingType="Linear"
-                                                 Color="#FFD91153" />
-                            </interactivity:Interaction.Behaviors>
                         </TextBlock>
                         <TextBlock FontFamily="{StaticResource TimeFont}"
                                    FontWeight="Bold"
@@ -88,14 +85,9 @@
                                     <ScaleTransform ScaleY="-1" />
                                 </TransformGroup>
                             </TextBlock.RenderTransform>
-
-                            <interactivity:Interaction.Behaviors>
-                                <behaviors:Light AutomaticallyStart="True"
-                                                 Distance="800.16"
-                                                 EasingMode="EaseOut"
-                                                 EasingType="Linear"
-                                                 Color="#FF001BAB" />
-                            </interactivity:Interaction.Behaviors>
+                            <TextBlock.Lights>
+                                <media:XamlPointLight Distance="800.16" Color="#FF001BAB" />
+                            </TextBlock.Lights>
                         </TextBlock>
                         <TextBlock FontFamily="{StaticResource TimeFont}"
                                    FontWeight="Bold"

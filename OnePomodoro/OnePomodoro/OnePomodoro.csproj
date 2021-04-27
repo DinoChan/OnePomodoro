@@ -191,6 +191,7 @@
     <Compile Include="Helpers\ScreenshotAttribute.cs" />
     <Compile Include="Helpers\SettingsStorageExtensions.cs" />
     <Compile Include="Helpers\TitleAttribute.cs" />
+    <Compile Include="Media\XamlPointLight.cs" />
     <Compile Include="Models\IPomodoroSettings.cs" />
     <Compile Include="Models\PomodoroSettings.cs" />
     <Compile Include="Controls\ColorfulShadowTextControl.cs" />
