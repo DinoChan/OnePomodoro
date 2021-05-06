@@ -17,16 +17,11 @@ namespace OnePomodoro.Views
         public AboutPage()
         {
             this.InitializeComponent();
-            Loaded += OnLoaded; 
         }
 
        
         private AboutViewModel ViewModel => DataContext as AboutViewModel;
 
-        private void OnLoaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            ViewModel.OnNavigatedTo(null, null);
-        }
-
+      
     }
 }

@@ -1,7 +1,9 @@
-﻿using OnePomodoro.Helpers;
+﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.Toolkit.Mvvm.Input;
+using OnePomodoro.Helpers;
 using OnePomodoro.Services;
-using Prism.Commands;
-using Prism.Windows.Mvvm;
+
+
 using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Core;
@@ -18,7 +20,7 @@ namespace OnePomodoro.ViewModels
     ///
     /// 所以在退出后台模式时更新一下就好了，不需要后台任务，简单就好。
     /// </summary>
-    public class PomodoroViewModel : ViewModelBase
+    public class PomodoroViewModel : ObservableObject
     {
         private TimeSpan PomodoroLength =>  TimeSpan.FromMinutes(SettingsService.Current == null ? 25 : SettingsService.Current.PomodoroLength);
         private TimeSpan ShortBreakLength => TimeSpan.FromMinutes(SettingsService.Current == null ? 5 : SettingsService.Current.ShortBreakLength);
@@ -38,8 +40,8 @@ namespace OnePomodoro.ViewModels
 
         public PomodoroViewModel()
         {
-            StartTimerCommand = new DelegateCommand(StartTimer);
-            StopTimerCommand = new DelegateCommand(StopTimer);
+            StartTimerCommand = new RelayCommand(StartTimer);
+            StopTimerCommand = new RelayCommand(StopTimer);
 
             IsInPomodoro = true;
             RemainingPomodoroTime = PomodoroLength;
@@ -91,7 +93,7 @@ namespace OnePomodoro.ViewModels
             {
                 _remainingPomodoroTime = value;
                 RemainingPomodoroTimeChanged?.Invoke(this, EventArgs.Empty);
-                RaisePropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -106,7 +108,7 @@ namespace OnePomodoro.ViewModels
             {
                 _remainingBreakTime = value;
                 RemainingBreakTimeChanged?.Invoke(this, EventArgs.Empty);
-                RaisePropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -120,7 +122,7 @@ namespace OnePomodoro.ViewModels
             {
                 _isInPomodoro = value;
                 IsInPomodoroChanged?.Invoke(this, EventArgs.Empty);
-                RaisePropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -131,13 +133,13 @@ namespace OnePomodoro.ViewModels
             private set
             {
                 _isTimerInProgress = value;
-                RaisePropertyChanged();
+                OnPropertyChanged();
             }
         }
 
-        public DelegateCommand StartTimerCommand { get; }
+        public RelayCommand StartTimerCommand { get; }
 
-        public DelegateCommand StopTimerCommand { get; }
+        public RelayCommand StopTimerCommand { get; }
 
         public CountdownTimer CurrentTimer
         {
@@ -159,7 +161,7 @@ namespace OnePomodoro.ViewModels
             set
             {
                 _completedPomodoros = value;
-                RaisePropertyChanged();
+                OnPropertyChanged();
             }
         }
 

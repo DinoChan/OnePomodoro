@@ -26,7 +26,7 @@ using Microsoft.AppCenter.Crashes;
 namespace OnePomodoro
 {
     [Windows.UI.Xaml.Data.Bindable]
-    public sealed partial class App : PrismUnityApplication
+    public sealed partial class App : Application
     {
         public bool HasExited { get; private set; }
 
@@ -122,17 +122,7 @@ namespace OnePomodoro
 
         protected override async Task OnInitializeAsync(IActivatedEventArgs args)
         {
-            await base.OnInitializeAsync(args);
             await ThemeSelectorService.InitializeAsync().ConfigureAwait(false);
-
-            // We are remapping the default ViewNamePage and ViewNamePageViewModel naming to ViewNamePage and ViewNameViewModel to
-            // gain better code reuse with other frameworks and pages within Windows Template Studio
-            ViewModelLocationProvider.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
-            {
-                var viewModelTypeName = string.Format(CultureInfo.InvariantCulture, "OnePomodoro.ViewModels.{0}ViewModel, OnePomodoro", viewType.Name.Substring(0, viewType.Name.Length - 4));
-                return Type.GetType(viewModelTypeName);
-            });
-            await Container.Resolve<ILiveTileService>().EnableQueueAsync().ConfigureAwait(false);
             await SettingsService.InitializeAsync();
         }
 

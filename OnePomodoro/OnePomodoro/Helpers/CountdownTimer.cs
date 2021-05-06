@@ -1,4 +1,5 @@
-﻿using Prism.Mvvm;
+﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ using Windows.UI.Xaml;
 //https://docs.microsoft.com/zh-cn/windows/uwp/launch-resume/app-lifecycle
 namespace OnePomodoro.Helpers
 {
-    public class CountdownTimer : BindableBase
+    public class CountdownTimer : ObservableObject
     {
 
         private DispatcherTimer _innerTimer;

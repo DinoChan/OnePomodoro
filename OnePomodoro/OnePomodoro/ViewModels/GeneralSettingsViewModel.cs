@@ -1,23 +1,18 @@
-﻿using OnePomodoro.Models;
+﻿using Microsoft.Practices.Unity;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
+using OnePomodoro.Helpers;
+using OnePomodoro.Infrastructure;
+using OnePomodoro.Models;
 using OnePomodoro.Services;
-using Prism.Windows.Mvvm;
+using Prism.Unity.Windows;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Prism.Commands;
-using Microsoft.Practices.Unity;
-using Prism.Unity.Windows;
-using Windows.ApplicationModel;
-using OnePomodoro.Helpers;
-using Windows.UI.Core;
 using System.ComponentModel;
-using OnePomodoro.Infrastructure;
+using Windows.ApplicationModel;
 
 namespace OnePomodoro.ViewModels
 {
-    public class GeneralSettingsViewModel : ViewModelBase
+    public class GeneralSettingsViewModel : ObservableObject
     {
         private ToastNotificationsService _toastNotificationsService;
 

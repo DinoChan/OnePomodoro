@@ -119,6 +119,9 @@
     <PackageReference Include="Microsoft.Services.Store.Engagement">
       <Version>10.1901.28001</Version>
     </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Mvvm">
+      <Version>7.0.1</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp">
       <Version>7.0.1</Version>
     </PackageReference>
