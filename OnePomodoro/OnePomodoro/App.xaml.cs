@@ -1,27 +1,18 @@
-﻿using System;
-using System.Globalization;
-using System.Threading.Tasks;
-
-using Microsoft.Practices.Unity;
+﻿using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+using Microsoft.Extensions.DependencyInjection;
 using OnePomodoro.Helpers;
 using OnePomodoro.Services;
-
-using Prism.Mvvm;
-using Prism.Unity.Windows;
-using Prism.Windows.AppModel;
-
+using OnePomodoro.Views;
+using System;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
 using Windows.ApplicationModel.Resources;
-using Windows.Foundation.Metadata;
-using Windows.UI;
 using Windows.UI.Core.Preview;
-using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Microsoft.AppCenter;
-using Microsoft.AppCenter.Analytics;
-using Microsoft.AppCenter.Crashes;
+using Windows.UI.Xaml.Navigation;
 
 namespace OnePomodoro
 {
@@ -53,39 +44,72 @@ namespace OnePomodoro
 
             AppCenter.Start("ba644924-74c7-432e-a7fa-e86442a1c601",
                 typeof(Analytics), typeof(Crashes));
-        }
-        
 
-        protected override void ConfigureContainer()
-        {
-            // register a singleton using Container.RegisterType<IInterface, Type>(new ContainerControlledLifetimeManager());
-            base.ConfigureContainer();
-            Container.RegisterType<IWhatsNewDisplayService, WhatsNewDisplayService>(new ContainerControlledLifetimeManager());
-            Container.RegisterType<IFirstRunDisplayService, FirstRunDisplayService>(new ContainerControlledLifetimeManager());
-            Container.RegisterType<ILiveTileService, LiveTileService>(new ContainerControlledLifetimeManager());
-            Container.RegisterInstance<IResourceLoader>(new ResourceLoaderAdapter(new ResourceLoader()));
+            Services = ConfigureServices();
         }
 
-        protected override async Task OnLaunchApplicationAsync(LaunchActivatedEventArgs args)
+        /// <summary>
+        /// 在应用程序由最终用户正常启动时进行调用。
+        /// 将在启动应用程序以打开特定文件等情况下使用。
+        /// </summary>
+        /// <param name="e">有关启动请求和过程的详细信息。</param>
+        protected async override void OnLaunched(LaunchActivatedEventArgs e)
         {
-           
-            await LaunchApplicationAsync(PageTokens.MainPage, null);
+            Frame rootFrame = Window.Current.Content as Frame;
+
+            // 不要在窗口已包含内容时重复应用程序初始化，
+            // 只需确保窗口处于活动状态
+            if (rootFrame == null)
+            {
+                // 创建要充当导航上下文的框架，并导航到第一页
+                rootFrame = new Frame();
+
+                rootFrame.NavigationFailed += OnNavigationFailed;
+
+                if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
+                {
+                    //TODO: 从之前挂起的应用程序加载状态
+                }
+
+                // 将框架放在当前窗口中
+                Window.Current.Content = rootFrame;
+            }
+
+            if (e.PrelaunchActivated == false)
+            {
+                if (rootFrame.Content == null)
+                {
+                    CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
+                    coreTitleBar.ExtendViewIntoTitleBar = true;
+                    await DataService.CreateTheDatabaseAsync();
+                    await DataService.RemoveFuturePeriodsAsync();
+                    await ThemeSelectorService.InitializeAsync().ConfigureAwait(false);
+                    await ThemeSelectorService.SetRequestedThemeAsync();
+
+                    await SettingsService.InitializeAsync();
+                    // 当导航堆栈尚未还原时，导航到第一页，
+                    // 并通过将所需信息作为导航参数传入来配置
+                    // 参数
+                    rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                    HandleClosed();
+                    NotificationManager.Current.RemoveBreakFinishedToastNotificationSchedule();
+                    NotificationManager.Current.RemovePomodoroFinishedToastNotificationSchedule();
+                    Analytics.TrackEvent(Windows.System.UserProfile.GlobalizationPreferences.HomeGeographicRegion);
+                }
+                // 确保当前窗口处于活动状态
+                Window.Current.Activate();
+
+
+                await Services.GetService<IFirstRunDisplayService>().ShowIfAppropriateAsync();
+            }
         }
 
-        private async Task LaunchApplicationAsync(string page, object launchParam)
+        private void HandleClosed()
         {
-            CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
-            coreTitleBar.ExtendViewIntoTitleBar = true;
-            await DataService.CreateTheDatabaseAsync();
-            await DataService.RemoveFuturePeriodsAsync();
-            await ThemeSelectorService.SetRequestedThemeAsync();
-            NavigationService.Navigate(page, launchParam);
-            Window.Current.Activate();
-
-            SystemNavigationManagerPreview.GetForCurrentView().CloseRequested +=async (s, e) =>
+            SystemNavigationManagerPreview.GetForCurrentView().CloseRequested += async (s, args) =>
             {
                 HasExited = true;
-                   var deferral = e.GetDeferral();
+                var deferral = args.GetDeferral();
                 await DataService.RemoveFuturePeriodsAsync();
                 NotificationManager.Current.IsEnabled = false;
                 NotificationManager.Current.RemoveBreakFinishedToastNotificationSchedule();
@@ -93,45 +117,41 @@ namespace OnePomodoro
 
                 deferral.Complete();
             };
-            NotificationManager.Current.RemoveBreakFinishedToastNotificationSchedule();
-            NotificationManager.Current.RemovePomodoroFinishedToastNotificationSchedule();
-
-          
-            //var dialog = new Views.FirstRunDialog();
-            //await dialog.ShowAsync();
-            //await Container.Resolve<IWhatsNewDisplayService>().ShowIfAppropriateAsync();
-            await Container.Resolve<IFirstRunDisplayService>().ShowIfAppropriateAsync();
-            //Container.Resolve<ILiveTileService>().SampleUpdate();
-            //Container.Resolve<IToastNotificationsService>().ShowToastNotificationSample();
-            Analytics.TrackEvent(Windows.System.UserProfile.GlobalizationPreferences.HomeGeographicRegion);
         }
 
-        protected override async Task OnActivateApplicationAsync(IActivatedEventArgs args)
+        /// <summary>
+        /// 导航到特定页失败时调用
+        /// </summary>
+        ///<param name="sender">导航失败的框架</param>
+        ///<param name="e">有关导航失败的详细信息</param>
+        void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
-            if (args.Kind == ActivationKind.ToastNotification && args.PreviousExecutionState != ApplicationExecutionState.Running)
-            {
-                // Handle a toast notification here
-                // Since dev center, toast, and Azure notification hub will all active with an ActivationKind.ToastNotification
-                // you may have to parse the toast data to determine where it came from and what action you want to take
-                // If the app isn't running then launch the app here
-                await OnLaunchApplicationAsync(args as LaunchActivatedEventArgs);
-            }
-
-            await Task.CompletedTask;
+            throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
         }
 
-        protected override async Task OnInitializeAsync(IActivatedEventArgs args)
+
+        /// <summary>
+        /// Gets the current <see cref="App"/> instance in use
+        /// </summary>
+        public new static App Current => (App)Application.Current;
+
+        /// <summary>
+        /// Gets the <see cref="IServiceProvider"/> instance to resolve application services.
+        /// </summary>
+        public IServiceProvider Services { get; }
+
+        /// <summary>
+        /// Configures the services for the application.
+        /// </summary>
+        private static IServiceProvider ConfigureServices()
         {
-            await ThemeSelectorService.InitializeAsync().ConfigureAwait(false);
-            await SettingsService.InitializeAsync();
-        }
+            var services = new ServiceCollection();
 
-        protected override IDeviceGestureService OnCreateDeviceGestureService()
-        {
-            var service = base.OnCreateDeviceGestureService();
-            service.UseTitleBarBackButton = false;
-            return service;
-        }
+            services.AddSingleton<IWhatsNewDisplayService, WhatsNewDisplayService>();
+            services.AddSingleton<IFirstRunDisplayService, FirstRunDisplayService>();
+            services.AddSingleton<ILiveTileService, LiveTileService>();
 
+            return services.BuildServiceProvider();
+        }
     }
 }

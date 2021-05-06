@@ -1,10 +1,9 @@
-﻿using Microsoft.Practices.Unity;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using OnePomodoro.Helpers;
 using OnePomodoro.Infrastructure;
 using OnePomodoro.Models;
 using OnePomodoro.Services;
-using Prism.Unity.Windows;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,8 +19,8 @@ namespace OnePomodoro.ViewModels
         {
             Settings = SettingsService.Current;
             (Settings as INotifyPropertyChanged).PropertyChanged += OnPropertyChanged;
-            if (DesignMode.DesignMode2Enabled == false && App.Current is PrismUnityApplication)
-                _toastNotificationsService = App.Current.Container.Resolve<ToastNotificationsService>();
+            if (DesignMode.DesignMode2Enabled == false)
+                _toastNotificationsService = App.Current.Services.GetService<ToastNotificationsService>();
 
             Audios = AudioDefinitions.Definitions;
 

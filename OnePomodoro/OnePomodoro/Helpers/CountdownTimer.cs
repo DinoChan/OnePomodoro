@@ -51,7 +51,7 @@ namespace OnePomodoro.Helpers
                     return;
 
                 _remainingTime = value;
-                RaisePropertyChanged();
+                OnPropertyChanged();
                 Elapsed?.Invoke(this, EventArgs.Empty);
             }
         }
