@@ -53,7 +53,7 @@ namespace OnePomodoro.ViewModels
 
         private async void OnEnteredBackground(object sender, EnteredBackgroundEventArgs e)
         {
-            if (IsTimerInProgress && (App.Current as App).HasExited == false)
+            if (IsTimerInProgress && App.Current.HasExited == false)
             {
                 var deferral = e.GetDeferral();
                 NotificationManager.Current.AddAllNotifications(IsInPomodoro, CurrentTimer.StartTime + CurrentTimer.TotalTime,

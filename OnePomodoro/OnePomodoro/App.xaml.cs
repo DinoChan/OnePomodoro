@@ -8,7 +8,6 @@ using OnePomodoro.Views;
 using System;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
-using Windows.ApplicationModel.Resources;
 using Windows.UI.Core.Preview;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -47,6 +46,16 @@ namespace OnePomodoro
 
             Services = ConfigureServices();
         }
+
+        /// <summary>
+        /// Gets the <see cref="IServiceProvider"/> instance to resolve application services.
+        /// </summary>
+        public IServiceProvider Services { get; }
+
+        /// <summary>
+        /// Gets the current <see cref="App"/> instance in use
+        /// </summary>
+        public new static App Current => (App)Application.Current;
 
         /// <summary>
         /// 在应用程序由最终用户正常启动时进行调用。
@@ -128,18 +137,6 @@ namespace OnePomodoro
         {
             throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
         }
-
-
-        /// <summary>
-        /// Gets the current <see cref="App"/> instance in use
-        /// </summary>
-        public new static App Current => (App)Application.Current;
-
-        /// <summary>
-        /// Gets the <see cref="IServiceProvider"/> instance to resolve application services.
-        /// </summary>
-        public IServiceProvider Services { get; }
-
         /// <summary>
         /// Configures the services for the application.
         /// </summary>
