@@ -76,7 +76,6 @@
                     <TextBlock Style="{StaticResource TipsContentStyle}" Text="After four pomodoros, take a longer break (25 minutes), reset your checkmark count to zero, then go to step 1." />
                 </StackPanel>
 
-
                 <StackPanel Margin="{StaticResource SettingsMargin}" Orientation="Horizontal">
                     <Image Width="88"
                            Height="88"
