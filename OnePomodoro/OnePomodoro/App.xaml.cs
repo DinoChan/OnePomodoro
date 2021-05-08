@@ -27,8 +27,7 @@ namespace OnePomodoro
             {
                 e.Handled = true;
                 var errorMessage = e.Message + Environment.NewLine + e.Exception.StackTrace;
-                ContentDialog dialog = new ContentDialog
-                {
+                ContentDialog dialog = new ContentDialog {
                     CloseButtonText = "Ok",
                     Content = errorMessage
                 };
