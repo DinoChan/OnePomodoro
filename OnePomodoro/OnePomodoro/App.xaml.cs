@@ -1,11 +1,11 @@
-﻿using Microsoft.AppCenter;
+﻿using System;
+using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using Microsoft.Extensions.DependencyInjection;
 using OnePomodoro.Helpers;
 using OnePomodoro.Services;
 using OnePomodoro.Views;
-using System;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Core.Preview;
@@ -27,7 +27,8 @@ namespace OnePomodoro
             {
                 e.Handled = true;
                 var errorMessage = e.Message + Environment.NewLine + e.Exception.StackTrace;
-                ContentDialog dialog = new ContentDialog {
+                ContentDialog dialog = new ContentDialog
+                {
                     CloseButtonText = "Ok",
                     Content = errorMessage
                 };
