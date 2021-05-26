@@ -11,8 +11,6 @@ namespace OnePomodoro.Services
     internal partial class ToastNotificationsService
     {
         private const string ToastTag = "ToastTag";
-        private const string PomodoroGroup = "Pomodoro";
-        private const string BreakGroup = "Break";
         private const string ToastGroup = "ToastGroup";
         private const string PomodoroTag = "Pomodoro";
         private const string BreakTag = "Break";
@@ -30,6 +28,15 @@ namespace OnePomodoro.Services
 
         private static ToastContent GetPomodoroToastContent()
         {
+            //        new ToastContentBuilder()
+            //   .AddArgument("action", "viewItemsDueToday")
+            //   .AddText("ASTR 170B1")
+            //   .AddText("You have 3 items due today!")
+            //.Schedule(DateTime.Now.AddSeconds(5), toast =>
+            // {
+            //     toast.Tag = "18365";
+            //     toast.Group = "ASTR 170B1";
+            // });
             var content = new ToastContent()
             {
                 Launch = "ToastContentActivationParams",
@@ -97,27 +104,8 @@ namespace OnePomodoro.Services
             }
         }
 
-        public void ShowPomodoroFinishedToastNotification()
-        {
-            var toast = new ToastNotification(PomodoroToastContent)
-            {
-                Tag = ToastTag
-            };
 
-            ShowToastNotification(toast);
-        }
-
-        public void ShowBreakFinishedToastNotification()
-        {
-            var toast = new ToastNotification(BreakToastContent)
-            {
-                Tag = ToastTag
-            };
-
-            ShowToastNotification(toast);
-        }
-
-        public ScheduledToastNotification AddPomodoroFinishedToastNotificationSchedule(DateTime time,string audioUri, bool isRemoveOthers = true)
+        public ScheduledToastNotification AddPomodoroFinishedToastNotificationSchedule(DateTime time, string audioUri, bool isRemoveOthers = true)
         {
             if (isRemoveOthers)
                 RemovePomodoroFinishedToastNotificationSchedule();
@@ -138,7 +126,8 @@ namespace OnePomodoro.Services
 
             var toast = new ScheduledToastNotification(toastContent.GetXml(), time)
             {
-                Tag = ToastTag,
+                Tag = PomodoroTag,
+                Group = ToastGroup,
                 ExpirationTime = time.AddHours(1),
                 Id = _id++.ToString()
             };
@@ -167,7 +156,8 @@ namespace OnePomodoro.Services
 
             var toast = new ScheduledToastNotification(toastContent.GetXml(), time)
             {
-                Tag = ToastTag,
+                Tag = BreakTag,
+                Group = ToastGroup,
                 ExpirationTime = time.AddHours(1),
                 Id = _id++.ToString()
             };
@@ -182,7 +172,7 @@ namespace OnePomodoro.Services
             var notifier = ToastNotificationManager.CreateToastNotifier();
             foreach (var scheduledToast in notifier.GetScheduledToastNotifications())
             {
-                if (scheduledToast.Content.InnerText == PomodoroToastContent.InnerText && (string.IsNullOrWhiteSpace(id) || scheduledToast.Id == id))
+                if (scheduledToast.Group == ToastGroup && scheduledToast.Tag == PomodoroTag && (string.IsNullOrWhiteSpace(id) || scheduledToast.Id == id))
                 {
                     notifier.RemoveFromSchedule(scheduledToast);
                     yield return scheduledToast.Id;
@@ -196,7 +186,7 @@ namespace OnePomodoro.Services
             var notifier = ToastNotificationManager.CreateToastNotifier();
             foreach (var scheduledToast in notifier.GetScheduledToastNotifications())
             {
-                if (scheduledToast.Content.InnerText == BreakToastContent.InnerText && (string.IsNullOrWhiteSpace(id) || scheduledToast.Id == id))
+                if (scheduledToast.Group == ToastGroup && scheduledToast.Tag == BreakTag && (string.IsNullOrWhiteSpace(id) || scheduledToast.Id == id))
                 {
                     notifier.RemoveFromSchedule(scheduledToast);
                     yield return scheduledToast.Id;
