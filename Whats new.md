@@ -26,3 +26,7 @@ Change os version to 1903.
 **2020-12-18 v1.23**
 
 Add Analytics.TrackEvent.
+
+**2021-5-28 v1.24**
+
+Update some packages to latest version.
