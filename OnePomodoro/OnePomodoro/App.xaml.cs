@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
@@ -41,11 +42,17 @@ namespace OnePomodoro
 
             };
 
+
+            AppDomain.CurrentDomain.UnhandledException += AppDomainUnhandledException;
+            TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
+
             AppCenter.Start("ba644924-74c7-432e-a7fa-e86442a1c601",
                 typeof(Analytics), typeof(Crashes));
 
             Services = ConfigureServices();
         }
+
+       
 
         /// <summary>
         /// Gets the <see cref="IServiceProvider"/> instance to resolve application services.
@@ -149,6 +156,14 @@ namespace OnePomodoro
             services.AddSingleton<ILiveTileService, LiveTileService>();
 
             return services.BuildServiceProvider();
+        }
+
+        private void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e) => Crashes.TrackError(e.Exception);
+
+        private void AppDomainUnhandledException(object sender, System.UnhandledExceptionEventArgs e)
+        {
+            if (e.ExceptionObject is Exception ex)
+                Crashes.TrackError(ex);
         }
     }
 }
