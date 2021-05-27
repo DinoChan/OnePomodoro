@@ -28,38 +28,45 @@ namespace OnePomodoro.ViewModels
 
         private async void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            await SettingsService.SaveAsync();
+            try
+            {
+                await SettingsService.SaveAsync();
 
-            if (Settings.IsNotifyWhenPomodoroFinished)
-            {
-                if (PomodoroViewModel.Current.IsInPomodoro && PomodoroViewModel.Current.IsTimerInProgress)
-                    NotificationManager.Current.AddPomodoroFinishedToastNotificationSchedule(DateTime.Now + PomodoroViewModel.Current.RemainingPomodoroTime);
-            }
-            else
-            {
-                NotificationManager.Current.RemovePomodoroFinishedToastNotificationSchedule();
-            }
+                if (Settings.IsNotifyWhenPomodoroFinished)
+                {
+                    if (PomodoroViewModel.Current.IsInPomodoro && PomodoroViewModel.Current.IsTimerInProgress)
+                        NotificationManager.Current.AddPomodoroFinishedToastNotificationSchedule(DateTime.Now + PomodoroViewModel.Current.RemainingPomodoroTime);
+                }
+                else
+                {
+                    NotificationManager.Current.RemovePomodoroFinishedToastNotificationSchedule();
+                }
 
-            if (Settings.IsNotifyWhenBreakFinished)
-            {
-                if (PomodoroViewModel.Current.IsInPomodoro == false && PomodoroViewModel.Current.IsTimerInProgress)
-                    NotificationManager.Current.AddBreakFinishedToastNotificationSchedule(DateTime.Now + PomodoroViewModel.Current.RemainingBreakTime);
-            }
-            else
-            {
-                NotificationManager.Current.RemoveBreakFinishedToastNotificationSchedule();
+                if (Settings.IsNotifyWhenBreakFinished)
+                {
+                    if (PomodoroViewModel.Current.IsInPomodoro == false && PomodoroViewModel.Current.IsTimerInProgress)
+                        NotificationManager.Current.AddBreakFinishedToastNotificationSchedule(DateTime.Now + PomodoroViewModel.Current.RemainingBreakTime);
+                }
+                else
+                {
+                    NotificationManager.Current.RemoveBreakFinishedToastNotificationSchedule();
 
-            }
+                }
 
-            if (e.PropertyName == nameof(IPomodoroSettings.PomodoroAudioUri))
-            {
-                if (Settings.IsNotifyWhenPomodoroFinished && PomodoroViewModel.Current.IsInPomodoro && PomodoroViewModel.Current.IsTimerInProgress)
-                    NotificationManager.Current.AddPomodoroFinishedToastNotificationSchedule(DateTime.Now + PomodoroViewModel.Current.RemainingPomodoroTime);
+                if (e.PropertyName == nameof(IPomodoroSettings.PomodoroAudioUri))
+                {
+                    if (Settings.IsNotifyWhenPomodoroFinished && PomodoroViewModel.Current.IsInPomodoro && PomodoroViewModel.Current.IsTimerInProgress)
+                        NotificationManager.Current.AddPomodoroFinishedToastNotificationSchedule(DateTime.Now + PomodoroViewModel.Current.RemainingPomodoroTime);
+                }
+                else if (e.PropertyName == nameof(IPomodoroSettings.BreakAudioUri))
+                {
+                    if (PomodoroViewModel.Current.IsInPomodoro == false && PomodoroViewModel.Current.IsTimerInProgress)
+                        NotificationManager.Current.AddBreakFinishedToastNotificationSchedule(DateTime.Now + PomodoroViewModel.Current.RemainingBreakTime);
+                }
             }
-            else if (e.PropertyName == nameof(IPomodoroSettings.BreakAudioUri))
+            catch (Exception ex)
             {
-                if (PomodoroViewModel.Current.IsInPomodoro == false && PomodoroViewModel.Current.IsTimerInProgress)
-                    NotificationManager.Current.AddBreakFinishedToastNotificationSchedule(DateTime.Now + PomodoroViewModel.Current.RemainingBreakTime);
+                Microsoft.AppCenter.Crashes.Crashes.TrackError(ex);
             }
         }
 

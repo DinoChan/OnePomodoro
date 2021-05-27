@@ -1,4 +1,5 @@
-﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+﻿using Microsoft.AppCenter;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using OnePomodoro.Helpers;
 using OnePomodoro.Services;
@@ -22,7 +23,7 @@ namespace OnePomodoro.ViewModels
     /// </summary>
     public class PomodoroViewModel : ObservableObject
     {
-        private TimeSpan PomodoroLength =>  TimeSpan.FromMinutes(SettingsService.Current == null ? 25 : SettingsService.Current.PomodoroLength);
+        private TimeSpan PomodoroLength => TimeSpan.FromMinutes(SettingsService.Current == null ? 25 : SettingsService.Current.PomodoroLength);
         private TimeSpan ShortBreakLength => TimeSpan.FromMinutes(SettingsService.Current == null ? 5 : SettingsService.Current.ShortBreakLength);
         private TimeSpan LongBreakLength => TimeSpan.FromMinutes(SettingsService.Current == null ? 15 : SettingsService.Current.LongBreakLength);
         private int LongBreakAfter => SettingsService.Current == null ? 4 : SettingsService.Current.LongBreakAfter;
@@ -56,28 +57,42 @@ namespace OnePomodoro.ViewModels
             if (IsTimerInProgress && App.Current.HasExited == false)
             {
                 var deferral = e.GetDeferral();
-                NotificationManager.Current.AddAllNotifications(IsInPomodoro, CurrentTimer.StartTime + CurrentTimer.TotalTime,
-                 SettingsService.Current.AutoStartOfNextPomodoro, SettingsService.Current.AutoStartOfBreak,
-                 _completedPomodoros, LongBreakAfter, PomodoroLength,
-                 ShortBreakLength, LongBreakLength);
+                try
+                {
+                    NotificationManager.Current.AddAllNotifications(IsInPomodoro, CurrentTimer.StartTime + CurrentTimer.TotalTime,
+                     SettingsService.Current.AutoStartOfNextPomodoro, SettingsService.Current.AutoStartOfBreak,
+                     _completedPomodoros, LongBreakAfter, PomodoroLength,
+                     ShortBreakLength, LongBreakLength);
 
-                await DataService.AddFuturePeriodsAsync(IsInPomodoro, CurrentTimer.StartTime + CurrentTimer.TotalTime,
-                 SettingsService.Current.AutoStartOfNextPomodoro, SettingsService.Current.AutoStartOfBreak,
-                 _completedPomodoros, LongBreakAfter, PomodoroLength,
-                 ShortBreakLength, LongBreakLength);
+                    await DataService.AddFuturePeriodsAsync(IsInPomodoro, CurrentTimer.StartTime + CurrentTimer.TotalTime,
+                     SettingsService.Current.AutoStartOfNextPomodoro, SettingsService.Current.AutoStartOfBreak,
+                     _completedPomodoros, LongBreakAfter, PomodoroLength,
+                     ShortBreakLength, LongBreakLength);
+                }
+                catch (Exception ex)
+                {
+                    Microsoft.AppCenter.Crashes.Crashes.TrackError(ex);
+                }
                 deferral.Complete();
             }
         }
 
         private async void OnLeavingBackground(object sender, LeavingBackgroundEventArgs e)
         {
-            if (CurrentTimer != null && IsTimerInProgress)
-                CurrentTimer.CheckTime();
-
-            if (IsTimerInProgress)
+            try
             {
-                NotificationManager.Current.RemoveAllNotificationsButFirst(IsInPomodoro, CurrentTimer.StartTime + CurrentTimer.TotalTime);
-                await DataService.RemoveFuturePeriodsAsync();
+                if (CurrentTimer != null && IsTimerInProgress)
+                    CurrentTimer.CheckTime();
+
+                if (IsTimerInProgress)
+                {
+                    NotificationManager.Current.RemoveAllNotificationsButFirst(IsInPomodoro, CurrentTimer.StartTime + CurrentTimer.TotalTime);
+                    await DataService.RemoveFuturePeriodsAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                Microsoft.AppCenter.Crashes.Crashes.TrackError(ex);
             }
         }
 
