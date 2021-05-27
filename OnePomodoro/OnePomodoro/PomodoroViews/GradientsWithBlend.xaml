@@ -63,11 +63,11 @@
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top">
                         <animations:Implicit.ShowAnimations>
-                            <animations:TranslationAnimation SetInitialValueBeforeDelay="True"
+                            <animations:TranslationAnimation DelayBehavior="SetInitialValueBeforeDelay"
                                                              From="0,-120,0"
                                                              To="0,0,0"
                                                              Duration="0:0:0.6" />
-                            <animations:OpacityAnimation SetInitialValueBeforeDelay="True"
+                            <animations:OpacityAnimation DelayBehavior="SetInitialValueBeforeDelay"
                                                          From="0"
                                                          To="1"
                                                          Duration="0:0:0.6" />
@@ -86,21 +86,21 @@
                         <StackPanel x:Name="FocusText"
                                     Visibility="Collapsed">
                             <animations:Implicit.HideAnimations>
-                                <animations:TranslationAnimation SetInitialValueBeforeDelay="True"
+                                <animations:TranslationAnimation DelayBehavior="SetInitialValueBeforeDelay"
                                                                  From="0,0,0"
                                                                  To="0,-120,0"
                                                                  Duration="0:0:0.6" />
-                                <animations:OpacityAnimation SetInitialValueBeforeDelay="True"
+                                <animations:OpacityAnimation DelayBehavior="SetInitialValueBeforeDelay"
                                                              From="1"
                                                              To="0"
                                                              Duration="0:0:0.6" />
                             </animations:Implicit.HideAnimations>
                             <animations:Implicit.ShowAnimations>
-                                <animations:TranslationAnimation SetInitialValueBeforeDelay="True"
+                                <animations:TranslationAnimation DelayBehavior="SetInitialValueBeforeDelay"
                                                                  From="0,-120,0"
                                                                  To="0,0,0"
                                                                  Duration="0:0:0.6" />
-                                <animations:OpacityAnimation SetInitialValueBeforeDelay="True"
+                                <animations:OpacityAnimation DelayBehavior="SetInitialValueBeforeDelay"
                                                              From="0"
                                                              To="1"
                                                              Duration="0:0:0.6" />
@@ -128,21 +128,21 @@
                         <StackPanel x:Name="RelaxText"
                                     Visibility="Collapsed">
                             <animations:Implicit.HideAnimations>
-                                <animations:TranslationAnimation SetInitialValueBeforeDelay="True"
+                                <animations:TranslationAnimation DelayBehavior="SetInitialValueBeforeDelay"
                                                                  From="0,0,0"
                                                                  To="0,120,0"
                                                                  Duration="0:0:0.6" />
-                                <animations:OpacityAnimation SetInitialValueBeforeDelay="True"
+                                <animations:OpacityAnimation DelayBehavior="SetInitialValueBeforeDelay"
                                                              From="1"
                                                              To="0"
                                                              Duration="0:0:0.6" />
                             </animations:Implicit.HideAnimations>
                             <animations:Implicit.ShowAnimations>
-                                <animations:TranslationAnimation SetInitialValueBeforeDelay="True"
+                                <animations:TranslationAnimation DelayBehavior="SetInitialValueBeforeDelay"
                                                                  From="0,120,0"
                                                                  To="0,0,0"
                                                                  Duration="0:0:0.6" />
-                                <animations:OpacityAnimation SetInitialValueBeforeDelay="True"
+                                <animations:OpacityAnimation DelayBehavior="SetInitialValueBeforeDelay"
                                                              From="0"
                                                              To="1"
                                                              Duration="0:0:0.6" />
@@ -188,12 +188,12 @@
                                           ShadowOpacity="0.2">
                     <animations:Implicit.HideAnimations>
                         <animations:TranslationAnimation Delay="0:0:2.2"
-                                                         SetInitialValueBeforeDelay="True"
+                                                         DelayBehavior="SetInitialValueBeforeDelay"
                                                          From="0,0,0"
                                                          To="0,40,0"
                                                          Duration="0:0:0.6" />
                         <animations:OpacityAnimation Delay="0:0:2.2"
-                                                     SetInitialValueBeforeDelay="True"
+                                                     DelayBehavior="SetInitialValueBeforeDelay"
                                                      From="1"
                                                      To="0"
                                                      Duration="0:0:0.6" />
@@ -221,21 +221,21 @@
                         <Grid Margin="4,-7,4,0">
                             <StackPanel x:Name="FocusTextCompact">
                                 <animations:Implicit.HideAnimations>
-                                    <animations:TranslationAnimation SetInitialValueBeforeDelay="True"
+                                    <animations:TranslationAnimation DelayBehavior="SetInitialValueBeforeDelay"
                                                                      From="0,0,0"
                                                                      To="0,-20,0"
                                                                      Duration="0:0:0.6" />
-                                    <animations:OpacityAnimation SetInitialValueBeforeDelay="True"
+                                    <animations:OpacityAnimation DelayBehavior="SetInitialValueBeforeDelay"
                                                                  From="1"
                                                                  To="0"
                                                                  Duration="0:0:0.6" />
                                 </animations:Implicit.HideAnimations>
                                 <animations:Implicit.ShowAnimations>
-                                    <animations:TranslationAnimation SetInitialValueBeforeDelay="True"
+                                    <animations:TranslationAnimation DelayBehavior="SetInitialValueBeforeDelay"
                                                                      From="0,-20,0"
                                                                      To="0,0,0"
                                                                      Duration="0:0:0.6" />
-                                    <animations:OpacityAnimation SetInitialValueBeforeDelay="True"
+                                    <animations:OpacityAnimation DelayBehavior="SetInitialValueBeforeDelay"
                                                                  From="0"
                                                                  To="1"
                                                                  Duration="0:0:0.6" />
@@ -262,21 +262,21 @@
 
                             <StackPanel x:Name="RelaxTextCompact" Visibility="Collapsed">
                                 <animations:Implicit.HideAnimations>
-                                    <animations:TranslationAnimation SetInitialValueBeforeDelay="True"
+                                    <animations:TranslationAnimation DelayBehavior="SetInitialValueBeforeDelay"
                                                                      From="0,0,0"
                                                                      To="0,20,0"
                                                                      Duration="0:0:0.6" />
-                                    <animations:OpacityAnimation SetInitialValueBeforeDelay="True"
+                                    <animations:OpacityAnimation DelayBehavior="SetInitialValueBeforeDelay"
                                                                  From="1"
                                                                  To="0"
                                                                  Duration="0:0:0.6" />
                                 </animations:Implicit.HideAnimations>
                                 <animations:Implicit.ShowAnimations>
-                                    <animations:TranslationAnimation SetInitialValueBeforeDelay="True"
+                                    <animations:TranslationAnimation DelayBehavior="SetInitialValueBeforeDelay"
                                                                      From="0,20,0"
                                                                      To="0,0,0"
                                                                      Duration="0:0:0.6" />
-                                    <animations:OpacityAnimation SetInitialValueBeforeDelay="True"
+                                    <animations:OpacityAnimation DelayBehavior="SetInitialValueBeforeDelay"
                                                                  From="0"
                                                                  To="1"
                                                                  Duration="0:0:0.6" />
@@ -312,11 +312,11 @@
                               HorizontalAlignment="Left"
                               VerticalAlignment="Bottom">
                             <animations:Implicit.ShowAnimations>
-                                <animations:TranslationAnimation SetInitialValueBeforeDelay="True"
+                                <animations:TranslationAnimation DelayBehavior="SetInitialValueBeforeDelay"
                                                                  From="0,-20,0"
                                                                  To="0,0,0"
                                                                  Duration="0:0:0.6" />
-                                <animations:OpacityAnimation SetInitialValueBeforeDelay="True"
+                                <animations:OpacityAnimation DelayBehavior="SetInitialValueBeforeDelay"
                                                              From="0"
                                                              To="1"
                                                              Duration="0:0:0.6" />

@@ -11,15 +11,11 @@ namespace OnePomodoro.Services
     internal partial class ToastNotificationsService
     {
         private const string ToastTag = "ToastTag";
-        private const string PomodoroGroup = "Pomodoro";
-        private const string BreakGroup = "Break";
         private const string ToastGroup = "ToastGroup";
         private const string PomodoroTag = "Pomodoro";
         private const string BreakTag = "Break";
 
-        private readonly XmlDocument PomodoroToastContent = GetPomodoroToastContent().GetXml();
 
-        private readonly XmlDocument BreakToastContent = GetBreakToastContent().GetXml();
 
         private int _id;
 
@@ -28,33 +24,23 @@ namespace OnePomodoro.Services
             _id = 0;
         }
 
-        private static ToastContent GetPomodoroToastContent()
+        private static ToastContentBuilder CreatePomodoroToastBuilder()
         {
-            var content = new ToastContent()
-            {
-                Launch = "ToastContentActivationParams",
-                Visual = new ToastVisual()
-                {
-                    BindingGeneric = new ToastBindingGeneric()
-                    {
-                        Children =
-                        {
-                            new AdaptiveText()
-                            {
-                                Text = "Pomodoro has finished"
-                            },
-
-                            new AdaptiveText()
-                            {
-                                 Text = @"Pomodoro has finished, let's take a break."
-                            }
-                        }
-                    }
-                },
-            };
-
-            return content;
+            return new ToastContentBuilder()
+                  .SetToastScenario(ToastScenario.Alarm)
+                  .AddText("Pomodoro has finished")
+                  .AddText(@"Pomodoro has finished, let's take a break.");
         }
+
+        private static ToastContentBuilder CreateBreakToastBuilder()
+        {
+            return new ToastContentBuilder()
+                  .SetToastScenario(ToastScenario.Alarm)
+                  .AddText("Break has ended")
+                  .AddText(@"Break has ended, it's time to work.");
+        }
+
+
 
 
         private static ToastContent GetBreakToastContent()
@@ -97,53 +83,25 @@ namespace OnePomodoro.Services
             }
         }
 
-        public void ShowPomodoroFinishedToastNotification()
-        {
-            var toast = new ToastNotification(PomodoroToastContent)
-            {
-                Tag = ToastTag
-            };
 
-            ShowToastNotification(toast);
-        }
-
-        public void ShowBreakFinishedToastNotification()
-        {
-            var toast = new ToastNotification(BreakToastContent)
-            {
-                Tag = ToastTag
-            };
-
-            ShowToastNotification(toast);
-        }
-
-        public ScheduledToastNotification AddPomodoroFinishedToastNotificationSchedule(DateTime time,string audioUri, bool isRemoveOthers = true)
+        public ScheduledToastNotification AddPomodoroFinishedToastNotificationSchedule(DateTime time, string audioUri, bool isRemoveOthers = true)
         {
             if (isRemoveOthers)
                 RemovePomodoroFinishedToastNotificationSchedule();
 
-
-            var toastContent = GetPomodoroToastContent();
+            var toastBuilder = CreatePomodoroToastBuilder();
             if (string.IsNullOrWhiteSpace(audioUri) == false)
+                toastBuilder.AddAudio(new Uri(audioUri));
+
+            var toast = new ScheduledToastNotification(toastBuilder.GetXml(), time)
             {
-                toastContent.Audio = new ToastAudio()
-                {
-                    Src = new Uri(audioUri)
-                };
-                //("ms-appx:///Assets/Audio/CustomToastAudio.m4a")
-            }
-
-
-            var notifier = ToastNotificationManager.CreateToastNotifier();
-
-            var toast = new ScheduledToastNotification(toastContent.GetXml(), time)
-            {
-                Tag = ToastTag,
+                Tag = PomodoroTag,
+                Group = ToastGroup,
                 ExpirationTime = time.AddHours(1),
                 Id = _id++.ToString()
             };
 
-            notifier.AddToSchedule(toast);
+            ToastNotificationManager.CreateToastNotifier().AddToSchedule(toast);
             Debug.WriteLine("add pomodoro:" + toast.Id);
             return toast;
         }
@@ -153,26 +111,19 @@ namespace OnePomodoro.Services
             if (isRemoveOthers)
                 RemoveBreakFinishedToastNotificationSchedule();
 
-            var toastContent = GetBreakToastContent();
+            var toastBuilder = CreatePomodoroToastBuilder();
             if (string.IsNullOrWhiteSpace(audioUri) == false)
-            {
-                toastContent.Audio = new ToastAudio()
-                {
-                    Src = new Uri(audioUri)
-                };
-                //("ms-appx:///Assets/Audio/CustomToastAudio.m4a")
-            }
+                toastBuilder.AddAudio(new Uri(audioUri));
 
-            var notifier = ToastNotificationManager.CreateToastNotifier();
-
-            var toast = new ScheduledToastNotification(toastContent.GetXml(), time)
+            var toast = new ScheduledToastNotification(toastBuilder.GetXml(), time)
             {
-                Tag = ToastTag,
+                Tag = BreakTag,
+                Group = ToastGroup,
                 ExpirationTime = time.AddHours(1),
                 Id = _id++.ToString()
             };
 
-            notifier.AddToSchedule(toast);
+            ToastNotificationManager.CreateToastNotifier().AddToSchedule(toast);
             Debug.WriteLine("add break:" + toast.Id);
             return toast;
         }
@@ -182,7 +133,7 @@ namespace OnePomodoro.Services
             var notifier = ToastNotificationManager.CreateToastNotifier();
             foreach (var scheduledToast in notifier.GetScheduledToastNotifications())
             {
-                if (scheduledToast.Content.InnerText == PomodoroToastContent.InnerText && (string.IsNullOrWhiteSpace(id) || scheduledToast.Id == id))
+                if (scheduledToast.Group == ToastGroup && scheduledToast.Tag == PomodoroTag && (string.IsNullOrWhiteSpace(id) || scheduledToast.Id == id))
                 {
                     notifier.RemoveFromSchedule(scheduledToast);
                     yield return scheduledToast.Id;
@@ -196,7 +147,7 @@ namespace OnePomodoro.Services
             var notifier = ToastNotificationManager.CreateToastNotifier();
             foreach (var scheduledToast in notifier.GetScheduledToastNotifications())
             {
-                if (scheduledToast.Content.InnerText == BreakToastContent.InnerText && (string.IsNullOrWhiteSpace(id) || scheduledToast.Id == id))
+                if (scheduledToast.Group == ToastGroup && scheduledToast.Tag == BreakTag && (string.IsNullOrWhiteSpace(id) || scheduledToast.Id == id))
                 {
                     notifier.RemoveFromSchedule(scheduledToast);
                     yield return scheduledToast.Id;

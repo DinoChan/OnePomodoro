@@ -1,13 +1,8 @@
-﻿using Prism.Windows.Mvvm;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
 
 namespace OnePomodoro.Helpers
 {
-    public class PromodoroViewModelInformation : ViewModelBase
+    public class PromodoroViewModelInformation : ObservableObject
     {
     }
 }

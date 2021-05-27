@@ -27,10 +27,10 @@ namespace OnePomodoro.Views
             SystemNavigationManager.GetForCurrentView().BackRequested += BlankPage1_BackRequested;
         }
 
-
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+          
             _ = Task.Run(async () =>
               {
                   var uri = new Uri("ms-appx:///Assets/Privacy Statement.md");

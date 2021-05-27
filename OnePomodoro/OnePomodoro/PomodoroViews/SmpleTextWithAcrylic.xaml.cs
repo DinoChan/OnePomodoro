@@ -15,11 +15,11 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 using Microsoft.Toolkit.Uwp.UI.Animations;
-using Microsoft.Toolkit.Uwp.UI.Extensions;
 using Windows.UI;
 using System.Numerics;
 using Windows.UI.Composition;
 using System.Threading.Tasks;
+using Microsoft.Toolkit.Uwp.UI;
 
 //https://go.microsoft.com/fwlink/?LinkId=234236 上介绍了“用户控件”项模板
 
@@ -41,8 +41,8 @@ namespace OnePomodoro.PomodoroViews
 
         private async void OnLoaded(object sender, RoutedEventArgs e)
         {
-            await LayoutRoot.Fade(0.0f, duration: 0, delay: 0, easingMode: Windows.UI.Xaml.Media.Animation.EasingMode.EaseIn).StartAsync();
-            await LayoutRoot.Fade(1.0f, duration: 1500, delay: 0).StartAsync();
+            await AnimationBuilder.Create().Opacity(from:0.01, to: 1, duration: TimeSpan.FromSeconds(1.5)).StartAsync(LayoutRoot);
+
             ShowTextShimming();
         }
 

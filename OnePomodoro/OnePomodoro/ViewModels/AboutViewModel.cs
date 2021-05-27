@@ -1,29 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Windows.Input;
-
-using OnePomodoro.Helpers;
-using OnePomodoro.Services;
-
-using Prism.Commands;
-using Prism.Windows.Mvvm;
-using Prism.Windows.Navigation;
-
-using Windows.ApplicationModel;
-using Windows.UI.Xaml;
-
+﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.Toolkit.Mvvm.Input;
 using Microsoft.Toolkit.Uwp.Helpers;
+using System.Windows.Input;
+using Windows.ApplicationModel;
 
 namespace OnePomodoro.ViewModels
 {
     // TODO WTS: Add other settings as necessary. For help see https://github.com/Microsoft/WindowsTemplateStudio/blob/master/docs/pages/settings.md
-    public class AboutViewModel : ViewModelBase
+    public class AboutViewModel : ObservableObject
     {
         private string _version;
 
         public AboutViewModel()
         {
+            Version = GetVersion();
         }
 
         public string Version
@@ -41,7 +31,7 @@ namespace OnePomodoro.ViewModels
             {
                 if (_reviewCommand == null)
                 {
-                    _reviewCommand = new DelegateCommand(
+                    _reviewCommand = new RelayCommand(
                         async () =>
                         {
                             await SystemInformation.LaunchStoreForReviewAsync();
@@ -51,18 +41,7 @@ namespace OnePomodoro.ViewModels
                 return _reviewCommand;
             }
         }
-      
-        public async Task InitializeAsync()
-        {
-            Version = GetVersion();
-            await Task.CompletedTask;
-        }
-
-        public override async void OnNavigatedTo(NavigatedToEventArgs e, Dictionary<string, object> viewModelState)
-        {
-            base.OnNavigatedTo(e, viewModelState);
-            await InitializeAsync();
-        }
+     
 
         private string GetVersion()
         {

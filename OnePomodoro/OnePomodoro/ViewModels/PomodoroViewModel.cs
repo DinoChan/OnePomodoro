@@ -1,7 +1,10 @@
-﻿using OnePomodoro.Helpers;
+﻿using Microsoft.AppCenter;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Microsoft.Toolkit.Mvvm.Input;
+using OnePomodoro.Helpers;
 using OnePomodoro.Services;
-using Prism.Commands;
-using Prism.Windows.Mvvm;
+
+
 using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Core;
@@ -18,9 +21,9 @@ namespace OnePomodoro.ViewModels
     ///
     /// 所以在退出后台模式时更新一下就好了，不需要后台任务，简单就好。
     /// </summary>
-    public class PomodoroViewModel : ViewModelBase
+    public class PomodoroViewModel : ObservableObject
     {
-        private TimeSpan PomodoroLength =>  TimeSpan.FromMinutes(SettingsService.Current == null ? 25 : SettingsService.Current.PomodoroLength);
+        private TimeSpan PomodoroLength => TimeSpan.FromMinutes(SettingsService.Current == null ? 25 : SettingsService.Current.PomodoroLength);
         private TimeSpan ShortBreakLength => TimeSpan.FromMinutes(SettingsService.Current == null ? 5 : SettingsService.Current.ShortBreakLength);
         private TimeSpan LongBreakLength => TimeSpan.FromMinutes(SettingsService.Current == null ? 15 : SettingsService.Current.LongBreakLength);
         private int LongBreakAfter => SettingsService.Current == null ? 4 : SettingsService.Current.LongBreakAfter;
@@ -38,8 +41,8 @@ namespace OnePomodoro.ViewModels
 
         public PomodoroViewModel()
         {
-            StartTimerCommand = new DelegateCommand(StartTimer);
-            StopTimerCommand = new DelegateCommand(StopTimer);
+            StartTimerCommand = new RelayCommand(StartTimer);
+            StopTimerCommand = new RelayCommand(StopTimer);
 
             IsInPomodoro = true;
             RemainingPomodoroTime = PomodoroLength;
@@ -51,31 +54,45 @@ namespace OnePomodoro.ViewModels
 
         private async void OnEnteredBackground(object sender, EnteredBackgroundEventArgs e)
         {
-            if (IsTimerInProgress && (App.Current as App).HasExited == false)
+            if (IsTimerInProgress && App.Current.HasExited == false)
             {
                 var deferral = e.GetDeferral();
-                NotificationManager.Current.AddAllNotifications(IsInPomodoro, CurrentTimer.StartTime + CurrentTimer.TotalTime,
-                 SettingsService.Current.AutoStartOfNextPomodoro, SettingsService.Current.AutoStartOfBreak,
-                 _completedPomodoros, LongBreakAfter, PomodoroLength,
-                 ShortBreakLength, LongBreakLength);
+                try
+                {
+                    NotificationManager.Current.AddAllNotifications(IsInPomodoro, CurrentTimer.StartTime + CurrentTimer.TotalTime,
+                     SettingsService.Current.AutoStartOfNextPomodoro, SettingsService.Current.AutoStartOfBreak,
+                     _completedPomodoros, LongBreakAfter, PomodoroLength,
+                     ShortBreakLength, LongBreakLength);
 
-                await DataService.AddFuturePeriodsAsync(IsInPomodoro, CurrentTimer.StartTime + CurrentTimer.TotalTime,
-                 SettingsService.Current.AutoStartOfNextPomodoro, SettingsService.Current.AutoStartOfBreak,
-                 _completedPomodoros, LongBreakAfter, PomodoroLength,
-                 ShortBreakLength, LongBreakLength);
+                    await DataService.AddFuturePeriodsAsync(IsInPomodoro, CurrentTimer.StartTime + CurrentTimer.TotalTime,
+                     SettingsService.Current.AutoStartOfNextPomodoro, SettingsService.Current.AutoStartOfBreak,
+                     _completedPomodoros, LongBreakAfter, PomodoroLength,
+                     ShortBreakLength, LongBreakLength);
+                }
+                catch (Exception ex)
+                {
+                    Microsoft.AppCenter.Crashes.Crashes.TrackError(ex);
+                }
                 deferral.Complete();
             }
         }
 
         private async void OnLeavingBackground(object sender, LeavingBackgroundEventArgs e)
         {
-            if (CurrentTimer != null && IsTimerInProgress)
-                CurrentTimer.CheckTime();
-
-            if (IsTimerInProgress)
+            try
             {
-                NotificationManager.Current.RemoveAllNotificationsButFirst(IsInPomodoro, CurrentTimer.StartTime + CurrentTimer.TotalTime);
-                await DataService.RemoveFuturePeriodsAsync();
+                if (CurrentTimer != null && IsTimerInProgress)
+                    CurrentTimer.CheckTime();
+
+                if (IsTimerInProgress)
+                {
+                    NotificationManager.Current.RemoveAllNotificationsButFirst(IsInPomodoro, CurrentTimer.StartTime + CurrentTimer.TotalTime);
+                    await DataService.RemoveFuturePeriodsAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                Microsoft.AppCenter.Crashes.Crashes.TrackError(ex);
             }
         }
 
@@ -91,7 +108,7 @@ namespace OnePomodoro.ViewModels
             {
                 _remainingPomodoroTime = value;
                 RemainingPomodoroTimeChanged?.Invoke(this, EventArgs.Empty);
-                RaisePropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -106,7 +123,7 @@ namespace OnePomodoro.ViewModels
             {
                 _remainingBreakTime = value;
                 RemainingBreakTimeChanged?.Invoke(this, EventArgs.Empty);
-                RaisePropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -120,7 +137,7 @@ namespace OnePomodoro.ViewModels
             {
                 _isInPomodoro = value;
                 IsInPomodoroChanged?.Invoke(this, EventArgs.Empty);
-                RaisePropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -131,13 +148,13 @@ namespace OnePomodoro.ViewModels
             private set
             {
                 _isTimerInProgress = value;
-                RaisePropertyChanged();
+                OnPropertyChanged();
             }
         }
 
-        public DelegateCommand StartTimerCommand { get; }
+        public RelayCommand StartTimerCommand { get; }
 
-        public DelegateCommand StopTimerCommand { get; }
+        public RelayCommand StopTimerCommand { get; }
 
         public CountdownTimer CurrentTimer
         {
@@ -159,7 +176,7 @@ namespace OnePomodoro.ViewModels
             set
             {
                 _completedPomodoros = value;
-                RaisePropertyChanged();
+                OnPropertyChanged();
             }
         }
 

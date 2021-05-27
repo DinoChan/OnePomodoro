@@ -1,17 +1,10 @@
-﻿using OnePomodoro.Models;
+﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+using OnePomodoro.Models;
 using OnePomodoro.Services;
-using Prism.Unity.Windows;
-using Prism.Windows.Mvvm;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.ApplicationModel;
 
 namespace OnePomodoro.ViewModels
 {
-    class ViewTypeSettingViewModel : ViewModelBase
+    class ViewTypeSettingViewModel : ObservableObject
     {
 
         public ViewTypeSettingViewModel()

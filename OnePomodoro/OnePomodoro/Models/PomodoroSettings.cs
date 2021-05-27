@@ -1,17 +1,9 @@
-﻿using OnePomodoro.Helpers;
-using Prism.Windows.Mvvm;
+﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.Media.Streaming.Adaptive;
-using Windows.Storage;
-using Windows.UI.Xaml.Controls;
 
 namespace OnePomodoro.Models
 {
-    public class PomodoroSettings : ViewModelBase, IPomodoroSettings
+    public class PomodoroSettings : ObservableObject, IPomodoroSettings
     {
         private string _viewType;
         private bool _autoStartOfNextPomodoro;
@@ -37,7 +29,7 @@ namespace OnePomodoro.Models
             set
             {
                 _autoStartOfNextPomodoro = value;
-                RaisePropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -47,7 +39,7 @@ namespace OnePomodoro.Models
             set
             {
                 _autoStartOfBreak = value;
-                RaisePropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -57,7 +49,7 @@ namespace OnePomodoro.Models
             set
             {
                 _isNotifyWhenPomodoroFinished = value;
-                RaisePropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -67,7 +59,7 @@ namespace OnePomodoro.Models
             set
             {
                 _isNotifyWhenBreakFinished = value;
-                RaisePropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -77,7 +69,7 @@ namespace OnePomodoro.Models
             set
             {
                 _pomodoroLength = value;
-                RaisePropertyChanged();
+                OnPropertyChanged();
             }
         }
         public int ShortBreakLength
@@ -90,7 +82,7 @@ namespace OnePomodoro.Models
             set
             {
                 _shortBreakLength = value;
-                RaisePropertyChanged();
+                OnPropertyChanged();
             }
         }
         public int LongBreakLength
@@ -99,7 +91,7 @@ namespace OnePomodoro.Models
             set
             {
                 _longBreakLength = value;
-                RaisePropertyChanged();
+                OnPropertyChanged();
             }
         }
         public int LongBreakAfter
@@ -108,7 +100,7 @@ namespace OnePomodoro.Models
             set
             {
                 _longBreakAfter = value;
-                RaisePropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -134,7 +126,7 @@ namespace OnePomodoro.Models
             set
             {
                 _pomodoroAudioUri = value;
-                RaisePropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -147,7 +139,7 @@ namespace OnePomodoro.Models
             set
             {
                 _breakAudioUri = value;
-                RaisePropertyChanged();
+                OnPropertyChanged();
             }
         }
     }
