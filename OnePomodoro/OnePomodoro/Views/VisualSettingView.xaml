@@ -217,7 +217,7 @@
         <ScrollViewer HorizontalScrollMode="Disabled" VerticalScrollMode="Auto">
             <ItemsControl Margin="64"
                           HorizontalAlignment="Center"
-                          ItemsSource="{x:Bind Items, Mode=OneWay}">
+                          ItemsSource="{x:Bind Items}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <controls:WrapPanel HorizontalSpacing="48" VerticalSpacing="48" />
