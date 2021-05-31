@@ -93,7 +93,7 @@
                             <TextBlock Margin="0,4,0,0"
                                        Foreground="Gray"
                                        Style="{ThemeResource BodyTextBlockStyle}"
-                                       Text="© 2019 dino.c" />
+                                       Text="© 2021 dino.c" />
                             <TextBlock Margin="16,4,0,0"
                                        Foreground="Gray"
                                        Style="{ThemeResource BodyTextBlockStyle}"
