@@ -15,7 +15,6 @@ namespace OnePomodoro.Controls
     public partial class DropShadowPanel : ElementDecorator
     {
         private readonly Compositor _compositor;
-        private CompositionMaskBrush _maskBrush;
         private readonly DropShadow _dropShadow;
 
         public DropShadowPanel() : base()

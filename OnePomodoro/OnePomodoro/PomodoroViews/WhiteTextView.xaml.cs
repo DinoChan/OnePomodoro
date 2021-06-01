@@ -42,18 +42,14 @@ namespace OnePomodoro.PomodoroViews
     {
         private PointLight _redLight;
         private PointLight _blueLight;
-        private AmbientLight _backgroundLight;
-        private AmbientLight _buttonLight;
 
         private Color _redColor = Color.FromArgb(255, 217, 17, 83);
         private Color _blueColor = Color.FromArgb(255, 0, 27, 171);
 
-        private Color _lightRedColor = Color.FromArgb(255, 247, 97, 163);
-        private Color _lightBlueColor = Color.FromArgb(255, 80, 107, 251);
 
         public WhiteTextView()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             OnIsInPomodoroChanged();
             Loaded += OnLoaded;
             ViewModel.IsInPomodoroChanged += (s, e) => OnIsInPomodoroChanged();

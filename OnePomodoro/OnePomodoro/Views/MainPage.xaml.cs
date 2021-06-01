@@ -25,8 +25,6 @@ namespace OnePomodoro.Views
 
         private bool _isInCompactOverlay;
 
-        private bool _canEnterCompactOverlay;
-
         private CompactOverlayAttribute _currentCompactOverlayAttribute;
 
 #warning need 1903
