@@ -1,88 +1,86 @@
 ﻿<local:PomodoroView x:Class="OnePomodoro.PomodoroViews.AudioCall"
                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="using:OnePomodoro.PomodoroViews"
-                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                    mc:Ignorable="d"
-                    xmlns:converters="using:Microsoft.Toolkit.Uwp.UI.Converters"
                     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
-                    xmlns:viewModels="using:OnePomodoro.ViewModels"
-                    xmlns:helpers="using:OnePomodoro.Helpers"
                     xmlns:controls="using:OnePomodoro.Controls"
                     xmlns:controls1="using:Microsoft.Toolkit.Uwp.UI.Controls"
-                    x:DefaultBindMode="OneWay"
+                    xmlns:converters="using:Microsoft.Toolkit.Uwp.UI.Converters"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:helpers="using:OnePomodoro.Helpers"
+                    xmlns:local="using:OnePomodoro.PomodoroViews"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:viewModels="using:OnePomodoro.ViewModels"
                     d:DataContext="{d:DesignInstance Type=viewModels:PomodoroViewModel}"
-                    RequestedTheme="Dark"
                     d:DesignHeight="1200"
-                    d:DesignWidth="1920">
+                    d:DesignWidth="1920"
+                    x:DefaultBindMode="OneWay"
+                    RequestedTheme="Dark"
+                    mc:Ignorable="d">
     <UserControl.Resources>
         <Color x:Key="RedBackground">#422D3E</Color>
         <Color x:Key="RedForeground">#CC6AC4</Color>
-        
+
         <Color x:Key="BlueBackground">#373644</Color>
         <Color x:Key="BlueForeground">#9ea2ff</Color>
-        <SolidColorBrush x:Name="Background"
-                         Color="#35343b" />
-        <converters:BoolToObjectConverter TrueValue="Top"
+        <SolidColorBrush x:Key="Background" Color="#35343b" />
+        <converters:BoolToObjectConverter x:Key="BoolToVerticalAlignmentConverter"
                                           FalseValue="Bottom"
-                                          x:Key="BoolToVerticalAlignmentConverter" />
-        <converters:BoolToObjectConverter TrueValue="Left"
+                                          TrueValue="Top" />
+        <converters:BoolToObjectConverter x:Key="BoolToVerticalHorizontalAlignment"
                                           FalseValue="Right"
-                                          x:Key="BoolToVerticalHorizontalAlignment" />
+                                          TrueValue="Left" />
         <Storyboard x:Name="BreathingLightsStoryboard"
                     AutoReverse="True"
                     BeginTime="0:0:15"
-                    Duration="0:0:3"
-                    Completed="OnStoryboardCompleted">
-            <DoubleAnimation Duration="00:00:1"
-                             Storyboard.TargetName="BackgroundFill"
+                    Completed="OnStoryboardCompleted"
+                    Duration="0:0:3">
+            <DoubleAnimation Storyboard.TargetName="BackgroundFill"
                              Storyboard.TargetProperty="(UIElement.Opacity)"
-                             To="0">
+                             To="0"
+                             Duration="00:00:1">
                 <DoubleAnimation.EasingFunction>
                     <QuinticEase EasingMode="EaseIn" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
-            <DoubleAnimation Duration="00:00:0.5"
-                             Storyboard.TargetName="FrontShadow"
+            <DoubleAnimation Storyboard.TargetName="FrontShadow"
                              Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)"
-                             To="-20" />
-            <DoubleAnimation Duration="00:00:0.5"
-                             Storyboard.TargetName="FrontShadow"
+                             To="-20"
+                             Duration="00:00:0.5" />
+            <DoubleAnimation Storyboard.TargetName="FrontShadow"
                              Storyboard.TargetProperty="(UIElement.Opacity)"
-                             To="0" />
+                             To="0"
+                             Duration="00:00:0.5" />
 
 
-            <DoubleAnimation Duration="00:00:1"
-                             Storyboard.TargetName="ShadowSource"
+            <DoubleAnimation Storyboard.TargetName="ShadowSource"
                              Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)"
-                             To="0.92">
+                             To="0.92"
+                             Duration="00:00:1">
                 <DoubleAnimation.EasingFunction>
                     <QuinticEase EasingMode="EaseIn" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
-            <DoubleAnimation Duration="00:00:1"
-                             Storyboard.TargetName="ShadowSource"
+            <DoubleAnimation Storyboard.TargetName="ShadowSource"
                              Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)"
-                             To="0.92">
+                             To="0.92"
+                             Duration="00:00:1">
                 <DoubleAnimation.EasingFunction>
                     <QuarticEase EasingMode="EaseIn" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
-            <DoubleAnimation Duration="00:00:00.8000000"
-                             Storyboard.TargetName="dropShadowPanel"
+            <DoubleAnimation Storyboard.TargetName="dropShadowPanel"
                              Storyboard.TargetProperty="(UIElement.Opacity)"
-                             To="0" />
+                             To="0"
+                             Duration="00:00:00.8000000" />
             <DoubleAnimationUsingKeyFrames EnableDependentAnimation="True"
                                            Storyboard.TargetName="dropShadowPanel2"
                                            Storyboard.TargetProperty="(DropShadowPanel.BlurRadius)">
-                <EasingDoubleKeyFrame KeyTime="00:00:1.5"
-                                      Value="0" />
+                <EasingDoubleKeyFrame KeyTime="00:00:1.5" Value="0" />
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimation Duration="00:00:2"
-                             Storyboard.TargetName="dropShadowPanel2"
+            <DoubleAnimation Storyboard.TargetName="dropShadowPanel2"
                              Storyboard.TargetProperty="(UIElement.Opacity)"
-                             To="0.3" />
+                             To="0.3"
+                             Duration="00:00:2" />
 
         </Storyboard>
     </UserControl.Resources>
@@ -92,20 +90,20 @@
                 <VisualStateGroup.Transitions>
                     <VisualTransition To="InPomodoro">
                         <Storyboard>
-                            <DoubleAnimation Duration="00:00:1"
+                            <DoubleAnimation AutoReverse="True"
                                              Storyboard.TargetName="OuterShadowSource"
                                              Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)"
                                              To="0.92"
-                                             AutoReverse="True">
+                                             Duration="00:00:1">
                                 <DoubleAnimation.EasingFunction>
                                     <QuinticEase EasingMode="EaseIn" />
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
-                            <DoubleAnimation Duration="00:00:1"
+                            <DoubleAnimation AutoReverse="True"
                                              Storyboard.TargetName="OuterShadowSource"
                                              Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)"
                                              To="0.92"
-                                             AutoReverse="True">
+                                             Duration="00:00:1">
                                 <DoubleAnimation.EasingFunction>
                                     <QuarticEase EasingMode="EaseIn" />
                                 </DoubleAnimation.EasingFunction>
@@ -114,36 +112,36 @@
                                             EnableDependentAnimation="True"
                                             Storyboard.TargetName="BrushBridge"
                                             Storyboard.TargetProperty="Color"
-                                            Duration="0:0:1"
-                                            To="{StaticResource RedForeground}" />
+                                            To="{StaticResource RedForeground}"
+                                            Duration="0:0:1" />
                             <ColorAnimation EnableDependentAnimation="True"
                                             Storyboard.TargetName="BackgroundFill"
                                             Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
-                                            Duration="0:0:2"
-                                            To="{StaticResource RedBackground}" />
+                                            To="{StaticResource RedBackground}"
+                                            Duration="0:0:2" />
                             <ColorAnimation EnableDependentAnimation="True"
                                             Storyboard.TargetName="LayoutRoot"
                                             Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)"
-                                            Duration="0:0:2"
-                                            To="{StaticResource RedBackground}" />
+                                            To="{StaticResource RedBackground}"
+                                            Duration="0:0:2" />
                         </Storyboard>
                     </VisualTransition>
                     <VisualTransition To="InBreak">
                         <Storyboard>
-                            <DoubleAnimation Duration="00:00:1"
+                            <DoubleAnimation AutoReverse="True"
                                              Storyboard.TargetName="OuterShadowSource"
                                              Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)"
                                              To="0.92"
-                                             AutoReverse="True">
+                                             Duration="00:00:1">
                                 <DoubleAnimation.EasingFunction>
                                     <QuinticEase EasingMode="EaseIn" />
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
-                            <DoubleAnimation Duration="00:00:1"
+                            <DoubleAnimation AutoReverse="True"
                                              Storyboard.TargetName="OuterShadowSource"
                                              Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)"
                                              To="0.92"
-                                             AutoReverse="True">
+                                             Duration="00:00:1">
                                 <DoubleAnimation.EasingFunction>
                                     <QuarticEase EasingMode="EaseIn" />
                                 </DoubleAnimation.EasingFunction>
@@ -152,39 +150,33 @@
                                             EnableDependentAnimation="True"
                                             Storyboard.TargetName="BrushBridge"
                                             Storyboard.TargetProperty="Color"
-                                            Duration="0:0:0.5"
-                                            To="#9ea2ff" />
+                                            To="#9ea2ff"
+                                            Duration="0:0:0.5" />
                             <ColorAnimation EnableDependentAnimation="True"
                                             Storyboard.TargetName="BackgroundFill"
                                             Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
-                                            Duration="0:0:2"
-                                            To="#373644" />
+                                            To="#373644"
+                                            Duration="0:0:2" />
                             <ColorAnimation EnableDependentAnimation="True"
                                             Storyboard.TargetName="LayoutRoot"
                                             Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)"
-                                            Duration="0:0:2"
-                                            To="#373644" />
+                                            To="#373644"
+                                            Duration="0:0:2" />
                         </Storyboard>
                     </VisualTransition>
                 </VisualStateGroup.Transitions>
                 <VisualState x:Name="InPomodoro">
                     <VisualState.Setters>
-                        <Setter Target="BrushBridge.Color"
-                                Value="{StaticResource RedForeground}" />
-                        <Setter Target="BackgroundFill.Fill"
-                                Value="{StaticResource RedBackground}" />
-                        <Setter Target="LayoutRoot.Background"
-                                Value="{StaticResource RedBackground}" />
+                        <Setter Target="BrushBridge.Color" Value="{StaticResource RedForeground}" />
+                        <Setter Target="BackgroundFill.Fill" Value="{StaticResource RedBackground}" />
+                        <Setter Target="LayoutRoot.Background" Value="{StaticResource RedBackground}" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="InBreak">
                     <VisualState.Setters>
-                        <Setter Target="BrushBridge.Color"
-                                Value="{StaticResource BlueForeground}" />
-                        <Setter Target="BackgroundFill.Fill"
-                                Value="{StaticResource BlueBackground}" />
-                        <Setter Target="LayoutRoot.Background"
-                                Value="{StaticResource BlueBackground}" />
+                        <Setter Target="BrushBridge.Color" Value="{StaticResource BlueForeground}" />
+                        <Setter Target="BackgroundFill.Fill" Value="{StaticResource BlueBackground}" />
+                        <Setter Target="LayoutRoot.Background" Value="{StaticResource BlueBackground}" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -194,28 +186,24 @@
                         <helpers:CompactOverlayModeTrigger IsCompactOverlayMode="True" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="TitlePanel.Visibility"
-                                Value="Collapsed" />
+                        <Setter Target="TitlePanel.Visibility" Value="Collapsed" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
-            
+
         </VisualStateManager.VisualStateGroups>
-        <helpers:SolidColorBrushBridge x:Name="BrushBridge"
-                                       Color="{StaticResource RedForeground}" />
-        <Grid Grid.Row="1" 
-              x:Name="LayoutRoot"
+        <helpers:SolidColorBrushBridge x:Name="BrushBridge" Color="{StaticResource RedForeground}" />
+        <Grid x:Name="LayoutRoot"
+              Grid.Row="1"
               Background="{StaticResource RedBackground}">
 
-            <Rectangle Fill="{StaticResource RedBackground}"
-                       x:Name="BackgroundFill" />
-            <Viewbox MaxHeight="1000"
-                     MaxWidth="1000"
+            <Rectangle x:Name="BackgroundFill" Fill="{StaticResource RedBackground}" />
+            <Viewbox MaxWidth="1000"
+                     MaxHeight="1000"
                      StretchDirection="DownOnly">
-                <Grid Height="280"
-                      Width="280">
-                    <Grid Height="208"
-                          Width="208"
+                <Grid Width="280" Height="280">
+                    <Grid Width="208"
+                          Height="208"
                           HorizontalAlignment="Center"
                           VerticalAlignment="Center">
 
@@ -223,17 +211,17 @@
                         <Grid>
 
                             <controls:DropShadowPanel x:Name="dropShadowPanel"
-                                                      RelativeElement="{Binding ElementName=BackgroundEllipse}"
                                                       controls:DropShadowPanel.BlurRadius="400"
-                                                      controls:DropShadowPanel.Color="{Binding ElementName=BrushBridge,Path=Color}"
-                                                      d:IsHidden="True" />
+                                                      controls:DropShadowPanel.Color="{Binding ElementName=BrushBridge, Path=Color}"
+                                                      d:IsHidden="True"
+                                                      RelativeElement="{Binding ElementName=BackgroundEllipse}" />
 
-                            <controls:DropShadowPanel RelativeElement="{Binding ElementName=BackgroundEllipse}"
+                            <controls:DropShadowPanel x:Name="FrontShadow"
                                                       controls:DropShadowPanel.BlurRadius="48"
-                                                      x:Name="FrontShadow"
-                                                      controls:DropShadowPanel.ShadowOpacity="0.8"
-                                                      controls:DropShadowPanel.OffsetY="20"
                                                       controls:DropShadowPanel.Color="Black"
+                                                      controls:DropShadowPanel.OffsetY="20"
+                                                      controls:DropShadowPanel.ShadowOpacity="0.8"
+                                                      RelativeElement="{Binding ElementName=BackgroundEllipse}"
                                                       RenderTransformOrigin="0.5,0.5">
                                 <controls:DropShadowPanel.RenderTransform>
                                     <CompositeTransform />
@@ -241,63 +229,60 @@
                             </controls:DropShadowPanel>
 
 
-                            <Grid x:Name="OuterShadowSource"
-                                  RenderTransformOrigin="0.5,0.5">
+                            <Grid x:Name="OuterShadowSource" RenderTransformOrigin="0.5,0.5">
                                 <Grid.RenderTransform>
                                     <CompositeTransform />
                                 </Grid.RenderTransform>
-                                <Grid x:Name="ShadowSource"
-                                      RenderTransformOrigin="0.5,0.5">
+                                <Grid x:Name="ShadowSource" RenderTransformOrigin="0.5,0.5">
                                     <Grid.RenderTransform>
                                         <CompositeTransform />
                                     </Grid.RenderTransform>
                                     <controls1:DropShadowPanel x:Name="dropShadowPanel2"
-                                                               Color="{Binding ElementName=BrushBridge,Path=Color}"
                                                                HorizontalContentAlignment="Stretch"
                                                                VerticalContentAlignment="Stretch"
-                                                               BlurRadius="800">
-                                        <Ellipse Margin="1"
-                                                 x:Name="BackgroundEllipse"
+                                                               BlurRadius="800"
+                                                               Color="{Binding ElementName=BrushBridge, Path=Color}">
+                                        <Ellipse x:Name="BackgroundEllipse"
+                                                 Margin="1"
                                                  Fill="{StaticResource Background}" />
                                     </controls1:DropShadowPanel>
-                                    <controls1:RadialProgressBar Foreground="{Binding ElementName=BrushBridge,Path=Brush}"
-                                                                 Value="0.5"
-                                                                 x:Name="ProgressBar"
-                                                                 Thickness="4" />
+                                    <controls1:RadialProgressBar x:Name="ProgressBar"
+                                                                 Foreground="{Binding ElementName=BrushBridge, Path=Brush}"
+                                                                 Thickness="4"
+                                                                 Value="0.5" />
                                 </Grid>
                             </Grid>
-                            <Ellipse Margin="7"
-                                     Fill="#e6eddd" />
+                            <Ellipse Margin="7" Fill="#e6eddd" />
                         </Grid>
-                        <controls:TimeAndButtonSwitcher Foreground="#4c6135"
-                                                        PomodoroColor="{StaticResource RedForeground}"
-                                                        BreakColor="{StaticResource BlueForeground}" />
-                        <Grid Margin="0,0,0,-350" x:Name="TitlePanel">
+                        <controls:TimeAndButtonSwitcher BreakColor="{StaticResource BlueForeground}"
+                                                        Foreground="#4c6135"
+                                                        PomodoroColor="{StaticResource RedForeground}" />
+                        <Grid x:Name="TitlePanel" Margin="0,0,0,-350">
                             <controls1:DropShadowPanel HorizontalAlignment="Center"
                                                        VerticalAlignment="Center"
-                                                       Visibility="{Binding IsInPomodoro,Converter={StaticResource BoolToVisibilityConverter}}"
                                                        BlurRadius="6"
-                                                       OffsetY="4">
-                                <TextBlock Text="Focus"
-                                           x:Name="InWorkCountDown"
-                                           VerticalAlignment="Center"
+                                                       OffsetY="4"
+                                                       Visibility="{Binding IsInPomodoro, Converter={StaticResource BoolToVisibilityConverter}}">
+                                <TextBlock x:Name="InWorkCountDown"
                                            HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
                                            FontFamily="{StaticResource TimeFont}"
                                            FontSize="36"
-                                           Foreground="#e6eddd" />
+                                           Foreground="#e6eddd"
+                                           Text="Focus" />
                             </controls1:DropShadowPanel>
                             <controls1:DropShadowPanel HorizontalAlignment="Center"
                                                        VerticalAlignment="Center"
-                                                       Visibility="{Binding IsInPomodoro,Converter={StaticResource NegationBoolToVisibilityConverter}}"
                                                        BlurRadius="6"
-                                                       OffsetY="4">
-                                <TextBlock Text="Relax"
-                                           x:Name="BreakCountDown"
-                                           VerticalAlignment="Center"
-                                           FontSize="36"
+                                                       OffsetY="4"
+                                                       Visibility="{Binding IsInPomodoro, Converter={StaticResource NegationBoolToVisibilityConverter}}">
+                                <TextBlock x:Name="BreakCountDown"
                                            HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
                                            FontFamily="{StaticResource TimeFont}"
-                                           Foreground="#e6eddd" />
+                                           FontSize="36"
+                                           Foreground="#e6eddd"
+                                           Text="Relax" />
                             </controls1:DropShadowPanel>
                         </Grid>
                     </Grid>

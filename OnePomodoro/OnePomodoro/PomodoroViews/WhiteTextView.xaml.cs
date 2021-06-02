@@ -73,7 +73,7 @@ namespace OnePomodoro.PomodoroViews
         {
             _redLight = CreatePointLightAndStartAnimation(_redColor, TimeSpan.Zero);
             _blueLight = CreatePointLightAndStartAnimation(_blueColor, TimeSpan.FromSeconds(0.5));
-            var backgroundVisual = VisualExtensions.GetVisual(Background);
+            var backgroundVisual = VisualExtensions.GetVisual(BackgroundElement);
 
             _redLight.Targets.Add(backgroundVisual);
             _blueLight.Targets.Add(backgroundVisual);
