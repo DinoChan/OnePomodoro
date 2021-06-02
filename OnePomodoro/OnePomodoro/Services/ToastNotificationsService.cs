@@ -5,6 +5,7 @@ using Windows.UI.Notifications;
 using System.Linq;
 using System.Diagnostics;
 using System.Collections.Generic;
+using Windows.Foundation.Metadata;
 
 namespace OnePomodoro.Services
 {
@@ -86,6 +87,11 @@ namespace OnePomodoro.Services
 
         public ScheduledToastNotification AddPomodoroFinishedToastNotificationSchedule(DateTime time, string audioUri, bool isRemoveOthers = true)
         {
+            if (ApiInformation.IsTypePresent("Windows.ApplicationModel.Background.ToastNotificationActionTrigger")==false)
+            {
+                return null;
+            }
+
             if (isRemoveOthers)
                 RemovePomodoroFinishedToastNotificationSchedule();
 
@@ -108,6 +114,11 @@ namespace OnePomodoro.Services
 
         public ScheduledToastNotification AddBreakFinishedToastNotificationSchedule(DateTime time, string audioUri, bool isRemoveOthers = true)
         {
+            if (ApiInformation.IsTypePresent("Windows.ApplicationModel.Background.ToastNotificationActionTrigger")==false)
+            {
+                return null;
+            }
+
             if (isRemoveOthers)
                 RemoveBreakFinishedToastNotificationSchedule();
 
@@ -130,6 +141,11 @@ namespace OnePomodoro.Services
 
         public IEnumerable<string> RemovePomodoroFinishedToastNotificationSchedule(string id = null)
         {
+            if (ApiInformation.IsTypePresent("Windows.ApplicationModel.Background.ToastNotificationActionTrigger")==false)
+            {
+                yield break;
+            }
+
             var notifier = ToastNotificationManager.CreateToastNotifier();
             foreach (var scheduledToast in notifier.GetScheduledToastNotifications())
             {
@@ -144,6 +160,11 @@ namespace OnePomodoro.Services
 
         public IEnumerable<string> RemoveBreakFinishedToastNotificationSchedule(string id = null)
         {
+            if (ApiInformation.IsTypePresent("Windows.ApplicationModel.Background.ToastNotificationActionTrigger")==false)
+            {
+                yield break;
+            }
+
             var notifier = ToastNotificationManager.CreateToastNotifier();
             foreach (var scheduledToast in notifier.GetScheduledToastNotifications())
             {

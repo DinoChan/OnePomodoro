@@ -175,6 +175,9 @@ namespace OnePomodoro.Controls
 
         private void OnButtonsCollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
+            if (ItemsPanel == null)
+                return;
+
             ItemsPanel.Children.Clear();
             foreach (var button in Buttons)
             {
