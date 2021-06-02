@@ -31,7 +31,8 @@ namespace OnePomodoro.Helpers
                 return;
 
             var notification = _toastNotificationsService.AddPomodoroFinishedToastNotificationSchedule(time, SettingsService.Current.PomodoroAudioUri, isRemoveOthers);
-            _notifications.Add(notification);
+            if (notification != null)
+                _notifications.Add(notification);
         }
 
         public void AddBreakFinishedToastNotificationSchedule(DateTime time, bool isRemoveOthers = true)
@@ -43,7 +44,8 @@ namespace OnePomodoro.Helpers
                 return;
 
             var notification = _toastNotificationsService.AddBreakFinishedToastNotificationSchedule(time, SettingsService.Current.BreakAudioUri, isRemoveOthers);
-            _notifications.Add(notification);
+            if (notification != null)
+                _notifications.Add(notification);
         }
 
         public void RemovePomodoroFinishedToastNotificationSchedule(string id = null)
