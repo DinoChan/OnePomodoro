@@ -87,7 +87,7 @@ namespace OnePomodoro.Services
 
         public ScheduledToastNotification AddPomodoroFinishedToastNotificationSchedule(DateTime time, string audioUri, bool isRemoveOthers = true)
         {
-            if (ApiInformation.IsTypePresent("Windows.ApplicationModel.Background.ToastNotificationActionTrigger")==false)
+            if (ApiInformation.IsTypePresent("Windows.ApplicationModel.Background.ToastNotificationActionTrigger") == false)
             {
                 return null;
             }
@@ -99,22 +99,43 @@ namespace OnePomodoro.Services
             if (string.IsNullOrWhiteSpace(audioUri) == false)
                 toastBuilder.AddAudio(new Uri(audioUri));
 
-            var toast = new ScheduledToastNotification(toastBuilder.GetXml(), time)
-            {
-                Tag = PomodoroTag,
-                Group = ToastGroup,
-                ExpirationTime = time.AddHours(1),
-                Id = _id++.ToString()
-            };
+            ScheduledToastNotification toast = null;
+            XmlDocument xml = null;
 
-            ToastNotificationManager.CreateToastNotifier().AddToSchedule(toast);
-            Debug.WriteLine("add pomodoro:" + toast.Id);
+            try
+            {
+                xml = toastBuilder.GetXml();
+                toast = new ScheduledToastNotification(xml, time)
+                {
+                    Tag = PomodoroTag,
+                    Group = ToastGroup,
+                    ExpirationTime = time.AddHours(1),
+                    Id = _id++.ToString()
+                };
+
+                var xx = xml.GetXml();
+                ToastNotificationManager.CreateToastNotifier().AddToSchedule(toast);
+                Debug.WriteLine("add pomodoro:" + toast.Id);
+            }
+            catch (Exception ex)
+            {
+                var properties = new Dictionary<string, string>
+                    {
+                        { "xml",  xml.GetXml()},
+                        {"time",time.ToString() },
+                        {"now",DateTime.Now.ToString() },
+                    };
+                Microsoft.AppCenter.Crashes.Crashes.TrackError(ex, properties);
+                throw;
+            }
+
+
             return toast;
         }
 
         public ScheduledToastNotification AddBreakFinishedToastNotificationSchedule(DateTime time, string audioUri, bool isRemoveOthers = true)
         {
-            if (ApiInformation.IsTypePresent("Windows.ApplicationModel.Background.ToastNotificationActionTrigger")==false)
+            if (ApiInformation.IsTypePresent("Windows.ApplicationModel.Background.ToastNotificationActionTrigger") == false)
             {
                 return null;
             }
@@ -141,7 +162,7 @@ namespace OnePomodoro.Services
 
         public IEnumerable<string> RemovePomodoroFinishedToastNotificationSchedule(string id = null)
         {
-            if (ApiInformation.IsTypePresent("Windows.ApplicationModel.Background.ToastNotificationActionTrigger")==false)
+            if (ApiInformation.IsTypePresent("Windows.ApplicationModel.Background.ToastNotificationActionTrigger") == false)
             {
                 yield break;
             }
@@ -160,7 +181,7 @@ namespace OnePomodoro.Services
 
         public IEnumerable<string> RemoveBreakFinishedToastNotificationSchedule(string id = null)
         {
-            if (ApiInformation.IsTypePresent("Windows.ApplicationModel.Background.ToastNotificationActionTrigger")==false)
+            if (ApiInformation.IsTypePresent("Windows.ApplicationModel.Background.ToastNotificationActionTrigger") == false)
             {
                 yield break;
             }

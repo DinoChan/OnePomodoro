@@ -6,6 +6,7 @@ using OnePomodoro.Services;
 
 
 using System;
+using System.Collections.Generic;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Core;
 
@@ -71,7 +72,12 @@ namespace OnePomodoro.ViewModels
                 }
                 catch (Exception ex)
                 {
-                    Microsoft.AppCenter.Crashes.Crashes.TrackError(ex);
+                    var properties = new Dictionary<string, string>
+                    {
+                        { "Message", ex.Message},
+                        { "Stacktrace", ex.StackTrace}
+                    };
+                    Microsoft.AppCenter.Crashes.Crashes.TrackError(ex, properties);
                 }
                 deferral.Complete();
             }
