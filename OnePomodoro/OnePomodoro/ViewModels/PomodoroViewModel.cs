@@ -72,12 +72,7 @@ namespace OnePomodoro.ViewModels
                 }
                 catch (Exception ex)
                 {
-                    var properties = new Dictionary<string, string>
-                    {
-                        { "Message", ex.Message},
-                        { "Stacktrace", ex.StackTrace}
-                    };
-                    Microsoft.AppCenter.Crashes.Crashes.TrackError(ex, properties);
+                    Microsoft.AppCenter.Crashes.Crashes.TrackError(ex);
                 }
                 deferral.Complete();
             }

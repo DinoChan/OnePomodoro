@@ -121,9 +121,10 @@ namespace OnePomodoro.Services
             {
                 var properties = new Dictionary<string, string>
                     {
-                        { "xml",  xml.GetXml()},
+                        {"xml",  xml.GetXml()},
                         {"time",time.ToString() },
                         {"now",DateTime.Now.ToString() },
+                        {"utc_now",DateTimeOffset.UtcNow.ToString() },
                     };
                 Microsoft.AppCenter.Crashes.Crashes.TrackError(ex, properties);
                 throw;

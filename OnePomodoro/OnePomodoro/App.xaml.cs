@@ -52,7 +52,7 @@ namespace OnePomodoro
             Services = ConfigureServices();
         }
 
-       
+
 
         /// <summary>
         /// Gets the <see cref="IServiceProvider"/> instance to resolve application services.
@@ -108,8 +108,15 @@ namespace OnePomodoro
                     // 参数
                     rootFrame.Navigate(typeof(MainPage), e.Arguments);
                     HandleClosed();
-                    NotificationManager.Current.RemoveBreakFinishedToastNotificationSchedule();
-                    NotificationManager.Current.RemovePomodoroFinishedToastNotificationSchedule();
+                    try
+                    {
+                        NotificationManager.Current.RemoveBreakFinishedToastNotificationSchedule();
+                        NotificationManager.Current.RemovePomodoroFinishedToastNotificationSchedule();
+                    }
+                    catch (Exception ex)
+                    {
+                        Microsoft.AppCenter.Crashes.Crashes.TrackError(ex);
+                    }
                     Analytics.TrackEvent(Windows.System.UserProfile.GlobalizationPreferences.HomeGeographicRegion);
                 }
                 // 确保当前窗口处于活动状态
@@ -126,10 +133,16 @@ namespace OnePomodoro
             {
                 HasExited = true;
                 var deferral = args.GetDeferral();
-                await DataService.RemoveFuturePeriodsAsync();
-                NotificationManager.Current.IsEnabled = false;
-                NotificationManager.Current.RemoveBreakFinishedToastNotificationSchedule();
-                NotificationManager.Current.RemovePomodoroFinishedToastNotificationSchedule();
+                await DataService.RemoveFuturePeriodsAsync(); try
+                {
+                    NotificationManager.Current.IsEnabled = false;
+                    NotificationManager.Current.RemoveBreakFinishedToastNotificationSchedule();
+                    NotificationManager.Current.RemovePomodoroFinishedToastNotificationSchedule();
+                }
+                catch (Exception ex)
+                {
+                    Microsoft.AppCenter.Crashes.Crashes.TrackError(ex);
+                }
 
                 deferral.Complete();
             };
