@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
@@ -52,7 +53,7 @@ namespace OnePomodoro
             Services = ConfigureServices();
         }
 
-       
+
 
         /// <summary>
         /// Gets the <see cref="IServiceProvider"/> instance to resolve application services.
@@ -110,7 +111,12 @@ namespace OnePomodoro
                     HandleClosed();
                     NotificationManager.Current.RemoveBreakFinishedToastNotificationSchedule();
                     NotificationManager.Current.RemovePomodoroFinishedToastNotificationSchedule();
-                    Analytics.TrackEvent(Windows.System.UserProfile.GlobalizationPreferences.HomeGeographicRegion);
+
+                    var properties = new Dictionary<string, string>
+                    {
+                        { "Region", Windows.System.UserProfile.GlobalizationPreferences.HomeGeographicRegion},
+                    };
+                    Analytics.TrackEvent("Launched", properties);
                 }
                 // 确保当前窗口处于活动状态
                 Window.Current.Activate();
