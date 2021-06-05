@@ -88,7 +88,11 @@ namespace OnePomodoro.Views
 
         private void ChangePomodoroContent(Type type)
         {
-            Analytics.TrackEvent(SettingsService.Current.ViewType);
+            var properties = new Dictionary<string, string>
+            {
+                { "ViewType",SettingsService.Current.ViewType},
+            };
+            Analytics.TrackEvent("ChangePomodoroContent", properties);
             var view = Activator.CreateInstance(type) as PomodoroView;
             PomodoroContent.Content = view;
             RequestedTheme = (view as FrameworkElement).RequestedTheme;
