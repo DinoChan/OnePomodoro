@@ -147,16 +147,35 @@ namespace OnePomodoro.Services
             if (string.IsNullOrWhiteSpace(audioUri) == false)
                 toastBuilder.AddAudio(new Uri(audioUri));
 
-            var toast = new ScheduledToastNotification(toastBuilder.GetXml(), time)
-            {
-                Tag = BreakTag,
-                Group = ToastGroup,
-                ExpirationTime = time.AddHours(1),
-                Id = _id++.ToString()
-            };
 
-            ToastNotificationManager.CreateToastNotifier().AddToSchedule(toast);
-            Debug.WriteLine("add break:" + toast.Id);
+            ScheduledToastNotification toast = null;
+            XmlDocument xml = null;
+
+            try
+            {
+                xml = toastBuilder.GetXml();
+                toast = new ScheduledToastNotification(xml, time)
+                {
+                    Tag = BreakTag,
+                    Group = ToastGroup,
+                    ExpirationTime = time.AddHours(1),
+                    Id = _id++.ToString()
+                };
+
+                ToastNotificationManager.CreateToastNotifier().AddToSchedule(toast);
+                Debug.WriteLine("add break:" + toast.Id);
+            }
+            catch (Exception ex)
+            {
+                var properties = new Dictionary<string, string>
+                    {
+                        {"xml",  xml.GetXml()},
+                        {"time",time.ToString() },
+                        {"now",DateTime.Now.ToString() },
+                    };
+                Microsoft.AppCenter.Crashes.Crashes.TrackError(ex, properties);
+                throw;
+            }
             return toast;
         }
 
