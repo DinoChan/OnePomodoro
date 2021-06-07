@@ -118,9 +118,6 @@ namespace OnePomodoro
                     {
                         Microsoft.AppCenter.Crashes.Crashes.TrackError(ex);
                     }
-                    Analytics.TrackEvent(Windows.System.UserProfile.GlobalizationPreferences.HomeGeographicRegion);
-                    NotificationManager.Current.RemoveBreakFinishedToastNotificationSchedule();
-                    NotificationManager.Current.RemovePomodoroFinishedToastNotificationSchedule();
 
                     var properties = new Dictionary<string, string>
                     {
