@@ -29,6 +29,7 @@ namespace OnePomodoro.Services
         {
             return new ToastContentBuilder()
                   .SetToastScenario(ToastScenario.Alarm)
+                  .AddAppLogoOverride(new Uri("ms-appx:///Assets/ToastAppLogo.png"))
                   .AddText("Pomodoro has finished")
                   .AddText(@"Pomodoro has finished, let's take a break.");
         }
@@ -37,6 +38,7 @@ namespace OnePomodoro.Services
         {
             return new ToastContentBuilder()
                   .SetToastScenario(ToastScenario.Alarm)
+                  .AddAppLogoOverride(new Uri("ms-appx:///Assets/ToastAppLogo.png"))
                   .AddText("Break has ended")
                   .AddText(@"Break has ended, it's time to work.");
         }
