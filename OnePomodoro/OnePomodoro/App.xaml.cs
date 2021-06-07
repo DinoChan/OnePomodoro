@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
@@ -118,6 +119,14 @@ namespace OnePomodoro
                         Microsoft.AppCenter.Crashes.Crashes.TrackError(ex);
                     }
                     Analytics.TrackEvent(Windows.System.UserProfile.GlobalizationPreferences.HomeGeographicRegion);
+                    NotificationManager.Current.RemoveBreakFinishedToastNotificationSchedule();
+                    NotificationManager.Current.RemovePomodoroFinishedToastNotificationSchedule();
+
+                    var properties = new Dictionary<string, string>
+                    {
+                        { "Region", Windows.System.UserProfile.GlobalizationPreferences.HomeGeographicRegion},
+                    };
+                    Analytics.TrackEvent("Launched", properties);
                 }
                 // 确保当前窗口处于活动状态
                 Window.Current.Activate();
