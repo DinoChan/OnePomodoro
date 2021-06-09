@@ -20,8 +20,6 @@ namespace OnePomodoro
     [Windows.UI.Xaml.Data.Bindable]
     public sealed partial class App : Application
     {
-        public bool HasExited { get; private set; }
-
         public App()
         {
             InitializeComponent();
@@ -53,18 +51,16 @@ namespace OnePomodoro
             Services = ConfigureServices();
         }
 
-
-
-        /// <summary>
-        /// Gets the <see cref="IServiceProvider"/> instance to resolve application services.
-        /// </summary>
-        public IServiceProvider Services { get; }
-
         /// <summary>
         /// Gets the current <see cref="App"/> instance in use
         /// </summary>
         public new static App Current => (App)Application.Current;
 
+        public bool HasExited { get; private set; }
+        /// <summary>
+        /// Gets the <see cref="IServiceProvider"/> instance to resolve application services.
+        /// </summary>
+        public IServiceProvider Services { get; }
         /// <summary>
         /// 在应用程序由最终用户正常启动时进行调用。
         /// 将在启动应用程序以打开特定文件等情况下使用。
@@ -133,6 +129,26 @@ namespace OnePomodoro
             }
         }
 
+        /// <summary>
+        /// Configures the services for the application.
+        /// </summary>
+        private static IServiceProvider ConfigureServices()
+        {
+            var services = new ServiceCollection();
+
+            services.AddSingleton<IWhatsNewDisplayService, WhatsNewDisplayService>();
+            services.AddSingleton<IFirstRunDisplayService, FirstRunDisplayService>();
+            services.AddSingleton<ILiveTileService, LiveTileService>();
+
+            return services.BuildServiceProvider();
+        }
+
+        private void AppDomainUnhandledException(object sender, System.UnhandledExceptionEventArgs e)
+        {
+            if (e.ExceptionObject is Exception ex)
+                Crashes.TrackError(ex);
+        }
+
         private void HandleClosed()
         {
             SystemNavigationManagerPreview.GetForCurrentView().CloseRequested += async (s, args) =>
@@ -163,26 +179,6 @@ namespace OnePomodoro
         {
             throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
         }
-        /// <summary>
-        /// Configures the services for the application.
-        /// </summary>
-        private static IServiceProvider ConfigureServices()
-        {
-            var services = new ServiceCollection();
-
-            services.AddSingleton<IWhatsNewDisplayService, WhatsNewDisplayService>();
-            services.AddSingleton<IFirstRunDisplayService, FirstRunDisplayService>();
-            services.AddSingleton<ILiveTileService, LiveTileService>();
-
-            return services.BuildServiceProvider();
-        }
-
         private void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e) => Crashes.TrackError(e.Exception);
-
-        private void AppDomainUnhandledException(object sender, System.UnhandledExceptionEventArgs e)
-        {
-            if (e.ExceptionObject is Exception ex)
-                Crashes.TrackError(ex);
-        }
     }
 }
