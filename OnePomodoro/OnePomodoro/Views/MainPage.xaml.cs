@@ -93,8 +93,7 @@ namespace OnePomodoro.Views
 
             var properties2 = new Dictionary<string, string>
             {
-                { "ViewType",SettingsService.Current.ViewType},
-                { "Region", Windows.System.UserProfile.GlobalizationPreferences.HomeGeographicRegion},
+                { "RegionAndViewType",Windows.System.UserProfile.GlobalizationPreferences.HomeGeographicRegion+" - "+SettingsService.Current.ViewType}
             };
             Analytics.TrackEvent("ChangePomodoroContentCombination", properties2);
             var view = Activator.CreateInstance(type) as PomodoroView;
