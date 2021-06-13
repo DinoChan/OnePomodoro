@@ -20,8 +20,6 @@ namespace OnePomodoro
     [Windows.UI.Xaml.Data.Bindable]
     public sealed partial class App : Application
     {
-        public bool HasExited { get; private set; }
-
         public App()
         {
             InitializeComponent();
@@ -53,18 +51,16 @@ namespace OnePomodoro
             Services = ConfigureServices();
         }
 
-
-
-        /// <summary>
-        /// Gets the <see cref="IServiceProvider"/> instance to resolve application services.
-        /// </summary>
-        public IServiceProvider Services { get; }
-
         /// <summary>
         /// Gets the current <see cref="App"/> instance in use
         /// </summary>
         public new static App Current => (App)Application.Current;
 
+        public bool HasExited { get; private set; }
+        /// <summary>
+        /// Gets the <see cref="IServiceProvider"/> instance to resolve application services.
+        /// </summary>
+        public IServiceProvider Services { get; }
         /// <summary>
         /// 在应用程序由最终用户正常启动时进行调用。
         /// 将在启动应用程序以打开特定文件等情况下使用。
@@ -109,8 +105,15 @@ namespace OnePomodoro
                     // 参数
                     rootFrame.Navigate(typeof(MainPage), e.Arguments);
                     HandleClosed();
-                    NotificationManager.Current.RemoveBreakFinishedToastNotificationSchedule();
-                    NotificationManager.Current.RemovePomodoroFinishedToastNotificationSchedule();
+                    try
+                    {
+                        NotificationManager.Current.RemoveBreakFinishedToastNotificationSchedule();
+                        NotificationManager.Current.RemovePomodoroFinishedToastNotificationSchedule();
+                    }
+                    catch (Exception ex)
+                    {
+                        Microsoft.AppCenter.Crashes.Crashes.TrackError(ex);
+                    }
 
                     var properties = new Dictionary<string, string>
                     {
@@ -126,30 +129,6 @@ namespace OnePomodoro
             }
         }
 
-        private void HandleClosed()
-        {
-            SystemNavigationManagerPreview.GetForCurrentView().CloseRequested += async (s, args) =>
-            {
-                HasExited = true;
-                var deferral = args.GetDeferral();
-                await DataService.RemoveFuturePeriodsAsync();
-                NotificationManager.Current.IsEnabled = false;
-                NotificationManager.Current.RemoveBreakFinishedToastNotificationSchedule();
-                NotificationManager.Current.RemovePomodoroFinishedToastNotificationSchedule();
-
-                deferral.Complete();
-            };
-        }
-
-        /// <summary>
-        /// 导航到特定页失败时调用
-        /// </summary>
-        ///<param name="sender">导航失败的框架</param>
-        ///<param name="e">有关导航失败的详细信息</param>
-        void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
-        {
-            throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
-        }
         /// <summary>
         /// Configures the services for the application.
         /// </summary>
@@ -164,12 +143,42 @@ namespace OnePomodoro
             return services.BuildServiceProvider();
         }
 
-        private void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e) => Crashes.TrackError(e.Exception);
-
         private void AppDomainUnhandledException(object sender, System.UnhandledExceptionEventArgs e)
         {
             if (e.ExceptionObject is Exception ex)
                 Crashes.TrackError(ex);
         }
+
+        private void HandleClosed()
+        {
+            SystemNavigationManagerPreview.GetForCurrentView().CloseRequested += async (s, args) =>
+            {
+                HasExited = true;
+                var deferral = args.GetDeferral();
+                await DataService.RemoveFuturePeriodsAsync(); try
+                {
+                    NotificationManager.Current.IsEnabled = false;
+                    NotificationManager.Current.RemoveBreakFinishedToastNotificationSchedule();
+                    NotificationManager.Current.RemovePomodoroFinishedToastNotificationSchedule();
+                }
+                catch (Exception ex)
+                {
+                    Microsoft.AppCenter.Crashes.Crashes.TrackError(ex);
+                }
+
+                deferral.Complete();
+            };
+        }
+
+        /// <summary>
+        /// 导航到特定页失败时调用
+        /// </summary>
+        ///<param name="sender">导航失败的框架</param>
+        ///<param name="e">有关导航失败的详细信息</param>
+        void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
+        {
+            throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
+        }
+        private void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e) => Crashes.TrackError(e.Exception);
     }
 }

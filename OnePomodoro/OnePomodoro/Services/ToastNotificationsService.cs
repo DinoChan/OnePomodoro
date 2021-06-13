@@ -29,6 +29,7 @@ namespace OnePomodoro.Services
         {
             return new ToastContentBuilder()
                   .SetToastScenario(ToastScenario.Alarm)
+                  .AddAppLogoOverride(new Uri("ms-appx:///Assets/ToastAppLogo.png"))
                   .AddText("Pomodoro has finished")
                   .AddText(@"Pomodoro has finished, let's take a break.");
         }
@@ -37,6 +38,7 @@ namespace OnePomodoro.Services
         {
             return new ToastContentBuilder()
                   .SetToastScenario(ToastScenario.Alarm)
+                  .AddAppLogoOverride(new Uri("ms-appx:///Assets/ToastAppLogo.png"))
                   .AddText("Break has ended")
                   .AddText(@"Break has ended, it's time to work.");
         }
@@ -121,9 +123,10 @@ namespace OnePomodoro.Services
             {
                 var properties = new Dictionary<string, string>
                     {
-                        { "xml",  xml.GetXml()},
+                        {"xml",  xml.GetXml()},
                         {"time",time.ToString() },
                         {"now",DateTime.Now.ToString() },
+                        {"utc_now",DateTimeOffset.UtcNow.ToString() },
                     };
                 Microsoft.AppCenter.Crashes.Crashes.TrackError(ex, properties);
                 throw;

@@ -3,9 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:controls="using:OnePomodoro.Controls"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="using:OnePomodoro.Views"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:model="using:Windows.ApplicationModel"
              xmlns:viewmodels="using:OnePomodoro.ViewModels"
              d:DesignHeight="600"
              d:DesignWidth="600"
@@ -145,7 +143,6 @@
                                             </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
-
                                 </VisualStateGroup>
                                 <VisualStateGroup x:Name="FocusEngagementStates">
                                     <VisualState x:Name="FocusDisengaged" />
@@ -171,9 +168,7 @@
                                             </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
-
                                 </VisualStateGroup>
-
                             </VisualStateManager.VisualStateGroups>
 
                             <Grid.RowDefinitions>
@@ -310,7 +305,6 @@
                                            FocusVisualMargin="-6,-14,-6,-14"
                                            Style="{StaticResource SliderThumbStyle}" />
                                 </Grid>
-
                             </Grid>
                             <StackPanel Grid.Row="1"
                                         Grid.Column="1"
@@ -326,7 +320,6 @@
                                                 Foreground="{ThemeResource SystemBaseHighColor}" />
                             </StackPanel>
                         </Grid>
-
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -342,7 +335,6 @@
                 <ToggleSwitch Margin="0,16,0,0"
                               Header="Notify When Pomodoro Finished"
                               IsOn="{x:Bind ViewModel.Settings.IsNotifyWhenPomodoroFinished, Mode=TwoWay}" />
-
 
                 <StackPanel Margin="0,16,0,0"
                             HorizontalAlignment="Left"
@@ -378,7 +370,7 @@
                 <Slider Margin="0,48,0,0"
                         Header="Pomodoro Length"
                         Maximum="90"
-                        Minimum="3"
+                        Minimum="1"
                         StepFrequency="1"
                         Value="{Binding Settings.PomodoroLength, Mode=TwoWay}">
                     <Slider.Tag>
@@ -390,7 +382,6 @@
                                              Click="OnDefaultPomodoroLengthClick"
                                              Content="Default" />
                         </StackPanel>
-
                     </Slider.Tag>
                 </Slider>
 
@@ -409,7 +400,6 @@
                                              Click="OnDefaultShortBreakLengthClick"
                                              Content="Default" />
                         </StackPanel>
-
                     </Slider.Tag>
                 </Slider>
 
@@ -428,7 +418,6 @@
                                              Click="OnDefaultLongBreakLengthClick"
                                              Content="Default" />
                         </StackPanel>
-
                     </Slider.Tag>
                 </Slider>
 
@@ -447,7 +436,6 @@
                                              Click="OnDefaultLongBreakAfterClick"
                                              Content="Default" />
                         </StackPanel>
-
                     </Slider.Tag>
                 </Slider>
             </StackPanel>

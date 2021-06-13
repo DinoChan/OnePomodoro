@@ -27,9 +27,6 @@ namespace OnePomodoro.Views
 
         private CompactOverlayAttribute _currentCompactOverlayAttribute;
 
-#warning need 1903
-        //private List<TeachingTip> _teachingTip;
-
         private static bool _isShown = false;
 
         public MainPage()
