@@ -1,10 +1,6 @@
-﻿using OnePomodoro.Helpers;
+﻿using System.Threading.Tasks;
+using OnePomodoro.Helpers;
 using OnePomodoro.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.Storage;
 
 namespace OnePomodoro.Services
