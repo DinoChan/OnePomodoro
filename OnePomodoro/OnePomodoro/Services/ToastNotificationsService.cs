@@ -175,6 +175,7 @@ namespace OnePomodoro.Services
                         {"xml",  xml.GetXml()},
                         {"time",time.ToString() },
                         {"now",DateTime.Now.ToString() },
+                        {"utc_now",DateTimeOffset.UtcNow.ToString() },
                     };
                 Microsoft.AppCenter.Crashes.Crashes.TrackError(ex, properties);
                 throw;
