@@ -29,6 +29,7 @@ namespace OnePomodoro.Services
         {
             return new ToastContentBuilder()
                   .SetToastScenario(ToastScenario.Alarm)
+                  .AddAppLogoOverride(new Uri("ms-appx:///Assets/ToastAppLogo.png"))
                   .AddText("Pomodoro has finished")
                   .AddText(@"Pomodoro has finished, let's take a break.");
         }
@@ -37,6 +38,7 @@ namespace OnePomodoro.Services
         {
             return new ToastContentBuilder()
                   .SetToastScenario(ToastScenario.Alarm)
+                  .AddAppLogoOverride(new Uri("ms-appx:///Assets/ToastAppLogo.png"))
                   .AddText("Break has ended")
                   .AddText(@"Break has ended, it's time to work.");
         }
@@ -121,9 +123,10 @@ namespace OnePomodoro.Services
             {
                 var properties = new Dictionary<string, string>
                     {
-                        { "xml",  xml.GetXml()},
+                        {"xml",  xml.GetXml()},
                         {"time",time.ToString() },
                         {"now",DateTime.Now.ToString() },
+                        {"utc_now",DateTimeOffset.UtcNow.ToString() },
                     };
                 Microsoft.AppCenter.Crashes.Crashes.TrackError(ex, properties);
                 throw;
@@ -146,17 +149,37 @@ namespace OnePomodoro.Services
             var toastBuilder = CreatePomodoroToastBuilder();
             if (string.IsNullOrWhiteSpace(audioUri) == false)
                 toastBuilder.AddAudio(new Uri(audioUri));
+            XmlDocument xml = null;
 
-            var toast = new ScheduledToastNotification(toastBuilder.GetXml(), time)
+
+
+            ScheduledToastNotification toast;
+            try
             {
-                Tag = BreakTag,
-                Group = ToastGroup,
-                ExpirationTime = time.AddHours(1),
-                Id = _id++.ToString()
-            };
+                xml = toastBuilder.GetXml();
+                toast = new ScheduledToastNotification(xml, time)
+                {
+                    Tag = BreakTag,
+                    Group = ToastGroup,
+                    ExpirationTime = time.AddHours(1),
+                    Id = _id++.ToString()
+                };
 
-            ToastNotificationManager.CreateToastNotifier().AddToSchedule(toast);
-            Debug.WriteLine("add break:" + toast.Id);
+                ToastNotificationManager.CreateToastNotifier().AddToSchedule(toast);
+                Debug.WriteLine("add break:" + toast.Id);
+            }
+            catch (Exception ex)
+            {
+                var properties = new Dictionary<string, string>
+                    {
+                        {"xml",  xml.GetXml()},
+                        {"time",time.ToString() },
+                        {"now",DateTime.Now.ToString() },
+                        {"utc_now",DateTimeOffset.UtcNow.ToString() },
+                    };
+                Microsoft.AppCenter.Crashes.Crashes.TrackError(ex, properties);
+                throw;
+            }
             return toast;
         }
 

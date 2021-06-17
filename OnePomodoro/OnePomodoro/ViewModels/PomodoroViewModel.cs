@@ -1,27 +1,14 @@
-﻿using Microsoft.AppCenter;
+﻿using System;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using OnePomodoro.Helpers;
 using OnePomodoro.Services;
-
-
-using System;
-using System.Collections.Generic;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Core;
 
 namespace OnePomodoro.ViewModels
 {
-    /// <summary>
-    /// 2019年12月5日：添加了自动开始功能。
-    /// 但最小化后程序进入后台模式Timer不能运行。但是……
-    ///
-    /// 最小化后，用户看不到程序，他怎么知道下一个番茄钟有自动开始运行？
-    /// 最小化后，用户看不到程序，他怎么知道下一个番茄钟没有自动开始运行？
-    /// 应用怎么知道用户知道或者不知道下一个番茄钟有开始或者没有开始运行？
-    ///
-    /// 所以在退出后台模式时更新一下就好了，不需要后台任务，简单就好。
-    /// </summary>
+  
     public class PomodoroViewModel : ObservableObject
     {
         private TimeSpan PomodoroLength => TimeSpan.FromMinutes(SettingsService.Current == null ? 25 : SettingsService.Current.PomodoroLength);
@@ -72,12 +59,7 @@ namespace OnePomodoro.ViewModels
                 }
                 catch (Exception ex)
                 {
-                    var properties = new Dictionary<string, string>
-                    {
-                        { "Message", ex.Message},
-                        { "Stacktrace", ex.StackTrace}
-                    };
-                    Microsoft.AppCenter.Crashes.Crashes.TrackError(ex, properties);
+                    Microsoft.AppCenter.Crashes.Crashes.TrackError(ex);
                 }
                 deferral.Complete();
             }
@@ -103,7 +85,9 @@ namespace OnePomodoro.ViewModels
         }
 
         public event EventHandler RemainingPomodoroTimeChanged;
+
         public event EventHandler RemainingBreakTimeChanged;
+
         public event EventHandler IsInPomodoroChanged;
 
         public TimeSpan RemainingPomodoroTime
@@ -123,7 +107,6 @@ namespace OnePomodoro.ViewModels
         public TimeSpan RemainingBreakTime
         {
             get => _remainingBreakTime;
-
 
             private set
             {
@@ -221,7 +204,6 @@ namespace OnePomodoro.ViewModels
         private void StartPomodoro()
         {
             IsTimerInProgress = true;
-
 
             if (SettingsService.Current.AutoStartOfNextPomodoro && CurrentTimer != null && CurrentTimer.RemainingTime == TimeSpan.Zero)
                 CurrentTimer = new CountdownTimer(CurrentTimer.StartTime + CurrentTimer.TotalTime, PomodoroLength);

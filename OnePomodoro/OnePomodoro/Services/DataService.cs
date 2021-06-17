@@ -1,11 +1,10 @@
-﻿using DataAccessLibrary;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using DataAccessLibrary;
+using Microsoft.EntityFrameworkCore;
 using Windows.Storage;
 
 namespace OnePomodoro.Services
@@ -62,7 +61,6 @@ namespace OnePomodoro.Services
             }
         }
 
-
         public static async Task AddFuturePeriodsAsync(bool isInPomodoro, DateTime startTime, bool autoStartOfNextPomodoro, bool autoStartOfBreak,
           int completedPomodoros, int longBreakAfter, TimeSpan pomodoroLength, TimeSpan shortBreakLength, TimeSpan longBreakLength)
         {
@@ -98,7 +96,6 @@ namespace OnePomodoro.Services
 
             await AddPeriodsAsync(periods);
         }
-
 
         public static async Task AddPeriodAsync(bool isInPomodoro, bool hasFinished, DateTime startTime, DateTime endTime)
         {

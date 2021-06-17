@@ -1,12 +1,12 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using OnePomodoro.Helpers;
 using OnePomodoro.Infrastructure;
 using OnePomodoro.Models;
 using OnePomodoro.Services;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using Windows.ApplicationModel;
 
 namespace OnePomodoro.ViewModels
@@ -23,7 +23,6 @@ namespace OnePomodoro.ViewModels
                 _toastNotificationsService = App.Current.Services.GetService<ToastNotificationsService>();
 
             Audios = AudioDefinitions.Definitions;
-
         }
 
         private async void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -50,7 +49,6 @@ namespace OnePomodoro.ViewModels
                 else
                 {
                     NotificationManager.Current.RemoveBreakFinishedToastNotificationSchedule();
-
                 }
 
                 if (e.PropertyName == nameof(IPomodoroSettings.PomodoroAudioUri))
