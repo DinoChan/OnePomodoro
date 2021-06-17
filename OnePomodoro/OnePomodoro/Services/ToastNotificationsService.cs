@@ -149,11 +149,11 @@ namespace OnePomodoro.Services
             var toastBuilder = CreatePomodoroToastBuilder();
             if (string.IsNullOrWhiteSpace(audioUri) == false)
                 toastBuilder.AddAudio(new Uri(audioUri));
-
-
-            ScheduledToastNotification toast = null;
             XmlDocument xml = null;
 
+
+
+            ScheduledToastNotification toast;
             try
             {
                 xml = toastBuilder.GetXml();

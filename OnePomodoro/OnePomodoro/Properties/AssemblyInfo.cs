@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("OnePomodoro")]
-[assembly: AssemblyCopyright("Copyright ©  2020 ~ 2021")]
+[assembly: AssemblyCopyright("Copyright ©  2019 ~ 2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
