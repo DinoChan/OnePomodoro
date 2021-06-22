@@ -6,6 +6,8 @@ using System.Linq;
 using System.Diagnostics;
 using System.Collections.Generic;
 using Windows.Foundation.Metadata;
+using OnePomodoro.Helpers;
+using System.Threading.Tasks;
 
 namespace OnePomodoro.Services
 {
@@ -87,7 +89,7 @@ namespace OnePomodoro.Services
         }
 
 
-        public ScheduledToastNotification AddPomodoroFinishedToastNotificationSchedule(DateTime time, string audioUri, bool isRemoveOthers = true)
+        public async Task<ScheduledToastNotification> AddPomodoroFinishedToastNotificationScheduleAsync(DateTime time, string audioUri, bool isRemoveOthers = true)
         {
             if (ApiInformation.IsTypePresent("Windows.ApplicationModel.Background.ToastNotificationActionTrigger") == false)
             {
@@ -95,8 +97,8 @@ namespace OnePomodoro.Services
             }
 
             if (isRemoveOthers)
-                RemovePomodoroFinishedToastNotificationSchedule();
-
+           await     RemovePomodoroFinishedToastNotificationScheduleAsync();
+            
             var toastBuilder = CreatePomodoroToastBuilder();
             if (string.IsNullOrWhiteSpace(audioUri) == false)
                 toastBuilder.AddAudio(new Uri(audioUri));
@@ -116,7 +118,8 @@ namespace OnePomodoro.Services
                 };
 
                 var xx = xml.GetXml();
-                ToastNotificationManager.CreateToastNotifier().AddToSchedule(toast);
+                var toastNotifier = await ToastNotificationToolkit.CreateToastNotifierAsync();
+                toastNotifier.AddToSchedule(toast);
                 Debug.WriteLine("add pomodoro:" + toast.Id);
             }
             catch (Exception ex)
@@ -136,7 +139,7 @@ namespace OnePomodoro.Services
             return toast;
         }
 
-        public ScheduledToastNotification AddBreakFinishedToastNotificationSchedule(DateTime time, string audioUri, bool isRemoveOthers = true)
+        public async Task<ScheduledToastNotification> AddBreakFinishedToastNotificationScheduleAsync(DateTime time, string audioUri, bool isRemoveOthers = true)
         {
             if (ApiInformation.IsTypePresent("Windows.ApplicationModel.Background.ToastNotificationActionTrigger") == false)
             {
@@ -144,7 +147,7 @@ namespace OnePomodoro.Services
             }
 
             if (isRemoveOthers)
-                RemoveBreakFinishedToastNotificationSchedule();
+               await RemoveBreakFinishedToastNotificationScheduleAsync();
 
             var toastBuilder = CreatePomodoroToastBuilder();
             if (string.IsNullOrWhiteSpace(audioUri) == false)
@@ -164,8 +167,8 @@ namespace OnePomodoro.Services
                     ExpirationTime = time.AddHours(1),
                     Id = _id++.ToString()
                 };
-
-                ToastNotificationManager.CreateToastNotifier().AddToSchedule(toast);
+                var toastNotifier = await ToastNotificationToolkit.CreateToastNotifierAsync();
+                toastNotifier.AddToSchedule(toast);
                 Debug.WriteLine("add break:" + toast.Id);
             }
             catch (Exception ex)
@@ -183,42 +186,48 @@ namespace OnePomodoro.Services
             return toast;
         }
 
-        public IEnumerable<string> RemovePomodoroFinishedToastNotificationSchedule(string id = null)
+        public async Task<IEnumerable<string>> RemovePomodoroFinishedToastNotificationScheduleAsync(string id = null)
         {
             if (ApiInformation.IsTypePresent("Windows.ApplicationModel.Background.ToastNotificationActionTrigger") == false)
             {
-                yield break;
+                return new List<string>();
             }
 
-            var notifier = ToastNotificationManager.CreateToastNotifier();
+            var notifier = await ToastNotificationToolkit.CreateToastNotifierAsync();
+            List<string> result = new List<string>();
             foreach (var scheduledToast in notifier.GetScheduledToastNotifications())
             {
                 if (scheduledToast.Group == ToastGroup && scheduledToast.Tag == PomodoroTag && (string.IsNullOrWhiteSpace(id) || scheduledToast.Id == id))
                 {
                     notifier.RemoveFromSchedule(scheduledToast);
-                    yield return scheduledToast.Id;
+                    result.Add(scheduledToast.Id);
                     Debug.WriteLine("remove pomodoro:" + scheduledToast.Id);
                 }
             }
+
+            return result;
         }
 
-        public IEnumerable<string> RemoveBreakFinishedToastNotificationSchedule(string id = null)
+        public async Task<IEnumerable<string>> RemoveBreakFinishedToastNotificationScheduleAsync(string id = null)
         {
             if (ApiInformation.IsTypePresent("Windows.ApplicationModel.Background.ToastNotificationActionTrigger") == false)
             {
-                yield break;
+                return new List<string>();
             }
 
-            var notifier = ToastNotificationManager.CreateToastNotifier();
+            var notifier = await ToastNotificationToolkit.CreateToastNotifierAsync();
+            List<string> result = new List<string>();
             foreach (var scheduledToast in notifier.GetScheduledToastNotifications())
             {
                 if (scheduledToast.Group == ToastGroup && scheduledToast.Tag == BreakTag && (string.IsNullOrWhiteSpace(id) || scheduledToast.Id == id))
                 {
                     notifier.RemoveFromSchedule(scheduledToast);
-                    yield return scheduledToast.Id;
+                    result.Add(scheduledToast.Id);
                     Debug.WriteLine("remove break:" + scheduledToast.Id);
                 }
             }
+
+            return result;
         }
     }
 }

@@ -34,32 +34,32 @@ namespace OnePomodoro.ViewModels
                 if (Settings.IsNotifyWhenPomodoroFinished)
                 {
                     if (PomodoroViewModel.Current.IsInPomodoro && PomodoroViewModel.Current.IsTimerInProgress)
-                        NotificationManager.Current.AddPomodoroFinishedToastNotificationSchedule(DateTime.Now + PomodoroViewModel.Current.RemainingPomodoroTime);
+                        await NotificationManager.Current.AddPomodoroFinishedToastNotificationScheduleAsync(DateTime.Now + PomodoroViewModel.Current.RemainingPomodoroTime);
                 }
                 else
                 {
-                    NotificationManager.Current.RemovePomodoroFinishedToastNotificationSchedule();
+                  await  NotificationManager.Current.RemovePomodoroFinishedToastNotificationScheduleAsync();
                 }
 
                 if (Settings.IsNotifyWhenBreakFinished)
                 {
                     if (PomodoroViewModel.Current.IsInPomodoro == false && PomodoroViewModel.Current.IsTimerInProgress)
-                        NotificationManager.Current.AddBreakFinishedToastNotificationSchedule(DateTime.Now + PomodoroViewModel.Current.RemainingBreakTime);
+                        await NotificationManager.Current.AddBreakFinishedToastNotificationScheduleAsync(DateTime.Now + PomodoroViewModel.Current.RemainingBreakTime);
                 }
                 else
                 {
-                    NotificationManager.Current.RemoveBreakFinishedToastNotificationSchedule();
+                  await  NotificationManager.Current.RemoveBreakFinishedToastNotificationScheduleAsync();
                 }
 
                 if (e.PropertyName == nameof(IPomodoroSettings.PomodoroAudioUri))
                 {
                     if (Settings.IsNotifyWhenPomodoroFinished && PomodoroViewModel.Current.IsInPomodoro && PomodoroViewModel.Current.IsTimerInProgress)
-                        NotificationManager.Current.AddPomodoroFinishedToastNotificationSchedule(DateTime.Now + PomodoroViewModel.Current.RemainingPomodoroTime);
+                        await NotificationManager.Current.AddPomodoroFinishedToastNotificationScheduleAsync(DateTime.Now + PomodoroViewModel.Current.RemainingPomodoroTime);
                 }
                 else if (e.PropertyName == nameof(IPomodoroSettings.BreakAudioUri))
                 {
                     if (PomodoroViewModel.Current.IsInPomodoro == false && PomodoroViewModel.Current.IsTimerInProgress)
-                        NotificationManager.Current.AddBreakFinishedToastNotificationSchedule(DateTime.Now + PomodoroViewModel.Current.RemainingBreakTime);
+                        await NotificationManager.Current.AddBreakFinishedToastNotificationScheduleAsync(DateTime.Now + PomodoroViewModel.Current.RemainingBreakTime);
                 }
             }
             catch (Exception ex)
