@@ -107,8 +107,8 @@ namespace OnePomodoro
                     HandleClosed();
                     try
                     {
-                        NotificationManager.Current.RemoveBreakFinishedToastNotificationSchedule();
-                        NotificationManager.Current.RemovePomodoroFinishedToastNotificationSchedule();
+                        await NotificationManager.Current.RemoveBreakFinishedToastNotificationScheduleAsync();
+                        await NotificationManager.Current.RemovePomodoroFinishedToastNotificationScheduleAsync();
                     }
                     catch (Exception ex)
                     {
@@ -155,11 +155,12 @@ namespace OnePomodoro
             {
                 HasExited = true;
                 var deferral = args.GetDeferral();
-                await DataService.RemoveFuturePeriodsAsync(); try
+                await DataService.RemoveFuturePeriodsAsync();
+                try
                 {
                     NotificationManager.Current.IsEnabled = false;
-                    NotificationManager.Current.RemoveBreakFinishedToastNotificationSchedule();
-                    NotificationManager.Current.RemovePomodoroFinishedToastNotificationSchedule();
+                    await NotificationManager.Current.RemoveBreakFinishedToastNotificationScheduleAsync();
+                    await NotificationManager.Current.RemovePomodoroFinishedToastNotificationScheduleAsync();
                 }
                 catch (Exception ex)
                 {

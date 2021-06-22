@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using OnePomodoro.Helpers;
@@ -8,7 +9,7 @@ using Windows.ApplicationModel.Core;
 
 namespace OnePomodoro.ViewModels
 {
-  
+
     public class PomodoroViewModel : ObservableObject
     {
         private TimeSpan PomodoroLength => TimeSpan.FromMinutes(SettingsService.Current == null ? 25 : SettingsService.Current.PomodoroLength);
@@ -47,10 +48,10 @@ namespace OnePomodoro.ViewModels
                 var deferral = e.GetDeferral();
                 try
                 {
-                    NotificationManager.Current.AddAllNotifications(IsInPomodoro, CurrentTimer.StartTime + CurrentTimer.TotalTime,
-                     SettingsService.Current.AutoStartOfNextPomodoro, SettingsService.Current.AutoStartOfBreak,
-                     _completedPomodoros, LongBreakAfter, PomodoroLength,
-                     ShortBreakLength, LongBreakLength);
+                    await NotificationManager.Current.AddAllNotificationsAsync(IsInPomodoro, CurrentTimer.StartTime + CurrentTimer.TotalTime,
+                        SettingsService.Current.AutoStartOfNextPomodoro, SettingsService.Current.AutoStartOfBreak,
+                        _completedPomodoros, LongBreakAfter, PomodoroLength,
+                        ShortBreakLength, LongBreakLength);
 
                     await DataService.AddFuturePeriodsAsync(IsInPomodoro, CurrentTimer.StartTime + CurrentTimer.TotalTime,
                      SettingsService.Current.AutoStartOfNextPomodoro, SettingsService.Current.AutoStartOfBreak,
@@ -74,7 +75,7 @@ namespace OnePomodoro.ViewModels
 
                 if (IsTimerInProgress)
                 {
-                    NotificationManager.Current.RemoveAllNotificationsButFirst(IsInPomodoro, CurrentTimer.StartTime + CurrentTimer.TotalTime);
+                    await NotificationManager.Current.RemoveAllNotificationsButFirstAsync(IsInPomodoro, CurrentTimer.StartTime + CurrentTimer.TotalTime);
                     await DataService.RemoveFuturePeriodsAsync();
                 }
             }
@@ -185,23 +186,23 @@ namespace OnePomodoro.ViewModels
                 RemainingBreakTime = CurrentTimer.RemainingTime;
         }
 
-        private void StartTimer()
+        private async void StartTimer()
         {
             if (_isInPomodoro)
-                StartPomodoro();
+                await StartPomodoroAsync();
             else
-                StartBreak();
+                await StartBreakAsync();
         }
 
-        private void StopTimer()
+        private async void StopTimer()
         {
-            NotificationManager.Current.RemovePomodoroFinishedToastNotificationSchedule();
-            NotificationManager.Current.RemoveBreakFinishedToastNotificationSchedule();
+           await NotificationManager.Current.RemovePomodoroFinishedToastNotificationScheduleAsync();
+           await NotificationManager.Current.RemoveBreakFinishedToastNotificationScheduleAsync();
             _isUserStop = true;
             CurrentTimer.Stop();
         }
 
-        private void StartPomodoro()
+        private async Task StartPomodoroAsync()
         {
             IsTimerInProgress = true;
 
@@ -211,12 +212,12 @@ namespace OnePomodoro.ViewModels
                 CurrentTimer = new CountdownTimer(DateTime.Now, PomodoroLength);
 
             if (SettingsService.Current.IsNotifyWhenPomodoroFinished && (CurrentTimer.StartTime + CurrentTimer.TotalTime) > DateTime.Now)
-                NotificationManager.Current.AddPomodoroFinishedToastNotificationSchedule(CurrentTimer.StartTime + CurrentTimer.TotalTime);
+                await NotificationManager.Current.AddPomodoroFinishedToastNotificationScheduleAsync(CurrentTimer.StartTime + CurrentTimer.TotalTime);
 
             CurrentTimer.Start();
         }
 
-        private void StartBreak()
+        private async Task StartBreakAsync()
         {
             IsTimerInProgress = true;
 
@@ -227,12 +228,12 @@ namespace OnePomodoro.ViewModels
                 CurrentTimer = new CountdownTimer(DateTime.Now, breakLength);
 
             if (SettingsService.Current.IsNotifyWhenBreakFinished && (CurrentTimer.StartTime + CurrentTimer.TotalTime) > DateTime.Now)
-                NotificationManager.Current.AddBreakFinishedToastNotificationSchedule(CurrentTimer.StartTime + CurrentTimer.TotalTime);
+                await NotificationManager.Current.AddBreakFinishedToastNotificationScheduleAsync(CurrentTimer.StartTime + CurrentTimer.TotalTime);
 
             CurrentTimer.Start();
         }
 
-        private void OnPomodoroTimerFinished()
+        private async void OnPomodoroTimerFinished()
         {
             var startTime = CurrentTimer.StartTime;
             IsTimerInProgress = false;
@@ -245,13 +246,13 @@ namespace OnePomodoro.ViewModels
             RemainingBreakTime = breakLength;
 
             if (SettingsService.Current.AutoStartOfBreak)
-                StartBreak();
+                await StartBreakAsync();
 
-            _ = DataService.AddPeriodAsync(true, _isUserStop == false, startTime, DateTime.Now);
+            await DataService.AddPeriodAsync(true, _isUserStop == false, startTime, DateTime.Now);
             _isUserStop = false;
         }
 
-        private void OnBreakTimerFinished()
+        private async void OnBreakTimerFinished()
         {
             var startTime = CurrentTimer.StartTime;
             RemainingPomodoroTime = PomodoroLength;
@@ -259,9 +260,9 @@ namespace OnePomodoro.ViewModels
             IsInPomodoro = true;
 
             if (SettingsService.Current.AutoStartOfNextPomodoro)
-                StartPomodoro();
+                await StartPomodoroAsync();
 
-            _ = DataService.AddPeriodAsync(false, _isUserStop == false, startTime, DateTime.Now);
+            await DataService.AddPeriodAsync(false, _isUserStop == false, startTime, DateTime.Now);
             _isUserStop = false;
         }
     }
