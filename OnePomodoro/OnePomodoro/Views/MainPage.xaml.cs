@@ -1,19 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.Toolkit.Uwp.Helpers;
+using OnePomodoro.Helpers;
 using OnePomodoro.PomodoroViews;
 using OnePomodoro.Services;
 using OnePomodoro.ViewModels;
-using Windows.ApplicationModel.Core;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
-using System.Linq;
-using Windows.UI.ViewManagement;
-using OnePomodoro.Helpers;
 using Windows.UI.Xaml.Media.Animation;
-using Microsoft.Toolkit.Uwp.Helpers;
-using Microsoft.Toolkit.Uwp.UI.Controls.TextToolbarSymbols;
-using System.Collections.Generic;
-using Microsoft.AppCenter.Analytics;
+using Windows.UI.Xaml.Navigation;
 
 namespace OnePomodoro.Views
 {
@@ -74,14 +72,12 @@ namespace OnePomodoro.Views
 
             _pomodoroViewType = viewType;
 
-
             ConnectedAnimation animation = ConnectedAnimationService.GetForCurrentView().GetAnimation("backAnimation");
             if (animation != null)
             {
                 animation.TryStart(PomodoroContent);
             }
         }
-
 
         private void ChangePomodoroContent(Type type)
         {
@@ -104,7 +100,6 @@ namespace OnePomodoro.Views
             _currentCompactOverlayAttribute = attributes.OfType<CompactOverlayAttribute>().FirstOrDefault();
             UpdateButtonsVisibility();
         }
-
 
         private async void OnPinClick(object sender, RoutedEventArgs e)
         {
@@ -153,7 +148,6 @@ namespace OnePomodoro.Views
                     UnpinButton.Visibility = Visibility.Collapsed;
                     PinButton.Visibility = _currentCompactOverlayAttribute == null ? Visibility.Collapsed : Visibility.Visible;
                 }
-
             }
         }
     }
