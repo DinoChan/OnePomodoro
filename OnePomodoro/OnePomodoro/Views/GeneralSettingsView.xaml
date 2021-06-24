@@ -370,7 +370,7 @@
                 <Slider Margin="0,48,0,0"
                         Header="Pomodoro Length"
                         Maximum="90"
-                        Minimum="1"
+                        Minimum="3"
                         StepFrequency="1"
                         Value="{Binding Settings.PomodoroLength, Mode=TwoWay}">
                     <Slider.Tag>

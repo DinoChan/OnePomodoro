@@ -35,7 +35,7 @@ namespace OnePomodoro.Services
             if (isRemoveOthers)
                 await RemoveBreakFinishedToastNotificationScheduleAsync();
 
-            var toastBuilder = CreatePomodoroToastBuilder();
+            var toastBuilder = CreateBreakToastBuilder();
             if (string.IsNullOrWhiteSpace(audioUri) == false)
                 toastBuilder.AddAudio(new Uri(audioUri));
 

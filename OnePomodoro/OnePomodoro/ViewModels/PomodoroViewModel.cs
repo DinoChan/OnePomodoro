@@ -196,8 +196,8 @@ namespace OnePomodoro.ViewModels
 
         private async void StopTimer()
         {
-           await NotificationManager.Current.RemovePomodoroFinishedToastNotificationScheduleAsync();
-           await NotificationManager.Current.RemoveBreakFinishedToastNotificationScheduleAsync();
+            await NotificationManager.Current.RemovePomodoroFinishedToastNotificationScheduleAsync();
+            await NotificationManager.Current.RemoveBreakFinishedToastNotificationScheduleAsync();
             _isUserStop = true;
             CurrentTimer.Stop();
         }
