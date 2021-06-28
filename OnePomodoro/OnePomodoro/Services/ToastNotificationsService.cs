@@ -29,8 +29,7 @@ namespace OnePomodoro.Services
             {
                 return null;
             }
-            if (time < DateTime.Now)
-                return null;
+           
 
             if (isRemoveOthers)
                 await RemoveBreakFinishedToastNotificationScheduleAsync();
@@ -41,9 +40,16 @@ namespace OnePomodoro.Services
 
             XmlDocument xml = null;
             ScheduledToastNotification toast;
+            if (time < DateTime.Now)
+                return null;
+
             try
             {
                 xml = toastBuilder.GetXml();
+                var toastNotifier = await ToastNotificationToolkit.CreateToastNotifierAsync();
+                if (time < DateTime.Now)
+                    time = DateTime.Now.AddSeconds(3);
+
                 toast = new ScheduledToastNotification(xml, time)
                 {
                     Tag = BreakTag,
@@ -51,7 +57,9 @@ namespace OnePomodoro.Services
                     ExpirationTime = time.AddHours(1),
                     Id = _id++.ToString()
                 };
-                var toastNotifier = await ToastNotificationToolkit.CreateToastNotifierAsync();
+              
+               
+
                 toastNotifier.AddToSchedule(toast);
                 Debug.WriteLine("add break:" + toast.Id);
             }
@@ -77,9 +85,6 @@ namespace OnePomodoro.Services
                 return null;
             }
 
-            if (time < DateTime.Now)
-                return null;
-
             if (isRemoveOthers)
                 await RemovePomodoroFinishedToastNotificationScheduleAsync();
 
@@ -95,6 +100,9 @@ namespace OnePomodoro.Services
             try
             {
                 xml = toastBuilder.GetXml();
+                var toastNotifier = await ToastNotificationToolkit.CreateToastNotifierAsync();
+                if (time < DateTime.Now)
+                    time = DateTime.Now.AddSeconds(3);
                 toast = new ScheduledToastNotification(xml, time)
                 {
                     Tag = PomodoroTag,
@@ -103,7 +111,7 @@ namespace OnePomodoro.Services
                     Id = _id++.ToString()
                 };
 
-                var toastNotifier = await ToastNotificationToolkit.CreateToastNotifierAsync();
+               
                 toastNotifier.AddToSchedule(toast);
                 Debug.WriteLine("add pomodoro:" + toast.Id);
             }
