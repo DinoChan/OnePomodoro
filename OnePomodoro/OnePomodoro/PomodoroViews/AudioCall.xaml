@@ -246,7 +246,7 @@
                                                  Margin="1"
                                                  Fill="{StaticResource Background}" />
                                     </controls1:DropShadowPanel>
-                                    <controls1:RadialProgressBar x:Name="ProgressBar"
+                                    <controls:RadialProgressBar x:Name="ProgressBar"
                                                                  Foreground="{Binding ElementName=BrushBridge, Path=Brush}"
                                                                  Thickness="4"
                                                                  Value="0.5" />

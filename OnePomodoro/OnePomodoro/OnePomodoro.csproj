@@ -163,6 +163,7 @@
     <Compile Include="Controls\PomodoroViewFunctionAttribute.cs" />
     <Compile Include="Controls\ProgressToPointCollectionBridge.cs" />
     <Compile Include="Controls\OutlineTextControl.cs" />
+    <Compile Include="Controls\RadialProgressBar.cs" />
     <Compile Include="Controls\Resizer.cs" />
     <Compile Include="Controls\RippleControl.cs" />
     <Compile Include="Controls\ShadowTextControl.cs" />
@@ -303,6 +304,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\RadialProgressBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\TitleBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
