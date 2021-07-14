@@ -52,6 +52,7 @@
   <Capabilities>
   	<rescap:Capability Name="confirmAppClose"/>
     <Capability Name="internetClient" />
+  	<DeviceCapability Name="location"/>
   </Capabilities>
 
   <genTemplate:Metadata>
