@@ -10,6 +10,9 @@ using OnePomodoro.Services;
 using OnePomodoro.Views;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
+using Windows.Devices.Geolocation;
+using Windows.Globalization;
+using Windows.Services.Maps;
 using Windows.UI.Core.Preview;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -126,6 +129,7 @@ namespace OnePomodoro
 
 
                 await Services.GetService<IFirstRunDisplayService>().ShowIfAppropriateAsync();
+                await SetCountryCode();
             }
         }
 
@@ -181,5 +185,47 @@ namespace OnePomodoro
             throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
         }
         private void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e) => Crashes.TrackError(e.Exception);
+
+        private static async Task SetCountryCode()
+        {
+            // The following country code is used only as a fallback for the main implementation.
+            // This fallback country code doesn't reflect the physical device location, but rather the
+            // country that corresponds to the culture it uses.
+            var countryCode = new GeographicRegion().CodeTwoLetter;
+            var accessStatus = await Geolocator.RequestAccessAsync();
+            switch (accessStatus)
+            {
+                case GeolocationAccessStatus.Allowed:
+                    var geoLocator = new Geolocator
+                    {
+                        DesiredAccuracyInMeters = 100
+                    };
+                    var position = await geoLocator.GetGeopositionAsync();
+                    var myLocation = new BasicGeoposition
+                    {
+                        Longitude = position.Coordinate.Point.Position.Longitude,
+                        Latitude = position.Coordinate.Point.Position.Latitude
+                    };
+                    var pointToReverseGeocode = new Geopoint(myLocation);
+                    MapService.ServiceToken = "IMWjHP2McfAwNKq8DAIP~Vor0jubIiy8-IJwoSQbzBQ~AkMH8oQZioNtAHeNvv_rHBJoy_jLcTXtf5_RrpQtrauTdsCKQvMGkFho5Jf9mF-8";
+                    var result = await MapLocationFinder.FindLocationsAtAsync(pointToReverseGeocode);
+                    if (result.Status != MapLocationFinderStatus.Success || result.Locations == null || result.Locations.Count == 0)
+                    {
+                        break;
+                    }
+
+                    // The returned country code is in 3-letter format (ISO 3166-1 alpha-3).
+                    // Below we convert it to ISO 3166-1 alpha-2 (two letter).
+                    var country = result.Locations[0].Address.CountryCode;
+                    countryCode = new GeographicRegion(country).CodeTwoLetter;
+                    break;
+                case GeolocationAccessStatus.Denied:
+                    AppCenterLog.Info("Map", "Geolocation access denied. To set country code in App Center, enable location service in Windows 10.");
+                    break;
+                case GeolocationAccessStatus.Unspecified:
+                    break;
+            }
+            AppCenter.SetCountryCode(countryCode);
+        }
     }
 }
