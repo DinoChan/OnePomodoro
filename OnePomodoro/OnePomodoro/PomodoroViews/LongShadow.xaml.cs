@@ -33,17 +33,17 @@ namespace OnePomodoro.PomodoroViews
         public LongShadow()
         {
             InitializeComponent();
-            MackLongShadow(188, 0.3f, InWorkCountDown, InworkBackground, Color.FromArgb(255, 250, 110, 93));
-            MackLongShadow(188, 0.3f, InWorkCountDownSecond, InworkSecondBackground, Color.FromArgb(255, 250, 110, 93));
+            MakeLongShadow(188, 0.3f, InWorkCountDown, InworkBackground, Color.FromArgb(255, 250, 110, 93));
+            MakeLongShadow(188, 0.3f, InWorkCountDownSecond, InworkSecondBackground, Color.FromArgb(255, 250, 110, 93));
 
-            MackLongShadow(188, 0.3f, BreakCountDown, BreakBackground, Color.FromArgb(255, 82, 113, 194));
-            MackLongShadow(188, 0.3f, BreakCountDownSecond, BreakSecondBackground, Color.FromArgb(255, 82, 113, 194));
+            MakeLongShadow(188, 0.3f, BreakCountDown, BreakBackground, Color.FromArgb(255, 82, 113, 194));
+            MakeLongShadow(188, 0.3f, BreakCountDownSecond, BreakSecondBackground, Color.FromArgb(255, 82, 113, 194));
 
-            MackLongShadow(188, 0.3f, CompactInWorkCountDown, CompactInworkBackground, Color.FromArgb(255, 250, 110, 93));
-            MackLongShadow(188, 0.3f, CompactInWorkCountDownSecond, CompactInworkSecondBackground, Color.FromArgb(255, 255, 110, 93));
+            MakeLongShadow(188, 0.3f, CompactInWorkCountDown, CompactInworkBackground, Color.FromArgb(255, 250, 110, 93));
+            MakeLongShadow(188, 0.3f, CompactInWorkCountDownSecond, CompactInworkSecondBackground, Color.FromArgb(255, 255, 110, 93));
 
-            MackLongShadow(188, 0.3f, CompactBreakCountDown, CompactBreakBackground, Color.FromArgb(255, 82, 113, 194));
-            MackLongShadow(188, 0.3f, CompactBreakCountDownSecond, CompactBreakSecondBackground, Color.FromArgb(255, 82, 113, 194));
+            MakeLongShadow(188, 0.3f, CompactBreakCountDown, CompactBreakBackground, Color.FromArgb(255, 82, 113, 194));
+            MakeLongShadow(188, 0.3f, CompactBreakCountDownSecond, CompactBreakSecondBackground, Color.FromArgb(255, 82, 113, 194));
 
             ViewModel.IsInPomodoroChanged += (s, e) =>
               {
@@ -53,7 +53,7 @@ namespace OnePomodoro.PomodoroViews
         }
 
 
-        private void MackLongShadow(int depth, float opacity, TextBlock textElement, FrameworkElement shadowElement, Color color)
+        private void MakeLongShadow(int depth, float opacity, TextBlock textElement, FrameworkElement shadowElement, Color color)
         {
             var textVisual = ElementCompositionPreview.GetElementVisual(textElement);
             var compositor = textVisual.Compositor;
