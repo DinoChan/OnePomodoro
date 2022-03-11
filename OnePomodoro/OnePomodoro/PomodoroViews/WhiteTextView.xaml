@@ -68,8 +68,6 @@
                                            Text="TAKE A BREAK" />
                             </StackPanel>
                         </Grid>
-
-
                     </StackPanel>
                 </ContentControl>
             </Grid>
@@ -100,7 +98,5 @@
                            Text="OnePomodoro" />
             </StackPanel>
         </Grid>
-
-
     </Grid>
 </local:PomodoroView>

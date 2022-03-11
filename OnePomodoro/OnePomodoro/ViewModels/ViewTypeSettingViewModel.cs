@@ -4,9 +4,8 @@ using OnePomodoro.Services;
 
 namespace OnePomodoro.ViewModels
 {
-    class ViewTypeSettingViewModel : ObservableObject
+    internal class ViewTypeSettingViewModel : ObservableObject
     {
-
         public ViewTypeSettingViewModel()
         {
             Settings = SettingsService.Current;

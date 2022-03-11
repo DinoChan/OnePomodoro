@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Numerics;
 using Windows.UI;
 using Windows.UI.Composition;
 using Windows.UI.Xaml.Controls;
@@ -77,7 +72,7 @@ namespace OnePomodoro.Controls
 
         private void OnOffsetZChanged(double newValue)
         {
-            if ( _dropShadow != null)
+            if (_dropShadow != null)
             {
                 UpdateShadowOffset(_dropShadow.Offset.X, _dropShadow.Offset.Y, (float)newValue);
             }
@@ -98,6 +93,5 @@ namespace OnePomodoro.Controls
                 _dropShadow.Offset = new Vector3(x, y, z);
             }
         }
-
     }
 }

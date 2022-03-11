@@ -63,7 +63,6 @@
                             <TextBlock.Lights>
                                 <media:XamlPointLight Distance="400.16" Color="#FFD91153" />
                             </TextBlock.Lights>
-
                         </TextBlock>
                         <TextBlock FontFamily="{StaticResource TimeFont}"
                                    FontWeight="Bold"
@@ -102,10 +101,8 @@
                                                   IsTimerInProgress="{x:Bind ViewModel.IsTimerInProgress}"
                                                   StartCommand="{Binding StartTimerCommand}"
                                                   StopCommand="{Binding StopTimerCommand}" />
-
                 </StackPanel>
             </Viewbox>
         </ContentControl>
-
     </Grid>
 </local:PomodoroView>

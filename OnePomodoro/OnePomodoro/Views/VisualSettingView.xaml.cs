@@ -1,21 +1,12 @@
-﻿using OnePomodoro.Helpers;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.Toolkit.Uwp.UI;
+using OnePomodoro.Helpers;
 using OnePomodoro.PomodoroViews;
 using OnePomodoro.Services;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-using Microsoft.Toolkit.Uwp.UI;
 
 //https://go.microsoft.com/fwlink/?LinkId=234236 上介绍了“用户控件”项模板
 
@@ -32,7 +23,6 @@ namespace OnePomodoro.Views
         public IEnumerable<VisualSettingItem> Items { get; }
 
         public event EventHandler<Tuple<Type, Image>> VisualChanged;
-
 
         private async void OnSelectVisual(object sender, RoutedEventArgs e)
         {
@@ -65,7 +55,6 @@ namespace OnePomodoro.Views
         public VisualSettingItem(Type pomodoroViewType)
         {
             Type = pomodoroViewType;
-
 
             var attributes = Type.GetCustomAttributes(true);
             var titleAttribute = attributes.OfType<TitleAttribute>().FirstOrDefault();

@@ -85,7 +85,6 @@
                                             </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
-
                                 </VisualStateGroup>
                                 <VisualStateGroup x:Name="NavigationButtonsVisibility">
                                     <VisualState x:Name="NavigationButtonsHidden" />
@@ -128,7 +127,6 @@
                                             </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
-
                                 </VisualStateGroup>
                                 <VisualStateGroup x:Name="HeaderStates">
                                     <VisualState x:Name="HeaderDynamic" />
@@ -143,9 +141,7 @@
                                             </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
-
                                 </VisualStateGroup>
-
                             </VisualStateManager.VisualStateGroups>
 
                             <Grid.RowDefinitions>
@@ -365,11 +361,8 @@
                                         </Grid>
                                     </PivotPanel>
                                 </ScrollViewer>
-
                             </Grid>
-
                         </Grid>
-
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -422,6 +415,5 @@
                 <views:AboutPage />
             </PivotItem>
         </Pivot>
-
     </Grid>
 </Page>

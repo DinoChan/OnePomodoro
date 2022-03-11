@@ -1,5 +1,5 @@
-﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
-using System;
+﻿using System;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 
 namespace OnePomodoro.Models
 {
@@ -72,6 +72,7 @@ namespace OnePomodoro.Models
                 OnPropertyChanged();
             }
         }
+
         public int ShortBreakLength
         {
             get
@@ -85,6 +86,7 @@ namespace OnePomodoro.Models
                 OnPropertyChanged();
             }
         }
+
         public int LongBreakLength
         {
             get { return _longBreakLength; }
@@ -94,6 +96,7 @@ namespace OnePomodoro.Models
                 OnPropertyChanged();
             }
         }
+
         public int LongBreakAfter
         {
             get { return _longBreakAfter; }

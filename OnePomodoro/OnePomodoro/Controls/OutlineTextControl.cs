@@ -1,22 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI;
-using Windows.UI.Composition;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media;
+﻿using System.Numerics;
 using Microsoft.Graphics.Canvas;
-using Microsoft.Graphics.Canvas.Effects;
 using Microsoft.Graphics.Canvas.Geometry;
 using Microsoft.Graphics.Canvas.Text;
 using Microsoft.Graphics.Canvas.UI.Composition;
 using Windows.Graphics.DirectX;
-using Windows.Foundation;
-using System.Numerics;
+using Windows.UI;
+using Windows.UI.Composition;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Hosting;
+using Windows.UI.Xaml.Media;
 
 namespace OnePomodoro.Controls
 {
@@ -30,8 +23,6 @@ namespace OnePomodoro.Controls
         {
             var graphicsDevice = CanvasComposition.CreateCompositionGraphicsDevice(Compositor, CanvasDevice.GetSharedDevice());
             var spriteTextVisual = Compositor.CreateSpriteVisual();
-
-
 
             ElementCompositionPreview.SetElementChildVisual(this, spriteTextVisual);
             SizeChanged += (s, e) =>
@@ -52,8 +43,6 @@ namespace OnePomodoro.Controls
             var maskSurfaceBrush = Compositor.CreateSurfaceBrush(DrawingSurface);
             spriteVisual.Brush = maskSurfaceBrush;
         }
-
-
 
         /// <summary>
         /// 获取或设置OutlineColor的值
@@ -91,8 +80,6 @@ namespace OnePomodoro.Controls
             DrawSurface();
         }
 
-
-
         /// <summary>
         /// 获取或设置FontColor的值
         /// </summary>
@@ -128,7 +115,6 @@ namespace OnePomodoro.Controls
         {
             DrawSurface();
         }
-
 
         /// <summary>
         /// 获取或设置Text的值
@@ -166,8 +152,6 @@ namespace OnePomodoro.Controls
             DrawSurface();
         }
 
-
-
         /// <summary>
         /// 获取或设置StrokeStyle的值
         /// </summary>
@@ -204,8 +188,6 @@ namespace OnePomodoro.Controls
             DrawSurface();
         }
 
-
-
         /// <summary>
         /// 获取或设置ShowNonOutlineText的值
         /// </summary>
@@ -241,7 +223,6 @@ namespace OnePomodoro.Controls
         {
             DrawSurface();
         }
-
 
         /// <summary>
         /// 获取或设置StrokeWidth的值
@@ -312,7 +293,6 @@ namespace OnePomodoro.Controls
                 }
             }
         }
-
 
         protected void DrawText(CanvasDrawingSession session, CanvasTextLayout textLayout)
         {

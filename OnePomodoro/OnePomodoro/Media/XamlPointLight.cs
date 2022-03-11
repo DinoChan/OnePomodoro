@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI;
+﻿using Windows.UI;
 using Windows.UI.Composition;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
@@ -12,7 +7,6 @@ namespace OnePomodoro.Media
 {
     public class XamlPointLight : XamlLight
     {
-
         /// <summary>
         /// The Blur value of the associated object
         /// </summary>

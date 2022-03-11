@@ -4,11 +4,11 @@ using Windows.Media.Playback;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
+
 namespace OnePomodoro.Controls
 {
     public class AudioButton : Button
     {
-
         private MediaPlayer _mediaPlayer;
         private Storyboard _playStoryboard;
 
@@ -19,7 +19,6 @@ namespace OnePomodoro.Controls
             _mediaPlayer.MediaEnded += OnMediaEnded;
             Click += OnClick;
         }
-
 
         /// <summary>
         /// 获取或设置AudioUri的值
@@ -60,7 +59,6 @@ namespace OnePomodoro.Controls
             this.Visibility = string.IsNullOrEmpty(newValue) ? Visibility.Collapsed : Visibility.Visible;
         }
 
-
         protected override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
@@ -89,6 +87,5 @@ namespace OnePomodoro.Controls
                 });
             }
         }
-
     }
 }

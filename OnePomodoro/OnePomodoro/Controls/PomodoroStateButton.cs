@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Windows.Input;
 using Windows.UI;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-
 
 namespace OnePomodoro.Controls
 {
@@ -15,7 +9,6 @@ namespace OnePomodoro.Controls
     [TemplateVisualState(GroupName = ProgressStatesName, Name = BusyStateName)]
     [TemplateVisualState(GroupName = PromodoroStatesName, Name = InworkStateName)]
     [TemplateVisualState(GroupName = PromodoroStatesName, Name = BreakStateName)]
-
     public class PomodoroStateButton : Button
     {
         private const string ProgressStatesName = "ProgressStates";
@@ -61,7 +54,6 @@ namespace OnePomodoro.Controls
         /// </summary>
         public static readonly DependencyProperty BreakColorProperty =
             DependencyProperty.Register(nameof(BreakColor), typeof(Color), typeof(PomodoroStateButton), new PropertyMetadata(Colors.White));
-
 
         /// <summary>
         /// 标识 OutlineColor 依赖属性。

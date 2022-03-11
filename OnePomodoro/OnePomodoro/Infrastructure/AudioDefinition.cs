@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OnePomodoro.Infrastructure
+﻿namespace OnePomodoro.Infrastructure
 {
     public class AudioDefinition
     {
@@ -47,7 +41,6 @@ namespace OnePomodoro.Infrastructure
             //new AudioDefinition("Call8", @"ms-winsoundevent:Notification.Looping.Call8"),
             //new AudioDefinition("Call9", @"ms-winsoundevent:Notification.Looping.Call9"),
             //new AudioDefinition("Call10", @"ms-winsoundevent:Notification.Looping.Call10"),
-
 
          new AudioDefinition("Default",string.Empty),
           new AudioDefinition("Alarm01", "ms-appx:///Assets/Media/Alarm01.wav"),

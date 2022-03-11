@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI.Xaml.Controls;
+﻿using Windows.UI.Xaml.Controls;
 
 namespace OnePomodoro.Controls
 {
@@ -15,17 +10,13 @@ namespace OnePomodoro.Controls
             SelectionChanged += OnSelectionChanged;
         }
 
-
-
         private Button _closeButton;
-
 
         protected override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
             _closeButton = GetTemplateChild("CloseButton") as Button;
             UpdateButton();
-
         }
 
         private void OnSelectionChanged(object sender, SelectionChangedEventArgs e)

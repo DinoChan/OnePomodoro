@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -58,7 +54,6 @@ namespace OnePomodoro.Controls
             Storyboard.SetTargetProperty(_defaultWidthAnimation, nameof(ContentWidth));
         }
 
-      
         /// <summary>
         /// 获取或设置Animation的值
         /// </summary>
@@ -120,9 +115,8 @@ namespace OnePomodoro.Controls
                         EasingFunction = Animation.EasingFunction
                     };
 
-
                     Storyboard.SetTarget(heightAnimation, this);
-                    Storyboard.SetTargetProperty(heightAnimation,nameof( ContentHeight));
+                    Storyboard.SetTargetProperty(heightAnimation, nameof(ContentHeight));
 
                     widthAnimation = new DoubleAnimation
                     {
@@ -150,8 +144,6 @@ namespace OnePomodoro.Controls
                 return _resizingStoryboard;
             }
         }
-
-        
 
         protected override void OnApplyTemplate()
         {

@@ -6,7 +6,6 @@ namespace OnePomodoro.ViewModels
     {
         public MainViewModel()
         {
-
         }
     }
 }

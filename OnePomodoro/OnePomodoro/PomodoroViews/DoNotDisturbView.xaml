@@ -33,7 +33,7 @@
                     </UIElement.Clip>
                     <Grid Margin="-1920,-2000">
                         <!--<Grid.RenderTransform>
-                            <CompositeTransform TranslateX="-1480"/>
+                            <CompositeTransform TranslateX="-1480" />
                         </Grid.RenderTransform>-->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
@@ -164,7 +164,6 @@
                             </Grid>
                         </StackPanel>
                     </Grid>
-
                 </Grid>
             </Grid>
         </Viewbox>

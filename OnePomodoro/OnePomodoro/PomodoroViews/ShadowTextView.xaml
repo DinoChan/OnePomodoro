@@ -58,7 +58,6 @@
                                                                     ShowNonOutlineText="True"
                                                                     StrokeWidth="0"
                                                                     Text="FOCUS ON JOB" />
-
                             </StackPanel>
                             <StackPanel x:Name="RelaxPanel">
                                 <controls:ColorfulShadowTextControl Width="1920"
@@ -88,11 +87,9 @@
                                                                     ShowNonOutlineText="True"
                                                                     StrokeWidth="0"
                                                                     Text="TAKE A BREAK" />
-                                <!--<TextBlock Text="sdfdsfds" FontSize="50" Foreground="White"/>-->
+                                <!--<TextBlock Text="sdfdsfds" FontSize="50" Foreground="White" />-->
                             </StackPanel>
                         </Grid>
-
-
                     </StackPanel>
                 </ContentControl>
             </Grid>
@@ -126,7 +123,5 @@
                            Text="OnePomodoro" />
             </StackPanel>
         </Grid>
-
-
     </Grid>
 </local:PomodoroView>

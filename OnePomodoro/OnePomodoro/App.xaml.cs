@@ -41,9 +41,7 @@ namespace OnePomodoro
 
             CoreApplication.Exiting += (s, e) =>
             {
-
             };
-
 
             AppDomain.CurrentDomain.UnhandledException += AppDomainUnhandledException;
             TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
@@ -60,16 +58,18 @@ namespace OnePomodoro
         public new static App Current => (App)Application.Current;
 
         public bool HasExited { get; private set; }
+
         /// <summary>
         /// Gets the <see cref="IServiceProvider"/> instance to resolve application services.
         /// </summary>
         public IServiceProvider Services { get; }
+
         /// <summary>
         /// 在应用程序由最终用户正常启动时进行调用。
         /// 将在启动应用程序以打开特定文件等情况下使用。
         /// </summary>
         /// <param name="e">有关启动请求和过程的详细信息。</param>
-        protected async override void OnLaunched(LaunchActivatedEventArgs e)
+        protected override async void OnLaunched(LaunchActivatedEventArgs e)
         {
             Frame rootFrame = Window.Current.Content as Frame;
 
@@ -127,7 +127,6 @@ namespace OnePomodoro
                 // 确保当前窗口处于活动状态
                 Window.Current.Activate();
 
-
                 await Services.GetService<IFirstRunDisplayService>().ShowIfAppropriateAsync();
                 await SetCountryCode();
             }
@@ -180,10 +179,11 @@ namespace OnePomodoro
         /// </summary>
         ///<param name="sender">导航失败的框架</param>
         ///<param name="e">有关导航失败的详细信息</param>
-        void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
+        private void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
             throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
         }
+
         private void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e) => Crashes.TrackError(e.Exception);
 
         private static async Task SetCountryCode()
@@ -219,9 +219,11 @@ namespace OnePomodoro
                     var country = result.Locations[0].Address.CountryCode;
                     countryCode = new GeographicRegion(country).CodeTwoLetter;
                     break;
+
                 case GeolocationAccessStatus.Denied:
                     AppCenterLog.Info("Map", "Geolocation access denied. To set country code in App Center, enable location service in Windows 10.");
                     break;
+
                 case GeolocationAccessStatus.Unspecified:
                     break;
             }

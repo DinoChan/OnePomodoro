@@ -43,7 +43,6 @@
             <Setter Property="FontSize" Value="570" />
             <Setter Property="Text" Value="花鳥風月" />
         </Style>
-
     </UserControl.Resources>
     <Grid x:Name="Root" Background="White">
         <VisualStateManager.VisualStateGroups>
@@ -133,8 +132,6 @@
                                                               StartCommand="{Binding StartTimerCommand}"
                                                               StopCommand="{Binding StopTimerCommand}"
                                                               Style="{StaticResource LargeButton}" />
-
-
                             </Grid>
                         </Grid>
                         <Viewbox x:Name="CompactFocusPanel"
@@ -162,7 +159,6 @@
                                         <CompositeTransform Rotation="56" />
                                     </Grid.RenderTransform>
                                     <controls:TimeAndButtonSwitcher />
-
                                 </Grid>
                             </Grid>
                         </Viewbox>
@@ -228,8 +224,6 @@
                                                               StartCommand="{Binding StartTimerCommand}"
                                                               StopCommand="{Binding StopTimerCommand}"
                                                               Style="{StaticResource LargeButton}" />
-
-
                             </Grid>
                         </Grid>
 
@@ -258,14 +252,11 @@
                                         <CompositeTransform Rotation="56" />
                                     </Grid.RenderTransform>
                                     <controls:TimeAndButtonSwitcher />
-
                                 </Grid>
                             </Grid>
                         </Viewbox>
                     </Grid>
                 </Grid>
-
-
             </Grid>
         </Viewbox>
     </Grid>

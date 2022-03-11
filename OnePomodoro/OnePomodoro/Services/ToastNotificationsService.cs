@@ -29,7 +29,6 @@ namespace OnePomodoro.Services
             {
                 return null;
             }
-           
 
             if (isRemoveOthers)
                 await RemoveBreakFinishedToastNotificationScheduleAsync();
@@ -57,8 +56,6 @@ namespace OnePomodoro.Services
                     ExpirationTime = time.AddHours(1),
                     Id = _id++.ToString()
                 };
-              
-               
 
                 toastNotifier.AddToSchedule(toast);
                 Debug.WriteLine("add break:" + toast.Id);
@@ -111,7 +108,6 @@ namespace OnePomodoro.Services
                     Id = _id++.ToString()
                 };
 
-               
                 toastNotifier.AddToSchedule(toast);
                 Debug.WriteLine("add pomodoro:" + toast.Id);
             }
@@ -204,6 +200,7 @@ namespace OnePomodoro.Services
                   .AddText("Pomodoro has finished")
                   .AddText(@"Pomodoro has finished, let's take a break.");
         }
+
         private static ToastContent GetBreakToastContent()
         {
             var content = new ToastContent()

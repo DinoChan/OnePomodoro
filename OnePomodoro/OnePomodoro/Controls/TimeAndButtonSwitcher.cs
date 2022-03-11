@@ -1,16 +1,7 @@
-﻿using Microsoft.Graphics.Canvas.Effects;
-using OnePomodoro.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
+﻿using OnePomodoro.ViewModels;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Documents;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 
 // The Templated Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234235
 
@@ -25,12 +16,9 @@ namespace OnePomodoro.Controls
 
         public PomodoroViewModel PomodoroViewModel => PomodoroViewModel.Current;
 
-
         // Using a DependencyProperty as the backing store for StateButtonLength.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty StateButtonLengthProperty =
             DependencyProperty.Register(nameof(StateButtonLength), typeof(double), typeof(TimeAndButtonSwitcher), new PropertyMetadata(0d));
-
-
 
         /// <summary>
         /// 标识 PomodoroColor 依赖属性。

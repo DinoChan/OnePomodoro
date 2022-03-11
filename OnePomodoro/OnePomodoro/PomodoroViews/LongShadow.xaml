@@ -22,7 +22,6 @@
         <converters:BoolToObjectConverter x:Key="BoolToVerticalHorizontalAlignment"
                                           FalseValue="Right"
                                           TrueValue="Left" />
-
     </UserControl.Resources>
     <Grid x:Name="ContentArea">
         <VisualStateManager.VisualStateGroups>
@@ -70,7 +69,6 @@
                                        FontSize="56"
                                        Text="Focus" />
 
-
                             <StackPanel Grid.Row="1"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
@@ -117,7 +115,6 @@
                                        FontSize="56"
                                        Text="Relax" />
 
-
                             <StackPanel Grid.Row="1"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
@@ -150,8 +147,6 @@
                         </Grid>
                     </controls:FlipSide.Side2>
                 </controls:FlipSide>
-
-
             </StackPanel>
 
             <Viewbox x:Name="CompactView"
@@ -174,7 +169,6 @@
                                        FontFamily="{StaticResource TimeFont}"
                                        FontSize="32"
                                        Text="Focus" />
-
 
                             <StackPanel Grid.Row="1"
                                         Margin="0,-10"
@@ -226,7 +220,6 @@
                                        FontSize="32"
                                        Text="Relax" />
 
-
                             <StackPanel Grid.Row="1"
                                         Margin="0,-10"
                                         HorizontalAlignment="Center"
@@ -262,7 +255,6 @@
                         </Grid>
                     </controls:FlipSide.Side2>
                 </controls:FlipSide>
-
             </Viewbox>
         </Grid>
     </Grid>

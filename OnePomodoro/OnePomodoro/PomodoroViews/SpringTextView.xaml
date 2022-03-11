@@ -105,7 +105,6 @@
                                Foreground="White"
                                Text="{Binding RemainingBreakTime, Converter={StaticResource FormatStringConverter}, ConverterParameter=mm\\:ss}"
                                Visibility="{Binding IsInPomodoro, Converter={StaticResource NegationBoolToVisibilityConverter}}" />
-
                 </StackPanel>
             </Grid>
         </Grid>

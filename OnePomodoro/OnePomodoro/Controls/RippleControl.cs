@@ -1,16 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.UI.Composition;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Documents;
 using Windows.UI.Xaml.Hosting;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 
 namespace OnePomodoro.Controls
 {
@@ -24,7 +17,6 @@ namespace OnePomodoro.Controls
             MakeClip();
             StartClipAnimation();
         }
-
 
         /// <summary>
         /// 获取或设置IsShwoRipple的值
@@ -84,12 +76,10 @@ namespace OnePomodoro.Controls
             return ellipseGeomerty;
         }
 
-
         private void StartClipAnimation()
         {
             if (_geomerty == null)
                 return;
-
 
             var compositor = Window.Current.Compositor;
             var animation = compositor.CreateVector2KeyFrameAnimation();
@@ -103,6 +93,5 @@ namespace OnePomodoro.Controls
 
             _geomerty.StartAnimation(nameof(CompositionEllipseGeometry.Radius), animation);
         }
-
     }
 }

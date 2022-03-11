@@ -1,8 +1,6 @@
-﻿using Windows.Foundation.Metadata;
-using Windows.UI;
+﻿using Windows.UI;
 using Windows.UI.Composition;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 
 namespace OnePomodoro.Controls
 {
@@ -50,7 +48,6 @@ namespace OnePomodoro.Controls
         public static readonly DependencyProperty IsMaskedProperty =
             DependencyProperty.RegisterAttached("IsMasked", typeof(bool), typeof(DropShadowPanel), new PropertyMetadata(true, OnIsMaskedChanged));
 
-
         /// <summary>
         /// Gets DropShadow. Exposes the underlying composition object to allow custom Windows.UI.Composition animations.
         /// </summary>
@@ -78,45 +75,32 @@ namespace OnePomodoro.Controls
 
         public static double GetBlurRadius(DependencyObject obj) => (double)obj.GetValue(BlurRadiusProperty);
 
-      
         public static void SetBlurRadius(DependencyObject obj, double value) => obj.SetValue(BlurRadiusProperty, value);
-
 
         public static Color GetColor(DependencyObject obj) => (Color)obj.GetValue(ColorProperty);
 
-
         public static void SetColor(DependencyObject obj, Color value) => obj.SetValue(ColorProperty, value);
-
 
         public static double GetOffsetX(DependencyObject obj) => (double)obj.GetValue(OffsetXProperty);
 
         public static void SetOffsetX(DependencyObject obj, double value) => obj.SetValue(OffsetXProperty, value);
 
-
         public static double GetOffsetY(DependencyObject obj) => (double)obj.GetValue(OffsetYProperty);
-
 
         public static void SetOffsetY(DependencyObject obj, double value) => obj.SetValue(OffsetYProperty, value);
 
-
         public static double GetOffsetZ(DependencyObject obj) => (double)obj.GetValue(OffsetZProperty);
-
 
         public static void SetOffsetZ(DependencyObject obj, double value) => obj.SetValue(OffsetZProperty, value);
 
-
         public static double GetShadowOpacity(DependencyObject obj) => (double)obj.GetValue(ShadowOpacityProperty);
-
 
         public static void SetShadowOpacity(DependencyObject obj, double value) => obj.SetValue(ShadowOpacityProperty, value);
 
-        
         public static bool GetIsMasked(DependencyObject obj) => (bool)obj.GetValue(IsMaskedProperty);
-
 
         public static void SetIsMasked(DependencyObject obj, bool value) => obj.SetValue(IsMaskedProperty, value);
 
-        
         private static void OnBlurRadiusChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is DropShadowPanel panel)

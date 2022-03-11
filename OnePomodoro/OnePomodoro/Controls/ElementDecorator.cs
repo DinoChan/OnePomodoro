@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI;
+﻿using System.Numerics;
 using Windows.UI.Composition;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Automation.Peers;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Hosting;
-using Windows.UI.Xaml.Shapes;
 
 namespace OnePomodoro.Controls
 {
@@ -22,7 +14,6 @@ namespace OnePomodoro.Controls
         /// </summary>
         public static readonly DependencyProperty RelativeElementProperty =
             DependencyProperty.Register(nameof(RelativeElement), typeof(FrameworkElement), typeof(ElementDecorator), new PropertyMetadata(default(FrameworkElement), OnRelativeElementChanged));
-
 
         private const string OutlineBorderName = "OutlineBorder";
 
@@ -98,13 +89,11 @@ namespace OnePomodoro.Controls
 
         protected virtual void UpdateOutlineMask()
         {
-
         }
 
         private void OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
             UpdateOutlineSize();
-
         }
 
         private void UpdateOutlineSize()

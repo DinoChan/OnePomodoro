@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI;
+﻿using Windows.UI;
 using Windows.UI.Composition;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Automation.Peers;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Hosting;
 using Windows.UI.Xaml.Shapes;
@@ -44,7 +37,6 @@ namespace OnePomodoro.Controls
                 _maskBrush.Source = _maskBrushSource;
             }
         }
-
 
         /// <summary>
         /// 获取或设置Color的值

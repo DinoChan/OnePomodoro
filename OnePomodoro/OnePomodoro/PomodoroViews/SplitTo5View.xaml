@@ -49,8 +49,6 @@
     <Grid x:Name="LayoutRoot" Background="White">
         <Rectangle x:Name="RootBackground" />
 
-
-
         <Viewbox>
             <Grid Width="1920" Height="1050">
                 <UIElement.Clip>
@@ -139,8 +137,6 @@
                                                            StartCommand="{Binding StartTimerCommand}"
                                                            StopCommand="{Binding StopTimerCommand}"
                                                            Style="{StaticResource HugeButton}" />
-
-
                         </StackPanel>
                     </Grid>
                     <Grid Width="1600"
@@ -210,6 +206,5 @@
                 </Grid>
             </Grid>
         </Viewbox>
-
     </Grid>
 </local:PomodoroView>

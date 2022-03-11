@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using Windows.ApplicationModel.Core;
 using Windows.UI;
 using Windows.UI.Core;
@@ -6,7 +7,6 @@ using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
-using System.Collections.ObjectModel;
 
 //https://go.microsoft.com/fwlink/?LinkId=234236 上介绍了“用户控件”项模板
 
@@ -57,7 +57,6 @@ namespace OnePomodoro.Controls
                 AppName.Visibility = Visibility.Collapsed;
         }
 
-
         private void OnUnloaded(object sender, RoutedEventArgs e)
         {
             // Unregister events
@@ -67,7 +66,6 @@ namespace OnePomodoro.Controls
             _accessibilitySettings.HighContrastChanged -= OnHighContrastChanged;
             Window.Current.Activated -= OnWindowActivated;
         }
-
 
         private void SetTitleBarVisibility()
         {
@@ -106,7 +104,7 @@ namespace OnePomodoro.Controls
 
         private async void OnColorValuesChanged(UISettings sender, Object e)
         {
-           await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => { SetTitleBarControlColors(); });
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => { SetTitleBarControlColors(); });
         }
 
         private void SetTitleBarControlColors()

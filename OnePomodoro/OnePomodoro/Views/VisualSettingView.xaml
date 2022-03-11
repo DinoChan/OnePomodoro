@@ -56,8 +56,6 @@
                                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RippleBackground" Storyboard.TargetProperty="IsShowRipple">
                                                     <DiscreteObjectKeyFrame KeyTime="00:00:0.0" Value="True" />
                                                 </ObjectAnimationUsingKeyFrames>
-
-
                                             </Storyboard>
                                         </VisualTransition>
                                         <VisualTransition From="*" To="Normal">
@@ -80,7 +78,6 @@
                                                         <CubicEase EasingMode="EaseOut" />
                                                     </DoubleAnimation.EasingFunction>
                                                 </DoubleAnimation>
-
                                             </Storyboard>
                                         </VisualTransition>
                                     </VisualStateGroup.Transitions>
@@ -95,7 +92,6 @@
                                             <Setter Target="ContentGrid.(RevealBrush.State)" Value="PointerOver" />
                                             <Setter Target="MoreInformationPanel.Height" Value="76" />
                                             <Setter Target="RippleBackground.IsShowRipple" Value="True" />
-
                                         </VisualState.Setters>
                                         <Storyboard>
                                             <DoubleAnimation EnableDependentAnimation="True"
@@ -126,11 +122,7 @@
                                                              Duration="0:0:0" />
                                         </Storyboard>
                                     </VisualState>
-
-
-
                                 </VisualStateGroup>
-
                             </VisualStateManager.VisualStateGroups>
                             <Grid x:Name="ContentGrid"
                                   HorizontalAlignment="Center"
@@ -197,7 +189,6 @@
                                                                        Text="{Binding}"
                                                                        TextTrimming="CharacterEllipsis" />
                                                         </Border>
-
                                                     </DataTemplate>
                                                 </ItemsControl.ItemTemplate>
                                             </ItemsControl>
@@ -206,7 +197,6 @@
                                 </StackPanel>
                             </Grid>
                         </Grid>
-
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -231,5 +221,4 @@
             </ItemsControl>
         </ScrollViewer>
     </Grid>
-
 </UserControl>

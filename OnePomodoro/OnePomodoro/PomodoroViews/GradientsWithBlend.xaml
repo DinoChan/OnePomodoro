@@ -118,7 +118,6 @@
                             </controls:DropShadowPanel>
                         </StackPanel>
 
-
                         <StackPanel x:Name="RelaxText" Visibility="Collapsed">
                             <animations:Implicit.HideAnimations>
                                 <animations:TranslationAnimation DelayBehavior="SetInitialValueBeforeDelay"
@@ -161,14 +160,10 @@
                                 <TextBlock FontSize="60"
                                            Foreground="White"
                                            Text="{Binding RemainingBreakTime, Converter={StaticResource FormatStringConverter}, ConverterParameter=mm\\:ss}" />
-
                             </controls:DropShadowPanel>
-
                         </StackPanel>
-
                     </Grid>
                 </StackPanel>
-
 
                 <controls:DropShadowPanel x:Name="MiddleText"
                                           Grid.RowSpan="2"
@@ -202,7 +197,6 @@
                     </TextBlock>
                 </controls:DropShadowPanel>
             </Grid>
-
 
             <Grid x:Name="CompactView"
                   IsHitTestVisible="False"
@@ -254,7 +248,6 @@
                                 </controls:DropShadowPanel>
                             </StackPanel>
 
-
                             <StackPanel x:Name="RelaxTextCompact" Visibility="Collapsed">
                                 <animations:Implicit.HideAnimations>
                                     <animations:TranslationAnimation DelayBehavior="SetInitialValueBeforeDelay"
@@ -297,11 +290,8 @@
                                     <TextBlock FontSize="30"
                                                Foreground="White"
                                                Text="{Binding RemainingBreakTime, Converter={StaticResource FormatStringConverter}, ConverterParameter=mm\\:ss}" />
-
                                 </controls:DropShadowPanel>
-
                             </StackPanel>
-
                         </Grid>
                         <Grid Margin="3,9"
                               HorizontalAlignment="Left"
@@ -330,8 +320,6 @@
                         </Grid>
                     </Grid>
                 </Viewbox>
-
-
             </Grid>
         </Grid>
     </Grid>

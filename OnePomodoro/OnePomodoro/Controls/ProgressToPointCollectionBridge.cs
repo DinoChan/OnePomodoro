@@ -8,7 +8,6 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Markup;
 using Windows.UI.Xaml.Media;
 
-
 namespace OnePomodoro.Controls
 {
     [ContentProperty(Name = nameof(Children))]
@@ -19,7 +18,6 @@ namespace OnePomodoro.Controls
             Children = new ObservableCollection<PointCollection>();
         }
 
-
         /// <summary>
         ///     获取或设置Points的值
         /// </summary>
@@ -28,7 +26,6 @@ namespace OnePomodoro.Controls
             get { return (PointCollection)GetValue(PointsProperty); }
             set { SetValue(PointsProperty, value); }
         }
-
 
         /// <summary>
         ///     获取或设置Progress的值
@@ -48,12 +45,10 @@ namespace OnePomodoro.Controls
             set { SetValue(ChildrenProperty, value); }
         }
 
-
         protected virtual void OnProgressChanged(double oldValue, double newValue)
         {
             UpdatePoints();
         }
-
 
         protected virtual void OnChildrenChanged(Collection<PointCollection> oldValue, Collection<PointCollection> newValue)
         {
@@ -122,7 +117,6 @@ namespace OnePomodoro.Controls
                 var y = (1 - percentage) * fromPoints[i].Y + percentage * toPoints[i].Y;
 
                 points.Add(new Point(x, y));
-
             }
             var result = new PointCollection();
             foreach (var point in points.Distinct())
@@ -170,7 +164,6 @@ namespace OnePomodoro.Controls
         public static readonly DependencyProperty PointsProperty =
             DependencyProperty.Register("Points", typeof(PointCollection), typeof(ProgressToPointCollectionBridge), new PropertyMetadata(null));
 
-        #endregion
+        #endregion DependencyProperties
     }
-
 }

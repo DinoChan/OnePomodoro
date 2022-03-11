@@ -9,7 +9,6 @@ using Windows.ApplicationModel.Core;
 
 namespace OnePomodoro.ViewModels
 {
-
     public class PomodoroViewModel : ObservableObject
     {
         private TimeSpan PomodoroLength => TimeSpan.FromMinutes(SettingsService.Current == null ? 25 : SettingsService.Current.PomodoroLength);

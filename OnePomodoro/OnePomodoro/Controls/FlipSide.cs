@@ -1,17 +1,10 @@
 ﻿//https://github.com/cnbluefire/FlipSide
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.UI.Composition;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Documents;
 using Windows.UI.Xaml.Hosting;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 
 // The Templated Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234235
 
@@ -25,9 +18,9 @@ namespace OnePomodoro.Controls
             this.DefaultStyleKey = typeof(FlipSide);
         }
 
-        ContentPresenter Side1Content;
-        ContentPresenter Side2Content;
-        Grid LayoutRoot;
+        private ContentPresenter Side1Content;
+        private ContentPresenter Side2Content;
+        private Grid LayoutRoot;
 
         private Visual s1Visual;
         private Visual s2Visual;
@@ -63,8 +56,6 @@ namespace OnePomodoro.Controls
                     }
                 }
             }));
-
-
 
         public object Side1
         {
@@ -111,9 +102,7 @@ namespace OnePomodoro.Controls
                 s1Visual.RotationAngleInDegrees = f1;
                 s2Visual.RotationAngleInDegrees = f2;
             }
-
         }
-
 
         protected override void OnApplyTemplate()
         {

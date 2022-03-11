@@ -13,7 +13,6 @@
                          x:Name="TitleBarForeground"
                          Color="{ThemeResource SystemBaseHighColor}" />
 
-
         <SolidColorBrush x:Key="ButtonForegroundColor" Color="{ThemeResource SystemBaseHighColor}" />
         <SolidColorBrush x:Key="ButtonInactiveForegroundBrush" Color="{ThemeResource SystemChromeDisabledLowColor}" />
         <SolidColorBrush x:Key="ButtonHoverBackgroundBrush" Color="{ThemeResource SystemListLowColor}" />
@@ -59,7 +58,6 @@
                         <Setter Property="IsTabStop" Value="False" />
                     </Style>
                 </StackPanel.Resources>
-
             </StackPanel>
 
             <TextBlock x:Name="AppName"

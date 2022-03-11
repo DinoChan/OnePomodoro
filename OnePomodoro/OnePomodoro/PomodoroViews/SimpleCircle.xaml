@@ -23,7 +23,6 @@
         <converters:BoolToObjectConverter x:Key="BoolToVerticalHorizontalAlignment"
                                           FalseValue="Right"
                                           TrueValue="Left" />
-
     </UserControl.Resources>
     <Grid x:Name="ContentArea">
 
@@ -94,7 +93,6 @@
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center">
 
-
                             <TextBlock HorizontalAlignment="Center"
                                        FontFamily="{StaticResource TimeFont}"
                                        FontSize="200"
@@ -116,7 +114,6 @@
                                                   StopCommand="{Binding StopTimerCommand}" />
                 </Grid>
             </Viewbox>
-
         </Grid>
     </Grid>
 </local:PomodoroView>

@@ -1,22 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI;
-using Windows.UI.Composition;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media;
+﻿using System.Numerics;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
 using Microsoft.Graphics.Canvas.Geometry;
 using Microsoft.Graphics.Canvas.Text;
 using Microsoft.Graphics.Canvas.UI.Composition;
-using Windows.Graphics.DirectX;
-using Windows.Foundation;
-using System.Numerics;
-using Windows.UI.Xaml.Hosting;
+using Windows.UI;
+using Windows.UI.Composition;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media;
 
 namespace OnePomodoro.Controls
 {
@@ -91,7 +82,6 @@ namespace OnePomodoro.Controls
                 }
             }
         }
-
 
         /// <summary>
         /// 获取或设置BlurAmount的值

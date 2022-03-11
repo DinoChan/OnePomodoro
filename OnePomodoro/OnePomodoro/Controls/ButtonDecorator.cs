@@ -1,16 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI;
-using Windows.UI.Composition;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Automation.Peers;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Hosting;
-using Windows.UI.Xaml.Shapes;
+﻿using Windows.UI.Xaml;
 
 namespace OnePomodoro.Controls
 {
@@ -19,7 +7,6 @@ namespace OnePomodoro.Controls
     [TemplateVisualState(GroupName = CommonStatesName, Name = PressedStateName)]
     [TemplateVisualState(GroupName = PromodoroStatesName, Name = InworkStateName)]
     [TemplateVisualState(GroupName = PromodoroStatesName, Name = BreakStateName)]
-
     public class ButtonDecorator : ElementDecorator
     {
         private const string CommonStatesName = "CommonStates";
@@ -36,20 +23,16 @@ namespace OnePomodoro.Controls
         public static readonly DependencyProperty IsInPomodoroProperty =
             DependencyProperty.Register(nameof(IsInPomodoro), typeof(bool), typeof(ButtonDecorator), new PropertyMetadata(default(bool), OnIsInPomodoroChanged));
 
-
         /// <summary>
         /// 标识 State 依赖属性。
         /// </summary>
         public static readonly DependencyProperty StateProperty =
             DependencyProperty.Register(nameof(State), typeof(ButtonState), typeof(ButtonDecorator), new PropertyMetadata(ButtonState.Normal, OnStateChanged));
 
-      
         public ButtonDecorator()
         {
             this.DefaultStyleKey = typeof(ButtonDecorator);
-           }
-
-       
+        }
 
         /// <summary>
         /// 获取或设置State的值
@@ -79,14 +62,12 @@ namespace OnePomodoro.Controls
             UpdateVisualStates(true);
         }
 
-
         protected override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-           
+
             UpdateVisualStates(false);
         }
-
 
         /// <summary>
         /// State 属性更改时调用此方法。
@@ -106,17 +87,20 @@ namespace OnePomodoro.Controls
                 case ButtonState.Normal:
                     state = NormalStateName;
                     break;
+
                 case ButtonState.PointerOver:
                     state = PointerOverStateName;
                     break;
+
                 case ButtonState.Pressed:
                     state = PressedStateName;
                     break;
+
                 default:
                     break;
             }
             VisualStateManager.GoToState(this, state, useTransitions);
-            VisualStateManager.GoToState(this, IsInPomodoro ? InworkStateName : BreakStateName, useTransitions);    
+            VisualStateManager.GoToState(this, IsInPomodoro ? InworkStateName : BreakStateName, useTransitions);
         }
 
         private static void OnStateChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
@@ -140,7 +124,5 @@ namespace OnePomodoro.Controls
             var target = obj as ButtonDecorator;
             target?.OnIsInPomodoroChanged(oldValue, newValue);
         }
-
-
     }
 }

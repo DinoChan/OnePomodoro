@@ -1,9 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
-                    xmlns:controls="using:OnePomodoro.Controls"
-                    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
-                    xmlns:local="using:OnePomodoro">
+                    xmlns:controls="using:OnePomodoro.Controls">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Controls/RadialProgressBar.xaml" />
     </ResourceDictionary.MergedDictionaries>
@@ -26,7 +24,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-
 
     <Style x:Key="Outline" TargetType="controls:ButtonDecorator">
         <Setter Property="IsTabStop" Value="False" />
@@ -279,7 +276,6 @@
                                                   ShadowOpacity="1"
                                                   Color="#FFFF35BF" />
 
-
                         <controls:DropShadowPanel x:Name="Blue"
                                                   BlurRadius="48"
                                                   OffsetX="0"
@@ -476,7 +472,6 @@
                                 <PointCollection>40.00,24.00 39.97,25.00 39.87,26.01 39.72,27.00 39.50,27.98 39.22,28.94 38.88,29.89 38.48,30.81 38.02,31.71 37.51,32.57 36.94,33.40 36.33,34.20 35.66,34.95 34.95,35.66 34.20,36.33 33.40,36.94 32.57,37.51 31.71,38.02 30.81,38.48 29.89,38.88 28.94,39.22 27.98,39.50 27.00,39.72 26.01,39.87 25.00,39.97 24.00,40.00 23.00,39.97 21.99,39.87 21.00,39.72 20.02,39.50 19.06,39.22 18.11,38.88 17.19,38.48 16.29,38.02 15.43,37.51 14.60,36.94 13.80,36.33 13.05,35.66 12.34,34.95 11.67,34.20 11.06,33.40 10.49,32.57 9.98,31.71 9.52,30.81 9.12,29.89 8.78,28.94 8.50,27.98 8.28,27.00 8.13,26.01 8.03,25.00 8.00,24.00 8.03,23.00 8.13,21.99 8.28,21.00 8.50,20.02 8.78,19.06 9.12,18.11 9.52,17.19 9.98,16.29 10.49,15.43 11.06,14.60 11.67,13.80 12.34,13.05 13.05,12.34 13.80,11.67 14.60,11.06 15.43,10.49 16.29,9.98 17.19,9.52 18.11,9.12 19.06,8.78 20.02,8.50 21.00,8.28 21.99,8.13 23.00,8.03 24.00,8.00 25.00,8.03 26.01,8.13 27.00,8.28 27.98,8.50 28.94,8.78 29.89,9.12 30.81,9.52 31.71,9.98 32.57,10.49 33.40,11.06 34.20,11.67 34.95,12.34 35.66,13.05 36.33,13.80 36.94,14.60 37.51,15.43 38.02,16.29 38.48,17.19 38.88,18.11 39.22,19.06 39.50,20.02 39.72,21.00 39.87,21.99 39.97,23.00</PointCollection>
                                 <PointCollection>38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 38,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,38 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 10,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10 38,10</PointCollection>
                             </controls:ProgressToPointCollectionBridge>
-
                         </Border.Resources>
                         <Grid>
 
@@ -513,7 +508,7 @@
                                             <SolidColorBrush x:Name="Fill" Color="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=PomodoroColor}" />
                                         </Polygon.Fill>
                                         <!--<Polygon.Stroke>
-                                            <SolidColorBrush x:Name="Stroke" Color="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=PomodoroColor}"/>
+                                            <SolidColorBrush x:Name="Stroke" Color="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Path=PomodoroColor}" />
                                         </Polygon.Stroke>-->
                                     </Polygon>
                                 </Grid>
@@ -573,7 +568,6 @@
                                                     <CubicEase EasingMode="EaseOut" />
                                                 </DoubleAnimation.EasingFunction>
                                             </DoubleAnimation>
-
                                         </Storyboard>
                                     </VisualTransition>
                                     <VisualTransition From="Busy" To="Idle">
@@ -635,14 +629,12 @@
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>
-
                         </VisualStateManager.VisualStateGroups>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-
 
     <Style TargetType="controls:FlipSide">
         <Setter Property="Background" Value="Transparent" />
@@ -893,8 +885,6 @@
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualState x:Name="Normal" />
 
-
-
                                 <VisualState x:Name="PointerOver">
 
                                     <Storyboard>
@@ -945,12 +935,9 @@
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
-
                             </VisualStateGroup>
-
                         </VisualStateManager.VisualStateGroups>
                     </Grid>
-
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

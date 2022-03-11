@@ -22,7 +22,6 @@
         <converters:BoolToObjectConverter x:Key="BoolToVerticalHorizontalAlignment"
                                           FalseValue="Right"
                                           TrueValue="Left" />
-
     </UserControl.Resources>
     <Grid x:Name="ContentArea">
         <VisualStateManager.VisualStateGroups>
@@ -126,7 +125,6 @@
                     </animations:Implicit.HideAnimations>
                 </TextBlock>
 
-
                 <TextBlock x:Name="BreakTitle"
                            Margin="0,0,30,-48"
                            FontFamily="{StaticResource TimeFont}"
@@ -148,7 +146,6 @@
                     </animations:Implicit.HideAnimations>
                 </TextBlock>
             </StackPanel>
-
 
             <controls:PomodoroStateButton Margin="45,60"
                                           HorizontalAlignment="Left"
