@@ -10,25 +10,22 @@ namespace OnePomodoro.Controls
 {
     public class ColorfulShadowTextControl : ShadowTextControl
     {
-        private CompositionLinearGradientBrush _foregroundBrush;
-        private CompositionLinearGradientBrush _backgroundBrush;
+        private static readonly Color Black = Colors.Black;
         private static readonly Color Blue = Color.FromArgb(255, 43, 210, 255);
         private static readonly Color Green = Color.FromArgb(255, 43, 255, 136);
-        private static readonly Color Red = Colors.Red;
 
         //private static readonly Color Pink = Color.FromArgb(255, 255, 43, 212);
         private static readonly Color Pink = Color.FromArgb(255, 142, 211, 255);
 
-        private static readonly Color Black = Colors.Black;
-
-        private Compositor _compositor;
-        private CompositionColorGradientStop _topLeftradientStop;
-        private CompositionColorGradientStop _bottomRightGradientStop;
-
+        private static readonly Color Red = Colors.Red;
+        private CompositionLinearGradientBrush _backgroundBrush;
         private CompositionColorGradientStop _bottomLeftGradientStop;
-        private CompositionColorGradientStop _topRightGradientStop;
-
+        private CompositionColorGradientStop _bottomRightGradientStop;
         private CompositionEffectBrush _brush;
+        private Compositor _compositor;
+        private CompositionLinearGradientBrush _foregroundBrush;
+        private CompositionColorGradientStop _topLeftradientStop;
+        private CompositionColorGradientStop _topRightGradientStop;
 
         public ColorfulShadowTextControl() : base()
         {
@@ -93,6 +90,23 @@ namespace OnePomodoro.Controls
             return _brush;
         }
 
+        private void StartColorAnimation(CompositionColorGradientStop gradientOffset, Color color)
+        {
+            var colorAnimation = _compositor.CreateColorKeyFrameAnimation();
+            colorAnimation.Duration = TimeSpan.FromSeconds(2);
+            colorAnimation.Direction = Windows.UI.Composition.AnimationDirection.Alternate;
+            colorAnimation.InsertKeyFrame(1.0f, color);
+            gradientOffset.StartAnimation(nameof(CompositionColorGradientStop.Color), colorAnimation);
+        }
+
+        private void StartOffsetAnimation(CompositionColorGradientStop gradientOffset, float offset)
+        {
+            var offsetAnimation = _compositor.CreateScalarKeyFrameAnimation();
+            offsetAnimation.Duration = TimeSpan.FromSeconds(1);
+            offsetAnimation.InsertKeyFrame(1.0f, offset);
+            gradientOffset.StartAnimation(nameof(CompositionColorGradientStop.Offset), offsetAnimation);
+        }
+
         private void UpdateGradients()
         {
             if (PomodoroViewModel.Current.IsInPomodoro)
@@ -123,23 +137,6 @@ namespace OnePomodoro.Controls
                 StartOffsetAnimation(_bottomLeftGradientStop, 0.75f);
                 StartColorAnimation(_bottomLeftGradientStop, Pink);
             }
-        }
-
-        private void StartOffsetAnimation(CompositionColorGradientStop gradientOffset, float offset)
-        {
-            var offsetAnimation = _compositor.CreateScalarKeyFrameAnimation();
-            offsetAnimation.Duration = TimeSpan.FromSeconds(1);
-            offsetAnimation.InsertKeyFrame(1.0f, offset);
-            gradientOffset.StartAnimation(nameof(CompositionColorGradientStop.Offset), offsetAnimation);
-        }
-
-        private void StartColorAnimation(CompositionColorGradientStop gradientOffset, Color color)
-        {
-            var colorAnimation = _compositor.CreateColorKeyFrameAnimation();
-            colorAnimation.Duration = TimeSpan.FromSeconds(2);
-            colorAnimation.Direction = Windows.UI.Composition.AnimationDirection.Alternate;
-            colorAnimation.InsertKeyFrame(1.0f, color);
-            gradientOffset.StartAnimation(nameof(CompositionColorGradientStop.Color), colorAnimation);
         }
     }
 }

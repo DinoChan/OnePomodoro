@@ -9,6 +9,12 @@ namespace OnePomodoro.Controls
 {
     public class RippleControl : Control
     {
+        /// <summary>
+        /// 标识 IsShwoRipple 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty IsShowRippleProperty =
+            DependencyProperty.Register(nameof(IsShowRipple), typeof(bool), typeof(RippleControl), new PropertyMetadata(default(bool), OnIsShwoRippleChanged));
+
         private CompositionEllipseGeometry _geomerty;
 
         public RippleControl()
@@ -28,10 +34,14 @@ namespace OnePomodoro.Controls
         }
 
         /// <summary>
-        /// 标识 IsShwoRipple 依赖属性。
+        /// IsShwoRipple 属性更改时调用此方法。
         /// </summary>
-        public static readonly DependencyProperty IsShowRippleProperty =
-            DependencyProperty.Register(nameof(IsShowRipple), typeof(bool), typeof(RippleControl), new PropertyMetadata(default(bool), OnIsShwoRippleChanged));
+        /// <param name="oldValue">IsShwoRipple 属性的旧值。</param>
+        /// <param name="newValue">IsShwoRipple 属性的新值。</param>
+        protected virtual void OnIsShwoRippleChanged(bool oldValue, bool newValue)
+        {
+            StartClipAnimation();
+        }
 
         private static void OnIsShwoRippleChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
         {
@@ -42,25 +52,6 @@ namespace OnePomodoro.Controls
 
             var target = obj as RippleControl;
             target?.OnIsShwoRippleChanged(oldValue, newValue);
-        }
-
-        /// <summary>
-        /// IsShwoRipple 属性更改时调用此方法。
-        /// </summary>
-        /// <param name="oldValue">IsShwoRipple 属性的旧值。</param>
-        /// <param name="newValue">IsShwoRipple 属性的新值。</param>
-        protected virtual void OnIsShwoRippleChanged(bool oldValue, bool newValue)
-        {
-            StartClipAnimation();
-        }
-
-        private void MakeClip()
-        {
-            var compositor = Window.Current.Compositor;
-            var visual = ElementCompositionPreview.GetElementVisual(this);
-            _geomerty = CreateEllipseGeometry();
-            var clip = compositor.CreateGeometricClip(_geomerty);
-            visual.Clip = clip;
         }
 
         private CompositionEllipseGeometry CreateEllipseGeometry()
@@ -74,6 +65,15 @@ namespace OnePomodoro.Controls
                 ellipseGeomerty.Center = e.NewSize.ToVector2() / 2;
             };
             return ellipseGeomerty;
+        }
+
+        private void MakeClip()
+        {
+            var compositor = Window.Current.Compositor;
+            var visual = ElementCompositionPreview.GetElementVisual(this);
+            _geomerty = CreateEllipseGeometry();
+            var clip = compositor.CreateGeometricClip(_geomerty);
+            visual.Clip = clip;
         }
 
         private void StartClipAnimation()

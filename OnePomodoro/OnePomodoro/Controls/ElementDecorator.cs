@@ -17,9 +17,8 @@ namespace OnePomodoro.Controls
 
         private const string OutlineBorderName = "OutlineBorder";
 
-        private Border _outlineBorder;
         private readonly Compositor _compositor;
-        protected SpriteVisual Visual { get; private set; }
+        private Border _outlineBorder;
 
         public ElementDecorator()
         {
@@ -36,6 +35,8 @@ namespace OnePomodoro.Controls
             get => (FrameworkElement)GetValue(RelativeElementProperty);
             set => SetValue(RelativeElementProperty, value);
         }
+
+        protected SpriteVisual Visual { get; private set; }
 
         protected override void OnApplyTemplate()
         {
@@ -69,6 +70,10 @@ namespace OnePomodoro.Controls
             ConfigureShadowVisualForCastingElement();
         }
 
+        protected virtual void UpdateOutlineMask()
+        {
+        }
+
         private static void OnRelativeElementChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
         {
             var oldValue = (FrameworkElement)args.OldValue;
@@ -85,10 +90,6 @@ namespace OnePomodoro.Controls
             UpdateOutlineMask();
 
             UpdateOutlineSize();
-        }
-
-        protected virtual void UpdateOutlineMask()
-        {
         }
 
         private void OnSizeChanged(object sender, SizeChangedEventArgs e)

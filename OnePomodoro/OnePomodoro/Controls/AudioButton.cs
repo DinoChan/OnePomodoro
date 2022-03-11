@@ -9,6 +9,12 @@ namespace OnePomodoro.Controls
 {
     public class AudioButton : Button
     {
+        /// <summary>
+        /// 标识 AudioUri 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty AudioUriProperty =
+            DependencyProperty.Register(nameof(AudioUri), typeof(string), typeof(AudioButton), new PropertyMetadata(default(string), OnAudioUriChanged));
+
         private MediaPlayer _mediaPlayer;
         private Storyboard _playStoryboard;
 
@@ -29,21 +35,12 @@ namespace OnePomodoro.Controls
             set => SetValue(AudioUriProperty, value);
         }
 
-        /// <summary>
-        /// 标识 AudioUri 依赖属性。
-        /// </summary>
-        public static readonly DependencyProperty AudioUriProperty =
-            DependencyProperty.Register(nameof(AudioUri), typeof(string), typeof(AudioButton), new PropertyMetadata(default(string), OnAudioUriChanged));
-
-        private static void OnAudioUriChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        protected override void OnApplyTemplate()
         {
-            var oldValue = (string)args.OldValue;
-            var newValue = (string)args.NewValue;
-            if (oldValue == newValue)
-                return;
-
-            var target = obj as AudioButton;
-            target?.OnAudioUriChanged(oldValue, newValue);
+            base.OnApplyTemplate();
+            var root = this.GetTemplateChild("Root") as FrameworkElement;
+            _playStoryboard = root.Resources["PlayStoryboard"] as Storyboard;
+            OnAudioUriChanged(null, AudioUri);
         }
 
         /// <summary>
@@ -59,12 +56,15 @@ namespace OnePomodoro.Controls
             this.Visibility = string.IsNullOrEmpty(newValue) ? Visibility.Collapsed : Visibility.Visible;
         }
 
-        protected override void OnApplyTemplate()
+        private static void OnAudioUriChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
         {
-            base.OnApplyTemplate();
-            var root = this.GetTemplateChild("Root") as FrameworkElement;
-            _playStoryboard = root.Resources["PlayStoryboard"] as Storyboard;
-            OnAudioUriChanged(null, AudioUri);
+            var oldValue = (string)args.OldValue;
+            var newValue = (string)args.NewValue;
+            if (oldValue == newValue)
+                return;
+
+            var target = obj as AudioButton;
+            target?.OnAudioUriChanged(oldValue, newValue);
         }
 
         private void OnClick(object sender, RoutedEventArgs e)

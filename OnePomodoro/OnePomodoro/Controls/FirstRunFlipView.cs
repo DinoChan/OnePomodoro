@@ -4,13 +4,13 @@ namespace OnePomodoro.Controls
 {
     public class FirstRunFlipView : FlipView
     {
+        private Button _closeButton;
+
         public FirstRunFlipView()
         {
             DefaultStyleKey = typeof(FirstRunFlipView);
             SelectionChanged += OnSelectionChanged;
         }
-
-        private Button _closeButton;
 
         protected override void OnApplyTemplate()
         {

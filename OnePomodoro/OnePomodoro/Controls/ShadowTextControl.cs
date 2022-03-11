@@ -13,7 +13,11 @@ namespace OnePomodoro.Controls
 {
     public class ShadowTextControl : OutlineTextControl
     {
-        private Compositor Compositor => Window.Current.Compositor;
+        /// <summary>
+        /// 标识 BlurAmount 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty BlurAmountProperty =
+            DependencyProperty.Register(nameof(BlurAmount), typeof(double), typeof(ShadowTextControl), new PropertyMetadata(10d, OnBlurAmountChanged));
 
         private CompositionMaskBrush _maskBrush;
 
@@ -24,12 +28,16 @@ namespace OnePomodoro.Controls
             _maskBrush.Source = surfaceTextBrush;
         }
 
-        protected override void UpdateSpriteVisual(SpriteVisual spriteVisual, CompositionDrawingSurface drawingSurface)
+        /// <summary>
+        /// 获取或设置BlurAmount的值
+        /// </summary>
+        public double BlurAmount
         {
-            var maskSurfaceBrush = Compositor.CreateSurfaceBrush(DrawingSurface);
-            _maskBrush.Mask = maskSurfaceBrush;
-            spriteVisual.Brush = _maskBrush;
+            get => (double)GetValue(BlurAmountProperty);
+            set => SetValue(BlurAmountProperty, value);
         }
+
+        private Compositor Compositor => Window.Current.Compositor;
 
         protected virtual CompositionBrush CreateBrush()
         {
@@ -84,19 +92,21 @@ namespace OnePomodoro.Controls
         }
 
         /// <summary>
-        /// 获取或设置BlurAmount的值
+        /// BlurAmount 属性更改时调用此方法。
         /// </summary>
-        public double BlurAmount
+        /// <param name="oldValue">BlurAmount 属性的旧值。</param>
+        /// <param name="newValue">BlurAmount 属性的新值。</param>
+        protected virtual void OnBlurAmountChanged(double oldValue, double newValue)
         {
-            get => (double)GetValue(BlurAmountProperty);
-            set => SetValue(BlurAmountProperty, value);
+            DrawSurface();
         }
 
-        /// <summary>
-        /// 标识 BlurAmount 依赖属性。
-        /// </summary>
-        public static readonly DependencyProperty BlurAmountProperty =
-            DependencyProperty.Register(nameof(BlurAmount), typeof(double), typeof(ShadowTextControl), new PropertyMetadata(10d, OnBlurAmountChanged));
+        protected override void UpdateSpriteVisual(SpriteVisual spriteVisual, CompositionDrawingSurface drawingSurface)
+        {
+            var maskSurfaceBrush = Compositor.CreateSurfaceBrush(DrawingSurface);
+            _maskBrush.Mask = maskSurfaceBrush;
+            spriteVisual.Brush = _maskBrush;
+        }
 
         private static void OnBlurAmountChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
         {
@@ -107,16 +117,6 @@ namespace OnePomodoro.Controls
 
             var target = obj as ShadowTextControl;
             target?.OnBlurAmountChanged(oldValue, newValue);
-        }
-
-        /// <summary>
-        /// BlurAmount 属性更改时调用此方法。
-        /// </summary>
-        /// <param name="oldValue">BlurAmount 属性的旧值。</param>
-        /// <param name="newValue">BlurAmount 属性的新值。</param>
-        protected virtual void OnBlurAmountChanged(double oldValue, double newValue)
-        {
-            DrawSurface();
         }
     }
 }

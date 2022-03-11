@@ -9,14 +9,6 @@ namespace OnePomodoro.Controls
     [TemplateVisualState(GroupName = PromodoroStatesName, Name = BreakStateName)]
     public class ButtonDecorator : ElementDecorator
     {
-        private const string CommonStatesName = "CommonStates";
-        private const string NormalStateName = "Normal";
-        private const string PointerOverStateName = "PointerOver";
-        private const string PressedStateName = "Pressed";
-        private const string PromodoroStatesName = "PromodoroStates";
-        private const string InworkStateName = "Inwork";
-        private const string BreakStateName = "Break";
-
         /// <summary>
         /// 标识 IsInPomodoro 依赖属性。
         /// </summary>
@@ -29,18 +21,17 @@ namespace OnePomodoro.Controls
         public static readonly DependencyProperty StateProperty =
             DependencyProperty.Register(nameof(State), typeof(ButtonState), typeof(ButtonDecorator), new PropertyMetadata(ButtonState.Normal, OnStateChanged));
 
+        private const string BreakStateName = "Break";
+        private const string CommonStatesName = "CommonStates";
+        private const string InworkStateName = "Inwork";
+        private const string NormalStateName = "Normal";
+        private const string PointerOverStateName = "PointerOver";
+        private const string PressedStateName = "Pressed";
+        private const string PromodoroStatesName = "PromodoroStates";
+
         public ButtonDecorator()
         {
             this.DefaultStyleKey = typeof(ButtonDecorator);
-        }
-
-        /// <summary>
-        /// 获取或设置State的值
-        /// </summary>
-        public ButtonState State
-        {
-            get => (ButtonState)GetValue(StateProperty);
-            set => SetValue(StateProperty, value);
         }
 
         /// <summary>
@@ -53,13 +44,12 @@ namespace OnePomodoro.Controls
         }
 
         /// <summary>
-        /// IsInPomodoro 属性更改时调用此方法。
+        /// 获取或设置State的值
         /// </summary>
-        /// <param name="oldValue">IsInPomodoro 属性的旧值。</param>
-        /// <param name="newValue">IsInPomodoro 属性的新值。</param>
-        protected virtual void OnIsInPomodoroChanged(bool oldValue, bool newValue)
+        public ButtonState State
         {
-            UpdateVisualStates(true);
+            get => (ButtonState)GetValue(StateProperty);
+            set => SetValue(StateProperty, value);
         }
 
         protected override void OnApplyTemplate()
@@ -67,6 +57,16 @@ namespace OnePomodoro.Controls
             base.OnApplyTemplate();
 
             UpdateVisualStates(false);
+        }
+
+        /// <summary>
+        /// IsInPomodoro 属性更改时调用此方法。
+        /// </summary>
+        /// <param name="oldValue">IsInPomodoro 属性的旧值。</param>
+        /// <param name="newValue">IsInPomodoro 属性的新值。</param>
+        protected virtual void OnIsInPomodoroChanged(bool oldValue, bool newValue)
+        {
+            UpdateVisualStates(true);
         }
 
         /// <summary>
@@ -103,17 +103,6 @@ namespace OnePomodoro.Controls
             VisualStateManager.GoToState(this, IsInPomodoro ? InworkStateName : BreakStateName, useTransitions);
         }
 
-        private static void OnStateChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
-        {
-            var oldValue = (ButtonState)args.OldValue;
-            var newValue = (ButtonState)args.NewValue;
-            if (oldValue == newValue)
-                return;
-
-            var target = obj as ButtonDecorator;
-            target?.OnStateChanged(oldValue, newValue);
-        }
-
         private static void OnIsInPomodoroChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
         {
             var oldValue = (bool)args.OldValue;
@@ -123,6 +112,17 @@ namespace OnePomodoro.Controls
 
             var target = obj as ButtonDecorator;
             target?.OnIsInPomodoroChanged(oldValue, newValue);
+        }
+
+        private static void OnStateChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        {
+            var oldValue = (ButtonState)args.OldValue;
+            var newValue = (ButtonState)args.NewValue;
+            if (oldValue == newValue)
+                return;
+
+            var target = obj as ButtonDecorator;
+            target?.OnStateChanged(oldValue, newValue);
         }
     }
 }

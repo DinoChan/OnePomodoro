@@ -14,9 +14,9 @@ namespace OnePomodoro.Controls
 {
     public sealed partial class TitleBar : UserControl
     {
-        private UISettings _uiSettings;
         private AccessibilitySettings _accessibilitySettings;
         private CoreApplicationViewTitleBar _coreTitleBar;
+        private UISettings _uiSettings;
 
         public TitleBar()
         {
@@ -32,9 +32,45 @@ namespace OnePomodoro.Controls
             Buttons.CollectionChanged += OnButtonsCollectionChanged;
         }
 
+        public ObservableCollection<Button> Buttons { get; } = new ObservableCollection<Button>();
         public bool IsTitleVisibile { get; set; }
 
-        public ObservableCollection<Button> Buttons { get; } = new ObservableCollection<Button>();
+        private void OnButtonsCollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (ItemsPanel == null)
+                return;
+
+            ItemsPanel.Children.Clear();
+            foreach (var button in Buttons)
+            {
+                ItemsPanel.Children.Add(button);
+            }
+        }
+
+        private async void OnColorValuesChanged(UISettings sender, Object e)
+        {
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => { SetTitleBarControlColors(); });
+        }
+
+        private async void OnHighContrastChanged(AccessibilitySettings sender, Object args)
+        {
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                SetTitleBarControlColors();
+                SetTitleBarVisibility();
+            });
+        }
+
+        private void OnIsVisibleChanged(CoreApplicationViewTitleBar sender, object args)
+        {
+            SetTitleBarVisibility();
+        }
+
+        private void OnLayoutMetricsChanged(CoreApplicationViewTitleBar sender, object args)
+        {
+            LayoutRoot.Height = _coreTitleBar.Height;
+            SetTitleBarPadding();
+        }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
@@ -67,44 +103,10 @@ namespace OnePomodoro.Controls
             Window.Current.Activated -= OnWindowActivated;
         }
 
-        private void SetTitleBarVisibility()
+        private void OnWindowActivated(Object sender, WindowActivatedEventArgs e)
         {
-            LayoutRoot.Visibility = _coreTitleBar.IsVisible ? Visibility.Visible : Visibility.Collapsed;
-        }
-
-        private void SetTitleBarPadding()
-        {
-            double leftAddition = 0;
-            double rightAddition = 0;
-
-            if (FlowDirection == FlowDirection.LeftToRight)
-            {
-                leftAddition = _coreTitleBar.SystemOverlayLeftInset;
-                rightAddition = _coreTitleBar.SystemOverlayRightInset;
-            }
-            else
-            {
-                leftAddition = _coreTitleBar.SystemOverlayRightInset;
-                rightAddition = _coreTitleBar.SystemOverlayLeftInset;
-            }
-
-            LayoutRoot.Padding = new Thickness(leftAddition, 0, rightAddition, 0);
-        }
-
-        private void OnIsVisibleChanged(CoreApplicationViewTitleBar sender, object args)
-        {
-            SetTitleBarVisibility();
-        }
-
-        private void OnLayoutMetricsChanged(CoreApplicationViewTitleBar sender, object args)
-        {
-            LayoutRoot.Height = _coreTitleBar.Height;
-            SetTitleBarPadding();
-        }
-
-        private async void OnColorValuesChanged(UISettings sender, Object e)
-        {
-            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => { SetTitleBarControlColors(); });
+            VisualStateManager.GoToState(
+                this, e.WindowActivationState == CoreWindowActivationState.Deactivated ? WindowNotFocused.Name : WindowFocused.Name, false);
         }
 
         private void SetTitleBarControlColors()
@@ -156,31 +158,28 @@ namespace OnePomodoro.Controls
             }
         }
 
-        private async void OnHighContrastChanged(AccessibilitySettings sender, Object args)
+        private void SetTitleBarPadding()
         {
-            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            double leftAddition = 0;
+            double rightAddition = 0;
+
+            if (FlowDirection == FlowDirection.LeftToRight)
             {
-                SetTitleBarControlColors();
-                SetTitleBarVisibility();
-            });
-        }
-
-        private void OnWindowActivated(Object sender, WindowActivatedEventArgs e)
-        {
-            VisualStateManager.GoToState(
-                this, e.WindowActivationState == CoreWindowActivationState.Deactivated ? WindowNotFocused.Name : WindowFocused.Name, false);
-        }
-
-        private void OnButtonsCollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            if (ItemsPanel == null)
-                return;
-
-            ItemsPanel.Children.Clear();
-            foreach (var button in Buttons)
-            {
-                ItemsPanel.Children.Add(button);
+                leftAddition = _coreTitleBar.SystemOverlayLeftInset;
+                rightAddition = _coreTitleBar.SystemOverlayRightInset;
             }
+            else
+            {
+                leftAddition = _coreTitleBar.SystemOverlayRightInset;
+                rightAddition = _coreTitleBar.SystemOverlayLeftInset;
+            }
+
+            LayoutRoot.Padding = new Thickness(leftAddition, 0, rightAddition, 0);
+        }
+
+        private void SetTitleBarVisibility()
+        {
+            LayoutRoot.Visibility = _coreTitleBar.IsVisible ? Visibility.Visible : Visibility.Collapsed;
         }
     }
 }

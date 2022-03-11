@@ -30,10 +30,10 @@ namespace OnePomodoro.Controls
         private const string InnerContentControlName = "InnerContentControl";
         private readonly DoubleAnimation _defaultHeightAnimation;
         private readonly DoubleAnimation _defaultWidthAnimation;
-        private InnerContentControl _innerContentControl;
         private readonly Storyboard _resizingStoryboard;
-        private bool _isResizing;
+        private InnerContentControl _innerContentControl;
         private bool _isInnerContentMeasuring;
+        private bool _isResizing;
 
         public Resizer()
         {
@@ -145,6 +145,29 @@ namespace OnePomodoro.Controls
             }
         }
 
+        protected override Size MeasureOverride(Size constraint)
+        {
+            if (_isResizing)
+                return new Size(ContentWidth, ContentHeight);
+
+            if (_isInnerContentMeasuring)
+            {
+                _isInnerContentMeasuring = false;
+                ChangeSize(true);
+            }
+
+            return base.MeasureOverride(constraint);
+        }
+
+        /// <summary>
+        /// Animation 属性更改时调用此方法。
+        /// </summary>
+        /// <param name="oldValue">Animation 属性的旧值。</param>
+        /// <param name="newValue">Animation 属性的新值。</param>
+        protected virtual void OnAnimationChanged(DoubleAnimation oldValue, DoubleAnimation newValue)
+        {
+        }
+
         protected override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
@@ -169,29 +192,6 @@ namespace OnePomodoro.Controls
         protected virtual void OnContentWidthChanged(double oldValue, double newValue)
         {
             InvalidateMeasure();
-        }
-
-        /// <summary>
-        /// Animation 属性更改时调用此方法。
-        /// </summary>
-        /// <param name="oldValue">Animation 属性的旧值。</param>
-        /// <param name="newValue">Animation 属性的新值。</param>
-        protected virtual void OnAnimationChanged(DoubleAnimation oldValue, DoubleAnimation newValue)
-        {
-        }
-
-        protected override Size MeasureOverride(Size constraint)
-        {
-            if (_isResizing)
-                return new Size(ContentWidth, ContentHeight);
-
-            if (_isInnerContentMeasuring)
-            {
-                _isInnerContentMeasuring = false;
-                ChangeSize(true);
-            }
-
-            return base.MeasureOverride(constraint);
         }
 
         private static void OnAnimationChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
@@ -250,14 +250,14 @@ namespace OnePomodoro.Controls
             }
         }
 
-        private void OnResizingCompleted(object sender, object e)
-        {
-            _isResizing = false;
-        }
-
         private void OnInnerContentMeasuring(object sender, EventArgs e)
         {
             _isInnerContentMeasuring = true;
+            _isResizing = false;
+        }
+
+        private void OnResizingCompleted(object sender, object e)
+        {
             _isResizing = false;
         }
     }

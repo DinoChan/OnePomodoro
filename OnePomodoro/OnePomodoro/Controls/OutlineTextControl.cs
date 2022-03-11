@@ -15,9 +15,41 @@ namespace OnePomodoro.Controls
 {
     public class OutlineTextControl : Control
     {
-        private Compositor Compositor => Window.Current.Compositor;
+        /// <summary>
+        /// 标识 StrokeStyle 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty DashStyleProperty =
+            DependencyProperty.Register(nameof(DashStyle), typeof(CanvasDashStyle), typeof(OutlineTextControl), new PropertyMetadata(default(CanvasDashStyle), OnDashStyleChanged));
 
-        protected CompositionDrawingSurface DrawingSurface { get; private set; }
+        /// <summary>
+        /// 标识 FontColor 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty FontColorProperty =
+            DependencyProperty.Register(nameof(FontColor), typeof(Color), typeof(OutlineTextControl), new PropertyMetadata(Colors.Black, OnFontColorChanged));
+
+        /// <summary>
+        /// 标识 OutlineColor 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty OutlineColorProperty =
+            DependencyProperty.Register(nameof(OutlineColor), typeof(Color), typeof(OutlineTextControl), new PropertyMetadata(Colors.Black, OnOutlineColorChanged));
+
+        /// <summary>
+        /// 标识 ShowNonOutlineText 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty ShowNonOutlineTextProperty =
+            DependencyProperty.Register(nameof(ShowNonOutlineText), typeof(bool), typeof(OutlineTextControl), new PropertyMetadata(default(bool), OnShowNonOutlineTextChanged));
+
+        /// <summary>
+        /// 标识 StrokeWidth 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty StrokeWidthProperty =
+            DependencyProperty.Register(nameof(StrokeWidth), typeof(double), typeof(OutlineTextControl), new PropertyMetadata(default(double), OnStrokeWidthChanged));
+
+        /// <summary>
+        /// 标识 Text 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty TextProperty =
+            DependencyProperty.Register(nameof(Text), typeof(string), typeof(OutlineTextControl), new PropertyMetadata(default(string), OnTextChanged));
 
         public OutlineTextControl()
         {
@@ -38,46 +70,13 @@ namespace OnePomodoro.Controls
              }));
         }
 
-        protected virtual void UpdateSpriteVisual(SpriteVisual spriteVisual, CompositionDrawingSurface drawingSurface)
-        {
-            var maskSurfaceBrush = Compositor.CreateSurfaceBrush(DrawingSurface);
-            spriteVisual.Brush = maskSurfaceBrush;
-        }
-
         /// <summary>
-        /// 获取或设置OutlineColor的值
+        /// 获取或设置StrokeStyle的值
         /// </summary>
-        public Color OutlineColor
+        public CanvasDashStyle DashStyle
         {
-            get => (Color)GetValue(OutlineColorProperty);
-            set => SetValue(OutlineColorProperty, value);
-        }
-
-        /// <summary>
-        /// 标识 OutlineColor 依赖属性。
-        /// </summary>
-        public static readonly DependencyProperty OutlineColorProperty =
-            DependencyProperty.Register(nameof(OutlineColor), typeof(Color), typeof(OutlineTextControl), new PropertyMetadata(Colors.Black, OnOutlineColorChanged));
-
-        private static void OnOutlineColorChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
-        {
-            var oldValue = (Color)args.OldValue;
-            var newValue = (Color)args.NewValue;
-            if (oldValue == newValue)
-                return;
-
-            var target = obj as OutlineTextControl;
-            target?.OnOutlineColorChanged(oldValue, newValue);
-        }
-
-        /// <summary>
-        /// OutlineColor 属性更改时调用此方法。
-        /// </summary>
-        /// <param name="oldValue">OutlineColor 属性的旧值。</param>
-        /// <param name="newValue">OutlineColor 属性的新值。</param>
-        protected virtual void OnOutlineColorChanged(Color oldValue, Color newValue)
-        {
-            DrawSurface();
+            get => (CanvasDashStyle)GetValue(DashStyleProperty);
+            set => SetValue(DashStyleProperty, value);
         }
 
         /// <summary>
@@ -90,102 +89,12 @@ namespace OnePomodoro.Controls
         }
 
         /// <summary>
-        /// 标识 FontColor 依赖属性。
+        /// 获取或设置OutlineColor的值
         /// </summary>
-        public static readonly DependencyProperty FontColorProperty =
-            DependencyProperty.Register(nameof(FontColor), typeof(Color), typeof(OutlineTextControl), new PropertyMetadata(Colors.Black, OnFontColorChanged));
-
-        private static void OnFontColorChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        public Color OutlineColor
         {
-            var oldValue = (Color)args.OldValue;
-            var newValue = (Color)args.NewValue;
-            if (oldValue == newValue)
-                return;
-
-            var target = obj as OutlineTextControl;
-            target?.OnFontColorChanged(oldValue, newValue);
-        }
-
-        /// <summary>
-        /// FontColor 属性更改时调用此方法。
-        /// </summary>
-        /// <param name="oldValue">FontColor 属性的旧值。</param>
-        /// <param name="newValue">FontColor 属性的新值。</param>
-        protected virtual void OnFontColorChanged(Color oldValue, Color newValue)
-        {
-            DrawSurface();
-        }
-
-        /// <summary>
-        /// 获取或设置Text的值
-        /// </summary>
-        public string Text
-        {
-            get => (string)GetValue(TextProperty);
-            set => SetValue(TextProperty, value);
-        }
-
-        /// <summary>
-        /// 标识 Text 依赖属性。
-        /// </summary>
-        public static readonly DependencyProperty TextProperty =
-            DependencyProperty.Register(nameof(Text), typeof(string), typeof(OutlineTextControl), new PropertyMetadata(default(string), OnTextChanged));
-
-        private static void OnTextChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
-        {
-            var oldValue = (string)args.OldValue;
-            var newValue = (string)args.NewValue;
-            if (oldValue == newValue)
-                return;
-
-            var target = obj as OutlineTextControl;
-            target?.OnTextChanged(oldValue, newValue);
-        }
-
-        /// <summary>
-        /// Text 属性更改时调用此方法。
-        /// </summary>
-        /// <param name="oldValue">Text 属性的旧值。</param>
-        /// <param name="newValue">Text 属性的新值。</param>
-        protected virtual void OnTextChanged(string oldValue, string newValue)
-        {
-            DrawSurface();
-        }
-
-        /// <summary>
-        /// 获取或设置StrokeStyle的值
-        /// </summary>
-        public CanvasDashStyle DashStyle
-        {
-            get => (CanvasDashStyle)GetValue(DashStyleProperty);
-            set => SetValue(DashStyleProperty, value);
-        }
-
-        /// <summary>
-        /// 标识 StrokeStyle 依赖属性。
-        /// </summary>
-        public static readonly DependencyProperty DashStyleProperty =
-            DependencyProperty.Register(nameof(DashStyle), typeof(CanvasDashStyle), typeof(OutlineTextControl), new PropertyMetadata(default(CanvasDashStyle), OnDashStyleChanged));
-
-        private static void OnDashStyleChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
-        {
-            var oldValue = (CanvasDashStyle)args.OldValue;
-            var newValue = (CanvasDashStyle)args.NewValue;
-            if (oldValue == newValue)
-                return;
-
-            var target = obj as OutlineTextControl;
-            target?.OnDashStyleChanged(oldValue, newValue);
-        }
-
-        /// <summary>
-        /// StrokeStyle 属性更改时调用此方法。
-        /// </summary>
-        /// <param name="oldValue">StrokeStyle 属性的旧值。</param>
-        /// <param name="newValue">StrokeStyle 属性的新值。</param>
-        protected virtual void OnDashStyleChanged(CanvasDashStyle oldValue, CanvasDashStyle newValue)
-        {
-            DrawSurface();
+            get => (Color)GetValue(OutlineColorProperty);
+            set => SetValue(OutlineColorProperty, value);
         }
 
         /// <summary>
@@ -198,33 +107,6 @@ namespace OnePomodoro.Controls
         }
 
         /// <summary>
-        /// 标识 ShowNonOutlineText 依赖属性。
-        /// </summary>
-        public static readonly DependencyProperty ShowNonOutlineTextProperty =
-            DependencyProperty.Register(nameof(ShowNonOutlineText), typeof(bool), typeof(OutlineTextControl), new PropertyMetadata(default(bool), OnShowNonOutlineTextChanged));
-
-        private static void OnShowNonOutlineTextChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
-        {
-            var oldValue = (bool)args.OldValue;
-            var newValue = (bool)args.NewValue;
-            if (oldValue == newValue)
-                return;
-
-            var target = obj as OutlineTextControl;
-            target?.OnShowNonOutlineTextChanged(oldValue, newValue);
-        }
-
-        /// <summary>
-        /// ShowNonOutlineText 属性更改时调用此方法。
-        /// </summary>
-        /// <param name="oldValue">ShowNonOutlineText 属性的旧值。</param>
-        /// <param name="newValue">ShowNonOutlineText 属性的新值。</param>
-        protected virtual void OnShowNonOutlineTextChanged(bool oldValue, bool newValue)
-        {
-            DrawSurface();
-        }
-
-        /// <summary>
         /// 获取或设置StrokeWidth的值
         /// </summary>
         public double StrokeWidth
@@ -234,31 +116,16 @@ namespace OnePomodoro.Controls
         }
 
         /// <summary>
-        /// 标识 StrokeWidth 依赖属性。
+        /// 获取或设置Text的值
         /// </summary>
-        public static readonly DependencyProperty StrokeWidthProperty =
-            DependencyProperty.Register(nameof(StrokeWidth), typeof(double), typeof(OutlineTextControl), new PropertyMetadata(default(double), OnStrokeWidthChanged));
-
-        private static void OnStrokeWidthChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        public string Text
         {
-            var oldValue = (double)args.OldValue;
-            var newValue = (double)args.NewValue;
-            if (oldValue == newValue)
-                return;
-
-            var target = obj as OutlineTextControl;
-            target?.OnStrokeWidthChanged(oldValue, newValue);
+            get => (string)GetValue(TextProperty);
+            set => SetValue(TextProperty, value);
         }
 
-        /// <summary>
-        /// StrokeWidth 属性更改时调用此方法。
-        /// </summary>
-        /// <param name="oldValue">StrokeWidth 属性的旧值。</param>
-        /// <param name="newValue">StrokeWidth 属性的新值。</param>
-        protected virtual void OnStrokeWidthChanged(double oldValue, double newValue)
-        {
-            DrawSurface();
-        }
+        protected CompositionDrawingSurface DrawingSurface { get; private set; }
+        private Compositor Compositor => Window.Current.Compositor;
 
         protected void DrawSurface()
         {
@@ -307,6 +174,138 @@ namespace OnePomodoro.Controls
                     session.DrawGeometry(textGeometry, OutlineColor, (float)StrokeWidth, dashedStroke);
                 }
             }
+        }
+
+        /// <summary>
+        /// StrokeStyle 属性更改时调用此方法。
+        /// </summary>
+        /// <param name="oldValue">StrokeStyle 属性的旧值。</param>
+        /// <param name="newValue">StrokeStyle 属性的新值。</param>
+        protected virtual void OnDashStyleChanged(CanvasDashStyle oldValue, CanvasDashStyle newValue)
+        {
+            DrawSurface();
+        }
+
+        /// <summary>
+        /// FontColor 属性更改时调用此方法。
+        /// </summary>
+        /// <param name="oldValue">FontColor 属性的旧值。</param>
+        /// <param name="newValue">FontColor 属性的新值。</param>
+        protected virtual void OnFontColorChanged(Color oldValue, Color newValue)
+        {
+            DrawSurface();
+        }
+
+        /// <summary>
+        /// OutlineColor 属性更改时调用此方法。
+        /// </summary>
+        /// <param name="oldValue">OutlineColor 属性的旧值。</param>
+        /// <param name="newValue">OutlineColor 属性的新值。</param>
+        protected virtual void OnOutlineColorChanged(Color oldValue, Color newValue)
+        {
+            DrawSurface();
+        }
+
+        /// <summary>
+        /// ShowNonOutlineText 属性更改时调用此方法。
+        /// </summary>
+        /// <param name="oldValue">ShowNonOutlineText 属性的旧值。</param>
+        /// <param name="newValue">ShowNonOutlineText 属性的新值。</param>
+        protected virtual void OnShowNonOutlineTextChanged(bool oldValue, bool newValue)
+        {
+            DrawSurface();
+        }
+
+        /// <summary>
+        /// StrokeWidth 属性更改时调用此方法。
+        /// </summary>
+        /// <param name="oldValue">StrokeWidth 属性的旧值。</param>
+        /// <param name="newValue">StrokeWidth 属性的新值。</param>
+        protected virtual void OnStrokeWidthChanged(double oldValue, double newValue)
+        {
+            DrawSurface();
+        }
+
+        /// <summary>
+        /// Text 属性更改时调用此方法。
+        /// </summary>
+        /// <param name="oldValue">Text 属性的旧值。</param>
+        /// <param name="newValue">Text 属性的新值。</param>
+        protected virtual void OnTextChanged(string oldValue, string newValue)
+        {
+            DrawSurface();
+        }
+
+        protected virtual void UpdateSpriteVisual(SpriteVisual spriteVisual, CompositionDrawingSurface drawingSurface)
+        {
+            var maskSurfaceBrush = Compositor.CreateSurfaceBrush(DrawingSurface);
+            spriteVisual.Brush = maskSurfaceBrush;
+        }
+
+        private static void OnDashStyleChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        {
+            var oldValue = (CanvasDashStyle)args.OldValue;
+            var newValue = (CanvasDashStyle)args.NewValue;
+            if (oldValue == newValue)
+                return;
+
+            var target = obj as OutlineTextControl;
+            target?.OnDashStyleChanged(oldValue, newValue);
+        }
+
+        private static void OnFontColorChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        {
+            var oldValue = (Color)args.OldValue;
+            var newValue = (Color)args.NewValue;
+            if (oldValue == newValue)
+                return;
+
+            var target = obj as OutlineTextControl;
+            target?.OnFontColorChanged(oldValue, newValue);
+        }
+
+        private static void OnOutlineColorChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        {
+            var oldValue = (Color)args.OldValue;
+            var newValue = (Color)args.NewValue;
+            if (oldValue == newValue)
+                return;
+
+            var target = obj as OutlineTextControl;
+            target?.OnOutlineColorChanged(oldValue, newValue);
+        }
+
+        private static void OnShowNonOutlineTextChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        {
+            var oldValue = (bool)args.OldValue;
+            var newValue = (bool)args.NewValue;
+            if (oldValue == newValue)
+                return;
+
+            var target = obj as OutlineTextControl;
+            target?.OnShowNonOutlineTextChanged(oldValue, newValue);
+        }
+
+        private static void OnStrokeWidthChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        {
+            var oldValue = (double)args.OldValue;
+            var newValue = (double)args.NewValue;
+            if (oldValue == newValue)
+                return;
+
+            var target = obj as OutlineTextControl;
+            target?.OnStrokeWidthChanged(oldValue, newValue);
+        }
+
+        private static void OnTextChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        {
+            var oldValue = (string)args.OldValue;
+            var newValue = (string)args.NewValue;
+            if (oldValue == newValue)
+                return;
+
+            var target = obj as OutlineTextControl;
+            target?.OnTextChanged(oldValue, newValue);
         }
     }
 }
