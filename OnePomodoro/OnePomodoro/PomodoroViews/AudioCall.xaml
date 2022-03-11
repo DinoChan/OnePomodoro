@@ -247,9 +247,9 @@
                                                  Fill="{StaticResource Background}" />
                                     </controls1:DropShadowPanel>
                                     <controls:RadialProgressBar x:Name="ProgressBar"
-                                                                 Foreground="{Binding ElementName=BrushBridge, Path=Brush}"
-                                                                 Thickness="4"
-                                                                 Value="0.5" />
+                                                                Foreground="{Binding ElementName=BrushBridge, Path=Brush}"
+                                                                Thickness="4"
+                                                                Value="0.5" />
                                 </Grid>
                             </Grid>
                             <Ellipse Margin="7" Fill="#e6eddd" />

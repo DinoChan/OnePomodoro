@@ -1,27 +1,27 @@
 ﻿<local:PomodoroView x:Class="OnePomodoro.PomodoroViews.LongShadow"
                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="using:OnePomodoro.PomodoroViews"
-                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                    mc:Ignorable="d"
-                    xmlns:converters="using:Microsoft.Toolkit.Uwp.UI.Converters"
                     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
-                    xmlns:viewModels="using:OnePomodoro.ViewModels"
-                    xmlns:helpers="using:OnePomodoro.Helpers"
                     xmlns:controls="using:OnePomodoro.Controls"
-                    x:DefaultBindMode="OneWay"
+                    xmlns:converters="using:Microsoft.Toolkit.Uwp.UI.Converters"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:helpers="using:OnePomodoro.Helpers"
+                    xmlns:local="using:OnePomodoro.PomodoroViews"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:viewModels="using:OnePomodoro.ViewModels"
                     d:DataContext="{d:DesignInstance Type=viewModels:PomodoroViewModel}"
-                    RequestedTheme="Dark"
                     d:DesignHeight="900"
-                    d:DesignWidth="1920">
+                    d:DesignWidth="1920"
+                    x:DefaultBindMode="OneWay"
+                    RequestedTheme="Dark"
+                    mc:Ignorable="d">
     <UserControl.Resources>
-        <converters:BoolToObjectConverter TrueValue="Top"
+        <converters:BoolToObjectConverter x:Key="BoolToVerticalAlignmentConverter"
                                           FalseValue="Bottom"
-                                          x:Key="BoolToVerticalAlignmentConverter" />
-        <converters:BoolToObjectConverter TrueValue="Left"
+                                          TrueValue="Top" />
+        <converters:BoolToObjectConverter x:Key="BoolToVerticalHorizontalAlignment"
                                           FalseValue="Right"
-                                          x:Key="BoolToVerticalHorizontalAlignment" />
+                                          TrueValue="Left" />
 
     </UserControl.Resources>
     <Grid x:Name="ContentArea">
@@ -32,131 +32,121 @@
                         <helpers:CompactOverlayModeTrigger IsCompactOverlayMode="True" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="NormalView.Opacity"
-                                Value="0" />
-                        <Setter Target="NormalView.IsHitTestVisible"
-                                Value="False" />
-                        <Setter Target="CompactView.Opacity"
-                                Value="1" />
-                        <Setter Target="CompactView.IsHitTestVisible"
-                                Value="True" />
+                        <Setter Target="NormalView.Opacity" Value="0" />
+                        <Setter Target="NormalView.IsHitTestVisible" Value="False" />
+                        <Setter Target="CompactView.Opacity" Value="1" />
+                        <Setter Target="CompactView.IsHitTestVisible" Value="True" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        <Grid Grid.Row="1"
-              Background="#FF1F1F1F">
-            <StackPanel HorizontalAlignment="Center"
-                        x:Name="NormalView"
+        <Grid Grid.Row="1" Background="#FF1F1F1F">
+            <StackPanel x:Name="NormalView"
                         Margin="40"
-                       >
-                <TextBlock Text="OnePomodoro"
+                        HorizontalAlignment="Center">
+                <TextBlock HorizontalAlignment="Center"
+                           FontSize="48"
+                           Text="OnePomodoro" />
+                <TextBlock Margin="0,12,0,0"
                            HorizontalAlignment="Center"
-                           FontSize="48" />
-                <TextBlock Text="The Pomodoro technique makes you more productive"
-                           HorizontalAlignment="Center"
-                           Margin="0,12,0,0"
-                           FontSize="15" />
-                <controls:FlipSide Height="500"
+                           FontSize="15"
+                           Text="The Pomodoro technique makes you more productive" />
+                <controls:FlipSide x:Name="FlipSide"
                                    Width="360"
-                                   Margin="0,24,0,0"
-                                   x:Name="FlipSide">
+                                   Height="500"
+                                   Margin="0,24,0,0">
                     <controls:FlipSide.Side1>
-                        <Grid   Background="#fd6e5d"
-                                x:Name="InworkElement"
-                                CornerRadius="1">
+                        <Grid x:Name="InworkElement"
+                              Background="#fd6e5d"
+                              CornerRadius="1">
                             <Grid.RowDefinitions>
                                 <RowDefinition />
                                 <RowDefinition />
                                 <RowDefinition />
                             </Grid.RowDefinitions>
 
-                            <TextBlock Text="Focus"
-                                       FontSize="56"
-                                       HorizontalAlignment="Center"
+                            <TextBlock HorizontalAlignment="Center"
                                        VerticalAlignment="Center"
-                                      />
+                                       FontSize="56"
+                                       Text="Focus" />
 
 
-                            <StackPanel Orientation="Horizontal"
+                            <StackPanel Grid.Row="1"
                                         HorizontalAlignment="Center"
-                                        Grid.Row="1"
-                                        VerticalAlignment="Center">
+                                        VerticalAlignment="Center"
+                                        Orientation="Horizontal">
                                 <Grid>
                                     <Rectangle x:Name="InworkBackground" />
 
-                                    <TextBlock Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm}"
-                                               x:Name="InWorkCountDown"
+                                    <TextBlock x:Name="InWorkCountDown"
                                                FontFamily="{StaticResource TimeFont}"
                                                FontSize="148"
-                                               FontWeight="Bold" />
+                                               FontWeight="Bold"
+                                               Text="{Binding RemainingPomodoroTime, Converter={StaticResource FormatStringConverter}, ConverterParameter=mm}" />
                                 </Grid>
-                                <Grid  VerticalAlignment="Bottom"
-                                       Margin="12,0,0,-16">
+                                <Grid Margin="12,0,0,-16" VerticalAlignment="Bottom">
                                     <Rectangle x:Name="InworkSecondBackground" />
-                                    <TextBlock Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=ss}"
-                                               x:Name="InWorkCountDownSecond"
+                                    <TextBlock x:Name="InWorkCountDownSecond"
                                                FontFamily="{StaticResource TimeFont}"
                                                FontSize="108"
-                                               FontWeight="Bold" />
+                                               FontWeight="Bold"
+                                               Text="{Binding RemainingPomodoroTime, Converter={StaticResource FormatStringConverter}, ConverterParameter=ss}" />
                                 </Grid>
                             </StackPanel>
 
-                            <controls:PomodoroStateButton HorizontalAlignment="Center"
+                            <controls:PomodoroStateButton Grid.Row="2"
+                                                          HorizontalAlignment="Center"
                                                           VerticalAlignment="Center"
-                                                          StartCommand="{Binding StartTimerCommand}"
-                                                          StopCommand="{Binding StopTimerCommand}"
                                                           IsInPomodoro="{x:Bind ViewModel.IsInPomodoro}"
                                                           IsTimerInProgress="{x:Bind ViewModel.IsTimerInProgress}"
-                                                          Grid.Row="2" />
+                                                          StartCommand="{Binding StartTimerCommand}"
+                                                          StopCommand="{Binding StopTimerCommand}" />
                         </Grid>
                     </controls:FlipSide.Side1>
                     <controls:FlipSide.Side2>
-                        <Grid  Background="#FF5271c2"
-                               x:Name="BreakElement"
-                               CornerRadius="1">
+                        <Grid x:Name="BreakElement"
+                              Background="#FF5271c2"
+                              CornerRadius="1">
                             <Grid.RowDefinitions>
                                 <RowDefinition />
                                 <RowDefinition />
                                 <RowDefinition />
                             </Grid.RowDefinitions>
-                            <TextBlock Text="Relax"
-                                       FontSize="56"
-                                       HorizontalAlignment="Center"
+                            <TextBlock HorizontalAlignment="Center"
                                        VerticalAlignment="Center"
-                                      />
+                                       FontSize="56"
+                                       Text="Relax" />
 
 
-                            <StackPanel HorizontalAlignment="Center"
-                                        Grid.Row="1"
+                            <StackPanel Grid.Row="1"
+                                        HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         Orientation="Horizontal">
                                 <Grid>
                                     <Rectangle x:Name="BreakBackground" />
-                                    <TextBlock Text="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm}"
-                                               x:Name="BreakCountDown"
+                                    <TextBlock x:Name="BreakCountDown"
                                                FontFamily="{StaticResource TimeFont}"
                                                FontSize="148"
-                                               FontWeight="Bold" />
+                                               FontWeight="Bold"
+                                               Text="{Binding RemainingBreakTime, Converter={StaticResource FormatStringConverter}, ConverterParameter=mm}" />
                                 </Grid>
-                                <Grid Margin="12,0,0,-16"
-                                      VerticalAlignment="Bottom">
+                                <Grid Margin="12,0,0,-16" VerticalAlignment="Bottom">
                                     <Rectangle x:Name="BreakSecondBackground" />
-                                    <TextBlock Text="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=ss}"
-                                               x:Name="BreakCountDownSecond"
+                                    <TextBlock x:Name="BreakCountDownSecond"
                                                FontFamily="{StaticResource TimeFont}"
                                                FontSize="108"
-                                               FontWeight="Bold" />
+                                               FontWeight="Bold"
+                                               Text="{Binding RemainingBreakTime, Converter={StaticResource FormatStringConverter}, ConverterParameter=ss}" />
                                 </Grid>
                             </StackPanel>
 
-                            <controls:PomodoroStateButton HorizontalAlignment="Center"
+                            <controls:PomodoroStateButton Grid.Row="2"
+                                                          HorizontalAlignment="Center"
                                                           VerticalAlignment="Center"
-                                                          StartCommand="{Binding StartTimerCommand}"
-                                                          StopCommand="{Binding StopTimerCommand}"
                                                           IsInPomodoro="{x:Bind ViewModel.IsInPomodoro}"
                                                           IsTimerInProgress="{x:Bind ViewModel.IsTimerInProgress}"
-                                                          Grid.Row="2" />
+                                                          StartCommand="{Binding StartTimerCommand}"
+                                                          StopCommand="{Binding StopTimerCommand}" />
                         </Grid>
                     </controls:FlipSide.Side2>
                 </controls:FlipSide>
@@ -165,113 +155,110 @@
             </StackPanel>
 
             <Viewbox x:Name="CompactView"
-                   
                      IsHitTestVisible="False"
                      Opacity="0">
-                <controls:FlipSide Height="130"
+                <controls:FlipSide x:Name="CompactFlipSide"
                                    Width="150"
-                                   x:Name="CompactFlipSide">
+                                   Height="130">
                     <controls:FlipSide.Side1>
-                        <Grid   Background="#fd6e5d"
-                                x:Name="CompactInworkElement"
-                                CornerRadius="1">
+                        <Grid x:Name="CompactInworkElement"
+                              Background="#fd6e5d"
+                              CornerRadius="1">
                             <Grid.RowDefinitions>
                                 <RowDefinition />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition />
                             </Grid.RowDefinitions>
-                            <TextBlock Text="Focus"
-                                       FontSize="32"
+                            <TextBlock HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
                                        FontFamily="{StaticResource TimeFont}"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center" />
+                                       FontSize="32"
+                                       Text="Focus" />
 
 
-                            <StackPanel Orientation="Horizontal"
-                                        HorizontalAlignment="Center"
-                                        Grid.Row="1"
+                            <StackPanel Grid.Row="1"
                                         Margin="0,-10"
-                                        VerticalAlignment="Center">
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Orientation="Horizontal">
                                 <Grid>
                                     <Rectangle x:Name="CompactInworkBackground" />
 
-                                    <TextBlock Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm}"
-                                               x:Name="CompactInWorkCountDown"
+                                    <TextBlock x:Name="CompactInWorkCountDown"
                                                FontFamily="{StaticResource TimeFont}"
                                                FontSize="56"
-                                               FontWeight="Bold" />
+                                               FontWeight="Bold"
+                                               Text="{Binding RemainingPomodoroTime, Converter={StaticResource FormatStringConverter}, ConverterParameter=mm}" />
                                 </Grid>
-                                <Grid  VerticalAlignment="Bottom"
-                                       Margin="6,0,0,0">
+                                <Grid Margin="6,0,0,0" VerticalAlignment="Bottom">
                                     <Rectangle x:Name="CompactInworkSecondBackground" />
-                                    <TextBlock Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=ss}"
-                                               x:Name="CompactInWorkCountDownSecond"
+                                    <TextBlock x:Name="CompactInWorkCountDownSecond"
                                                FontFamily="{StaticResource TimeFont}"
                                                FontSize="56"
+                                               FontWeight="Bold"
                                                Opacity="0.85"
-                                               FontWeight="Bold" />
+                                               Text="{Binding RemainingPomodoroTime, Converter={StaticResource FormatStringConverter}, ConverterParameter=ss}" />
                                 </Grid>
                             </StackPanel>
 
-                            <controls:PomodoroStateButton HorizontalAlignment="Center"
+                            <controls:PomodoroStateButton Grid.Row="2"
+                                                          HorizontalAlignment="Center"
                                                           VerticalAlignment="Center"
-                                                          Style="{StaticResource SmallButton}"
-                                                          StartCommand="{Binding StartTimerCommand}"
-                                                          StopCommand="{Binding StopTimerCommand}"
                                                           IsInPomodoro="{x:Bind ViewModel.IsInPomodoro}"
                                                           IsTimerInProgress="{x:Bind ViewModel.IsTimerInProgress}"
-                                                          Grid.Row="2" />
+                                                          StartCommand="{Binding StartTimerCommand}"
+                                                          StopCommand="{Binding StopTimerCommand}"
+                                                          Style="{StaticResource SmallButton}" />
                         </Grid>
                     </controls:FlipSide.Side1>
                     <controls:FlipSide.Side2>
-                        <Grid  Background="#FF5271c2"
-                               x:Name="CompactBreakElement"
-                               CornerRadius="1">
+                        <Grid x:Name="CompactBreakElement"
+                              Background="#FF5271c2"
+                              CornerRadius="1">
                             <Grid.RowDefinitions>
                                 <RowDefinition />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition />
                             </Grid.RowDefinitions>
-                            <TextBlock Text="Relax"
-                                       FontSize="32"
-                                       HorizontalAlignment="Center"
+                            <TextBlock HorizontalAlignment="Center"
                                        VerticalAlignment="Center"
-                                       FontFamily="{StaticResource TimeFont}" />
+                                       FontFamily="{StaticResource TimeFont}"
+                                       FontSize="32"
+                                       Text="Relax" />
 
 
-                            <StackPanel HorizontalAlignment="Center"
-                                        Grid.Row="1"
+                            <StackPanel Grid.Row="1"
                                         Margin="0,-10"
+                                        HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         Orientation="Horizontal">
                                 <Grid>
                                     <Rectangle x:Name="CompactBreakBackground" />
-                                    <TextBlock Text="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm}"
-                                               x:Name="CompactBreakCountDown"
+                                    <TextBlock x:Name="CompactBreakCountDown"
                                                FontFamily="{StaticResource TimeFont}"
                                                FontSize="56"
-                                               FontWeight="Bold" />
+                                               FontWeight="Bold"
+                                               Text="{Binding RemainingBreakTime, Converter={StaticResource FormatStringConverter}, ConverterParameter=mm}" />
                                 </Grid>
-                                <Grid Margin="6,0,0,0"
-                                      VerticalAlignment="Bottom">
+                                <Grid Margin="6,0,0,0" VerticalAlignment="Bottom">
                                     <Rectangle x:Name="CompactBreakSecondBackground" />
-                                    <TextBlock Text="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=ss}"
-                                               x:Name="CompactBreakCountDownSecond"
+                                    <TextBlock x:Name="CompactBreakCountDownSecond"
                                                FontFamily="{StaticResource TimeFont}"
                                                FontSize="56"
+                                               FontWeight="Bold"
                                                Opacity="0.85"
-                                               FontWeight="Bold" />
+                                               Text="{Binding RemainingBreakTime, Converter={StaticResource FormatStringConverter}, ConverterParameter=ss}" />
                                 </Grid>
                             </StackPanel>
 
-                            <controls:PomodoroStateButton HorizontalAlignment="Center"
+                            <controls:PomodoroStateButton Grid.Row="2"
+                                                          HorizontalAlignment="Center"
                                                           VerticalAlignment="Center"
-                                                          Style="{StaticResource SmallButton}"
-                                                          StartCommand="{Binding StartTimerCommand}"
-                                                          StopCommand="{Binding StopTimerCommand}"
                                                           IsInPomodoro="{x:Bind ViewModel.IsInPomodoro}"
                                                           IsTimerInProgress="{x:Bind ViewModel.IsTimerInProgress}"
-                                                          Grid.Row="2" />
+                                                          StartCommand="{Binding StartTimerCommand}"
+                                                          StopCommand="{Binding StopTimerCommand}"
+                                                          Style="{StaticResource SmallButton}" />
                         </Grid>
                     </controls:FlipSide.Side2>
                 </controls:FlipSide>
