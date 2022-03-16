@@ -1,23 +1,11 @@
-﻿using OnePomodoro.Helpers;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+﻿using System;
+using System.Numerics;
+using System.Threading.Tasks;
+using OnePomodoro.Helpers;
+using Windows.UI;
 using Windows.UI.Composition;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-using Windows.UI;
-using System.Numerics;
 using Windows.UI.Xaml.Hosting;
-using System.Threading.Tasks;
 
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -26,11 +14,10 @@ namespace OnePomodoro.PomodoroViews
     [Title("Gradients")]
     [Screenshot("/Assets/Screenshots/Gradients.png")]
     [CompactOverlay]
-    [FunctionTags(Tags.CompositionAnimation,Tags.CompositionLinearGradientBrush)]
+    [FunctionTags(Tags.CompositionAnimation, Tags.CompositionLinearGradientBrush)]
     [SourceCode("https://github.com/DinoChan/OnePomodoro/blob/master/OnePomodoro/OnePomodoro/PomodoroViews/Gradients.xaml.cs")]
     public sealed partial class Gradients : PomodoroView
     {
-
         private readonly CompositionLinearGradientBrush _gradientBrush;
         private readonly SpriteVisual _backgroundVisual;
         private static readonly Color Blue = Color.FromArgb(255, 43, 210, 255);
@@ -38,6 +25,7 @@ namespace OnePomodoro.PomodoroViews
         private readonly Compositor _compositor;
         private readonly CompositionColorGradientStop _focusGradientStop;
         private readonly CompositionColorGradientStop _relaxGradientStop;
+
         public Gradients() : base()
         {
             InitializeComponent();
@@ -59,10 +47,6 @@ namespace OnePomodoro.PomodoroViews
             _backgroundVisual = _compositor.CreateSpriteVisual();
             _backgroundVisual.Brush = _gradientBrush;
             ElementCompositionPreview.SetElementChildVisual(Gradient, _backgroundVisual);
-
-
-
-
 
             Loaded += async (s, e) =>
             {
@@ -101,7 +85,7 @@ namespace OnePomodoro.PomodoroViews
             var relaxGradientStopOffsetAnimation = _compositor.CreateScalarKeyFrameAnimation();
             relaxGradientStopOffsetAnimation.Duration = TimeSpan.FromSeconds(1);
             // relaxGradientStopOffsetAnimation.DelayTime = TimeSpan.FromSeconds(2);
-            relaxGradientStopOffsetAnimation.InsertKeyFrame(1.0f, ViewModel.IsInPomodoro ?1.0f : 0.75f);
+            relaxGradientStopOffsetAnimation.InsertKeyFrame(1.0f, ViewModel.IsInPomodoro ? 1.0f : 0.75f);
             _relaxGradientStop.StartAnimation(nameof(_relaxGradientStop.Offset), relaxGradientStopOffsetAnimation);
 
             var focusGradientStopOffsetAnimation = _compositor.CreateScalarKeyFrameAnimation();

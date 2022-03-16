@@ -29,21 +29,26 @@ namespace OnePomodoro.Services
             {
                 return null;
             }
-            if (time < DateTime.Now)
-                return null;
 
             if (isRemoveOthers)
                 await RemoveBreakFinishedToastNotificationScheduleAsync();
 
-            var toastBuilder = CreatePomodoroToastBuilder();
+            var toastBuilder = CreateBreakToastBuilder();
             if (string.IsNullOrWhiteSpace(audioUri) == false)
                 toastBuilder.AddAudio(new Uri(audioUri));
 
             XmlDocument xml = null;
             ScheduledToastNotification toast;
+            if (time < DateTime.Now)
+                return null;
+
             try
             {
                 xml = toastBuilder.GetXml();
+                var toastNotifier = await ToastNotificationToolkit.CreateToastNotifierAsync();
+                if (time < DateTime.Now)
+                    time = DateTime.Now.AddSeconds(3);
+
                 toast = new ScheduledToastNotification(xml, time)
                 {
                     Tag = BreakTag,
@@ -51,7 +56,7 @@ namespace OnePomodoro.Services
                     ExpirationTime = time.AddHours(1),
                     Id = _id++.ToString()
                 };
-                var toastNotifier = await ToastNotificationToolkit.CreateToastNotifierAsync();
+
                 toastNotifier.AddToSchedule(toast);
                 Debug.WriteLine("add break:" + toast.Id);
             }
@@ -77,9 +82,6 @@ namespace OnePomodoro.Services
                 return null;
             }
 
-            if (time < DateTime.Now)
-                return null;
-
             if (isRemoveOthers)
                 await RemovePomodoroFinishedToastNotificationScheduleAsync();
 
@@ -95,6 +97,9 @@ namespace OnePomodoro.Services
             try
             {
                 xml = toastBuilder.GetXml();
+                var toastNotifier = await ToastNotificationToolkit.CreateToastNotifierAsync();
+                if (time < DateTime.Now)
+                    time = DateTime.Now.AddSeconds(3);
                 toast = new ScheduledToastNotification(xml, time)
                 {
                     Tag = PomodoroTag,
@@ -103,7 +108,6 @@ namespace OnePomodoro.Services
                     Id = _id++.ToString()
                 };
 
-                var toastNotifier = await ToastNotificationToolkit.CreateToastNotifierAsync();
                 toastNotifier.AddToSchedule(toast);
                 Debug.WriteLine("add pomodoro:" + toast.Id);
             }
@@ -196,6 +200,7 @@ namespace OnePomodoro.Services
                   .AddText("Pomodoro has finished")
                   .AddText(@"Pomodoro has finished, let's take a break.");
         }
+
         private static ToastContent GetBreakToastContent()
         {
             var content = new ToastContent()

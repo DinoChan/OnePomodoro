@@ -1,6 +1,6 @@
-﻿using OnePomodoro.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using OnePomodoro.ViewModels;
 using Windows.UI.Xaml.Controls;
 
 namespace OnePomodoro.PomodoroViews
@@ -13,7 +13,6 @@ namespace OnePomodoro.PomodoroViews
         }
 
         public PomodoroViewModel ViewModel => DataContext as PomodoroViewModel;
-
 
         public static IEnumerable<Type> Views { get; } = new List<Type>
         {
@@ -34,6 +33,5 @@ namespace OnePomodoro.PomodoroViews
             typeof(EllipseClipView),
             typeof(DoNotDisturbView),
         };
-
     }
 }

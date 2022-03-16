@@ -9,7 +9,6 @@ using Windows.ApplicationModel.Core;
 
 namespace OnePomodoro.ViewModels
 {
-
     public class PomodoroViewModel : ObservableObject
     {
         private TimeSpan PomodoroLength => TimeSpan.FromMinutes(SettingsService.Current == null ? 25 : SettingsService.Current.PomodoroLength);
@@ -196,8 +195,8 @@ namespace OnePomodoro.ViewModels
 
         private async void StopTimer()
         {
-           await NotificationManager.Current.RemovePomodoroFinishedToastNotificationScheduleAsync();
-           await NotificationManager.Current.RemoveBreakFinishedToastNotificationScheduleAsync();
+            await NotificationManager.Current.RemovePomodoroFinishedToastNotificationScheduleAsync();
+            await NotificationManager.Current.RemoveBreakFinishedToastNotificationScheduleAsync();
             _isUserStop = true;
             CurrentTimer.Stop();
         }

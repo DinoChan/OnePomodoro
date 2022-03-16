@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OnePomodoro.Helpers
 {
@@ -33,6 +29,5 @@ namespace OnePomodoro.Helpers
         public const string TransformMatrix = "TransformMatrix";
         public const string Win2D = "Win2D";
         public const string ImplicitAnimation = "Implicit Animation";
-        
     }
 }

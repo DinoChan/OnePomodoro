@@ -1,25 +1,11 @@
-﻿using OnePomodoro.Helpers;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-
-using Microsoft.Toolkit.Uwp.UI.Animations;
-using Windows.UI;
+﻿using System;
 using System.Numerics;
-using Windows.UI.Composition;
-using System.Threading.Tasks;
 using Microsoft.Toolkit.Uwp.UI;
+using Microsoft.Toolkit.Uwp.UI.Animations;
+using OnePomodoro.Helpers;
+using Windows.UI;
+using Windows.UI.Composition;
+using Windows.UI.Xaml;
 
 //https://go.microsoft.com/fwlink/?LinkId=234236 上介绍了“用户控件”项模板
 
@@ -41,7 +27,7 @@ namespace OnePomodoro.PomodoroViews
 
         private async void OnLoaded(object sender, RoutedEventArgs e)
         {
-            await AnimationBuilder.Create().Opacity(from:0.01, to: 1, duration: TimeSpan.FromSeconds(1.5)).StartAsync(LayoutRoot);
+            await AnimationBuilder.Create().Opacity(from: 0.01, to: 1, duration: TimeSpan.FromSeconds(1.5)).StartAsync(LayoutRoot);
 
             ShowTextShimming();
         }
@@ -50,8 +36,6 @@ namespace OnePomodoro.PomodoroViews
         {
             StopTextShimming();
         }
-
-
 
         private void ShowTextShimming()
         {
@@ -75,8 +59,6 @@ namespace OnePomodoro.PomodoroViews
             offsetAnimation.IterationBehavior = AnimationIterationBehavior.Forever;
 
             _inworkPointLight.StartAnimation("Offset.X", offsetAnimation);
-
-
 
             if (_breakPointLight == null)
             {

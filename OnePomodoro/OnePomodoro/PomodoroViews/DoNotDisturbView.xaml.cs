@@ -1,21 +1,9 @@
-﻿using OnePomodoro.Helpers;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System;
 using System.Numerics;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using OnePomodoro.Helpers;
 using Windows.UI.Composition;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Hosting;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 //https://go.microsoft.com/fwlink/?LinkId=234236 上介绍了“用户控件”项模板
 
@@ -29,6 +17,7 @@ namespace OnePomodoro.PomodoroViews
     public sealed partial class DoNotDisturbView
     {
         private Compositor Compositor => Window.Current.Compositor;
+
         public DoNotDisturbView()
         {
             this.InitializeComponent();
@@ -62,7 +51,6 @@ namespace OnePomodoro.PomodoroViews
 
             if (ViewModel.IsInPomodoro)
             {
-
                 contentVisualAnimation.InsertKeyFrame(1, Vector3.Zero, easing);
                 contentVisual.StartAnimation(nameof(Visual.Offset), contentVisualAnimation);
 
@@ -108,7 +96,6 @@ namespace OnePomodoro.PomodoroViews
             offsetAnimation.InsertKeyFrame(1, Vector3.Zero, easing);
             visual.StartAnimation(nameof(Visual.Offset), offsetAnimation);
         }
-
 
         private void HideAnimation(FrameworkElement element)
         {

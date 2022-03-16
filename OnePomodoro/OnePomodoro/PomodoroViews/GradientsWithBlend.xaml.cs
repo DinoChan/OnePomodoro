@@ -1,24 +1,12 @@
-﻿using OnePomodoro.Helpers;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Composition;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-using Windows.UI;
+﻿using System;
 using System.Numerics;
-using Windows.UI.Xaml.Hosting;
 using System.Threading.Tasks;
 using Microsoft.Graphics.Canvas.Effects;
+using OnePomodoro.Helpers;
+using Windows.UI;
+using Windows.UI.Composition;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Hosting;
 
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -31,15 +19,16 @@ namespace OnePomodoro.PomodoroViews
     [SourceCode("https://github.com/DinoChan/OnePomodoro/blob/master/OnePomodoro/OnePomodoro/PomodoroViews/GradientsWithBlend.xaml.cs")]
     public sealed partial class GradientsWithBlend : PomodoroView
     {
-
         private readonly CompositionLinearGradientBrush _foregroundBrush;
         private readonly CompositionLinearGradientBrush _backgroundBrush;
         private readonly SpriteVisual _backgroundVisual;
         private static readonly Color Blue = Color.FromArgb(255, 43, 210, 255);
         private static readonly Color Green = Color.FromArgb(255, 43, 255, 136);
         private static readonly Color Red = Colors.Red;
+
         //private static readonly Color Pink = Color.FromArgb(255, 255, 43, 212);
         private static readonly Color Pink = Color.FromArgb(255, 142, 211, 255);
+
         private static readonly Color Black = Colors.Black;
 
         private readonly Compositor _compositor;
@@ -68,7 +57,6 @@ namespace OnePomodoro.PomodoroViews
             _foregroundBrush.ColorStops.Add(_bottomRightGradientStop);
             _foregroundBrush.ColorStops.Add(_topLeftradientStop);
 
-
             _backgroundBrush = _compositor.CreateLinearGradientBrush();
             _backgroundBrush.StartPoint = new Vector2(1.0f, 0);
             _backgroundBrush.EndPoint = new Vector2(0, 1.0f);
@@ -81,7 +69,6 @@ namespace OnePomodoro.PomodoroViews
             _bottomLeftGradientStop.Color = Black;
             _backgroundBrush.ColorStops.Add(_topRightGradientStop);
             _backgroundBrush.ColorStops.Add(_bottomLeftGradientStop);
-
 
             var graphicsEffect = new BlendEffect()
             {
@@ -98,22 +85,13 @@ namespace OnePomodoro.PomodoroViews
             _backgroundVisual = _compositor.CreateSpriteVisual();
             _backgroundVisual.Brush = brush;
 
-
             ElementCompositionPreview.SetElementChildVisual(Gradient, _backgroundVisual);
-
-
-
-
 
             //var leftToRightAnimation = _compositor.CreateScalarKeyFrameAnimation();
             //leftToRightAnimation.Duration = TimeSpan.FromSeconds(2);
             //leftToRightAnimation.DelayTime = TimeSpan.FromSeconds(1);
             //leftToRightAnimation.InsertKeyFrame(1.0f, 1.0f);
             //_bottomRightGradientStop.StartAnimation(nameof(_bottomRightGradientStop.Offset), leftToRightAnimation);
-
-
-
-
 
             Loaded += async (s, e) =>
             {
@@ -178,7 +156,6 @@ namespace OnePomodoro.PomodoroViews
 
                 StartOffsetAnimation(_bottomLeftGradientStop, 0.75f);
                 StartColorAnimation(_bottomLeftGradientStop, Pink);
-
             }
         }
 

@@ -1,22 +1,9 @@
-﻿using OnePomodoro.Helpers;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Numerics;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+﻿using System.Numerics;
+using OnePomodoro.Helpers;
 using Windows.UI;
-using Windows.UI.Composition;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Hosting;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -29,31 +16,29 @@ namespace OnePomodoro.PomodoroViews
     [SourceCode("https://github.com/DinoChan/OnePomodoro/blob/master/OnePomodoro/OnePomodoro/PomodoroViews/LongShadow.xaml.cs")]
     public sealed partial class LongShadow : PomodoroView
     {
-
         public LongShadow()
         {
             InitializeComponent();
-            MackLongShadow(188, 0.3f, InWorkCountDown, InworkBackground, Color.FromArgb(255, 250, 110, 93));
-            MackLongShadow(188, 0.3f, InWorkCountDownSecond, InworkSecondBackground, Color.FromArgb(255, 250, 110, 93));
+            MakeLongShadow(188, 0.3f, InWorkCountDown, InworkBackground, Color.FromArgb(255, 250, 110, 93));
+            MakeLongShadow(188, 0.3f, InWorkCountDownSecond, InworkSecondBackground, Color.FromArgb(255, 250, 110, 93));
 
-            MackLongShadow(188, 0.3f, BreakCountDown, BreakBackground, Color.FromArgb(255, 82, 113, 194));
-            MackLongShadow(188, 0.3f, BreakCountDownSecond, BreakSecondBackground, Color.FromArgb(255, 82, 113, 194));
+            MakeLongShadow(188, 0.3f, BreakCountDown, BreakBackground, Color.FromArgb(255, 82, 113, 194));
+            MakeLongShadow(188, 0.3f, BreakCountDownSecond, BreakSecondBackground, Color.FromArgb(255, 82, 113, 194));
 
-            MackLongShadow(188, 0.3f, CompactInWorkCountDown, CompactInworkBackground, Color.FromArgb(255, 250, 110, 93));
-            MackLongShadow(188, 0.3f, CompactInWorkCountDownSecond, CompactInworkSecondBackground, Color.FromArgb(255, 255, 110, 93));
+            MakeLongShadow(188, 0.3f, CompactInWorkCountDown, CompactInworkBackground, Color.FromArgb(255, 250, 110, 93));
+            MakeLongShadow(188, 0.3f, CompactInWorkCountDownSecond, CompactInworkSecondBackground, Color.FromArgb(255, 255, 110, 93));
 
-            MackLongShadow(188, 0.3f, CompactBreakCountDown, CompactBreakBackground, Color.FromArgb(255, 82, 113, 194));
-            MackLongShadow(188, 0.3f, CompactBreakCountDownSecond, CompactBreakSecondBackground, Color.FromArgb(255, 82, 113, 194));
+            MakeLongShadow(188, 0.3f, CompactBreakCountDown, CompactBreakBackground, Color.FromArgb(255, 82, 113, 194));
+            MakeLongShadow(188, 0.3f, CompactBreakCountDownSecond, CompactBreakSecondBackground, Color.FromArgb(255, 82, 113, 194));
 
             ViewModel.IsInPomodoroChanged += (s, e) =>
               {
                   FlipSide.IsFlipped = ViewModel.IsInPomodoro == false;
-                  CompactFlipSide.IsFlipped= ViewModel.IsInPomodoro == false;
+                  CompactFlipSide.IsFlipped = ViewModel.IsInPomodoro == false;
               };
         }
 
-
-        private void MackLongShadow(int depth, float opacity, TextBlock textElement, FrameworkElement shadowElement, Color color)
+        private void MakeLongShadow(int depth, float opacity, TextBlock textElement, FrameworkElement shadowElement, Color color)
         {
             var textVisual = ElementCompositionPreview.GetElementVisual(textElement);
             var compositor = textVisual.Compositor;

@@ -1,9 +1,4 @@
 ﻿using Microsoft.Toolkit.Uwp.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 
@@ -29,7 +24,6 @@ namespace OnePomodoro.Helpers
 
         private bool _isCompactOverlayMode;
 
-
         public bool IsCompactOverlayMode
         {
             get => _isCompactOverlayMode;
@@ -38,7 +32,7 @@ namespace OnePomodoro.Helpers
                 _isCompactOverlayMode = value;
                 if (!Windows.ApplicationModel.DesignMode.DesignModeEnabled)
                 {
-                    var isCompactOverlayMode = ApplicationView.GetForCurrentView().ViewMode== ApplicationViewMode.CompactOverlay;
+                    var isCompactOverlayMode = ApplicationView.GetForCurrentView().ViewMode == ApplicationViewMode.CompactOverlay;
                     UpdateTrigger(isCompactOverlayMode);
                 }
             }

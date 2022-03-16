@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Windows.Input;
 using Windows.UI;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-
 
 namespace OnePomodoro.Controls
 {
@@ -15,16 +9,13 @@ namespace OnePomodoro.Controls
     [TemplateVisualState(GroupName = ProgressStatesName, Name = BusyStateName)]
     [TemplateVisualState(GroupName = PromodoroStatesName, Name = InworkStateName)]
     [TemplateVisualState(GroupName = PromodoroStatesName, Name = BreakStateName)]
-
     public class PomodoroStateButton : Button
     {
-        private const string ProgressStatesName = "ProgressStates";
-        private const string IdleStateName = "Idle";
-        private const string BusyStateName = "Busy";
-
-        private const string PromodoroStatesName = "PromodoroStates";
-        private const string InworkStateName = "Inwork";
-        private const string BreakStateName = "Break";
+        /// <summary>
+        /// 标识 BreakColor 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty BreakColorProperty =
+            DependencyProperty.Register(nameof(BreakColor), typeof(Color), typeof(PomodoroStateButton), new PropertyMetadata(Colors.White));
 
         /// <summary>
         /// 标识 IsInPomodoro 依赖属性。
@@ -39,6 +30,18 @@ namespace OnePomodoro.Controls
             DependencyProperty.Register(nameof(IsTimerInProgress), typeof(bool), typeof(PomodoroStateButton), new PropertyMetadata(default(bool), OnIsTimerInProgressChanged));
 
         /// <summary>
+        /// 标识 OutlineColor 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty OutlineColorProperty =
+            DependencyProperty.Register(nameof(OutlineColor), typeof(Color), typeof(PomodoroStateButton), new PropertyMetadata(Colors.White));
+
+        /// <summary>
+        /// 标识 PomodoroColor 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty PomodoroColorProperty =
+            DependencyProperty.Register(nameof(PomodoroColor), typeof(Color), typeof(PomodoroStateButton), new PropertyMetadata(Colors.White));
+
+        /// <summary>
         /// 标识 StartCommand 依赖属性。
         /// </summary>
         public static readonly DependencyProperty StartCommandProperty =
@@ -50,29 +53,26 @@ namespace OnePomodoro.Controls
         public static readonly DependencyProperty StopCommandProperty =
             DependencyProperty.Register(nameof(StopCommand), typeof(ICommand), typeof(PomodoroStateButton), new PropertyMetadata(null));
 
-        /// <summary>
-        /// 标识 PomodoroColor 依赖属性。
-        /// </summary>
-        public static readonly DependencyProperty PomodoroColorProperty =
-            DependencyProperty.Register(nameof(PomodoroColor), typeof(Color), typeof(PomodoroStateButton), new PropertyMetadata(Colors.White));
-
-        /// <summary>
-        /// 标识 BreakColor 依赖属性。
-        /// </summary>
-        public static readonly DependencyProperty BreakColorProperty =
-            DependencyProperty.Register(nameof(BreakColor), typeof(Color), typeof(PomodoroStateButton), new PropertyMetadata(Colors.White));
-
-
-        /// <summary>
-        /// 标识 OutlineColor 依赖属性。
-        /// </summary>
-        public static readonly DependencyProperty OutlineColorProperty =
-            DependencyProperty.Register(nameof(OutlineColor), typeof(Color), typeof(PomodoroStateButton), new PropertyMetadata(Colors.White));
+        private const string BreakStateName = "Break";
+        private const string BusyStateName = "Busy";
+        private const string IdleStateName = "Idle";
+        private const string InworkStateName = "Inwork";
+        private const string ProgressStatesName = "ProgressStates";
+        private const string PromodoroStatesName = "PromodoroStates";
 
         public PomodoroStateButton()
         {
             DefaultStyleKey = typeof(PomodoroStateButton);
             Click += OnClick;
+        }
+
+        /// <summary>
+        /// 获取或设置BreakColor的值
+        /// </summary>
+        public Color BreakColor
+        {
+            get => (Color)GetValue(BreakColorProperty);
+            set => SetValue(BreakColorProperty, value);
         }
 
         /// <summary>
@@ -94,6 +94,24 @@ namespace OnePomodoro.Controls
         }
 
         /// <summary>
+        /// 获取或设置BreakColor的值
+        /// </summary>
+        public Color OutlineColor
+        {
+            get => (Color)GetValue(OutlineColorProperty);
+            set => SetValue(OutlineColorProperty, value);
+        }
+
+        /// <summary>
+        /// 获取或设置PomodoroColor的值
+        /// </summary>
+        public Color PomodoroColor
+        {
+            get => (Color)GetValue(PomodoroColorProperty);
+            set => SetValue(PomodoroColorProperty, value);
+        }
+
+        /// <summary>
         /// 获取或设置StartCommand的值
         /// </summary>
         public ICommand StartCommand
@@ -109,33 +127,6 @@ namespace OnePomodoro.Controls
         {
             get => (ICommand)GetValue(StopCommandProperty);
             set => SetValue(StopCommandProperty, value);
-        }
-
-        /// <summary>
-        /// 获取或设置PomodoroColor的值
-        /// </summary>
-        public Color PomodoroColor
-        {
-            get => (Color)GetValue(PomodoroColorProperty);
-            set => SetValue(PomodoroColorProperty, value);
-        }
-
-        /// <summary>
-        /// 获取或设置BreakColor的值
-        /// </summary>
-        public Color BreakColor
-        {
-            get => (Color)GetValue(BreakColorProperty);
-            set => SetValue(BreakColorProperty, value);
-        }
-
-        /// <summary>
-        /// 获取或设置BreakColor的值
-        /// </summary>
-        public Color OutlineColor
-        {
-            get => (Color)GetValue(OutlineColorProperty);
-            set => SetValue(OutlineColorProperty, value);
         }
 
         protected override void OnApplyTemplate()

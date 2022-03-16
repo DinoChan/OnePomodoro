@@ -8,7 +8,6 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Markup;
 using Windows.UI.Xaml.Media;
 
-
 namespace OnePomodoro.Controls
 {
     [ContentProperty(Name = nameof(Children))]
@@ -17,26 +16,6 @@ namespace OnePomodoro.Controls
         public ProgressToPointCollectionBridge()
         {
             Children = new ObservableCollection<PointCollection>();
-        }
-
-
-        /// <summary>
-        ///     获取或设置Points的值
-        /// </summary>
-        public PointCollection Points
-        {
-            get { return (PointCollection)GetValue(PointsProperty); }
-            set { SetValue(PointsProperty, value); }
-        }
-
-
-        /// <summary>
-        ///     获取或设置Progress的值
-        /// </summary>
-        public double Progress
-        {
-            get { return (double)GetValue(ProgressProperty); }
-            set { SetValue(ProgressProperty, value); }
         }
 
         /// <summary>
@@ -48,12 +27,23 @@ namespace OnePomodoro.Controls
             set { SetValue(ChildrenProperty, value); }
         }
 
-
-        protected virtual void OnProgressChanged(double oldValue, double newValue)
+        /// <summary>
+        ///     获取或设置Points的值
+        /// </summary>
+        public PointCollection Points
         {
-            UpdatePoints();
+            get { return (PointCollection)GetValue(PointsProperty); }
+            set { SetValue(PointsProperty, value); }
         }
 
+        /// <summary>
+        ///     获取或设置Progress的值
+        /// </summary>
+        public double Progress
+        {
+            get { return (double)GetValue(ProgressProperty); }
+            set { SetValue(ProgressProperty, value); }
+        }
 
         protected virtual void OnChildrenChanged(Collection<PointCollection> oldValue, Collection<PointCollection> newValue)
         {
@@ -66,6 +56,31 @@ namespace OnePomodoro.Controls
                 newCollection.CollectionChanged += OnChildrenCollectionChanged;
 
             UpdatePoints();
+        }
+
+        protected virtual void OnProgressChanged(double oldValue, double newValue)
+        {
+            UpdatePoints();
+        }
+
+        private PointCollection GetCurrentPoints(PointCollection fromPoints, PointCollection toPoints, double percentage)
+        {
+            var points = new List<Point>();
+            for (var i = 0;
+                 i < Math.Min(fromPoints.Count, toPoints.Count);
+                 i++)
+            {
+                var x = (1 - percentage) * fromPoints[i].X + percentage * toPoints[i].X;
+                var y = (1 - percentage) * fromPoints[i].Y + percentage * toPoints[i].Y;
+
+                points.Add(new Point(x, y));
+            }
+            var result = new PointCollection();
+            foreach (var point in points.Distinct())
+            {
+                result.Add(point);
+            }
+            return result;
         }
 
         private void OnChildrenCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -111,49 +126,25 @@ namespace OnePomodoro.Controls
             }
         }
 
-        private PointCollection GetCurrentPoints(PointCollection fromPoints, PointCollection toPoints, double percentage)
-        {
-            var points = new List<Point>();
-            for (var i = 0;
-                 i < Math.Min(fromPoints.Count, toPoints.Count);
-                 i++)
-            {
-                var x = (1 - percentage) * fromPoints[i].X + percentage * toPoints[i].X;
-                var y = (1 - percentage) * fromPoints[i].Y + percentage * toPoints[i].Y;
-
-                points.Add(new Point(x, y));
-
-            }
-            var result = new PointCollection();
-            foreach (var point in points.Distinct())
-            {
-                result.Add(point);
-            }
-            return result;
-        }
-
         #region DependencyProperties
-
-        /// <summary>
-        ///     标识 Progress 依赖属性。
-        /// </summary>
-        public static readonly DependencyProperty ProgressProperty =
-            DependencyProperty.Register("Progress", typeof(double), typeof(ProgressToPointCollectionBridge), new PropertyMetadata(0d, OnProgressChanged));
-
-        private static void OnProgressChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
-        {
-            var target = obj as ProgressToPointCollectionBridge;
-            var oldValue = (double)args.OldValue;
-            var newValue = (double)args.NewValue;
-            if (oldValue != newValue)
-                target.OnProgressChanged(oldValue, newValue);
-        }
 
         /// <summary>
         ///     标识 Children 依赖属性。
         /// </summary>
         public static readonly DependencyProperty ChildrenProperty =
             DependencyProperty.Register("Children", typeof(Collection<PointCollection>), typeof(ProgressToPointCollectionBridge), new PropertyMetadata(null, OnChildrenChanged));
+
+        /// <summary>
+        ///     标识 Points 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty PointsProperty =
+            DependencyProperty.Register("Points", typeof(PointCollection), typeof(ProgressToPointCollectionBridge), new PropertyMetadata(null));
+
+        /// <summary>
+        ///     标识 Progress 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty ProgressProperty =
+            DependencyProperty.Register("Progress", typeof(double), typeof(ProgressToPointCollectionBridge), new PropertyMetadata(0d, OnProgressChanged));
 
         private static void OnChildrenChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
         {
@@ -164,13 +155,15 @@ namespace OnePomodoro.Controls
                 target.OnChildrenChanged(oldValue, newValue);
         }
 
-        /// <summary>
-        ///     标识 Points 依赖属性。
-        /// </summary>
-        public static readonly DependencyProperty PointsProperty =
-            DependencyProperty.Register("Points", typeof(PointCollection), typeof(ProgressToPointCollectionBridge), new PropertyMetadata(null));
+        private static void OnProgressChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        {
+            var target = obj as ProgressToPointCollectionBridge;
+            var oldValue = (double)args.OldValue;
+            var newValue = (double)args.NewValue;
+            if (oldValue != newValue)
+                target.OnProgressChanged(oldValue, newValue);
+        }
 
-        #endregion
+        #endregion DependencyProperties
     }
-
 }

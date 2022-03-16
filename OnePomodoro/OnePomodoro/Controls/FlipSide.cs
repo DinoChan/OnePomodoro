@@ -1,17 +1,10 @@
 ﻿//https://github.com/cnbluefire/FlipSide
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.UI.Composition;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Documents;
 using Windows.UI.Xaml.Hosting;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 
 // The Templated Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234235
 
@@ -19,21 +12,45 @@ namespace OnePomodoro.Controls
 {
     public sealed class FlipSide : Control
     {
+        public static readonly DependencyProperty IsFlippedProperty =
+            DependencyProperty.Register("IsFlipped", typeof(bool), typeof(FlipSide), new PropertyMetadata(false, (s, a) =>
+            {
+                if (a.NewValue != a.OldValue)
+                {
+                    if (s is FlipSide sender)
+                    {
+                        sender.OnIsFlippedChanged();
+                    }
+                }
+            }));
+
+        public static readonly DependencyProperty Side1Property =
+            DependencyProperty.Register("Side1", typeof(object), typeof(FlipSide), new PropertyMetadata(null));
+
+        public static readonly DependencyProperty Side2Property =
+            DependencyProperty.Register("Side2", typeof(object), typeof(FlipSide), new PropertyMetadata(null));
+
+        private Vector2 axis;
+
+        private Grid LayoutRoot;
+
+        private Visual s1Visual;
+
+        private Visual s2Visual;
+
+        private ContentPresenter Side1Content;
+
+        private ContentPresenter Side2Content;
+
+        private SpringScalarNaturalMotionAnimation springAnimation1;
+
+        private SpringScalarNaturalMotionAnimation springAnimation2;
+
         public FlipSide()
         {
             axis = new Vector2(0, 1);
             this.DefaultStyleKey = typeof(FlipSide);
         }
-
-        ContentPresenter Side1Content;
-        ContentPresenter Side2Content;
-        Grid LayoutRoot;
-
-        private Visual s1Visual;
-        private Visual s2Visual;
-        private Vector2 axis;
-        private SpringScalarNaturalMotionAnimation springAnimation1;
-        private SpringScalarNaturalMotionAnimation springAnimation2;
 
         public Vector2 Axis
         {
@@ -52,68 +69,17 @@ namespace OnePomodoro.Controls
             set { SetValue(IsFlippedProperty, value); }
         }
 
-        public static readonly DependencyProperty IsFlippedProperty =
-            DependencyProperty.Register("IsFlipped", typeof(bool), typeof(FlipSide), new PropertyMetadata(false, (s, a) =>
-            {
-                if (a.NewValue != a.OldValue)
-                {
-                    if (s is FlipSide sender)
-                    {
-                        sender.OnIsFlippedChanged();
-                    }
-                }
-            }));
-
-
-
         public object Side1
         {
             get { return (object)GetValue(Side1Property); }
             set { SetValue(Side1Property, value); }
         }
 
-        public static readonly DependencyProperty Side1Property =
-            DependencyProperty.Register("Side1", typeof(object), typeof(FlipSide), new PropertyMetadata(null));
-
         public object Side2
         {
             get { return (object)GetValue(Side2Property); }
             set { SetValue(Side2Property, value); }
         }
-
-        public static readonly DependencyProperty Side2Property =
-            DependencyProperty.Register("Side2", typeof(object), typeof(FlipSide), new PropertyMetadata(null));
-
-        private void OnIsFlippedChanged()
-        {
-            float f1 = 0f, f2 = 0f;
-            if (IsFlipped)
-            {
-                f1 = 180f;
-                f2 = 360f;
-                VisualStateManager.GoToState(this, "Slide2", false);
-            }
-            else
-            {
-                f1 = 0f;
-                f2 = 180f;
-                VisualStateManager.GoToState(this, "Slide1", false);
-            }
-            if (springAnimation1 != null && springAnimation2 != null)
-            {
-                springAnimation1.FinalValue = f1;
-                springAnimation2.FinalValue = f2;
-                s1Visual.StartAnimation("RotationAngleInDegrees", springAnimation1);
-                s2Visual.StartAnimation("RotationAngleInDegrees", springAnimation2);
-            }
-            else
-            {
-                s1Visual.RotationAngleInDegrees = f1;
-                s2Visual.RotationAngleInDegrees = f2;
-            }
-
-        }
-
 
         protected override void OnApplyTemplate()
         {
@@ -167,6 +133,44 @@ namespace OnePomodoro.Controls
             UpdateAxis(Side2Content);
         }
 
+        private void OnIsFlippedChanged()
+        {
+            float f1 = 0f, f2 = 0f;
+            if (IsFlipped)
+            {
+                f1 = 180f;
+                f2 = 360f;
+                VisualStateManager.GoToState(this, "Slide2", false);
+            }
+            else
+            {
+                f1 = 0f;
+                f2 = 180f;
+                VisualStateManager.GoToState(this, "Slide1", false);
+            }
+            if (springAnimation1 != null && springAnimation2 != null)
+            {
+                springAnimation1.FinalValue = f1;
+                springAnimation2.FinalValue = f2;
+                s1Visual.StartAnimation("RotationAngleInDegrees", springAnimation1);
+                s2Visual.StartAnimation("RotationAngleInDegrees", springAnimation2);
+            }
+            else
+            {
+                s1Visual.RotationAngleInDegrees = f1;
+                s2Visual.RotationAngleInDegrees = f2;
+            }
+        }
+
+        private void UpdateAxis(FrameworkElement element)
+        {
+            var visual = ElementCompositionPreview.GetElementVisual(element);
+            var size = element.RenderSize.ToVector2();
+
+            visual.CenterPoint = new Vector3(size.X / 2, size.Y / 2, 0f);
+            visual.RotationAxis = new Vector3(axis, 0f);
+        }
+
         private void UpdateTransformMatrix(FrameworkElement element)
         {
             var host = ElementCompositionPreview.GetElementVisual(element);
@@ -184,15 +188,6 @@ namespace OnePomodoro.Controls
                 Matrix4x4.CreateTranslation(-size.X / 2, -size.Y / 2, 0f) *
                 perspective *
                 Matrix4x4.CreateTranslation(size.X / 2, size.Y / 2, 0f);
-        }
-
-        private void UpdateAxis(FrameworkElement element)
-        {
-            var visual = ElementCompositionPreview.GetElementVisual(element);
-            var size = element.RenderSize.ToVector2();
-
-            visual.CenterPoint = new Vector3(size.X / 2, size.Y / 2, 0f);
-            visual.RotationAxis = new Vector3(axis, 0f);
         }
     }
 }

@@ -1,21 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.UI.Composition;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Documents;
 using Windows.UI.Xaml.Hosting;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 
 namespace OnePomodoro.Controls
 {
     public class RippleControl : Control
     {
+        /// <summary>
+        /// 标识 IsShwoRipple 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty IsShowRippleProperty =
+            DependencyProperty.Register(nameof(IsShowRipple), typeof(bool), typeof(RippleControl), new PropertyMetadata(default(bool), OnIsShwoRippleChanged));
+
         private CompositionEllipseGeometry _geomerty;
 
         public RippleControl()
@@ -25,7 +24,6 @@ namespace OnePomodoro.Controls
             StartClipAnimation();
         }
 
-
         /// <summary>
         /// 获取或设置IsShwoRipple的值
         /// </summary>
@@ -33,23 +31,6 @@ namespace OnePomodoro.Controls
         {
             get => (bool)GetValue(IsShowRippleProperty);
             set => SetValue(IsShowRippleProperty, value);
-        }
-
-        /// <summary>
-        /// 标识 IsShwoRipple 依赖属性。
-        /// </summary>
-        public static readonly DependencyProperty IsShowRippleProperty =
-            DependencyProperty.Register(nameof(IsShowRipple), typeof(bool), typeof(RippleControl), new PropertyMetadata(default(bool), OnIsShwoRippleChanged));
-
-        private static void OnIsShwoRippleChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
-        {
-            var oldValue = (bool)args.OldValue;
-            var newValue = (bool)args.NewValue;
-            if (oldValue == newValue)
-                return;
-
-            var target = obj as RippleControl;
-            target?.OnIsShwoRippleChanged(oldValue, newValue);
         }
 
         /// <summary>
@@ -62,13 +43,15 @@ namespace OnePomodoro.Controls
             StartClipAnimation();
         }
 
-        private void MakeClip()
+        private static void OnIsShwoRippleChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
         {
-            var compositor = Window.Current.Compositor;
-            var visual = ElementCompositionPreview.GetElementVisual(this);
-            _geomerty = CreateEllipseGeometry();
-            var clip = compositor.CreateGeometricClip(_geomerty);
-            visual.Clip = clip;
+            var oldValue = (bool)args.OldValue;
+            var newValue = (bool)args.NewValue;
+            if (oldValue == newValue)
+                return;
+
+            var target = obj as RippleControl;
+            target?.OnIsShwoRippleChanged(oldValue, newValue);
         }
 
         private CompositionEllipseGeometry CreateEllipseGeometry()
@@ -84,12 +67,19 @@ namespace OnePomodoro.Controls
             return ellipseGeomerty;
         }
 
+        private void MakeClip()
+        {
+            var compositor = Window.Current.Compositor;
+            var visual = ElementCompositionPreview.GetElementVisual(this);
+            _geomerty = CreateEllipseGeometry();
+            var clip = compositor.CreateGeometricClip(_geomerty);
+            visual.Clip = clip;
+        }
 
         private void StartClipAnimation()
         {
             if (_geomerty == null)
                 return;
-
 
             var compositor = Window.Current.Compositor;
             var animation = compositor.CreateVector2KeyFrameAnimation();
@@ -103,6 +93,5 @@ namespace OnePomodoro.Controls
 
             _geomerty.StartAnimation(nameof(CompositionEllipseGeometry.Radius), animation);
         }
-
     }
 }

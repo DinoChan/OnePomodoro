@@ -1,19 +1,12 @@
-﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Timers;
-using Windows.System.Threading;
+﻿using System;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Windows.UI.Xaml;
+
 //https://docs.microsoft.com/zh-cn/windows/uwp/launch-resume/app-lifecycle
 namespace OnePomodoro.Helpers
 {
     public class CountdownTimer : ObservableObject
     {
-
         private DispatcherTimer _innerTimer;
         private TimeSpan _totalTime;
         private TimeSpan _remainingTime;
@@ -25,10 +18,10 @@ namespace OnePomodoro.Helpers
             _innerTimer = new DispatcherTimer();
             _innerTimer.Tick += OnInnerTimerTick;
             _innerTimer.Interval = TimeSpan.FromSeconds(0.1);
-
         }
 
         public event EventHandler Finished;
+
         public event EventHandler Elapsed;
 
         public TimeSpan TotalTime => _totalTime;

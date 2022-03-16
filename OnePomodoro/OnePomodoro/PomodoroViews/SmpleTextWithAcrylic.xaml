@@ -45,7 +45,6 @@
                         <TextBlock.Lights>
                             <media:XamlPointLight Distance="400.16" Color="#FFD91153" />
                         </TextBlock.Lights>
-
                     </TextBlock>
                     <TextBlock FontFamily="{StaticResource TimeFont}"
                                FontWeight="Bold"
@@ -70,7 +69,6 @@
                         <TextBlock.Lights>
                             <media:XamlPointLight Distance="800.16" Color="#FF001BAB" />
                         </TextBlock.Lights>
-
                     </TextBlock>
                     <TextBlock FontFamily="{StaticResource TimeFont}"
                                FontWeight="Bold"
@@ -87,6 +85,5 @@
                                               StopCommand="{Binding StopTimerCommand}" />
             </StackPanel>
         </ContentControl>
-
     </Grid>
 </local:PomodoroView>

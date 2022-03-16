@@ -1,28 +1,27 @@
 ﻿<local:PomodoroView x:Class="OnePomodoro.PomodoroViews.TheFirst"
                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="using:OnePomodoro.PomodoroViews"
-                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                    mc:Ignorable="d"
-                    xmlns:converters="using:Microsoft.Toolkit.Uwp.UI.Converters"
                     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
-                    xmlns:viewModels="using:OnePomodoro.ViewModels"
-                    xmlns:helpers="using:OnePomodoro.Helpers"
                     xmlns:controls="using:OnePomodoro.Controls"
-                    x:DefaultBindMode="OneWay"
+                    xmlns:converters="using:Microsoft.Toolkit.Uwp.UI.Converters"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:helpers="using:OnePomodoro.Helpers"
+                    xmlns:local="using:OnePomodoro.PomodoroViews"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:viewModels="using:OnePomodoro.ViewModels"
                     d:DataContext="{d:DesignInstance Type=viewModels:PomodoroViewModel}"
-                    RequestedTheme="Dark"
                     d:DesignHeight="300"
-                    d:DesignWidth="1920">
+                    d:DesignWidth="1920"
+                    x:DefaultBindMode="OneWay"
+                    RequestedTheme="Dark"
+                    mc:Ignorable="d">
     <UserControl.Resources>
-        <converters:BoolToObjectConverter TrueValue="Top"
+        <converters:BoolToObjectConverter x:Key="BoolToVerticalAlignmentConverter"
                                           FalseValue="Bottom"
-                                          x:Key="BoolToVerticalAlignmentConverter" />
-        <converters:BoolToObjectConverter TrueValue="Left"
+                                          TrueValue="Top" />
+        <converters:BoolToObjectConverter x:Key="BoolToVerticalHorizontalAlignment"
                                           FalseValue="Right"
-                                          x:Key="BoolToVerticalHorizontalAlignment" />
-
+                                          TrueValue="Left" />
     </UserControl.Resources>
     <Grid x:Name="ContentArea">
         <VisualStateManager.VisualStateGroups>
@@ -32,24 +31,16 @@
                         <AdaptiveTrigger MinWindowWidth="60" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="InWorkTitle.FontSize"
-                                Value="128" />
-                        <Setter Target="InWorkTitle.Margin"
-                                Value="10,-24,0,0" />
-                        <Setter Target="InWorkCountDown.FontSize"
-                                Value="80" />
-                        <Setter Target="InWorkCountDown.Margin"
-                                Value="4,-40,0,0" />
+                        <Setter Target="InWorkTitle.FontSize" Value="128" />
+                        <Setter Target="InWorkTitle.Margin" Value="10,-24,0,0" />
+                        <Setter Target="InWorkCountDown.FontSize" Value="80" />
+                        <Setter Target="InWorkCountDown.Margin" Value="4,-40,0,0" />
 
-                        <Setter Target="BreakCountDown.FontSize"
-                                Value="80" />
-                        <Setter Target="BreakCountDown.Margin"
-                                Value="0,0,22,-20" />
+                        <Setter Target="BreakCountDown.FontSize" Value="80" />
+                        <Setter Target="BreakCountDown.Margin" Value="0,0,22,-20" />
 
-                        <Setter Target="BreakTitle.FontSize"
-                                Value="128" />
-                        <Setter Target="BreakTitle.Margin"
-                                Value="0,0,30,-6" />
+                        <Setter Target="BreakTitle.FontSize" Value="128" />
+                        <Setter Target="BreakTitle.Margin" Value="0,0,30,-6" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState>
@@ -59,114 +50,110 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        <Grid Grid.Row="1"
-              Background="#FF101010">
+        <Grid Grid.Row="1" Background="#FF101010">
             <StackPanel Margin="40"
-                        VerticalAlignment="{Binding IsInPomodoro,Converter={StaticResource BoolToVerticalAlignmentConverter}}"
-                        HorizontalAlignment="{Binding IsInPomodoro,Converter={StaticResource BoolToVerticalHorizontalAlignment}}">
+                        HorizontalAlignment="{Binding IsInPomodoro, Converter={StaticResource BoolToVerticalHorizontalAlignment}}"
+                        VerticalAlignment="{Binding IsInPomodoro, Converter={StaticResource BoolToVerticalAlignmentConverter}}">
                 <animations:Implicit.Animations>
-                    <animations:Vector3Animation Target="Offset"
-                                                 Duration="0:0:1" />
+                    <animations:Vector3Animation Target="Offset" Duration="0:0:1" />
                 </animations:Implicit.Animations>
-                <TextBlock Text="In Work"
-                           x:Name="InWorkTitle"
-                           Foreground="#FF9E1300"
-                           FontSize="256"
+                <TextBlock x:Name="InWorkTitle"
+                           Margin="0,-60,0,0"
                            FontFamily="{StaticResource TimeFont}"
+                           FontSize="256"
                            FontWeight="Bold"
-                           Visibility="{Binding IsInPomodoro,Converter={StaticResource BoolToVisibilityConverter}}"
-                           Margin="0,-60,0,0">
-                     <animations:Implicit.ShowAnimations>
-                                  <animations:OpacityAnimation Duration="0:0:0.5"
-                                                               From="0"
-                                                               To="1.0" />
-                     </animations:Implicit.ShowAnimations>
-                     <animations:Implicit.HideAnimations>
-                                  <animations:OpacityAnimation Duration="0:0:0.5"
-                                                               From="1"
-                                                               To="0" />
-                     </animations:Implicit.HideAnimations>
+                           Foreground="#FF9E1300"
+                           Text="In Work"
+                           Visibility="{Binding IsInPomodoro, Converter={StaticResource BoolToVisibilityConverter}}">
+                    <animations:Implicit.ShowAnimations>
+                        <animations:OpacityAnimation From="0"
+                                                     To="1.0"
+                                                     Duration="0:0:0.5" />
+                    </animations:Implicit.ShowAnimations>
+                    <animations:Implicit.HideAnimations>
+                        <animations:OpacityAnimation From="1"
+                                                     To="0"
+                                                     Duration="0:0:0.5" />
+                    </animations:Implicit.HideAnimations>
                 </TextBlock>
-                <TextBlock Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
-                           x:Name="InWorkCountDown"
+                <TextBlock x:Name="InWorkCountDown"
+                           Margin="8,-80,0,0"
                            FontFamily="{StaticResource TimeFont}"
                            FontSize="160"
                            Foreground="#FF999999"
-                           Margin="8,-80,0,0"
-                           Visibility="{Binding IsInPomodoro,Converter={StaticResource BoolToVisibilityConverter}}">
+                           Text="{Binding RemainingPomodoroTime, Converter={StaticResource FormatStringConverter}, ConverterParameter=mm\\:ss}"
+                           Visibility="{Binding IsInPomodoro, Converter={StaticResource BoolToVisibilityConverter}}">
 
                     <animations:Implicit.ShowAnimations>
                         <animations:ScalarAnimation Target="Translation.Y"
-                                                    Duration="0:0:1.5"
                                                     From="200"
-                                                    To="0" />
-                        <animations:OpacityAnimation Duration="0:0:1.5"
-                                                     From="0"
-                                                     To="1" />
+                                                    To="0"
+                                                    Duration="0:0:1.5" />
+                        <animations:OpacityAnimation From="0"
+                                                     To="1"
+                                                     Duration="0:0:1.5" />
                     </animations:Implicit.ShowAnimations>
 
                     <animations:Implicit.HideAnimations>
-                        <animations:OpacityAnimation Duration="0:0:0.5"
-                                                     From="1"
-                                                     To="0" />
+                        <animations:OpacityAnimation From="1"
+                                                     To="0"
+                                                     Duration="0:0:0.5" />
                     </animations:Implicit.HideAnimations>
                 </TextBlock>
-                <TextBlock Text="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}"
-                           x:Name="BreakCountDown"
-                           FontSize="160"
-                           FontFamily="{StaticResource TimeFont}"
-                           Foreground="#FF999999"
+                <TextBlock x:Name="BreakCountDown"
                            Margin="0,0,22,-40"
                            HorizontalAlignment="Right"
-                           Visibility="{Binding IsInPomodoro,Converter={StaticResource NegationBoolToVisibilityConverter}}">
+                           FontFamily="{StaticResource TimeFont}"
+                           FontSize="160"
+                           Foreground="#FF999999"
+                           Text="{Binding RemainingBreakTime, Converter={StaticResource FormatStringConverter}, ConverterParameter=mm\\:ss}"
+                           Visibility="{Binding IsInPomodoro, Converter={StaticResource NegationBoolToVisibilityConverter}}">
                     <animations:Implicit.ShowAnimations>
-                            <animations:ScalarAnimation Target="Translation.Y"
-                                                        Duration="0:0:1.5"
-                                                        From="-200"
-                                                        To="0" />
-                       
-                          <animations:OpacityAnimation Duration="0:0:1.5"
-                                                       From="0"
-                                                       To="1" />
-                        </animations:Implicit.ShowAnimations>
-                        <animations:Implicit.HideAnimations>
-                        <animations:OpacityAnimation Duration="0:0:0.5"
-                                                     From="1"
-                                                     To="0" />
-                        </animations:Implicit.HideAnimations>
+                        <animations:ScalarAnimation Target="Translation.Y"
+                                                    From="-200"
+                                                    To="0"
+                                                    Duration="0:0:1.5" />
+
+                        <animations:OpacityAnimation From="0"
+                                                     To="1"
+                                                     Duration="0:0:1.5" />
+                    </animations:Implicit.ShowAnimations>
+                    <animations:Implicit.HideAnimations>
+                        <animations:OpacityAnimation From="1"
+                                                     To="0"
+                                                     Duration="0:0:0.5" />
+                    </animations:Implicit.HideAnimations>
                 </TextBlock>
 
-
-                <TextBlock Text="Take a Break"
-                           x:Name="BreakTitle"
-                           Foreground="#FF001BAB"
-                           FontSize="256"
+                <TextBlock x:Name="BreakTitle"
+                           Margin="0,0,30,-48"
                            FontFamily="{StaticResource TimeFont}"
+                           FontSize="256"
                            FontWeight="Bold"
-                           Visibility="{Binding IsInPomodoro,Converter={StaticResource NegationBoolToVisibilityConverter}}"
-                           Margin="0,0,30,-48">
-                     <animations:Implicit.ShowAnimations>
-                        <animations:OpacityAnimation Duration="0:0:0.5"
-                                                     From="0"
-                                                     To="1.0" />
-                        </animations:Implicit.ShowAnimations>
+                           Foreground="#FF001BAB"
+                           Text="Take a Break"
+                           Visibility="{Binding IsInPomodoro, Converter={StaticResource NegationBoolToVisibilityConverter}}">
+                    <animations:Implicit.ShowAnimations>
+                        <animations:OpacityAnimation From="0"
+                                                     To="1.0"
+                                                     Duration="0:0:0.5" />
+                    </animations:Implicit.ShowAnimations>
                     <animations:Implicit.HideAnimations>
 
-                        <animations:OpacityAnimation Duration="0:0:0.5"
-                                                     From="1"
-                                                     To="0" />
+                        <animations:OpacityAnimation From="1"
+                                                     To="0"
+                                                     Duration="0:0:0.5" />
                     </animations:Implicit.HideAnimations>
                 </TextBlock>
             </StackPanel>
 
-
             <controls:PomodoroStateButton Margin="45,60"
                                           HorizontalAlignment="Left"
                                           VerticalAlignment="Bottom"
-                                          StartCommand="{Binding StartTimerCommand}"
-                                          StopCommand="{Binding StopTimerCommand}"
                                           IsInPomodoro="{x:Bind ViewModel.IsInPomodoro}"
-                                          IsTimerInProgress="{x:Bind ViewModel.IsTimerInProgress}"/>
+                                          IsTimerInProgress="{x:Bind ViewModel.IsTimerInProgress}"
+                                          StartCommand="{Binding StartTimerCommand}"
+                                          StopCommand="{Binding StopTimerCommand}" />
         </Grid>
     </Grid>
 </local:PomodoroView>

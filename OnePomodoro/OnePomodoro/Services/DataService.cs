@@ -11,7 +11,7 @@ namespace OnePomodoro.Services
 {
     public class DataService
     {
-        public readonly static string DbName = "pomodoro.db";
+        public static readonly string DbName = "pomodoro.db";
 
         public static async Task<bool> IsFilePresent()
         {

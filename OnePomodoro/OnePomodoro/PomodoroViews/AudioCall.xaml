@@ -51,7 +51,6 @@
                              To="0"
                              Duration="00:00:0.5" />
 
-
             <DoubleAnimation Storyboard.TargetName="ShadowSource"
                              Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)"
                              To="0.92"
@@ -81,7 +80,6 @@
                              Storyboard.TargetProperty="(UIElement.Opacity)"
                              To="0.3"
                              Duration="00:00:2" />
-
         </Storyboard>
     </UserControl.Resources>
     <Grid x:Name="ContentArea">
@@ -190,7 +188,6 @@
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
-
         </VisualStateManager.VisualStateGroups>
         <helpers:SolidColorBrushBridge x:Name="BrushBridge" Color="{StaticResource RedForeground}" />
         <Grid x:Name="LayoutRoot"
@@ -206,7 +203,6 @@
                           Height="208"
                           HorizontalAlignment="Center"
                           VerticalAlignment="Center">
-
 
                         <Grid>
 
@@ -228,7 +224,6 @@
                                 </controls:DropShadowPanel.RenderTransform>
                             </controls:DropShadowPanel>
 
-
                             <Grid x:Name="OuterShadowSource" RenderTransformOrigin="0.5,0.5">
                                 <Grid.RenderTransform>
                                     <CompositeTransform />
@@ -246,10 +241,10 @@
                                                  Margin="1"
                                                  Fill="{StaticResource Background}" />
                                     </controls1:DropShadowPanel>
-                                    <controls1:RadialProgressBar x:Name="ProgressBar"
-                                                                 Foreground="{Binding ElementName=BrushBridge, Path=Brush}"
-                                                                 Thickness="4"
-                                                                 Value="0.5" />
+                                    <controls:RadialProgressBar x:Name="ProgressBar"
+                                                                Foreground="{Binding ElementName=BrushBridge, Path=Brush}"
+                                                                Thickness="4"
+                                                                Value="0.5" />
                                 </Grid>
                             </Grid>
                             <Ellipse Margin="7" Fill="#e6eddd" />
@@ -288,7 +283,6 @@
                     </Grid>
                 </Grid>
             </Viewbox>
-
         </Grid>
     </Grid>
 </local:PomodoroView>

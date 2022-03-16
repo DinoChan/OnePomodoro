@@ -16,12 +16,10 @@
 
                 <ResourceDictionary Source="/Themes/Converters.xaml" />
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
-
             </ResourceDictionary.MergedDictionaries>
-           
+
             <FontFamily x:Key="TimeFont">/Font/DINPro-Regular.otf#DINPro</FontFamily>
             <FontFamily x:Key="TimeFontBold">/Font/DINPro-Bold.otf#DINPro</FontFamily>
         </ResourceDictionary>
-
     </Application.Resources>
 </Application>

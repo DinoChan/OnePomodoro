@@ -1,19 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.Media.Capture;
+﻿using System.ComponentModel;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 
 namespace OnePomodoro.Helpers
 {
-    public class SolidColorBrushBridge : FrameworkElement,INotifyPropertyChanged
+    public class SolidColorBrushBridge : FrameworkElement, INotifyPropertyChanged
     {
-
         public SolidColorBrushBridge()
         {
             Brush = new SolidColorBrush(Color);

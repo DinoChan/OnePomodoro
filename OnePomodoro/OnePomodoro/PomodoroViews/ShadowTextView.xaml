@@ -1,82 +1,127 @@
 ﻿<local:PomodoroView x:Class="OnePomodoro.PomodoroViews.ShadowTextView"
                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="using:OnePomodoro.PomodoroViews"
-                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                    mc:Ignorable="d"
-                    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
                     xmlns:behaviors="using:Microsoft.Toolkit.Uwp.UI.Animations.Behaviors"
                     xmlns:controls="using:OnePomodoro.Controls"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+                    xmlns:local="using:OnePomodoro.PomodoroViews"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     xmlns:media="using:OnePomodoro.Media"
-                    x:DefaultBindMode="OneWay"
                     d:DesignHeight="1000"
-                    d:DesignWidth="1900">
+                    d:DesignWidth="1900"
+                    x:DefaultBindMode="OneWay"
+                    mc:Ignorable="d">
 
     <Grid x:Name="LayoutRoot" Background="Black">
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Viewbox>
-            <Grid Height="922"
+            <Grid x:Name="Root"
                   Width="1920"
-                  x:Name="Root">
-                <ContentControl FontFamily="{StaticResource TimeFont}"
-                                Foreground="White"
-                                HorizontalAlignment="Center" 
-                                VerticalAlignment="Center">
-                    <StackPanel VerticalAlignment="Center"
+                  Height="922">
+                <ContentControl HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontFamily="{StaticResource TimeFont}"
+                                Foreground="White">
+                    <StackPanel x:Name="PomodoroPanel"
                                 HorizontalAlignment="Center"
-                                x:Name="PomodoroPanel">
+                                VerticalAlignment="Center">
                         <Grid>
                             <StackPanel x:Name="FocusPanel">
-                                <controls:ColorfulShadowTextControl BlurAmount="40" ShowNonOutlineText="True" Margin="-100,-140,-100,-100" Width="1920" Text="{Binding RemainingPomodoroTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}" StrokeWidth="0" OutlineColor="White" DashStyle="Solid"  Height="900"  FontSize="750"  FontColor="White" FontWeight="Bold" FontFamily="{StaticResource TimeFontBold}"/>
+                                <controls:ColorfulShadowTextControl Width="1920"
+                                                                    Height="900"
+                                                                    Margin="-100,-140,-100,-100"
+                                                                    BlurAmount="40"
+                                                                    DashStyle="Solid"
+                                                                    FontColor="White"
+                                                                    FontFamily="{StaticResource TimeFontBold}"
+                                                                    FontSize="750"
+                                                                    FontWeight="Bold"
+                                                                    OutlineColor="White"
+                                                                    ShowNonOutlineText="True"
+                                                                    StrokeWidth="0"
+                                                                    Text="{Binding RemainingPomodoroTime, Converter={StaticResource FormatStringConverter}, ConverterParameter=mm\\:ss}" />
 
-                                <controls:ColorfulShadowTextControl  BlurAmount="15" ShowNonOutlineText="True" Width="1920" Margin="-50" Text="FOCUS ON JOB" StrokeWidth="0" OutlineColor="White" DashStyle="Solid"  Height="356"  FontSize="266" FontColor="White" FontWeight="Bold" FontFamily="{StaticResource TimeFontBold}"/>
-
+                                <controls:ColorfulShadowTextControl Width="1920"
+                                                                    Height="356"
+                                                                    Margin="-50"
+                                                                    BlurAmount="15"
+                                                                    DashStyle="Solid"
+                                                                    FontColor="White"
+                                                                    FontFamily="{StaticResource TimeFontBold}"
+                                                                    FontSize="266"
+                                                                    FontWeight="Bold"
+                                                                    OutlineColor="White"
+                                                                    ShowNonOutlineText="True"
+                                                                    StrokeWidth="0"
+                                                                    Text="FOCUS ON JOB" />
                             </StackPanel>
                             <StackPanel x:Name="RelaxPanel">
-                                <controls:ColorfulShadowTextControl  BlurAmount="40" ShowNonOutlineText="True" Width="1920" Margin="-100,-140,-100,-100" Text="{Binding RemainingBreakTime,Converter={StaticResource FormatStringConverter},ConverterParameter=mm\\:ss}" StrokeWidth="0" OutlineColor="White" DashStyle="Solid" Height="900"  FontSize="750"  FontColor="White" FontWeight="Bold" FontFamily="{StaticResource TimeFontBold}"/>
+                                <controls:ColorfulShadowTextControl Width="1920"
+                                                                    Height="900"
+                                                                    Margin="-100,-140,-100,-100"
+                                                                    BlurAmount="40"
+                                                                    DashStyle="Solid"
+                                                                    FontColor="White"
+                                                                    FontFamily="{StaticResource TimeFontBold}"
+                                                                    FontSize="750"
+                                                                    FontWeight="Bold"
+                                                                    OutlineColor="White"
+                                                                    ShowNonOutlineText="True"
+                                                                    StrokeWidth="0"
+                                                                    Text="{Binding RemainingBreakTime, Converter={StaticResource FormatStringConverter}, ConverterParameter=mm\\:ss}" />
 
-                                <controls:ColorfulShadowTextControl  BlurAmount="15" ShowNonOutlineText="True" Width="1920" Margin="-50" Text="TAKE A BREAK" StrokeWidth="0" OutlineColor="White" DashStyle="Solid"  Height="356"  FontSize="266" FontColor="White" FontWeight="Bold" FontFamily="{StaticResource TimeFontBold}"/>
-                                <!--<TextBlock Text="sdfdsfds" FontSize="50" Foreground="White"/>-->
+                                <controls:ColorfulShadowTextControl Width="1920"
+                                                                    Height="356"
+                                                                    Margin="-50"
+                                                                    BlurAmount="15"
+                                                                    DashStyle="Solid"
+                                                                    FontColor="White"
+                                                                    FontFamily="{StaticResource TimeFontBold}"
+                                                                    FontSize="266"
+                                                                    FontWeight="Bold"
+                                                                    OutlineColor="White"
+                                                                    ShowNonOutlineText="True"
+                                                                    StrokeWidth="0"
+                                                                    Text="TAKE A BREAK" />
+                                <!--<TextBlock Text="sdfdsfds" FontSize="50" Foreground="White" />-->
                             </StackPanel>
                         </Grid>
-
-
                     </StackPanel>
                 </ContentControl>
             </Grid>
         </Viewbox>
-        <Rectangle IsHitTestVisible="False" Grid.RowSpan="2" >
+        <Rectangle Grid.RowSpan="2" IsHitTestVisible="False">
             <Rectangle.Fill>
-                <media:TiledImageBrush Source="ms-appx:///Assets/flutter.png"/>
+                <media:TiledImageBrush Source="ms-appx:///Assets/flutter.png" />
             </Rectangle.Fill>
         </Rectangle>
 
-        <Grid Height="32" Grid.Row="1">
-            <Rectangle x:Name="FootBackground" Fill="White"/>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="ButtonPanel">
-                <controls:PomodoroStateButton 
-                                               x:Name="StateButton"
-                                                  VerticalAlignment="Center"
-                                                 HorizontalAlignment="Center"
-                                                  Style="{StaticResource SmallButton}"
-                                                  StartCommand="{Binding StartTimerCommand}"
-                                                  StopCommand="{Binding StopTimerCommand}"
-                                                  IsInPomodoro="{x:Bind ViewModel.IsInPomodoro}"
-                                                  IsTimerInProgress="{x:Bind ViewModel.IsTimerInProgress}"/>
+        <Grid Grid.Row="1" Height="32">
+            <Rectangle x:Name="FootBackground" Fill="White" />
+            <StackPanel x:Name="ButtonPanel"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal">
+                <controls:PomodoroStateButton x:Name="StateButton"
+                                              HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              IsInPomodoro="{x:Bind ViewModel.IsInPomodoro}"
+                                              IsTimerInProgress="{x:Bind ViewModel.IsTimerInProgress}"
+                                              StartCommand="{Binding StartTimerCommand}"
+                                              StopCommand="{Binding StopTimerCommand}"
+                                              Style="{StaticResource SmallButton}" />
 
-                <TextBlock Text="OnePomodoro"
-                               VerticalAlignment="Center"
+                <TextBlock Margin="8,0,0,2"
+                           VerticalAlignment="Center"
                            FontFamily="{StaticResource TimeFont}"
                            FontSize="20"
                            Foreground="White"
-                           Margin="8,0,0,2"/>
+                           Text="OnePomodoro" />
             </StackPanel>
         </Grid>
-
-
     </Grid>
 </local:PomodoroView>

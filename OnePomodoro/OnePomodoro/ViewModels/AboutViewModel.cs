@@ -1,7 +1,7 @@
-﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+﻿using System.Windows.Input;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using Microsoft.Toolkit.Uwp.Helpers;
-using System.Windows.Input;
 using Windows.ApplicationModel;
 
 namespace OnePomodoro.ViewModels
@@ -41,7 +41,6 @@ namespace OnePomodoro.ViewModels
                 return _reviewCommand;
             }
         }
-     
 
         private string GetVersion()
         {

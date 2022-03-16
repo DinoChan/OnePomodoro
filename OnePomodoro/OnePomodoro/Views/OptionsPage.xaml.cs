@@ -1,13 +1,9 @@
-﻿using OnePomodoro.Helpers;
-using OnePomodoro.ViewModels;
-using System;
+﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Windows.ApplicationModel.Core;
+using OnePomodoro.ViewModels;
 using Windows.Storage;
-using Windows.System;
 using Windows.UI.Core;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media.Animation;
@@ -29,7 +25,7 @@ namespace OnePomodoro.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-          
+
             _ = Task.Run(async () =>
               {
                   var uri = new Uri("ms-appx:///Assets/Privacy Statement.md");
@@ -67,7 +63,6 @@ namespace OnePomodoro.Views
         {
             On_BackRequested();
         }
-
 
         private void OnBackClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {

@@ -1,10 +1,5 @@
-﻿using Microsoft.Toolkit.Uwp.UI.Controls;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.Storage;
+﻿using System;
+using Microsoft.Toolkit.Uwp.UI.Controls;
 using Windows.UI.Xaml;
 
 namespace OnePomodoro.Helpers
@@ -31,7 +26,7 @@ namespace OnePomodoro.Helpers
         public static readonly DependencyProperty FileUriProperty =
             DependencyProperty.RegisterAttached("FileUri", typeof(Uri), typeof(MarkdownTextBlockExtensions), new PropertyMetadata(default(Uri), OnFileUriChanged));
 
-        private  static void OnFileUriChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        private static void OnFileUriChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
         {
             var oldValue = (Uri)args.OldValue;
             var newValue = (Uri)args.NewValue;

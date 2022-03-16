@@ -7,7 +7,5 @@ namespace OnePomodoro.ViewModels
         public OptionsViewModel()
         {
         }
-
-        
     }
 }

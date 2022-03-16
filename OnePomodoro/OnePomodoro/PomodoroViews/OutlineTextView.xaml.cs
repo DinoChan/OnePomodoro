@@ -1,32 +1,11 @@
-﻿using Microsoft.Graphics.Canvas;
-using Microsoft.Graphics.Canvas.Effects;
-using Microsoft.Graphics.Canvas.Geometry;
-using Microsoft.Graphics.Canvas.Text;
-using Microsoft.Graphics.Canvas.UI.Composition;
+﻿using System;
+using System.Numerics;
 using Microsoft.Toolkit.Uwp.UI;
 using OnePomodoro.Helpers;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Numerics;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.Graphics.DirectX;
-using Windows.Networking.BackgroundTransfer;
 using Windows.UI;
 using Windows.UI.Composition;
-using Windows.UI.Text;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Hosting;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-
 
 //https://go.microsoft.com/fwlink/?LinkId=234236 上介绍了“用户控件”项模板
 
@@ -35,7 +14,7 @@ namespace OnePomodoro.PomodoroViews
     [Title("Outline Text")]
     [Screenshot("/Assets/Screenshots/OutlineText.png")]
     [CompactOverlay(CustomWidth = 288, CustomHeight = 157.5)]
-    [FunctionTags(Tags.CompositionAnimation, Tags.PointLight, Tags.AmbientLight,Tags.Win2D)]
+    [FunctionTags(Tags.CompositionAnimation, Tags.PointLight, Tags.AmbientLight, Tags.Win2D)]
     [SourceCode("https://github.com/DinoChan/OnePomodoro/blob/master/OnePomodoro/OnePomodoro/PomodoroViews/OutlineTextView.xaml.cs")]
     public sealed partial class OutlineTextView : PomodoroView
     {
@@ -76,7 +55,6 @@ namespace OnePomodoro.PomodoroViews
             FocusPanel.Visibility = ViewModel.IsInPomodoro ? Visibility.Visible : Visibility.Collapsed;
             RelaxPanel.Visibility = ViewModel.IsInPomodoro ? Visibility.Collapsed : Visibility.Visible;
             SwitchBackgroundLightColor();
-
         }
 
         protected override void OnPointerEntered(PointerRoutedEventArgs e)
@@ -110,7 +88,6 @@ namespace OnePomodoro.PomodoroViews
             _greenLight.Targets.Add(focusVisual);
             _greenLight.Targets.Add(relayVisual);
         }
-
 
         private void CreateBackgroundLight()
         {
@@ -225,9 +202,5 @@ namespace OnePomodoro.PomodoroViews
             var footBackgroundVisual = VisualExtensions.GetVisual(FootBackground);
             footBackgroundVisual.StartAnimation(nameof(footBackgroundVisual.Opacity), scalarAnimation);
         }
-
     }
-
-
-
 }

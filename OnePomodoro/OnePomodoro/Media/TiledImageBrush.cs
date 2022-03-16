@@ -1,5 +1,5 @@
-﻿using Microsoft.Graphics.Canvas.Effects;
-using System;
+﻿using System;
+using Microsoft.Graphics.Canvas.Effects;
 using Windows.UI.Composition;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
@@ -17,11 +17,10 @@ namespace OnePomodoro.Media
 
         private Compositor Compositor => Window.Current.Compositor;
 
-
         /// <summary>
         /// 获取或设置ImageSourceUri的值
         /// </summary>
-        public ImageSource Source 
+        public ImageSource Source
         {
             get => (ImageSource)GetValue(SourceProperty);
             set => SetValue(SourceProperty, value);
@@ -54,7 +53,6 @@ namespace OnePomodoro.Media
             UpdateSurface();
         }
 
-
         private void UpdateSurface()
         {
             if (Source != null && _surfaceBrush != null)
@@ -64,7 +62,6 @@ namespace OnePomodoro.Media
                 _surfaceBrush.Surface = _surface;
             }
         }
-
 
         protected override void OnConnected()
         {
@@ -90,7 +87,6 @@ namespace OnePomodoro.Media
                 CompositionBrush = _borderEffectBrush;
             }
         }
-
 
         protected override void OnDisconnected()
         {
@@ -132,8 +128,5 @@ namespace OnePomodoro.Media
                 _surfaceBrush = null;
             }
         }
-
-
     }
-
 }
