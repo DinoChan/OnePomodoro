@@ -146,46 +146,6 @@ namespace OnePomodoro
             return services.BuildServiceProvider();
         }
 
-        private void AppDomainUnhandledException(object sender, System.UnhandledExceptionEventArgs e)
-        {
-            if (e.ExceptionObject is Exception ex)
-                Crashes.TrackError(ex);
-        }
-
-        private void HandleClosed()
-        {
-            SystemNavigationManagerPreview.GetForCurrentView().CloseRequested += async (s, args) =>
-            {
-                HasExited = true;
-                var deferral = args.GetDeferral();
-                await DataService.RemoveFuturePeriodsAsync();
-                try
-                {
-                    NotificationManager.Current.IsEnabled = false;
-                    await NotificationManager.Current.RemoveBreakFinishedToastNotificationScheduleAsync();
-                    await NotificationManager.Current.RemovePomodoroFinishedToastNotificationScheduleAsync();
-                }
-                catch (Exception ex)
-                {
-                    Microsoft.AppCenter.Crashes.Crashes.TrackError(ex);
-                }
-
-                deferral.Complete();
-            };
-        }
-
-        /// <summary>
-        /// 导航到特定页失败时调用
-        /// </summary>
-        ///<param name="sender">导航失败的框架</param>
-        ///<param name="e">有关导航失败的详细信息</param>
-        private void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
-        {
-            throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
-        }
-
-        private void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e) => Crashes.TrackError(e.Exception);
-
         private static async Task SetCountryCode()
         {
             // The following country code is used only as a fallback for the main implementation.
@@ -229,5 +189,45 @@ namespace OnePomodoro
             }
             AppCenter.SetCountryCode(countryCode);
         }
+
+        private void AppDomainUnhandledException(object sender, System.UnhandledExceptionEventArgs e)
+        {
+            if (e.ExceptionObject is Exception ex)
+                Crashes.TrackError(ex);
+        }
+
+        private void HandleClosed()
+        {
+            SystemNavigationManagerPreview.GetForCurrentView().CloseRequested += async (s, args) =>
+            {
+                HasExited = true;
+                var deferral = args.GetDeferral();
+                await DataService.RemoveFuturePeriodsAsync();
+                try
+                {
+                    NotificationManager.Current.IsEnabled = false;
+                    await NotificationManager.Current.RemoveBreakFinishedToastNotificationScheduleAsync();
+                    await NotificationManager.Current.RemovePomodoroFinishedToastNotificationScheduleAsync();
+                }
+                catch (Exception ex)
+                {
+                    Microsoft.AppCenter.Crashes.Crashes.TrackError(ex);
+                }
+
+                deferral.Complete();
+            };
+        }
+
+        /// <summary>
+        /// 导航到特定页失败时调用
+        /// </summary>
+        ///<param name="sender">导航失败的框架</param>
+        ///<param name="e">有关导航失败的详细信息</param>
+        private void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
+        {
+            throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
+        }
+
+        private void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e) => Crashes.TrackError(e.Exception);
     }
 }

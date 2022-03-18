@@ -21,14 +21,6 @@ namespace OnePomodoro.Services
             Theme = await LoadThemeFromSettingsAsync();
         }
 
-        public static async Task SetThemeAsync(ElementTheme theme)
-        {
-            Theme = theme;
-
-            await SetRequestedThemeAsync();
-            await SaveThemeInSettingsAsync(Theme);
-        }
-
         public static async Task SetRequestedThemeAsync()
         {
             foreach (var view in CoreApplication.Views)
@@ -41,6 +33,14 @@ namespace OnePomodoro.Services
                     }
                 });
             }
+        }
+
+        public static async Task SetThemeAsync(ElementTheme theme)
+        {
+            Theme = theme;
+
+            await SetRequestedThemeAsync();
+            await SaveThemeInSettingsAsync(Theme);
         }
 
         private static async Task<ElementTheme> LoadThemeFromSettingsAsync()

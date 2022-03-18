@@ -18,19 +18,16 @@ namespace OnePomodoro.PomodoroViews
     [SourceCode("https://github.com/DinoChan/OnePomodoro/blob/master/OnePomodoro/OnePomodoro/PomodoroViews/OutlineTextView.xaml.cs")]
     public sealed partial class OutlineTextView : PomodoroView
     {
-        private PointLight _redLight;
-        private PointLight _blueLight;
         private AmbientLight _backgroundLight;
-        private AmbientLight _buttonLight;
-        private AmbientLight _greenLight;
-
-        private Color _redColor = Color.FromArgb(255, 217, 17, 83);
         private Color _blueColor = Color.FromArgb(255, 0, 27, 171);
-
+        private PointLight _blueLight;
+        private AmbientLight _buttonLight;
         private Color _greenColor = Color.FromArgb(255, 38, 211, 1);
-
-        private Color _lightRedColor = Color.FromArgb(255, 247, 97, 163);
+        private AmbientLight _greenLight;
         private Color _lightBlueColor = Color.FromArgb(255, 80, 107, 251);
+        private Color _lightRedColor = Color.FromArgb(255, 247, 97, 163);
+        private Color _redColor = Color.FromArgb(255, 217, 17, 83);
+        private PointLight _redLight;
 
         public OutlineTextView()
         {
@@ -40,21 +37,6 @@ namespace OnePomodoro.PomodoroViews
             ViewModel.IsInPomodoroChanged += (s, e) => OnIsInPomodoroChanged();
             var footBackgroundVisual = VisualExtensions.GetVisual(FootBackground);
             footBackgroundVisual.Opacity = 0;
-        }
-
-        private void OnLoaded(object sender, RoutedEventArgs e)
-        {
-            Loaded -= OnLoaded;
-            ShowTextShimmingAsync();
-            OnIsInPomodoroChanged();
-            CreateBackgroundLight();
-        }
-
-        private void OnIsInPomodoroChanged()
-        {
-            FocusPanel.Visibility = ViewModel.IsInPomodoro ? Visibility.Visible : Visibility.Collapsed;
-            RelaxPanel.Visibility = ViewModel.IsInPomodoro ? Visibility.Collapsed : Visibility.Visible;
-            SwitchBackgroundLightColor();
         }
 
         protected override void OnPointerEntered(PointerRoutedEventArgs e)
@@ -69,24 +51,25 @@ namespace OnePomodoro.PomodoroViews
             HideBackgroundLight();
         }
 
-        private void ShowTextShimmingAsync()
+        private AmbientLight CreateAmbientLightAndStartAnimation()
         {
-            var width = 1920;
+            var compositor = Window.Current.Compositor;
 
-            _redLight = CreatePointLightAndStartAnimation(_redColor, -width * 1, width * 2);
-            _blueLight = CreatePointLightAndStartAnimation(_blueColor, width * 2, -width * 1);
-            _greenLight = CreateAmbientLightAndStartAnimation();
-            var focusVisual = VisualExtensions.GetVisual(FocusPanel);
-            var relayVisual = VisualExtensions.GetVisual(RelaxPanel);
+            var rootVisual = VisualExtensions.GetVisual(Root);
+            var ambientLight = compositor.CreateAmbientLight();
 
-            _redLight.Targets.Add(focusVisual);
-            _blueLight.Targets.Add(focusVisual);
+            ambientLight.Intensity = 0;
+            ambientLight.Color = _greenColor;
 
-            _redLight.Targets.Add(relayVisual);
-            _blueLight.Targets.Add(relayVisual);
+            var offsetAnimation = compositor.CreateScalarKeyFrameAnimation();
+            offsetAnimation.InsertKeyFrame(0.25f, 0, compositor.CreateLinearEasingFunction());
+            offsetAnimation.InsertKeyFrame(0.5f, 0.20f, compositor.CreateLinearEasingFunction());
+            offsetAnimation.InsertKeyFrame(0.75f, 0, compositor.CreateLinearEasingFunction());
+            offsetAnimation.Duration = TimeSpan.FromSeconds(10);
+            offsetAnimation.IterationBehavior = AnimationIterationBehavior.Forever;
 
-            _greenLight.Targets.Add(focusVisual);
-            _greenLight.Targets.Add(relayVisual);
+            ambientLight.StartAnimation(nameof(AmbientLight.Intensity), offsetAnimation);
+            return ambientLight;
         }
 
         private void CreateBackgroundLight()
@@ -131,38 +114,36 @@ namespace OnePomodoro.PomodoroViews
             return pointLight;
         }
 
-        private AmbientLight CreateAmbientLightAndStartAnimation()
-        {
-            var compositor = Window.Current.Compositor;
-
-            var rootVisual = VisualExtensions.GetVisual(Root);
-            var ambientLight = compositor.CreateAmbientLight();
-
-            ambientLight.Intensity = 0;
-            ambientLight.Color = _greenColor;
-
-            var offsetAnimation = compositor.CreateScalarKeyFrameAnimation();
-            offsetAnimation.InsertKeyFrame(0.25f, 0, compositor.CreateLinearEasingFunction());
-            offsetAnimation.InsertKeyFrame(0.5f, 0.20f, compositor.CreateLinearEasingFunction());
-            offsetAnimation.InsertKeyFrame(0.75f, 0, compositor.CreateLinearEasingFunction());
-            offsetAnimation.Duration = TimeSpan.FromSeconds(10);
-            offsetAnimation.IterationBehavior = AnimationIterationBehavior.Forever;
-
-            ambientLight.StartAnimation(nameof(AmbientLight.Intensity), offsetAnimation);
-            return ambientLight;
-        }
-
-        private void SwitchBackgroundLightColor()
+        private void HideBackgroundLight()
         {
             if (_backgroundLight == null)
                 return;
 
             var compositor = Window.Current.Compositor;
 
-            var colorAnimation = compositor.CreateColorKeyFrameAnimation();
-            colorAnimation.InsertKeyFrame(1.0f, ViewModel.IsInPomodoro ? _lightRedColor : _lightBlueColor, compositor.CreateLinearEasingFunction());
-            colorAnimation.Duration = TimeSpan.FromSeconds(1);
-            _backgroundLight.StartAnimation(nameof(AmbientLight.Color), colorAnimation);
+            var scalarAnimation = compositor.CreateScalarKeyFrameAnimation();
+            scalarAnimation.InsertKeyFrame(1.0f, 0, compositor.CreateLinearEasingFunction());
+            scalarAnimation.Duration = TimeSpan.FromSeconds(1);
+            _backgroundLight.StartAnimation(nameof(AmbientLight.Intensity), scalarAnimation);
+            _buttonLight.StartAnimation(nameof(AmbientLight.Intensity), scalarAnimation);
+
+            var footBackgroundVisual = VisualExtensions.GetVisual(FootBackground);
+            footBackgroundVisual.StartAnimation(nameof(footBackgroundVisual.Opacity), scalarAnimation);
+        }
+
+        private void OnIsInPomodoroChanged()
+        {
+            FocusPanel.Visibility = ViewModel.IsInPomodoro ? Visibility.Visible : Visibility.Collapsed;
+            RelaxPanel.Visibility = ViewModel.IsInPomodoro ? Visibility.Collapsed : Visibility.Visible;
+            SwitchBackgroundLightColor();
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            Loaded -= OnLoaded;
+            ShowTextShimmingAsync();
+            OnIsInPomodoroChanged();
+            CreateBackgroundLight();
         }
 
         private void ShowBackgroundLight()
@@ -186,21 +167,37 @@ namespace OnePomodoro.PomodoroViews
             footBackgroundVisual.StartAnimation(nameof(footBackgroundVisual.Opacity), scalarAnimation);
         }
 
-        private void HideBackgroundLight()
+        private void ShowTextShimmingAsync()
+        {
+            var width = 1920;
+
+            _redLight = CreatePointLightAndStartAnimation(_redColor, -width * 1, width * 2);
+            _blueLight = CreatePointLightAndStartAnimation(_blueColor, width * 2, -width * 1);
+            _greenLight = CreateAmbientLightAndStartAnimation();
+            var focusVisual = VisualExtensions.GetVisual(FocusPanel);
+            var relayVisual = VisualExtensions.GetVisual(RelaxPanel);
+
+            _redLight.Targets.Add(focusVisual);
+            _blueLight.Targets.Add(focusVisual);
+
+            _redLight.Targets.Add(relayVisual);
+            _blueLight.Targets.Add(relayVisual);
+
+            _greenLight.Targets.Add(focusVisual);
+            _greenLight.Targets.Add(relayVisual);
+        }
+
+        private void SwitchBackgroundLightColor()
         {
             if (_backgroundLight == null)
                 return;
 
             var compositor = Window.Current.Compositor;
 
-            var scalarAnimation = compositor.CreateScalarKeyFrameAnimation();
-            scalarAnimation.InsertKeyFrame(1.0f, 0, compositor.CreateLinearEasingFunction());
-            scalarAnimation.Duration = TimeSpan.FromSeconds(1);
-            _backgroundLight.StartAnimation(nameof(AmbientLight.Intensity), scalarAnimation);
-            _buttonLight.StartAnimation(nameof(AmbientLight.Intensity), scalarAnimation);
-
-            var footBackgroundVisual = VisualExtensions.GetVisual(FootBackground);
-            footBackgroundVisual.StartAnimation(nameof(footBackgroundVisual.Opacity), scalarAnimation);
+            var colorAnimation = compositor.CreateColorKeyFrameAnimation();
+            colorAnimation.InsertKeyFrame(1.0f, ViewModel.IsInPomodoro ? _lightRedColor : _lightBlueColor, compositor.CreateLinearEasingFunction());
+            colorAnimation.Duration = TimeSpan.FromSeconds(1);
+            _backgroundLight.StartAnimation(nameof(AmbientLight.Color), colorAnimation);
         }
     }
 }

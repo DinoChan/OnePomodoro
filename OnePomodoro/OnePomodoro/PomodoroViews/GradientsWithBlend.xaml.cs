@@ -19,23 +19,21 @@ namespace OnePomodoro.PomodoroViews
     [SourceCode("https://github.com/DinoChan/OnePomodoro/blob/master/OnePomodoro/OnePomodoro/PomodoroViews/GradientsWithBlend.xaml.cs")]
     public sealed partial class GradientsWithBlend : PomodoroView
     {
-        private readonly CompositionLinearGradientBrush _foregroundBrush;
-        private readonly CompositionLinearGradientBrush _backgroundBrush;
-        private readonly SpriteVisual _backgroundVisual;
+        private static readonly Color Black = Colors.Black;
         private static readonly Color Blue = Color.FromArgb(255, 43, 210, 255);
         private static readonly Color Green = Color.FromArgb(255, 43, 255, 136);
-        private static readonly Color Red = Colors.Red;
 
         //private static readonly Color Pink = Color.FromArgb(255, 255, 43, 212);
         private static readonly Color Pink = Color.FromArgb(255, 142, 211, 255);
 
-        private static readonly Color Black = Colors.Black;
-
-        private readonly Compositor _compositor;
-        private readonly CompositionColorGradientStop _topLeftradientStop;
-        private readonly CompositionColorGradientStop _bottomRightGradientStop;
-
+        private static readonly Color Red = Colors.Red;
+        private readonly CompositionLinearGradientBrush _backgroundBrush;
+        private readonly SpriteVisual _backgroundVisual;
         private readonly CompositionColorGradientStop _bottomLeftGradientStop;
+        private readonly CompositionColorGradientStop _bottomRightGradientStop;
+        private readonly Compositor _compositor;
+        private readonly CompositionLinearGradientBrush _foregroundBrush;
+        private readonly CompositionColorGradientStop _topLeftradientStop;
         private readonly CompositionColorGradientStop _topRightGradientStop;
 
         public GradientsWithBlend() : base()
@@ -119,12 +117,21 @@ namespace OnePomodoro.PomodoroViews
               };
         }
 
-        private void UpdateText()
+        private void StartColorAnimation(CompositionColorGradientStop gradientOffset, Color color)
         {
-            FocusText.Visibility = ViewModel.IsInPomodoro ? Visibility.Visible : Visibility.Collapsed;
-            RelaxText.Visibility = ViewModel.IsInPomodoro ? Visibility.Collapsed : Visibility.Visible;
-            FocusTextCompact.Visibility = ViewModel.IsInPomodoro ? Visibility.Visible : Visibility.Collapsed;
-            RelaxTextCompact.Visibility = ViewModel.IsInPomodoro ? Visibility.Collapsed : Visibility.Visible;
+            var colorAnimation = _compositor.CreateColorKeyFrameAnimation();
+            colorAnimation.Duration = TimeSpan.FromSeconds(2);
+            colorAnimation.Direction = Windows.UI.Composition.AnimationDirection.Alternate;
+            colorAnimation.InsertKeyFrame(1.0f, color);
+            gradientOffset.StartAnimation(nameof(CompositionColorGradientStop.Color), colorAnimation);
+        }
+
+        private void StartOffsetAnimation(CompositionColorGradientStop gradientOffset, float offset)
+        {
+            var offsetAnimation = _compositor.CreateScalarKeyFrameAnimation();
+            offsetAnimation.Duration = TimeSpan.FromSeconds(1);
+            offsetAnimation.InsertKeyFrame(1.0f, offset);
+            gradientOffset.StartAnimation(nameof(CompositionColorGradientStop.Offset), offsetAnimation);
         }
 
         private void UpdateGradients()
@@ -159,21 +166,12 @@ namespace OnePomodoro.PomodoroViews
             }
         }
 
-        private void StartOffsetAnimation(CompositionColorGradientStop gradientOffset, float offset)
+        private void UpdateText()
         {
-            var offsetAnimation = _compositor.CreateScalarKeyFrameAnimation();
-            offsetAnimation.Duration = TimeSpan.FromSeconds(1);
-            offsetAnimation.InsertKeyFrame(1.0f, offset);
-            gradientOffset.StartAnimation(nameof(CompositionColorGradientStop.Offset), offsetAnimation);
-        }
-
-        private void StartColorAnimation(CompositionColorGradientStop gradientOffset, Color color)
-        {
-            var colorAnimation = _compositor.CreateColorKeyFrameAnimation();
-            colorAnimation.Duration = TimeSpan.FromSeconds(2);
-            colorAnimation.Direction = Windows.UI.Composition.AnimationDirection.Alternate;
-            colorAnimation.InsertKeyFrame(1.0f, color);
-            gradientOffset.StartAnimation(nameof(CompositionColorGradientStop.Color), colorAnimation);
+            FocusText.Visibility = ViewModel.IsInPomodoro ? Visibility.Visible : Visibility.Collapsed;
+            RelaxText.Visibility = ViewModel.IsInPomodoro ? Visibility.Collapsed : Visibility.Visible;
+            FocusTextCompact.Visibility = ViewModel.IsInPomodoro ? Visibility.Visible : Visibility.Collapsed;
+            RelaxTextCompact.Visibility = ViewModel.IsInPomodoro ? Visibility.Collapsed : Visibility.Visible;
         }
 
         //private void OnOptionsClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)

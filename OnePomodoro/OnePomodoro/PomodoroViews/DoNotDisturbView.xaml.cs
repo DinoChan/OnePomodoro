@@ -16,13 +16,31 @@ namespace OnePomodoro.PomodoroViews
     [SourceCode("https://github.com/DinoChan/OnePomodoro/blob/master/OnePomodoro/OnePomodoro/PomodoroViews/DoNotDisturbView.xaml.cs")]
     public sealed partial class DoNotDisturbView
     {
-        private Compositor Compositor => Window.Current.Compositor;
-
         public DoNotDisturbView()
         {
             this.InitializeComponent();
             ViewModel.IsInPomodoroChanged += OnIsPomodoroChanged;
             Loaded += OnLoaded;
+        }
+
+        private Compositor Compositor => Window.Current.Compositor;
+
+        private void HideAnimation(FrameworkElement element)
+        {
+            var visual = ElementCompositionPreview.GetElementVisual(element);
+
+            var easing = Compositor.CreateCubicBezierEasingFunction(new Vector2(0.1f, 0.9f), new Vector2(0.2f, 1f));
+            var offsetAnimation = Compositor.CreateVector3KeyFrameAnimation();
+            offsetAnimation.Duration = TimeSpan.FromSeconds(1);
+            offsetAnimation.DelayTime = TimeSpan.FromSeconds(0.4);
+
+            offsetAnimation.InsertKeyFrame(1, new Vector3(-(float)element.ActualWidth, 0, 0), easing);
+            visual.StartAnimation(nameof(Visual.Offset), offsetAnimation);
+        }
+
+        private void OnIsPomodoroChanged(object sender, EventArgs e)
+        {
+            UpdateContent();
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
@@ -31,9 +49,18 @@ namespace OnePomodoro.PomodoroViews
             UpdateContent();
         }
 
-        private void OnIsPomodoroChanged(object sender, EventArgs e)
+        private void ShowAnimation(FrameworkElement element)
         {
-            UpdateContent();
+            var visual = ElementCompositionPreview.GetElementVisual(element);
+            visual.Offset = new Vector3(-(float)element.ActualWidth, 0, 0);
+
+            var easing = Compositor.CreateCubicBezierEasingFunction(new Vector2(0.1f, 0.9f), new Vector2(0.2f, 1f));
+            var offsetAnimation = Compositor.CreateVector3KeyFrameAnimation();
+            offsetAnimation.Duration = TimeSpan.FromSeconds(1);
+            offsetAnimation.DelayTime = TimeSpan.FromSeconds(0.3);
+
+            offsetAnimation.InsertKeyFrame(1, Vector3.Zero, easing);
+            visual.StartAnimation(nameof(Visual.Offset), offsetAnimation);
         }
 
         private void UpdateContent()
@@ -81,33 +108,6 @@ namespace OnePomodoro.PomodoroViews
                 HideAnimation(WorkText2);
                 HideAnimation(WorkText3);
             }
-        }
-
-        private void ShowAnimation(FrameworkElement element)
-        {
-            var visual = ElementCompositionPreview.GetElementVisual(element);
-            visual.Offset = new Vector3(-(float)element.ActualWidth, 0, 0);
-
-            var easing = Compositor.CreateCubicBezierEasingFunction(new Vector2(0.1f, 0.9f), new Vector2(0.2f, 1f));
-            var offsetAnimation = Compositor.CreateVector3KeyFrameAnimation();
-            offsetAnimation.Duration = TimeSpan.FromSeconds(1);
-            offsetAnimation.DelayTime = TimeSpan.FromSeconds(0.3);
-
-            offsetAnimation.InsertKeyFrame(1, Vector3.Zero, easing);
-            visual.StartAnimation(nameof(Visual.Offset), offsetAnimation);
-        }
-
-        private void HideAnimation(FrameworkElement element)
-        {
-            var visual = ElementCompositionPreview.GetElementVisual(element);
-
-            var easing = Compositor.CreateCubicBezierEasingFunction(new Vector2(0.1f, 0.9f), new Vector2(0.2f, 1f));
-            var offsetAnimation = Compositor.CreateVector3KeyFrameAnimation();
-            offsetAnimation.Duration = TimeSpan.FromSeconds(1);
-            offsetAnimation.DelayTime = TimeSpan.FromSeconds(0.4);
-
-            offsetAnimation.InsertKeyFrame(1, new Vector3(-(float)element.ActualWidth, 0, 0), easing);
-            visual.StartAnimation(nameof(Visual.Offset), offsetAnimation);
         }
     }
 }

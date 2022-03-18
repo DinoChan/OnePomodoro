@@ -10,8 +10,7 @@ namespace OnePomodoro.Helpers
             CustomHeight = 150;
         }
 
-        public double CustomWidth { get; set; }
-
         public double CustomHeight { get; set; }
+        public double CustomWidth { get; set; }
     }
 }

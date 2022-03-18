@@ -18,8 +18,8 @@ namespace OnePomodoro.PomodoroViews
     [SourceCode("https://github.com/DinoChan/OnePomodoro/blob/master/OnePomodoro/OnePomodoro/PomodoroViews/TheBigOne.xaml.cs")]
     public sealed partial class TheBigOne : PomodoroView
     {
-        private PointLight _inworkPointLight;
         private PointLight _breakPointLight;
+        private PointLight _inworkPointLight;
 
         public TheBigOne()
         {

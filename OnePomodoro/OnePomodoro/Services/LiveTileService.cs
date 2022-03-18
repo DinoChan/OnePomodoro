@@ -15,6 +15,11 @@ namespace OnePomodoro.Services
     {
         private const string QueueEnabledKey = "LiveTileNotificationQueueEnabled";
 
+        public bool CanHandleInternal(LaunchActivatedEventArgs args)
+        {
+            return LaunchFromSecondaryTile(args) || LaunchFromLiveTileUpdate(args);
+        }
+
         public async Task EnableQueueAsync()
         {
             var queueEnabled = await ApplicationData.Current.LocalSettings.ReadAsync<bool>(QueueEnabledKey);
@@ -25,16 +30,14 @@ namespace OnePomodoro.Services
             }
         }
 
-        public void UpdateTile(TileNotification notification)
+        public async Task HandleInternalAsync(LaunchActivatedEventArgs args)
         {
-            try
-            {
-                TileUpdateManager.CreateTileUpdaterForApplication().Update(notification);
-            }
-            catch (Exception)
-            {
-                // TODO WTS: Updating LiveTile can fail in rare conditions, please handle exceptions as appropriate to your scenario.
-            }
+            // If app is launched from a SecondaryTile, tile arguments property is contained in args.Arguments
+            // var secondaryTileArguments = args.Arguments;
+
+            // If app is launched from a LiveTile notification update, TileContent arguments property is contained in args.TileActivatedInfo.RecentlyShownNotifications
+            // var tileUpdatesArguments = args.TileActivatedInfo.RecentlyShownNotifications;
+            await Task.CompletedTask;
         }
 
         public async Task<bool> PinSecondaryTileAsync(SecondaryTile tile, bool allowDuplicity = false)
@@ -55,38 +58,35 @@ namespace OnePomodoro.Services
             }
         }
 
+        public void UpdateTile(TileNotification notification)
+        {
+            try
+            {
+                TileUpdateManager.CreateTileUpdaterForApplication().Update(notification);
+            }
+            catch (Exception)
+            {
+                // TODO WTS: Updating LiveTile can fail in rare conditions, please handle exceptions as appropriate to your scenario.
+            }
+        }
+
         private async Task<bool> IsAlreadyPinnedAsync(SecondaryTile tile)
         {
             var secondaryTiles = await SecondaryTile.FindAllAsync();
             return secondaryTiles.Any(t => t.Arguments == tile.Arguments);
         }
 
-        public async Task HandleInternalAsync(LaunchActivatedEventArgs args)
+        private bool LaunchFromLiveTileUpdate(LaunchActivatedEventArgs args)
         {
-            // If app is launched from a SecondaryTile, tile arguments property is contained in args.Arguments
-            // var secondaryTileArguments = args.Arguments;
-
             // If app is launched from a LiveTile notification update, TileContent arguments property is contained in args.TileActivatedInfo.RecentlyShownNotifications
-            // var tileUpdatesArguments = args.TileActivatedInfo.RecentlyShownNotifications;
-            await Task.CompletedTask;
-        }
-
-        public bool CanHandleInternal(LaunchActivatedEventArgs args)
-        {
-            return LaunchFromSecondaryTile(args) || LaunchFromLiveTileUpdate(args);
+            // TODO WTS: Implement your own logic to determine if you can handle the LiveTile notification update activation
+            return false;
         }
 
         private bool LaunchFromSecondaryTile(LaunchActivatedEventArgs args)
         {
             // If app is launched from a SecondaryTile, tile arguments property is contained in args.Arguments
             // TODO WTS: Implement your own logic to determine if you can handle the SecondaryTile activation
-            return false;
-        }
-
-        private bool LaunchFromLiveTileUpdate(LaunchActivatedEventArgs args)
-        {
-            // If app is launched from a LiveTile notification update, TileContent arguments property is contained in args.TileActivatedInfo.RecentlyShownNotifications
-            // TODO WTS: Implement your own logic to determine if you can handle the LiveTile notification update activation
             return false;
         }
     }

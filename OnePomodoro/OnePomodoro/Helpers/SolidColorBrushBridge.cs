@@ -7,10 +7,20 @@ namespace OnePomodoro.Helpers
 {
     public class SolidColorBrushBridge : FrameworkElement, INotifyPropertyChanged
     {
+        /// <summary>
+        /// 标识 Color 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty ColorProperty =
+            DependencyProperty.Register(nameof(Color), typeof(Color), typeof(SolidColorBrushBridge), new PropertyMetadata(default(Color), OnColorChanged));
+
         public SolidColorBrushBridge()
         {
             Brush = new SolidColorBrush(Color);
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public SolidColorBrush Brush { get; }
 
         /// <summary>
         /// 获取或设置Color的值
@@ -19,25 +29,6 @@ namespace OnePomodoro.Helpers
         {
             get => (Color)GetValue(ColorProperty);
             set => SetValue(ColorProperty, value);
-        }
-
-        /// <summary>
-        /// 标识 Color 依赖属性。
-        /// </summary>
-        public static readonly DependencyProperty ColorProperty =
-            DependencyProperty.Register(nameof(Color), typeof(Color), typeof(SolidColorBrushBridge), new PropertyMetadata(default(Color), OnColorChanged));
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private static void OnColorChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
-        {
-            var oldValue = (Color)args.OldValue;
-            var newValue = (Color)args.NewValue;
-            if (oldValue == newValue)
-                return;
-
-            var target = obj as SolidColorBrushBridge;
-            target?.OnColorChanged(oldValue, newValue);
         }
 
         /// <summary>
@@ -51,6 +42,15 @@ namespace OnePomodoro.Helpers
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Brush)));
         }
 
-        public SolidColorBrush Brush { get; }
+        private static void OnColorChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
+        {
+            var oldValue = (Color)args.OldValue;
+            var newValue = (Color)args.NewValue;
+            if (oldValue == newValue)
+                return;
+
+            var target = obj as SolidColorBrushBridge;
+            target?.OnColorChanged(oldValue, newValue);
+        }
     }
 }

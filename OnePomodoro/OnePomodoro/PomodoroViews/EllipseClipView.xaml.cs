@@ -19,7 +19,6 @@ namespace OnePomodoro.PomodoroViews
     [SourceCode("https://github.com/DinoChan/OnePomodoro/blob/master/OnePomodoro/OnePomodoro/PomodoroViews/EllipseClipView.xaml.cs")]
     public sealed partial class EllipseClipView : PomodoroView
     {
-        private Compositor Compositor => Window.Current.Compositor;
         private Visual _oldVisual;
 
         public EllipseClipView()
@@ -28,6 +27,8 @@ namespace OnePomodoro.PomodoroViews
             ViewModel.IsInPomodoroChanged += OnIsPomodoroChanged;
             UpdateContent();
         }
+
+        private Compositor Compositor => Window.Current.Compositor;
 
         private void OnIsPomodoroChanged(object sender, EventArgs e)
         {

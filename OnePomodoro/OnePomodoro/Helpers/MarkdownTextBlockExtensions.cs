@@ -7,6 +7,12 @@ namespace OnePomodoro.Helpers
     public class MarkdownTextBlockExtensions
     {
         /// <summary>
+        /// 标识 FileUri 依赖项属性。
+        /// </summary>
+        public static readonly DependencyProperty FileUriProperty =
+            DependencyProperty.RegisterAttached("FileUri", typeof(Uri), typeof(MarkdownTextBlockExtensions), new PropertyMetadata(default(Uri), OnFileUriChanged));
+
+        /// <summary>
         /// 从指定元素获取 FileUri 依赖项属性的值。
         /// </summary>
         /// <param name="obj">从中读取属性值的元素。</param>
@@ -19,12 +25,6 @@ namespace OnePomodoro.Helpers
         /// <param name="obj">对其设置属性值的元素。</param>
         /// <param name="value">要设置的值。</param>
         public static void SetFileUri(DependencyObject obj, Uri value) => obj.SetValue(FileUriProperty, value);
-
-        /// <summary>
-        /// 标识 FileUri 依赖项属性。
-        /// </summary>
-        public static readonly DependencyProperty FileUriProperty =
-            DependencyProperty.RegisterAttached("FileUri", typeof(Uri), typeof(MarkdownTextBlockExtensions), new PropertyMetadata(default(Uri), OnFileUriChanged));
 
         private static void OnFileUriChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
         {

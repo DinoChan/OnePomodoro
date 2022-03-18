@@ -13,7 +13,7 @@ namespace OnePomodoro.Views
 {
     public sealed partial class OptionsPage : Page
     {
-        private OptionsViewModel ViewModel => DataContext as OptionsViewModel;
+        private Image _visualImage;
 
         public OptionsPage()
         {
@@ -21,6 +21,8 @@ namespace OnePomodoro.Views
 
             SystemNavigationManager.GetForCurrentView().BackRequested += BlankPage1_BackRequested;
         }
+
+        private OptionsViewModel ViewModel => DataContext as OptionsViewModel;
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -59,26 +61,6 @@ namespace OnePomodoro.Views
               });
         }
 
-        private void BlankPage1_BackRequested(object sender, BackRequestedEventArgs e)
-        {
-            On_BackRequested();
-        }
-
-        private void OnBackClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            On_BackRequested();
-        }
-
-        private bool On_BackRequested()
-        {
-            if (this.Frame.CanGoBack)
-            {
-                this.Frame.GoBack();
-                return true;
-            }
-            return false;
-        }
-
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             if (e.NavigationMode == NavigationMode.Back)
@@ -98,7 +80,25 @@ namespace OnePomodoro.Views
             args.Handled = true;
         }
 
-        private Image _visualImage;
+        private void BlankPage1_BackRequested(object sender, BackRequestedEventArgs e)
+        {
+            On_BackRequested();
+        }
+
+        private bool On_BackRequested()
+        {
+            if (this.Frame.CanGoBack)
+            {
+                this.Frame.GoBack();
+                return true;
+            }
+            return false;
+        }
+
+        private void OnBackClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            On_BackRequested();
+        }
 
         private void OnVisualChanged(object sender, Tuple<Type, Image> e)
         {

@@ -18,15 +18,13 @@ namespace OnePomodoro.PomodoroViews
     [SourceCode("https://github.com/DinoChan/OnePomodoro/blob/master/OnePomodoro/OnePomodoro/PomodoroViews/SplitTo5View.xaml.cs")]
     public sealed partial class SplitTo5View : PomodoroView
     {
-        private readonly Compositor _compositor;
         private readonly CompositionColorBrush _colorBursh;
-
-        private Color Red = Color.FromArgb(255, 248, 169, 162);
-        private Color Blue = Color.FromArgb(255, 140, 220, 247);
-
+        private readonly Compositor _compositor;
+        private List<Visual> _breakVisuals;
         private Visual _contentAeraVisual;
         private List<Visual> _workVisuals;
-        private List<Visual> _breakVisuals;
+        private Color Blue = Color.FromArgb(255, 140, 220, 247);
+        private Color Red = Color.FromArgb(255, 248, 169, 162);
 
         public SplitTo5View()
         {
@@ -75,6 +73,37 @@ namespace OnePomodoro.PomodoroViews
             _breakVisuals.Add(ElementCompositionPreview.GetElementVisual(BreakSection1));
         }
 
+        private void StartColorAnimation(Color color)
+        {
+            var colorAnimation = _compositor.CreateColorKeyFrameAnimation();
+            colorAnimation.Duration = TimeSpan.FromSeconds(2);
+            colorAnimation.Direction = Windows.UI.Composition.AnimationDirection.Alternate;
+            colorAnimation.InsertKeyFrame(1.0f, color);
+            _colorBursh.StartAnimation(nameof(_colorBursh.Color), colorAnimation);
+        }
+
+        private void StartOffsetAnimation(Visual visual, Vector2 offset)
+        {
+            StartOffsetAnimation(visual, offset, TimeSpan.FromMilliseconds(50));
+        }
+
+        private void StartOffsetAnimation(Visual visual, Vector2 offset, TimeSpan period)
+        {
+            var springAnimation = _compositor.CreateSpringVector3Animation();
+            springAnimation.DampingRatio = 0.85f;
+            springAnimation.Period = period;
+            springAnimation.FinalValue = new Vector3(offset, 0);
+            visual.StartAnimation(nameof(visual.Offset), springAnimation);
+        }
+
+        private void UpdateBackground()
+        {
+            if (ViewModel.IsInPomodoro)
+                StartColorAnimation(Red);
+            else
+                StartColorAnimation(Blue);
+        }
+
         private void UpdateOffset()
         {
             var y = 0;
@@ -107,37 +136,6 @@ namespace OnePomodoro.PomodoroViews
                     StartOffsetAnimation(_breakVisuals[i], new Vector2(0, y), TimeSpan.FromMilliseconds(40 * (1 + i)));
                 }
             }
-        }
-
-        private void UpdateBackground()
-        {
-            if (ViewModel.IsInPomodoro)
-                StartColorAnimation(Red);
-            else
-                StartColorAnimation(Blue);
-        }
-
-        private void StartColorAnimation(Color color)
-        {
-            var colorAnimation = _compositor.CreateColorKeyFrameAnimation();
-            colorAnimation.Duration = TimeSpan.FromSeconds(2);
-            colorAnimation.Direction = Windows.UI.Composition.AnimationDirection.Alternate;
-            colorAnimation.InsertKeyFrame(1.0f, color);
-            _colorBursh.StartAnimation(nameof(_colorBursh.Color), colorAnimation);
-        }
-
-        private void StartOffsetAnimation(Visual visual, Vector2 offset)
-        {
-            StartOffsetAnimation(visual, offset, TimeSpan.FromMilliseconds(50));
-        }
-
-        private void StartOffsetAnimation(Visual visual, Vector2 offset, TimeSpan period)
-        {
-            var springAnimation = _compositor.CreateSpringVector3Animation();
-            springAnimation.DampingRatio = 0.85f;
-            springAnimation.Period = period;
-            springAnimation.FinalValue = new Vector3(offset, 0);
-            visual.StartAnimation(nameof(visual.Offset), springAnimation);
         }
     }
 }

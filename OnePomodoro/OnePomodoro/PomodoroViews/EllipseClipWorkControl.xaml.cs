@@ -38,6 +38,15 @@ namespace OnePomodoro.PomodoroViews
             Unloaded += OnUnloaded;
         }
 
+        private CompositionEllipseGeometry CreateEllipseGeometry()
+        {
+            var compositor = Window.Current.Compositor;
+            var ellipseGeomerty = compositor.CreateEllipseGeometry();
+            ellipseGeomerty.Center = new System.Numerics.Vector2(192, 525);
+            ellipseGeomerty.Radius = Vector2.Zero;
+            return ellipseGeomerty;
+        }
+
         private void MakeClip(UIElement uElement)
         {
             var compositor = Window.Current.Compositor;
@@ -56,23 +65,6 @@ namespace OnePomodoro.PomodoroViews
             _timeVisuals.Add(visual);
         }
 
-        private CompositionEllipseGeometry CreateEllipseGeometry()
-        {
-            var compositor = Window.Current.Compositor;
-            var ellipseGeomerty = compositor.CreateEllipseGeometry();
-            ellipseGeomerty.Center = new System.Numerics.Vector2(192, 525);
-            ellipseGeomerty.Radius = Vector2.Zero;
-            return ellipseGeomerty;
-        }
-
-        private void OnTimeChanged(object sender, EventArgs e)
-        {
-            TimeElemnt1.Text = (ViewModel.RemainingPomodoroTime.Minutes / 10).ToString();
-            TimeElemnt2.Text = (ViewModel.RemainingPomodoroTime.Minutes % 10).ToString();
-            TimeElemnt3.Text = (ViewModel.RemainingPomodoroTime.Seconds / 10).ToString();
-            TimeElemnt4.Text = (ViewModel.RemainingPomodoroTime.Seconds % 10).ToString();
-        }
-
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             Loaded -= OnLoaded;
@@ -85,6 +77,19 @@ namespace OnePomodoro.PomodoroViews
             {
                 StartOffsetAnimation(_timeVisuals[i], TimeSpan.FromSeconds(0.8 + i));
             }
+        }
+
+        private void OnTimeChanged(object sender, EventArgs e)
+        {
+            TimeElemnt1.Text = (ViewModel.RemainingPomodoroTime.Minutes / 10).ToString();
+            TimeElemnt2.Text = (ViewModel.RemainingPomodoroTime.Minutes % 10).ToString();
+            TimeElemnt3.Text = (ViewModel.RemainingPomodoroTime.Seconds / 10).ToString();
+            TimeElemnt4.Text = (ViewModel.RemainingPomodoroTime.Seconds % 10).ToString();
+        }
+
+        private void OnUnloaded(object sender, RoutedEventArgs e)
+        {
+            ViewModel.RemainingPomodoroTimeChanged -= OnTimeChanged;
         }
 
         private void StartClipAnimation(CompositionEllipseGeometry ellipseGeometry, TimeSpan delayTime)
@@ -109,11 +114,6 @@ namespace OnePomodoro.PomodoroViews
             animation.Duration = TimeSpan.FromSeconds(1.3);
             animation.InsertKeyFrame(1, Vector3.Zero, easing);
             visual.StartAnimation(nameof(Visual.Offset), animation);
-        }
-
-        private void OnUnloaded(object sender, RoutedEventArgs e)
-        {
-            ViewModel.RemainingPomodoroTimeChanged -= OnTimeChanged;
         }
     }
 }

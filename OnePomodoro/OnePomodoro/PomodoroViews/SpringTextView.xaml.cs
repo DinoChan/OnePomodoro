@@ -20,10 +20,10 @@ namespace OnePomodoro.PomodoroViews
     [SourceCode("https://github.com/DinoChan/OnePomodoro/blob/master/OnePomodoro/OnePomodoro/PomodoroViews/SpringTextView.xaml.cs")]
     public sealed partial class SpringTextView : PomodoroView
     {
-        private readonly Compositor _compositor;
-        private readonly CompositionColorBrush _colorBursh;
         private static readonly Color Blue = Color.FromArgb(255, 44, 56, 82);
         private static readonly Color Red = Color.FromArgb(255, 81, 44, 81);
+        private readonly CompositionColorBrush _colorBursh;
+        private readonly Compositor _compositor;
         private readonly Visual _focusVisual;
         private readonly Visual _relaxVisual;
 
@@ -65,29 +65,6 @@ namespace OnePomodoro.PomodoroViews
             };
         }
 
-        private void UpdateBackground()
-        {
-            if (ViewModel.IsInPomodoro)
-                StartColorAnimation(Red);
-            else
-                StartColorAnimation(Blue);
-        }
-
-        private void UpdateOffset()
-        {
-            var y = 0;
-            if (ViewModel.IsInPomodoro)
-            {
-                StartOffsetAnimation(_focusVisual, new Vector2(0, y));
-                StartOffsetAnimation(_relaxVisual, new Vector2((float)(ContentArea.ActualWidth * 3), y));
-            }
-            else
-            {
-                StartOffsetAnimation(_focusVisual, new Vector2(-(float)(ContentArea.ActualWidth) * 3, y));
-                StartOffsetAnimation(_relaxVisual, new Vector2(0, y));
-            }
-        }
-
         private void StartColorAnimation(Color color)
         {
             var colorAnimation = _compositor.CreateColorKeyFrameAnimation();
@@ -109,6 +86,29 @@ namespace OnePomodoro.PomodoroViews
             springAnimation.Period = period;
             springAnimation.FinalValue = new Vector3(offset, 0);
             visual.StartAnimation(nameof(visual.Offset), springAnimation);
+        }
+
+        private void UpdateBackground()
+        {
+            if (ViewModel.IsInPomodoro)
+                StartColorAnimation(Red);
+            else
+                StartColorAnimation(Blue);
+        }
+
+        private void UpdateOffset()
+        {
+            var y = 0;
+            if (ViewModel.IsInPomodoro)
+            {
+                StartOffsetAnimation(_focusVisual, new Vector2(0, y));
+                StartOffsetAnimation(_relaxVisual, new Vector2((float)(ContentArea.ActualWidth * 3), y));
+            }
+            else
+            {
+                StartOffsetAnimation(_focusVisual, new Vector2(-(float)(ContentArea.ActualWidth) * 3, y));
+                StartOffsetAnimation(_relaxVisual, new Vector2(0, y));
+            }
         }
     }
 }

@@ -8,18 +8,18 @@ namespace OnePomodoro.Services
 {
     internal interface ILiveTileService
     {
+        bool CanHandleInternal(LaunchActivatedEventArgs args);
+
         Task EnableQueueAsync();
-
-        void UpdateTile(TileNotification notification);
-
-        Task<bool> PinSecondaryTileAsync(SecondaryTile tile, bool allowDuplicity = false);
 
         Task HandleInternalAsync(LaunchActivatedEventArgs args);
 
-        bool CanHandleInternal(LaunchActivatedEventArgs args);
+        Task<bool> PinSecondaryTileAsync(SecondaryTile tile, bool allowDuplicity = false);
+
+        Task SamplePinSecondaryAsync(string pageName);
 
         void SampleUpdate();
 
-        Task SamplePinSecondaryAsync(string pageName);
+        void UpdateTile(TileNotification notification);
     }
 }
