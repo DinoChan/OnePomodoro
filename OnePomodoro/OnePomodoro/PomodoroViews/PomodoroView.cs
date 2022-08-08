@@ -12,8 +12,6 @@ namespace OnePomodoro.PomodoroViews
             DataContext = PomodoroViewModel.Current;
         }
 
-        public PomodoroViewModel ViewModel => DataContext as PomodoroViewModel;
-
         public static IEnumerable<Type> Views { get; } = new List<Type>
         {
             typeof(LongShadow),
@@ -33,5 +31,7 @@ namespace OnePomodoro.PomodoroViews
             typeof(EllipseClipView),
             typeof(DoNotDisturbView),
         };
+
+        public PomodoroViewModel ViewModel => DataContext as PomodoroViewModel;
     }
 }

@@ -5,18 +5,18 @@ namespace OnePomodoro.Services
 {
     internal interface IToastNotificationsService
     {
-        void ShowToastNotification(ToastNotification toastNotification);
-
-        void ShowPomodoroFinishedToastNotification();
-
-        void ShowBreakFinishedToastNotification();
+        void AddBreakFinishedToastNotificationSchedule(DateTime time);
 
         void AddPomodoroFinishedToastNotificationSchedule(DateTime time);
 
-        void AddBreakFinishedToastNotificationSchedule(DateTime time);
+        void RemoveBreakFinishedToastNotificationSchedule();
 
         void RemovePomodoroFinishedToastNotificationSchedule();
 
-        void RemoveBreakFinishedToastNotificationSchedule();
+        void ShowBreakFinishedToastNotification();
+
+        void ShowPomodoroFinishedToastNotification();
+
+        void ShowToastNotification(ToastNotification toastNotification);
     }
 }

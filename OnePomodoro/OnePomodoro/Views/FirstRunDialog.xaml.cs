@@ -18,14 +18,19 @@ namespace OnePomodoro.Views
             SizeChanged += OnSizeChanged;
         }
 
-        private void OnSizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            UpdateBackgroundElement();
-        }
-
         private void OnBackgroundElementLoaded(object sender, RoutedEventArgs e)
         {
             _backgroundElement = sender as FrameworkElement;
+            UpdateBackgroundElement();
+        }
+
+        private void OnClose(object sender, RoutedEventArgs e)
+        {
+            Hide();
+        }
+
+        private void OnSizeChanged(object sender, SizeChangedEventArgs e)
+        {
             UpdateBackgroundElement();
         }
 
@@ -37,19 +42,12 @@ namespace OnePomodoro.Views
             _backgroundElement.Width = Math.Min(ActualWidth, 1440);
             _backgroundElement.Height = Math.Min(ActualHeight, 810);
         }
-
-        private void OnClose(object sender, RoutedEventArgs e)
-        {
-            Hide();
-        }
     }
 
     public class TeachItem
     {
-        public string Screenshot { get; set; }
-
         public string Description { get; set; }
-
+        public string Screenshot { get; set; }
         public string Title { get; set; }
     }
 

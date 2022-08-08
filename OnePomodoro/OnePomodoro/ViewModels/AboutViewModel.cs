@@ -9,21 +9,13 @@ namespace OnePomodoro.ViewModels
     // TODO WTS: Add other settings as necessary. For help see https://github.com/Microsoft/WindowsTemplateStudio/blob/master/docs/pages/settings.md
     public class AboutViewModel : ObservableObject
     {
+        private ICommand _reviewCommand;
         private string _version;
 
         public AboutViewModel()
         {
             Version = GetVersion();
         }
-
-        public string Version
-        {
-            get { return _version; }
-
-            set { SetProperty(ref _version, value); }
-        }
-
-        private ICommand _reviewCommand;
 
         public ICommand ReviewCommand
         {
@@ -40,6 +32,13 @@ namespace OnePomodoro.ViewModels
 
                 return _reviewCommand;
             }
+        }
+
+        public string Version
+        {
+            get { return _version; }
+
+            set { SetProperty(ref _version, value); }
         }
 
         private string GetVersion()

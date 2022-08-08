@@ -6,6 +6,8 @@ namespace OnePomodoro.Helpers
 {
     public class CompactOverlayModeTrigger : StateTriggerBase
     {
+        private bool _isCompactOverlayMode;
+
         public CompactOverlayModeTrigger()
         {
             if (!Windows.ApplicationModel.DesignMode.DesignModeEnabled)
@@ -20,10 +22,6 @@ namespace OnePomodoro.Helpers
             }
         }
 
-        private void CompactOverlayModeTrigger_VisibleBoundsChanged(ApplicationView sender, object args) => UpdateTrigger(sender.ViewMode == ApplicationViewMode.CompactOverlay);
-
-        private bool _isCompactOverlayMode;
-
         public bool IsCompactOverlayMode
         {
             get => _isCompactOverlayMode;
@@ -37,6 +35,8 @@ namespace OnePomodoro.Helpers
                 }
             }
         }
+
+        private void CompactOverlayModeTrigger_VisibleBoundsChanged(ApplicationView sender, object args) => UpdateTrigger(sender.ViewMode == ApplicationViewMode.CompactOverlay);
 
         private void UpdateTrigger(bool isCompactOverlayMode) => SetActive(IsCompactOverlayMode == isCompactOverlayMode);
     }

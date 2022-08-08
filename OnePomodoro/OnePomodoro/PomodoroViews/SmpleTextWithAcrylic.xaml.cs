@@ -15,8 +15,8 @@ namespace OnePomodoro.PomodoroViews
     [Screenshot("/Assets/Screenshots/TheBigOne.png")]
     public sealed partial class SmpleTextWithAcrylic : PomodoroView
     {
-        private PointLight _inworkPointLight;
         private PointLight _breakPointLight;
+        private PointLight _inworkPointLight;
 
         public SmpleTextWithAcrylic()
         {

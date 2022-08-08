@@ -17,15 +17,10 @@ namespace OnePomodoro.Views
 {
     public sealed partial class MainPage : Page
     {
-        private MainViewModel ViewModel => DataContext as MainViewModel;
-
-        private Type _pomodoroViewType;
-
-        private bool _isInCompactOverlay;
-
-        private CompactOverlayAttribute _currentCompactOverlayAttribute;
-
         private static bool _isShown = false;
+        private CompactOverlayAttribute _currentCompactOverlayAttribute;
+        private bool _isInCompactOverlay;
+        private Type _pomodoroViewType;
 
         public MainPage()
         {
@@ -36,26 +31,7 @@ namespace OnePomodoro.Views
             Loaded += OnLoaded;
         }
 
-        private bool DetectIfFirstRun()
-        {
-            return SystemInformation.Instance.IsFirstRun && !_isShown;
-        }
-
-        private void OnLoaded(object sender, RoutedEventArgs e)
-        {
-            Loaded -= OnLoaded;
-            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Windows.Foundation.Size(300, 300));
-        }
-
-        private void OnWindowCurrentSizeChanged(object sender, Windows.UI.Core.WindowSizeChangedEventArgs e)
-        {
-            UpdateButtonsVisibility();
-        }
-
-        private void OnOptionsClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(OptionsPage));
-        }
+        private MainViewModel ViewModel => DataContext as MainViewModel;
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -101,6 +77,28 @@ namespace OnePomodoro.Views
             UpdateButtonsVisibility();
         }
 
+        private bool DetectIfFirstRun()
+        {
+            return SystemInformation.Instance.IsFirstRun && !_isShown;
+        }
+
+        private void OnFullScreenClick(object sender, RoutedEventArgs e)
+        {
+            var view = ApplicationView.GetForCurrentView();
+            view.TryEnterFullScreenMode();
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            Loaded -= OnLoaded;
+            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Windows.Foundation.Size(300, 300));
+        }
+
+        private void OnOptionsClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(OptionsPage));
+        }
+
         private async void OnPinClick(object sender, RoutedEventArgs e)
         {
             var preferences = ViewModePreferences.CreateDefault(ApplicationViewMode.CompactOverlay);
@@ -118,10 +116,9 @@ namespace OnePomodoro.Views
             UpdateButtonsVisibility();
         }
 
-        private void OnFullScreenClick(object sender, RoutedEventArgs e)
+        private void OnWindowCurrentSizeChanged(object sender, Windows.UI.Core.WindowSizeChangedEventArgs e)
         {
-            var view = ApplicationView.GetForCurrentView();
-            view.TryEnterFullScreenMode();
+            UpdateButtonsVisibility();
         }
 
         private void UpdateButtonsVisibility()

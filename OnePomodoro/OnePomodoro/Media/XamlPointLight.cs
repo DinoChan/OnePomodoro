@@ -8,14 +8,23 @@ namespace OnePomodoro.Media
     public class XamlPointLight : XamlLight
     {
         /// <summary>
+        /// The Color of the spotlight no the associated object.
+        /// </summary>
+        public static readonly DependencyProperty ColorProperty = DependencyProperty.Register("Color", typeof(Brush), typeof(XamlPointLight), new PropertyMetadata(new SolidColorBrush(Colors.White)));
+
+        /// <summary>
         /// The Blur value of the associated object
         /// </summary>
         public static readonly DependencyProperty DistanceProperty = DependencyProperty.Register(nameof(Distance), typeof(double), typeof(XamlPointLight), new PropertyMetadata(0d));
 
         /// <summary>
-        /// The Color of the spotlight no the associated object.
+        /// Gets or sets the color of the spotlight.
         /// </summary>
-        public static readonly DependencyProperty ColorProperty = DependencyProperty.Register("Color", typeof(Brush), typeof(XamlPointLight), new PropertyMetadata(new SolidColorBrush(Colors.White)));
+        public Brush Color
+        {
+            get { return (Brush)GetValue(ColorProperty); }
+            set { SetValue(ColorProperty, value); }
+        }
 
         /// <summary>
         /// Gets or sets the Distance.
@@ -27,15 +36,6 @@ namespace OnePomodoro.Media
         {
             get { return (double)GetValue(DistanceProperty); }
             set { SetValue(DistanceProperty, value); }
-        }
-
-        /// <summary>
-        /// Gets or sets the color of the spotlight.
-        /// </summary>
-        public Brush Color
-        {
-            get { return (Brush)GetValue(ColorProperty); }
-            set { SetValue(ColorProperty, value); }
         }
 
         protected override string GetId()
@@ -56,12 +56,6 @@ namespace OnePomodoro.Media
             XamlLight.AddTargetElement(GetId(), newElement);
         }
 
-        private void XamlPointLight_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            var newElement = sender as UIElement;
-            (CompositionLight as PointLight).Offset = new System.Numerics.Vector3(newElement.ActualSize.X / 2, newElement.ActualSize.Y / 2, (float)Distance);
-        }
-
         protected override void OnDisconnected(UIElement oldElement)
         {
             // 这一句是对应的，Add了之后就要Remove
@@ -69,6 +63,12 @@ namespace OnePomodoro.Media
             // 释放资源
             CompositionLight.Dispose();
             CompositionLight = null;
+        }
+
+        private void XamlPointLight_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            var newElement = sender as UIElement;
+            (CompositionLight as PointLight).Offset = new System.Numerics.Vector3(newElement.ActualSize.X / 2, newElement.ActualSize.Y / 2, (float)Distance);
         }
     }
 }

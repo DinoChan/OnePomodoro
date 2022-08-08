@@ -27,6 +27,10 @@ namespace OnePomodoro.ViewModels
             Audios = AudioDefinitions.Definitions;
         }
 
+        public IEnumerable<AudioDefinition> Audios { get; }
+
+        public IPomodoroSettings Settings { get; }
+
         private async void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             try
@@ -69,9 +73,5 @@ namespace OnePomodoro.ViewModels
                 Microsoft.AppCenter.Crashes.Crashes.TrackError(ex);
             }
         }
-
-        public IEnumerable<AudioDefinition> Audios { get; }
-
-        public IPomodoroSettings Settings { get; }
     }
 }

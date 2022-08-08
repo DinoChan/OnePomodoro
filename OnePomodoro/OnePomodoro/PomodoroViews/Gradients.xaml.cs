@@ -18,12 +18,12 @@ namespace OnePomodoro.PomodoroViews
     [SourceCode("https://github.com/DinoChan/OnePomodoro/blob/master/OnePomodoro/OnePomodoro/PomodoroViews/Gradients.xaml.cs")]
     public sealed partial class Gradients : PomodoroView
     {
-        private readonly CompositionLinearGradientBrush _gradientBrush;
-        private readonly SpriteVisual _backgroundVisual;
         private static readonly Color Blue = Color.FromArgb(255, 43, 210, 255);
         private static readonly Color Red = Color.FromArgb(255, 255, 43, 136);
+        private readonly SpriteVisual _backgroundVisual;
         private readonly Compositor _compositor;
         private readonly CompositionColorGradientStop _focusGradientStop;
+        private readonly CompositionLinearGradientBrush _gradientBrush;
         private readonly CompositionColorGradientStop _relaxGradientStop;
 
         public Gradients() : base()
@@ -72,14 +72,6 @@ namespace OnePomodoro.PomodoroViews
               };
         }
 
-        private void UpdateText()
-        {
-            FocusText.Visibility = ViewModel.IsInPomodoro ? Visibility.Visible : Visibility.Collapsed;
-            RelaxText.Visibility = ViewModel.IsInPomodoro ? Visibility.Collapsed : Visibility.Visible;
-            FocusTextCompact.Visibility = ViewModel.IsInPomodoro ? Visibility.Visible : Visibility.Collapsed;
-            RelaxTextCompact.Visibility = ViewModel.IsInPomodoro ? Visibility.Collapsed : Visibility.Visible;
-        }
-
         private void UpdateGradients()
         {
             var relaxGradientStopOffsetAnimation = _compositor.CreateScalarKeyFrameAnimation();
@@ -93,6 +85,14 @@ namespace OnePomodoro.PomodoroViews
             //focusGradientStopOffsetAnimation.DelayTime = TimeSpan.FromSeconds(2);
             focusGradientStopOffsetAnimation.InsertKeyFrame(1.0f, ViewModel.IsInPomodoro ? 0.25f : 0.0f);
             _focusGradientStop.StartAnimation(nameof(_focusGradientStop.Offset), focusGradientStopOffsetAnimation);
+        }
+
+        private void UpdateText()
+        {
+            FocusText.Visibility = ViewModel.IsInPomodoro ? Visibility.Visible : Visibility.Collapsed;
+            RelaxText.Visibility = ViewModel.IsInPomodoro ? Visibility.Collapsed : Visibility.Visible;
+            FocusTextCompact.Visibility = ViewModel.IsInPomodoro ? Visibility.Visible : Visibility.Collapsed;
+            RelaxTextCompact.Visibility = ViewModel.IsInPomodoro ? Visibility.Collapsed : Visibility.Visible;
         }
 
         //private void OnOptionsClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)

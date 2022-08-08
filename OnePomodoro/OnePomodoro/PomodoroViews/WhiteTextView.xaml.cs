@@ -17,11 +17,10 @@ namespace OnePomodoro.PomodoroViews
     [SourceCode("https://github.com/DinoChan/OnePomodoro/blob/master/OnePomodoro/OnePomodoro/PomodoroViews/WhiteTextView.xaml.cs")]
     public sealed partial class WhiteTextView : PomodoroView
     {
-        private PointLight _redLight;
-        private PointLight _blueLight;
-
-        private Color _redColor = Color.FromArgb(255, 217, 17, 83);
         private Color _blueColor = Color.FromArgb(255, 0, 27, 171);
+        private PointLight _blueLight;
+        private Color _redColor = Color.FromArgb(255, 217, 17, 83);
+        private PointLight _redLight;
 
         public WhiteTextView()
         {
@@ -29,29 +28,6 @@ namespace OnePomodoro.PomodoroViews
             OnIsInPomodoroChanged();
             Loaded += OnLoaded;
             ViewModel.IsInPomodoroChanged += (s, e) => OnIsInPomodoroChanged();
-        }
-
-        private void OnLoaded(object sender, RoutedEventArgs e)
-        {
-            Loaded -= OnLoaded;
-            ShowTextShimmingAsync();
-            OnIsInPomodoroChanged();
-        }
-
-        private void OnIsInPomodoroChanged()
-        {
-            FocusPanel.Visibility = ViewModel.IsInPomodoro ? Visibility.Visible : Visibility.Collapsed;
-            RelaxPanel.Visibility = ViewModel.IsInPomodoro ? Visibility.Collapsed : Visibility.Visible;
-        }
-
-        private void ShowTextShimmingAsync()
-        {
-            _redLight = CreatePointLightAndStartAnimation(_redColor, TimeSpan.Zero);
-            _blueLight = CreatePointLightAndStartAnimation(_blueColor, TimeSpan.FromSeconds(0.5));
-            var backgroundVisual = VisualExtensions.GetVisual(BackgroundElement);
-
-            _redLight.Targets.Add(backgroundVisual);
-            _blueLight.Targets.Add(backgroundVisual);
         }
 
         private PointLight CreatePointLightAndStartAnimation(Color color, TimeSpan delay)
@@ -74,6 +50,29 @@ namespace OnePomodoro.PomodoroViews
 
             pointLight.StartAnimation("Offset.X", offsetAnimation);
             return pointLight;
+        }
+
+        private void OnIsInPomodoroChanged()
+        {
+            FocusPanel.Visibility = ViewModel.IsInPomodoro ? Visibility.Visible : Visibility.Collapsed;
+            RelaxPanel.Visibility = ViewModel.IsInPomodoro ? Visibility.Collapsed : Visibility.Visible;
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            Loaded -= OnLoaded;
+            ShowTextShimmingAsync();
+            OnIsInPomodoroChanged();
+        }
+
+        private void ShowTextShimmingAsync()
+        {
+            _redLight = CreatePointLightAndStartAnimation(_redColor, TimeSpan.Zero);
+            _blueLight = CreatePointLightAndStartAnimation(_blueColor, TimeSpan.FromSeconds(0.5));
+            var backgroundVisual = VisualExtensions.GetVisual(BackgroundElement);
+
+            _redLight.Targets.Add(backgroundVisual);
+            _blueLight.Targets.Add(backgroundVisual);
         }
     }
 }
